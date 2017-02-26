@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `axisdb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `axisdb`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: axisdb
@@ -38,7 +36,7 @@ CREATE TABLE `clients` (
   `ZipCode` varchar(45) DEFAULT NULL,
   `Country` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ClientId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +45,7 @@ CREATE TABLE `clients` (
 
 LOCK TABLES `clients` WRITE;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
+INSERT INTO `clients` VALUES (1000,'Jose','Garcia','Director','Operacion','999-445-9978','jagr14@gmail.com','Conocida','Merida','Yucatan','+52','Mexico');
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,12 +72,11 @@ CREATE TABLE `farms` (
   `NumberMws` int(11) DEFAULT NULL,
   `Gearbox` varchar(45) DEFAULT NULL,
   `ClientId` int(11) DEFAULT NULL,
-  `Other1` varchar(45) DEFAULT NULL,
-  `Other2` varchar(45) DEFAULT NULL,
+  `Panel` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`FarmId`),
   KEY `ClientId_idx` (`ClientId`),
   CONSTRAINT `ClientId` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,6 +85,7 @@ CREATE TABLE `farms` (
 
 LOCK TABLES `farms` WRITE;
 /*!40000 ALTER TABLE `farms` DISABLE KEYS */;
+INSERT INTO `farms` VALUES (1,'1','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba',4,4,'1',1000,NULL),(2,'1','xxx','xxx','xxx','xx','xx','xx','xx','xx','xx',1,3,'x',1000,NULL);
 /*!40000 ALTER TABLE `farms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +105,6 @@ CREATE TABLE `quotes` (
   `Currency` varchar(45) NOT NULL,
   `VersionId` int(11) DEFAULT NULL,
   PRIMARY KEY (`QouteId`),
-  UNIQUE KEY `QouteId_UNIQUE` (`QouteId`),
   UNIQUE KEY `Quantity_UNIQUE` (`Quantity`),
   KEY `VersionId_idx` (`VersionId`),
   CONSTRAINT `VersionId` FOREIGN KEY (`VersionId`) REFERENCES `versions` (`VersionId`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -135,7 +133,6 @@ CREATE TABLE `rfqs` (
   `ProjectName` varchar(45) DEFAULT NULL,
   `FarmId` int(11) DEFAULT NULL,
   PRIMARY KEY (`RfqId`),
-  UNIQUE KEY `RfqId_UNIQUE` (`RfqId`),
   KEY `FarmId_idx` (`FarmId`),
   CONSTRAINT `FarmId` FOREIGN KEY (`FarmId`) REFERENCES `farms` (`FarmId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -151,6 +148,31 @@ LOCK TABLES `rfqs` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `UserId` int(11) NOT NULL,
+  `Email` varchar(45) DEFAULT NULL,
+  `UserName` varchar(45) DEFAULT NULL,
+  `Password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `versions`
 --
 
@@ -159,8 +181,8 @@ DROP TABLE IF EXISTS `versions`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `versions` (
   `VersionId` int(11) NOT NULL AUTO_INCREMENT,
-  `Rfq` int(11) DEFAULT NULL,
-  `Version` tinyint(2) unsigned NOT NULL,
+  `RfqId` int(11) DEFAULT NULL,
+  `NumberVersion` tinyint(2) unsigned NOT NULL,
   `Date` datetime NOT NULL,
   `TypeWork` varchar(45) NOT NULL,
   `ScopeWork` text NOT NULL,
@@ -169,9 +191,8 @@ CREATE TABLE `versions` (
   `Status` varchar(45) DEFAULT NULL,
   `NotesAndInstructions` text,
   PRIMARY KEY (`VersionId`),
-  UNIQUE KEY `VersionId_UNIQUE` (`VersionId`),
-  KEY `Rfq_idx` (`Rfq`),
-  CONSTRAINT `Rfq` FOREIGN KEY (`Rfq`) REFERENCES `rfqs` (`RfqId`) ON DELETE CASCADE ON UPDATE NO ACTION
+  KEY `Rfq_idx` (`RfqId`),
+  CONSTRAINT `Rfq` FOREIGN KEY (`RfqId`) REFERENCES `rfqs` (`RfqId`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -193,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-19 21:42:51
+-- Dump completed on 2017-02-26 10:29:38
