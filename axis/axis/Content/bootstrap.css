@@ -316,6 +316,8 @@ body {
   line-height: 1.428571429;
   color: #333333;
   background-color: #ffffff;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
 }
 
 input,
