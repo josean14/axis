@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(axis.Startup))]
-namespace axis
+[assembly: OwinStartupAttribute(typeof(AXIS.Startup))]
+namespace AXIS
 {
     public partial class Startup
     {
