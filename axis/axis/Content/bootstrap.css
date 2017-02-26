@@ -58,7 +58,6 @@ html {
 }
 
 body {
-  background-color: #FFCC66;
   margin: 0;
 }
 
@@ -73,7 +72,7 @@ a:hover {
 
 h1 {
   margin: 0.67em 0;
-  font-size: 24pt;
+  font-size: 2em;
 }
 
 abbr[title] {
@@ -317,8 +316,6 @@ body {
   line-height: 1.428571429;
   color: #333333;
   background-color: #ffffff;
-  background-repeat: repeat-y;
-  background-attachment: fixed;
 }
 
 input,
@@ -1108,7 +1105,7 @@ pre code {
     width: 25%;
   }
   .col-md-4 {
-    width: 33.333333333333%;
+    width: 33.33333333333333%;
   }
   .col-md-5 {
     width: 41.66666666666667%;
@@ -2094,9 +2091,8 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
   color: #ffffff;
-  background-color: #e31009;
-  border-color: #080808;
-  width:350px;
+  background-color: #428bca;
+  border-color: #357ebd;
 }
 
 .btn-primary:hover,
@@ -2105,7 +2101,7 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   color: #ffffff;
-  background-color: #6b081c;
+  background-color: #3276b1;
   border-color: #285e8e;
 }
 
@@ -2130,7 +2126,7 @@ fieldset[disabled] .btn-primary:active,
 .btn-primary.disabled.active,
 .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #e31009;
+  background-color: #428bca;
   border-color: #357ebd;
 }
 
@@ -2337,8 +2333,8 @@ fieldset[disabled] .btn-link:focus {
 }
 
 .btn-lg {
-  padding: 16px 16px;
-  font-size: 24px;
+  padding: 10px 16px;
+  font-size: 18px;
   line-height: 1.33;
   border-radius: 6px;
 }
