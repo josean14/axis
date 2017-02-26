@@ -4,26 +4,31 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace axis.Controllers
+namespace AXIS.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
+            return View();
+        }
+        public ActionResult Axisweb()
+        {
+            ViewBag.Message = "Mandar a la pagina de www.Axisrg.com";
 
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page  .";
+            ViewBag.Message = "THE COMPANY";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact info";
 
             return View();
         }
