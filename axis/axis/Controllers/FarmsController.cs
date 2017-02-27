@@ -82,7 +82,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FarmId,TypeFarm,FarmName,StreetAddress,City,State,ZipCode,Country,Manufacture,Platform,Convertor,NumberTowers,NumberMws,Gearbox,ClientId")] Farm farm)
+        public ActionResult Edit([Bind(Include = "FarmId,TypeFarm,FarmName,StreetAddress,City,State,ZipCode,Country,Manufacture,Platform,Convertor,NumberTowers,NumberMws,Gearbox,ClientId,Panel")] Farm farm)
         {
             if (ModelState.IsValid)
             {
@@ -94,30 +94,17 @@ namespace AXIS.Controllers
             return View(farm);
         }
 
-        // GET: Farms/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Farm farm = db.Farms.Find(id);
-            if (farm == null)
-            {
-                return HttpNotFound();
-            }
-            return View(farm);
-        }
+       
 
         // POST: Farms/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
             Farm farm = db.Farms.Find(id);
             db.Farms.Remove(farm);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return new JsonResult() { Data = "Deleted successfully" };
         }
 
         protected override void Dispose(bool disposing)
