@@ -105,8 +105,16 @@
             @Html.DisplayFor(modelItem => item.Gearbox)
         </td>
         <td>
+<<<<<<< HEAD
+            @Html.ActionLink("Edit", "Edit", new { id=item.FarmId }) |
+            @*
+            @Html.ActionLink("Details", "Details", new { id=item.FarmId }) |
+            *@
+            @Html.ActionLink("Delete", "Delete", new { id=item.FarmId })
+=======
             @Html.ActionLink(" ", "Edit", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-pencil" }) |
             <a href="" onclick="confirmDelete(@item.FarmId); return false;" class="glyphicon glyphicon-remove"></a>
+>>>>>>> origin/master
         </td>
     </tr>
 }

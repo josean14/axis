@@ -48,6 +48,7 @@ namespace AXIS.Models
         public virtual int NumberTowers { get; set; }
         public virtual int NumberMws { get; set; }
         public virtual string Gearbox { get; set; }
+        public virtual string Panel { get; set; }
         public virtual int ClientId { get; set; }
 
         public virtual Client Client { get; set; }
