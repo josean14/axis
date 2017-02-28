@@ -14,13 +14,12 @@ namespace AXIS.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
+
         public AXISDB() : base("name=AXISDB")
         {
         }
 
         public System.Data.Entity.DbSet<AXIS.Models.Client> Clients { get; set; }
-        public System.Data.Entity.DbSet<AXIS.Models.Farm> Farms { get; set; }
-        public System.Data.Entity.DbSet<AXIS.Models.LoginViewModel> Users { get; set; }
+        public System.Data.Entity.DbSet<AXIS.Models.Farm> Farms { get; set; } 
     }
 }
