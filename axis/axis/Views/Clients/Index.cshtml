@@ -4,11 +4,9 @@
     ViewBag.Title = "Clients";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Business Development &raquo; Customer DB</h2>
+    
+<p><a href=@Url.Action("Create","Clients") class="btn btn-primary btn-lg">New Client</a></p>
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
@@ -98,11 +96,30 @@
             }
 
         </table>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col col-xs-4">
+                Page 1 of 5
+            </div>
+            <div class="col col-xs-8">
+                <ul class="pagination hidden-xs pull-right">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+                <ul class="pagination visible-xs pull-right">
+                    <li><a href="#">«</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
 
 </div>
-
-
-
 
 
 @Html.AntiForgeryToken()
@@ -150,3 +167,4 @@
 
 
 }
+
