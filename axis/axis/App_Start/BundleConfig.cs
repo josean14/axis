@@ -25,6 +25,8 @@ namespace AXIS
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                        "~/Scripts/bootstrap.min.js",
+                       "~/Scripts/dropdown.js",
+                       "~/Scripts/collapse.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootbox").Include(
