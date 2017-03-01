@@ -20,6 +20,10 @@ namespace AXIS.Models
         }
 
         public System.Data.Entity.DbSet<AXIS.Models.Client> Clients { get; set; }
-        public System.Data.Entity.DbSet<AXIS.Models.Farm> Farms { get; set; } 
+        public System.Data.Entity.DbSet<AXIS.Models.Farm> Farms { get; set; }
+
+        public System.Data.Entity.DbSet<AXIS.Models.Rfq> Rfqs { get; set; }
+
+        public System.Data.Entity.DbSet<AXIS.Models.Rversion> Rversions { get; set; }
     }
 }

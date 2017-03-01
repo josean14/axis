@@ -14,9 +14,9 @@ namespace AXIS.Models
         public virtual string PricePerUnit { get; set; }
         public virtual int Quantity { get; set; }
         public virtual string Currency { get; set; }
-        public virtual int VersionId { get; set; }
+        public virtual int RversionId { get; set; }
 
-        public virtual Version Version { get; set; }
+        public virtual Rversion Rversion { get; set; }
 
     }
 }

@@ -21,7 +21,7 @@ namespace AXIS.Models
         public virtual int FarmId { get; set; }
 
         public virtual Farm Farm { get; set; }
-        public virtual List<Version> Versions { get; set; }
+        public virtual List<Rversion> Rversions { get; set; }
 
     }
 }
