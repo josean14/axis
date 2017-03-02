@@ -76,7 +76,7 @@ CREATE TABLE `farms` (
   PRIMARY KEY (`FarmId`),
   KEY `ClientId_idx` (`ClientId`),
   CONSTRAINT `ClientId` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `farms` (
 
 LOCK TABLES `farms` WRITE;
 /*!40000 ALTER TABLE `farms` DISABLE KEYS */;
-INSERT INTO `farms` VALUES (1,'1','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba','Prueba',4,4,'1',1000,NULL),(2,'1','xxx','xxx','xxx','xx','xx','xx','xx','xx','xx',1,3,'x',1000,NULL);
+INSERT INTO `farms` VALUES (1001,'0','Prueba 10','Conocida','Conocida','Conocida','Conocida','Mexico','Conocida','Conocida','Conocida',4,4,'Conocida',1000,NULL);
 /*!40000 ALTER TABLE `farms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,11 +103,11 @@ CREATE TABLE `quotes` (
   `PricePerUnit` double(11,3) NOT NULL,
   `Quantity` int(11) NOT NULL,
   `Currency` varchar(45) NOT NULL,
-  `VersionId` int(11) DEFAULT NULL,
+  `RversionId` int(11) DEFAULT NULL,
   PRIMARY KEY (`QouteId`),
   UNIQUE KEY `Quantity_UNIQUE` (`Quantity`),
-  KEY `VersionId_idx` (`VersionId`),
-  CONSTRAINT `VersionId` FOREIGN KEY (`VersionId`) REFERENCES `versions` (`VersionId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `RversionId_idx` (`RversionId`),
+  CONSTRAINT `RversionId` FOREIGN KEY (`RversionId`) REFERENCES `rversions` (`RversionId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -134,8 +134,8 @@ CREATE TABLE `rfqs` (
   `FarmId` int(11) DEFAULT NULL,
   PRIMARY KEY (`RfqId`),
   KEY `FarmId_idx` (`FarmId`),
-  CONSTRAINT `FarmId` FOREIGN KEY (`FarmId`) REFERENCES `farms` (`FarmId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `FarmId` FOREIGN KEY (`FarmId`) REFERENCES `farms` (`FarmId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +144,42 @@ CREATE TABLE `rfqs` (
 
 LOCK TABLES `rfqs` WRITE;
 /*!40000 ALTER TABLE `rfqs` DISABLE KEYS */;
+INSERT INTO `rfqs` VALUES (1000,'Open','Prueba 16',1001),(1001,'Open','Proyecto prueba 3',1001),(1002,'Open','Prueba 20',1001);
 /*!40000 ALTER TABLE `rfqs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rversions`
+--
+
+DROP TABLE IF EXISTS `rversions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rversions` (
+  `RversionId` int(11) NOT NULL AUTO_INCREMENT,
+  `RfqId` int(11) DEFAULT NULL,
+  `NumberVersion` tinyint(2) unsigned DEFAULT NULL,
+  `Date` datetime DEFAULT NULL,
+  `TypeWork` varchar(45) DEFAULT NULL,
+  `ScopeWork` text,
+  `ProjectDescription` text,
+  `TotalCost` double(11,3) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  `NotesAndInstructions` text,
+  PRIMARY KEY (`RversionId`),
+  KEY `Rfq_idx` (`RfqId`),
+  CONSTRAINT `RfqId` FOREIGN KEY (`RfqId`) REFERENCES `rfqs` (`RfqId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rversions`
+--
+
+LOCK TABLES `rversions` WRITE;
+/*!40000 ALTER TABLE `rversions` DISABLE KEYS */;
+INSERT INTO `rversions` VALUES (4,1000,0,'2017-03-01 11:53:02','0','Prueba','Prueba',0.000,'Open','3');
+/*!40000 ALTER TABLE `rversions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -171,39 +206,6 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `versions`
---
-
-DROP TABLE IF EXISTS `versions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `versions` (
-  `VersionId` int(11) NOT NULL AUTO_INCREMENT,
-  `RfqId` int(11) DEFAULT NULL,
-  `NumberVersion` tinyint(2) unsigned NOT NULL,
-  `Date` datetime NOT NULL,
-  `TypeWork` varchar(45) NOT NULL,
-  `ScopeWork` text NOT NULL,
-  `ProjectDescription` text NOT NULL,
-  `TotalCost` double(11,3) DEFAULT NULL,
-  `Status` varchar(45) DEFAULT NULL,
-  `NotesAndInstructions` text,
-  PRIMARY KEY (`VersionId`),
-  KEY `Rfq_idx` (`RfqId`),
-  CONSTRAINT `Rfq` FOREIGN KEY (`RfqId`) REFERENCES `rfqs` (`RfqId`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `versions`
---
-
-LOCK TABLES `versions` WRITE;
-/*!40000 ALTER TABLE `versions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `versions` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -214,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-26 10:29:38
+-- Dump completed on 2017-03-01 18:00:27
