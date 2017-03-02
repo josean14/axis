@@ -18,40 +18,63 @@ namespace AXIS.Models
     {
         public virtual int FarmId { get; set; }
 
-        [DisplayName("Type of farm")]
+        [DisplayName("Type of Farm")]
         [Required(ErrorMessage = "The type of farm is required.")]
         public virtual TypeFarm? TypeFarm { get; set; }
 
-        [DisplayName("Farm name")]
+        [DisplayName("Farm Name")]
         [Required(ErrorMessage = "The farm name is required.")]
         public virtual string FarmName { get; set; }
 
 
-        [DisplayName("Street address")]
+        [DisplayName("Street Address")]
         [Required(ErrorMessage = "The street address is required.")]
         public virtual string StreetAddress { get; set; }
 
+        [DisplayName("City")]
         [Required(ErrorMessage = "The city is required.")]
         public virtual string City { get; set; }
 
+        [DisplayName("State")]
         [Required(ErrorMessage = "The state is required.")]
         public virtual string State { get; set; }
 
+        [DisplayName("Zip Code")]
         [Required(ErrorMessage = "The zipcode is required.")]
         public virtual string ZipCode { get; set; }
 
+        [DisplayName("Country")]
         [Required(ErrorMessage = "The country is required.")]
         public virtual string Country { get; set; }
+
+        [DisplayName("Manufacture")]
         public virtual string Manufacture { get; set; }
+
+        [DisplayName("Platform")]
         public virtual string Platform { get; set; }
+
+        [DisplayName("Convertor")]
         public virtual string Convertor { get; set; }
+
+        [DisplayName("# of Towers")]
         public virtual int NumberTowers { get; set; }
+
+        [DisplayName("MW")]
         public virtual int NumberMws { get; set; }
+
+        [DisplayName("Gearbox")]
         public virtual string Gearbox { get; set; }
+
+        [DisplayName("# of Panels")]
         public virtual string Panel { get; set; }
+
+        [DisplayName("ID Client")]
         public virtual int ClientId { get; set; }
 
+        [DisplayName("Client")]
         public virtual Client Client { get; set; }
+        
+
         public virtual ICollection<Rfq> Rfqs { get; set; }
 
     }

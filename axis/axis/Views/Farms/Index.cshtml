@@ -1,165 +1,194 @@
 ﻿@model IEnumerable<AXIS.Models.Farm>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Farms";
 }
 
-<h2>Index</h2>
+<h2>Business Development &raquo; Customer DB</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
+
+    <a href=@Url.Action("Create","Farms") class="btn btn-primary btn-xs">New Farm</a>
 </p>
-<table class="table table-hover">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Client.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeFarm)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FarmName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StreetAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Manufacture)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Platform)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Convertor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberTowers)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberMws)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gearbox)
-        </th>
-        <th>Actions</th>
-    </tr>
 
-@foreach (var item in Model)
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Axis Farms List</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    @Html.DisplayNameFor(model => model.Client.FirstName)
+                </th>
+                <th align="center">
+                    @Html.DisplayNameFor(model => model.TypeFarm)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FarmName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StreetAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ZipCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Manufacture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Platform)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Convertor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberTowers)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberMws)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gearbox)
+                </th>
+                <th>Actions</th>
+            </tr>
+
+        @foreach (var item in Model)
+        {
+            var ident = "Farm" + @item.FarmId;
+
+            <tr id=@ident>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeFarm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FarmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StreetAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZipCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufacture)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Platform)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Convertor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberTowers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberMws)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gearbox)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-pencil" }) |
+                    <a href="" onclick="confirmDelete(@item.FarmId); return false;" class="glyphicon glyphicon-remove"></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col col-xs-4">
+                Page 1 of 5
+            </div>
+            <div class="col col-xs-8">
+                <ul class="pagination hidden-xs pull-right">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+                <ul class="pagination visible-xs pull-right">
+                    <li><a href="#">«</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    @Html.AntiForgeryToken()
+    <p id="msg"></p>
+
+    @section scripts
 {
-    var ident = "Farm" + @item.FarmId;
+        <script>
+            function confirmDelete(id) {
+                bootbox.confirm({
+                    message: "Are you sure you want to delete this?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
 
-    <tr id=@ident>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeFarm)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FarmName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manufacture)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Platform)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Convertor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberTowers)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberMws)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gearbox)
-        </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-pencil" }) |
-            <a href="" onclick="confirmDelete(@item.FarmId); return false;" class="glyphicon glyphicon-remove"></a>
-        </td>
-    </tr>
-}
+                        if (result) {
 
-</table>
+                            var url = "/farms/Delete/";
+                            var FarmId = id
+                            var anti = $('[name=__RequestVerificationToken]').val();
 
-@Html.AntiForgeryToken()
-<p id="msg"></p>
-
-@section scripts
-{
-    <script>
-    function confirmDelete(id) {
-        bootbox.confirm({
-            message: "Are you sure you want to delete this?",
-            buttons: {
-                confirm: {
-                    label: 'Yes',
-                    className: 'btn-success'
-                },
-                cancel: {
-                    label: 'No',
-                    className: 'btn-danger'
-                }
-            },
-            callback: function (result) {
-
-               
-                if (result) {
-
-                    var url = "/farms/Delete/";
-                    var FarmId = id
-                    var anti = $('[name=__RequestVerificationToken]').val();
-
-                    $.post(url, { id: FarmId, __RequestVerificationToken: anti }, function (data) {
+                            $.post(url, { id: FarmId, __RequestVerificationToken: anti }, function (data) {
 
 
 
-                        $("#Farm" + FarmId).remove();
-                        $("#msg").last().addClass("alert alert-success");
-                        $("#msg").html(data);
+                                $("#Farm" + FarmId).remove();
+                                $("#msg").last().addClass("alert alert-success");
+                                $("#msg").html(data);
 
 
 
-                    });
+                            });
 
-                }
+                        }
+                    }
+                });
+
+
             }
-        });
+        </script>
 
 
     }
-    </script>
-
-
-}
