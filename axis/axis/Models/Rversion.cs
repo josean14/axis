@@ -48,6 +48,6 @@ namespace AXIS.Models
         public virtual int RfqId { get; set; }
 
         public virtual Rfq Rfq { get; set; }
-        public virtual List<Qoute> Qoutes { get; set; }
+        public virtual List<Quote> Qoutes { get; set; }
     }
 }

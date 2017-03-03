@@ -1,0 +1,196 @@
+﻿@model AXIS.Models.Quote
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+<h4>Project @ViewData["ProjectName"] </h4>
+<h4>Number project @ViewData["NumberRfq"] with number version @ViewData["NumberVersion"] </h4>
+<h4>Type work @ViewData["TypeWork"]</h4>
+<h4>Project description: @ViewData["ProjectDescription"]</h4>
+
+
+
+<div class="form-horizontal">
+    <h4>Quote</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Um, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PricePerUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()" } })
+            @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()" } })
+            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Create </a>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@Html.AntiForgeryToken()
+
+<p id="msg"></p>
+
+
+<table class="table" id="tabla">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Um)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PricePerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script>
+            function addtable(id) {
+
+                var Description = $('#Description').val();
+                var Um = $('#Um').val();
+                var PricePerUnit = $('#PricePerUnit').val();
+                var Quantity = $('#Quantity').val();
+                var Currency = PricePerUnit * Quantity;
+
+                $('#tabla tr:last').after(
+                    '<tr id=Quote'+id+'><td>'+ Description +'</td><td>' + Um +'</td>'+
+                         '<td>'+ PricePerUnit +'</td><td>' + Quantity +'</td>'+
+                         '<td>'+ Currency +'</td>' +
+                           '<td><a href="" onclick="confirmDelete('+id+'); return false;" class = "glyphicon glyphicon-remove"></a></td>'
+                    );
+            }
+
+            function addQuote(id) {
+                var url = "/Quotes/Create/";
+                var RversionId = id
+                var anti = $('[name=__RequestVerificationToken]').val();
+                var Description = $('#Description').val();
+                var Um = $('#Um').val();
+                var PricePerUnit = $('#PricePerUnit').val();
+                var Quantity = $('#Quantity').val();
+                var Currency = PricePerUnit * Quantity;
+
+                $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, __RequestVerificationToken: anti },
+                    function (data) {
+                        var band = addtable(data);
+
+                    });
+
+               // var band = clearform();
+            }
+
+            function confirmDelete(id) {
+                var url = "/quotes/Delete/";
+                var QuoteId = id
+                var anti = $('[name=__RequestVerificationToken]').val();
+
+                $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
+                    $("#Quote" + QuoteId).remove();
+                });
+
+                }
+
+            function clearform() {
+
+                var Description = $('#Description').val('');
+                var Um = $('#Um').val('');
+                var PricePerUnit = $('#PricePerUnit').val('');
+                var Quantity = $('#Quantity').val('');
+                var Currency = $('#Currency').val('');
+
+            }
+
+
+            function calctotal() {
+                    var PricePerUnit = $('#PricePerUnit').val();
+                    var Quantity = $('#Quantity').val();
+
+
+                    var result =  PricePerUnit * Quantity;
+                    $('#Currency').val(result);
+            }
+            //$('input#PricePerUnit').keypress(function () {
+
+            //    var PricePerUnit = $('#PricePerUnit').val();
+            //    var Quantity = $('#Quantity').val();
+
+
+            //    var result =  PricePerUnit * Quantity;
+            //    $('#Currency').val(result);
+            //});
+
+            //$('input#Quantity').keypress(function () {
+
+            //    var PricePerUnit = $('#PricePerUnit').val();
+            //    var Quantity = $('#Quantity').val();
+
+            //    var result = PricePerUnit * Quantity;
+            //    $('#Currency').val(result);
+            //});
+    </script>
+
+}

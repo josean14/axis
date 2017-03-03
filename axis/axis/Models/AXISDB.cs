@@ -25,5 +25,7 @@ namespace AXIS.Models
         public System.Data.Entity.DbSet<AXIS.Models.Rfq> Rfqs { get; set; }
 
         public System.Data.Entity.DbSet<AXIS.Models.Rversion> Rversions { get; set; }
+
+        public System.Data.Entity.DbSet<AXIS.Models.Quote> Quotes { get; set; }
     }
 }

@@ -62,7 +62,7 @@ namespace AXIS.Controllers
             {
                 db.Rversions.Add(rversion);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Quotes", new { rversionid = rversion.RversionId });
             }
 
             ViewBag.RfqId = new SelectList(db.Rfqs, "RfqId", "ProjectName", rversion.RfqId);

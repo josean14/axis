@@ -211,6 +211,7 @@
     <Compile Include="Controllers\FarmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuotesController.cs" />
     <Compile Include="Controllers\RfqsController.cs" />
     <Compile Include="Controllers\RversionsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,7 +238,7 @@
     <Compile Include="Models\Farm.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Qoute.cs" />
+    <Compile Include="Models\Quote.cs" />
     <Compile Include="Models\Rfq.cs" />
     <Compile Include="Models\Rversion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -342,6 +343,10 @@
     <Content Include="Views\Rversions\Details.cshtml" />
     <Content Include="Views\Rversions\Edit.cshtml" />
     <Content Include="Views\Rversions\Index.cshtml" />
+    <Content Include="Views\Quotes\Create.cshtml" />
+    <Content Include="Views\Quotes\Details.cshtml" />
+    <Content Include="Views\Quotes\Edit.cshtml" />
+    <Content Include="Views\Quotes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
