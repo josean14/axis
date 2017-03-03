@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Business Development";
+}
+<div class="jumbotron" align="center">
+    <h1><b>Business Development</b></h1>
+
+</div>
+
+<div class="row">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="nav-side-menu">
+        <div class="brand">HOME</div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+                <li data-toggle="collapse" data-target="#DB" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> Customer DB <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="DB">
+                    <li><a href=@Url.Action("Index","Clients")>Clients</a></li>
+                    <li><a href=@Url.Action("Index","Farms")>Farms</a></li>
+                </ul>
+
+                <li data-toggle="collapse" data-target="#NRFQ" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> New RFQ <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="NRFQ">
+                    <li><a href=@Url.Action("Create","Rfqs" )>Wind</a></li>
+
+                    <li>Solar</li>
+
+                    <li>Other</li>
+
+
+                </ul>
+
+                <li data-toggle="collapse" data-target="#ORFQ" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> Open RFQ <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu collapse" id="ORFQ">
+                    <li>Wind</li>
+                    <li>Solar</li>
+                    <li>Other</li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+
+</div>
