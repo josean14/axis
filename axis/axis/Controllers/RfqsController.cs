@@ -37,8 +37,14 @@ namespace AXIS.Controllers
         }
 
         // GET: Rfqs/Create
-        public ActionResult Create()
+        public ActionResult Create(string typefarm)
         {
+            //string stypefarm = typefarm;
+            //Farm farm = db.Farms.SingleOrDefault(farm => db.Farms.typefarm ==  typefarm);
+            //Farm Prueba = new Farm();
+            //db.Farms.Find();
+            //Farm farm = db.Farms.Where(Prueba => Prueba.TypeFarm == typefarm);
+
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName");
 
             var model = new Rfq
