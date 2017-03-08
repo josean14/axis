@@ -1,18 +1,97 @@
 ﻿@model AXIS.Models.Quote
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Quote";
 }
 
-<h2>Create</h2>
+<div class="panelright">
+    <div class="panel panel-axis right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">RFQ # @ViewData["NumberRfq"]</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Date:</p>
+                </th>
+                <th align="center">
+                    <p>Check server date GMT</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Version #</p>
+                </th>
+                <th align="center">
+                    <p>@ViewData["NumberVersion"]</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Wind Farm</p>
+                </th>
+                <th align="center">
+                </th>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axis right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Customer</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>Name Client</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Addess</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Adress</p>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axislg right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Quote/Project Description</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>Project Name: @ViewData["ProjectName"]</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        @ViewData["ProjectDescription"]
+                    </th>
+                </tr>
 
 
-<h4>Project @ViewData["ProjectName"] </h4>
-<h4>Number project @ViewData["NumberRfq"] with number version @ViewData["NumberVersion"] </h4>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
 <h4>Type work @ViewData["TypeWork"]</h4>
-<h4>Project description: @ViewData["ProjectDescription"]</h4>
-
-
 
 <div class="form-horizontal">
     <h4>Quote</h4>

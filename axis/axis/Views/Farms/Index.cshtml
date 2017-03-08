@@ -66,11 +66,12 @@
         @foreach (var item in Model)
         {
             var ident = "Farm" + @item.FarmId;
+            var sitename = @item.Client.FirstName + " " + @item.Client.LastName;
 
             <tr id=@ident>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Client.FirstName)
+                    @Html.DisplayFor(modelItem => sitename)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TypeFarm)

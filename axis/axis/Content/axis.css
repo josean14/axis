@@ -2093,10 +2093,10 @@ fieldset[disabled] .btnaxis-default.active {
 }
 
 .btnaxis-axis {
-  color: #ffffff;
+  color: #080808;
   background-color: #ec1d23;
   border-color: #080808;
-  width:300px;
+  width:280px;
 }
 
 .btnaxis-axis:hover,
@@ -2338,7 +2338,7 @@ fieldset[disabled] .btnaxis-link:focus {
 
 .btnaxis-lg {
   padding: 16px 16px;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.33;
   border-radius: 6px;
 }
@@ -4938,7 +4938,7 @@ a.list-group-item.active > .badge,
   font-weight: 200;
   line-height: 2.1428571435;
   color: black;
-  background-color: #eeeeee;
+  background-color: transparent;
 }
 
 .jumbotron h1 {
@@ -4964,7 +4964,7 @@ a.list-group-item.active > .badge,
     padding-left: 60px;
   }
   .jumbotron h1 {
-    font-size: 63px;
+    font-size: 50px;
   }
 }
 
@@ -5442,6 +5442,36 @@ a.list-group-item:focus {
   border-bottom: 1px solid #dddddd;
 }
 
+.panelright{
+    overflow:hidden;
+
+}
+
+.panel-axis {
+    border-color:#ee1d22;
+    width: 350px;
+  
+}
+
+.panel-axislg {
+    border-color:#ee1d22;
+    width: 500px;
+  
+}
+
+.panel-axis > .panel-heading {
+  color: #eeeeee;
+  background-color: #ee1d22;
+  border-color: #dddddd;
+
+}
+
+.panel-axislg > .panel-heading {
+  color: #eeeeee;
+  background-color: #ee1d22;
+  border-color: #dddddd;
+
+}
 .panel-default {
   border-color: #dddddd;
 }

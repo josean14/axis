@@ -1,80 +1,152 @@
 ﻿@model AXIS.Models.Rversion
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "RFQ # Ver. 1";
 }
 
-<h2>Create</h2>
+<h2>Aditional info RFQ</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Rversion</h4>
-        <hr />
-        <h2>@ViewBag.ProjectName</h2>
-        <h3>Numero de RFQ @ViewBag.RfqId</h3>
 
+    @Html.HiddenFor(model => model.Date)
+    @Html.HiddenFor(model => model.RfqId)
+    @Html.HiddenFor(model => model.TotalCost)
+    @Html.HiddenFor(model => model.Status)
+    @Html.HiddenFor(model => model.NumberVersion)
 
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @Html.HiddenFor(model => model.Date)
-        @Html.HiddenFor(model => model.RfqId)
-        @Html.HiddenFor(model => model.TotalCost)
-        @Html.HiddenFor(model => model.Status)
-        @Html.HiddenFor(model => model.NumberVersion)
+<div class="panelright">
+    <div class="panel panel-axis right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">RFQ # @ViewBag.RfqId</div>
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Date:</p>
+                </th>
+                <th align="center">
+                    <p>Check server date GMT</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Version #</p>
+                </th>
+                <th align="center">
+                    <p>1</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Wind Farm</p>
+                </th>
+                <th align="center">
+                </th>
+            </tr>
+        </table>
 
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TypeWork, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.TypeWork, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TypeWork, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ScopeWork, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ScopeWork, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ScopeWork, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectDescription, htmlAttributes: new { @class = "control-label col-md-2", @row = "10" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ProjectDescription, new { htmlAttributes = new { @class = "form-control", @row = "10" } })
-                @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NotesAndInstructions, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.NotesAndInstructions, new { htmlAttributes = new { @class = "form-control", @row = "10", @cols = "10" } })
-                @Html.ValidationMessageFor(model => model.NotesAndInstructions, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Step 3" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+<div class="row">
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axis right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Customer</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>Name Client</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Addess</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Adress</p>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axislg right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Quote/Project Description</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>Project Name: @ViewBag.ProjectName</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        @Html.TextAreaFor(model => model.ProjectDescription, new { @class = "form-control", placeholder = "Enter description Here..", @rows = "10" } )
+                        @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
+                    </th>
+                </tr>
+
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TypeWork, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.TypeWork, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TypeWork, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ScopeWork, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ScopeWork, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ScopeWork, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NotesAndInstructions, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.NotesAndInstructions, new  { @class = "form-control", @row = "10", @cols = "10"})
+                    @Html.ValidationMessageFor(model => model.NotesAndInstructions, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Step 3" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
 }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
