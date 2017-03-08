@@ -39,15 +39,20 @@ namespace AXIS.Controllers
         // GET: Rfqs/Create
         public ActionResult Create(string typefarm)
         {
-            //string stypefarm = typefarm;
-            //Farm farm = db.Farms.SingleOrDefault(farm => db.Farms.typefarm ==  typefarm);
-            //Farm Prueba = new Farm();
-            //db.Farms.Find();
-            //Farm farm = db.Farms.Where(Prueba => Prueba.TypeFarm == typefarm);
 
-            ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName");
+            switch (typefarm) {
 
-            var model = new Rfq
+                case "Wind":
+                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Wind), "FarmId", "FarmName");
+                    break;
+                case "Solar":
+                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Solar), "FarmId", "FarmName");
+                    break;
+                case "Other":
+                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Other), "FarmId", "FarmName");
+                    break;
+            }
+        var model = new Rfq
             {
                 Status = "Open"
             };
