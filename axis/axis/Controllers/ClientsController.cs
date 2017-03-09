@@ -46,7 +46,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClientId,FirstName,LastName,Title,Department,WorkPhone,Email,Street,City,State,ZipCode,Country")] Client client)
+        public ActionResult Create([Bind(Include = "ClientId,FirstName,LastName,Title,Department,WorkPhone,Email,Street,City,State,ZipCode,Country,Company,Region")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClientId,FirstName,LastName,Title,Department,WorkPhone,Email,Street,City,State,ZipCode,Country")] Client client)
+        public ActionResult Edit([Bind(Include = "ClientId,FirstName,LastName,Title,Department,WorkPhone,Email,Street,City,State,ZipCode,Country,Company,Region")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,8 @@ namespace AXIS.Controllers
             Client client = db.Clients.Find(id);
             db.Clients.Remove(client);
             db.SaveChanges();
-            return new JsonResult() { Data = "Deleted successfully" };
+            return new JsonResult() { Data = 1 };
+            
         }
 
         protected override void Dispose(bool disposing)
