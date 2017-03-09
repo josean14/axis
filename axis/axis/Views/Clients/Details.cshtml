@@ -1,106 +1,102 @@
 ﻿@model AXIS.Models.Client
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "CLIENT PROFILE";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <h1 class="well">PROFILE</h1>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <form>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>First Name</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.FirstName)</span>
+                            
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Last Name</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.LastName)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <p></p>
+                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Street)</span>                       
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label>City</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.City)</span>                              
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label>State</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.State)</span> 
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label>Zip</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.ZipCode)</span> 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <p></p>
+                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Country)</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Title</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Title)</span>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Department</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Department)</span>
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Company</label>
+                            <p></p>
+                            <span class="labelaxis labelaxix-profile">Company</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Work Phone Number</label>
+                        <p></p>
+                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.WorkPhone)</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <p></p>
+                        <span class="labelaxis labelaxix-profile">
+                            <a href="mailto:@Html.DisplayFor(model => model.Email)">@Html.DisplayFor(model => model.Email)</a>
+                        </span>
+                    </div>
 
-<div>
-    <h4>Client</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Department)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkPhone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkPhone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Street)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Street)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-
-    </dl>
+                    <div class="form-group">
+                        <div class="col-md-offset-0 col-md-5">
+                            <input type=" " value="New Call Log" class="btn btn-lg btn-info" />
+                        </div>
+                    </div>
+                
+                
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId }) |
     @Html.ActionLink("Back to List", "Index")
+
 </p>

@@ -1,10 +1,7 @@
 ﻿@{
     ViewBag.Title = "Business Development";
 }
-<div class="jumbotron" align="center">
-    <h1><b>Business Development</b></h1>
 
-</div>
 
 <div class="row">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -15,30 +12,56 @@
         <div class="menu-list">
 
             <ul id="menu-content" class="menu-content collapse out">
+
                 <li data-toggle="collapse" data-target="#DB" class="collapsed">
                     <a href="#"><i class="fa fa-globe fa-lg"></i> Customer DB <span class="arrow"></span></a>
-                </li>
-                <ul class="sub-menu collapse" id="DB">
-                    <li><a href=@Url.Action("Index","Clients")>Clients</a></li>
-                    <li><a href=@Url.Action("Index","Farms")>Farms</a></li>
-                </ul>
 
+                    <ul class="sub-menu collapse" id="DB">
+                        <li><a href=@Url.Action("Index","Clients")>Clients</a></li>
+                        <li><a href=@Url.Action("Index","Farms")>Farms</a></li>
+                    </ul>
+                </li>
                 <li data-toggle="collapse" data-target="#NRFQ" class="collapsed">
                     <a href="#"><i class="fa fa-globe fa-lg"></i> New RFQ <span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="NRFQ">
+                        <li><a href=@Url.Action("Create","Rfqs", new { typefarm = "Wind" })>Wind</a></li>
+
+                        <li>Solar</li>
+
+                        <li>Other</li>
+
+                    </ul>
                 </li>
-                <ul class="sub-menu collapse" id="NRFQ">
-                    <li><a href=@Url.Action("Create","Rfqs",new {typefarm = "Wind" } )>Wind</a></li>
-
-                    <li><a href=@Url.Action("Create","Rfqs",new {typefarm = "Solar" } )>Solar</a></li>
-
-                    <li><a href=@Url.Action("Create","Rfqs",new {typefarm = "Other" } )>Other</a></li>
-
-
-                </ul>
-
                 <li data-toggle="collapse" data-target="#ORFQ" class="collapsed">
                     <a href="#"><i class="fa fa-globe fa-lg"></i> Open RFQ <span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="ORFQ">
+                        <li><a href=@Url.Action("Index","Rfqs" )>Wind</a></li>
+                        <li>Solar</li>
+                        <li>Other</li>
+                    </ul>
                 </li>
+
+                <li data-toggle="collapse" data-target="#CALLLOG" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> Call Log <span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="CALLLOG">
+                        <li>Open</li>
+                        <li>View</li>
+                    </ul>
+                </li>
+
+                <li data-toggle="collapse" data-target="#REPORTS" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> Reports <span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="REPORTS">
+                        <li>Option 1</li>
+                        <li>Option 2</li>
+                    </ul>
+                </li>
+
+
                 <ul class="sub-menu collapse" id="ORFQ">
                     <li>Wind</li>
                     <li>Solar</li>

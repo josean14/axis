@@ -4812,6 +4812,26 @@ textarea.input-group-sm > .input-group-btnaxis > .btnaxis {
   background-color: #ffffff;
 }
 
+.labelaxis{
+
+  padding: 1em 8em .3em;
+  font-size: 100%;
+  font-weight: bold;
+  line-height: 1;
+  color: #333333;
+
+  vertical-align: baseline;
+  border-radius: .25em;
+  border:solid;
+  border-width:1px;
+  border-color:#333333;
+}
+
+.labelaxix-profile{
+  background-color: #cccccc;
+
+}
+
 .label {
   display: inline;
   padding: .2em .6em .3em;

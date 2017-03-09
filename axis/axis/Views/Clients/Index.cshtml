@@ -18,25 +18,17 @@
         <table class="table table-bordered">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    <p>Full Name</p>
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.Title)
                 </th>
                 <th>
+                    <p>Company</p>
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Department)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WorkPhone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Street)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.City)
@@ -45,7 +37,7 @@
                     @Html.DisplayNameFor(model => model.State)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ZipCode)
+                    <p>Region</p>
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Country)
@@ -57,27 +49,20 @@
             {
                 var ident = "Client" + @item.ClientId;
 
+                var fullname = @item.FirstName + " " + @item.LastName;
+
                 <tr id=@ident>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
+                        @Html.DisplayFor(modelItem => fullname)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
+                        <p>Valor de Company</p>
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Department)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WorkPhone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Street)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.City)
@@ -86,14 +71,17 @@
                         @Html.DisplayFor(modelItem => item.State)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ZipCode)
+                        <p>Valor Region</p>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Country)
                     </td>
                     <td>
-                        @Html.ActionLink(" ", "Edit", new { id = item.ClientId }, new { @class = "glyphicon glyphicon-pencil" }) |
-                        <a href="" onclick="confirmDelete(@item.ClientId); return false;" class="glyphicon glyphicon-remove"></a> |
+                        @*
+    @Html.ActionLink(" ", "Edit", new { id = item.ClientId }, new { @class = "glyphicon glyphicon-pencil" }) |
+    <a href="" onclick="confirmDelete(@item.ClientId); return false;" class="glyphicon glyphicon-remove"></a> |
+                        *@
+                        @Html.ActionLink("Profile","Details", new { id = item.ClientId },new { @class = "glyphicon glyphicon-user" })
 
                     </td>
                 </tr>

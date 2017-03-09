@@ -1,7 +1,7 @@
 ﻿@model AXIS.Models.Client
 
 @{
-    ViewBag.Title = "Edit Customer";
+    ViewBag.Title = "Edit Profile";
 }
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.HiddenFor(model => model.ClientId)
 
     <div class="container">
-        <h1 class="well">Edit Customer</h1>
+        <h1 class="well">Edit Profile</h1>
         <div class="col-lg-12 well">
             <div class="row">
                 <form>
@@ -82,7 +82,11 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Save" class="btn btn-lg btn-info" />
-                            </div>
+
+                                @*Falta incluir el cogigo de borrar*@
+                                <input type="" value="Detele" class="btn btn-lg btn-info" />
+                            </div>                        
+                        
                         </div>
                     </div>
                 </form>

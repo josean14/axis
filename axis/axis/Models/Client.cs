@@ -23,9 +23,17 @@ namespace AXIS.Models
         [Required(ErrorMessage = "The title is required.")]
         public virtual string Title { get; set; }
 
-
+        [DisplayName("Department")]
         [Required(ErrorMessage = "The department is required.")]
         public virtual string Department { get; set; }
+
+        //[DisplayName("Company")]
+        //[Required(ErrorMessage = "The Company is required.")]
+        //public virtual string Company { get; set; }
+
+        //[DisplayName("Region")]
+        //[Required(ErrorMessage = "The Region is required.")]
+        //public virtual string Region { get; set; }
 
         [DisplayName("Work Phone")]
         [Required(ErrorMessage = "The phone number is required.")]
