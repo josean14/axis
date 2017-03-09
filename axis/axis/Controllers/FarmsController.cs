@@ -104,7 +104,7 @@ namespace AXIS.Controllers
             Farm farm = db.Farms.Find(id);
             db.Farms.Remove(farm);
             db.SaveChanges();
-            return new JsonResult() { Data = "Deleted successfully" };
+            return new JsonResult() { Data = 1 };
         }
 
         protected override void Dispose(bool disposing)

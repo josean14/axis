@@ -95,6 +95,7 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Save" class="btn btn-lg btn-info" />
+                                <a href="" onclick="confirmDelete(); return false;" class="btn btn-lg btn-info">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -238,4 +239,48 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
+<script>
+    function confirmDelete() {
+        bootbox.confirm({
+            message: "Are you sure you want to delete this?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                if (result) {
+                    var url = "/Farms/Delete/";
+                    var FarmId = $('#FarmId').val();
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: FarmId, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1){
+
+                            var url = '@Url.Action("Index", "Farms")';
+                            window.location.href = url;
+                        }
+
+
+
+
+                  });
+
+                }
+            }
+        });
+
+
+    }
+</script>
 }
