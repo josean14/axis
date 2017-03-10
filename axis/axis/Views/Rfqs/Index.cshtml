@@ -3,14 +3,11 @@
 @{
     ViewBag.Title = "RFQ LIST";
 }
-<!--Parcial para agregar el menu-->
-@Html.Partial("~/views/BusDev/PartialMenu.cshtml");
+
 <h2>Request for Quote</h2>
 
 <p>
     <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
-
-    <a href=@Url.Action("Create","Rfqs") class="btn btn-primary btn-xs">New RFQ</a>
 </p>
 
 
@@ -25,7 +22,7 @@
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.Farm.FarmName)
+                <P>Site Name</P>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
@@ -33,7 +30,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ProjectName)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
 
     @foreach (var item in Model) {
@@ -53,6 +50,7 @@
                 @Html.DisplayFor(modelItem => item.ProjectName)
             </td>
             <td>
+                @Html.ActionLink(" ", "Details", new { id = item.RfqId }, new { @class = "glyphicon glyphicon-list-alt" }) |
                 @Html.ActionLink(" ", "Edit", new { id = item.RfqId }, new { @class = "glyphicon glyphicon-pencil" }) |
                 <a href="" onclick="confirmDelete(@item.RfqId); return false;" class="glyphicon glyphicon-remove"></a>
             </td>

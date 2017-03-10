@@ -39,7 +39,7 @@ namespace AXIS.Controllers
         // GET: Farms/Create
         public ActionResult Create()
         {
-            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName");
+            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FullName");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace AXIS.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName", farm.ClientId);
+            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FullName", farm.ClientId);
             return View(farm);
         }
 
@@ -73,7 +73,7 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName", farm.ClientId);
+            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FullName", farm.ClientId);
             return View(farm);
         }
 
@@ -90,7 +90,7 @@ namespace AXIS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FirstName", farm.ClientId);
+            ViewBag.ClientId = new SelectList(db.Clients, "ClientId", "FullName", farm.ClientId);
             return View(farm);
         }
 

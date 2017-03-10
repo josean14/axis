@@ -4813,8 +4813,9 @@ textarea.input-group-sm > .input-group-btnaxis > .btnaxis {
 }
 
 .labelaxis{
-
-  padding: 1em 8em .3em;
+  max-width: 750px;
+  padding:8px 80px 8px;
+  text-align:left;
   font-size: 100%;
   font-weight: bold;
   line-height: 1;

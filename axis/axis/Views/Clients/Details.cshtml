@@ -102,7 +102,6 @@
 
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId }) |
-    @Html.ActionLink("Back to List", "Index")
-
+    <a href=@Url.Action("Index", "Clients") class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Edit", "Clients", new { id = Model.ClientId }) class="btn btn-primary btn-xs"> Edit </a>
 </p>

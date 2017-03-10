@@ -66,6 +66,9 @@ namespace AXIS.Models
         public virtual string Country { get; set; }
         public virtual ICollection<Farm> Farms { get; set; }
 
+        public string FullName
+        {get { return FirstName + " " + LastName; }
 
+        }
     }
 }

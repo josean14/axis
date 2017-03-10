@@ -57,15 +57,20 @@
                             @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                         </div>
                         <div class="row">
-                            <div class="col-sm-6 form-group">
+                            <div class="col-sm-4 form-group">
                                 <label>Title</label>
                                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Designation Here.." } })
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
-                            <div class="col-sm-6 form-group">
+                            <div class="col-sm-4 form-group">
                                 <label>Department</label>
                                 @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Department Name Here.." } })
                                 @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-4 form-group">
+                                <label>Company</label>
+                                @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Company Name Here.." } })
+                                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -87,20 +92,17 @@
 
                         <div class="form-group">
                             <label>Region</label>
-                            @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Name Here.." } })
+                            @Html.EditorFor(model => model.Region, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Region Here.." } })
                             @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
                         </div>
 
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Save" class="btn btn-lg btn-info" />
+                                <a href=@Url.Action("Index", "Clients") class="btn btn-primary btn-xs">Back</a>
+                                <input type="submit" value="Save" class="btn btn-primary btn-xs" />
+                                <a href="" onclick="confirmDelete(); return false;" class="btn btn-primary btn-xs">Delete</a>
 
-                                @*Falta incluir el cogigo de borrar*@
-                              
-
-                                
-                                <a href="" onclick="confirmDelete(); return false;" class="btn btn-lg btn-info">Delete</a>
                             </div>                        
                         
                         </div>
