@@ -1,0 +1,58 @@
+﻿@model IEnumerable<AXIS.Models.Ccall>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { id = @ViewBag.ClientId })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CcallId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CcallId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CcallId })
+            </td>
+        </tr>
+    }
+
+</table>

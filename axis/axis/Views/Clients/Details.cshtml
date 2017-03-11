@@ -88,7 +88,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-0 col-md-5">
-                            <input type=" " value="New Call Log" class="btn btn-lg btn-info" />
+                            <input type="button" value="New Call Log" class="btn btn-lg btn-info" id="PartialCreate" />
                         </div>
                     </div>
                 
@@ -99,9 +99,50 @@
     </div>
 </div>
 
-
+@Html.HiddenFor(model => model.ClientId)
 
 <p>
     <a href=@Url.Action("Index", "Clients") class="btn btn-primary btn-xs">Back</a>
     <a href=@Url.Action("Edit", "Clients", new { id = Model.ClientId }) class="btn btn-primary btn-xs"> Edit </a>
 </p>
+
+<div id="PartialCreateView"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $('#PartialCreate').click(function () {
+
+
+                var ClientId = $('#ClientId').val();
+
+                var url = "/Ccalls/PartialCreate/" + ClientId;
+
+                $('#PartialCreateView').load(url);
+            });
+        });
+
+        function CallSave() {
+            var url = "/Ccalls/PartialCreate/";
+            var clientid = $('#ClientId').val();
+            var anti = $('[name=__RequestVerificationToken]').val();
+            var title = $('#Title').val();
+            var date = $('#Date').val();
+            var note = $('#Note').val();
+            var username = $('#UserName').val();
+            var ccallid = 0
+
+            $.post(url, { CcallId: ccallid, Title: title, Date: date, Note: note, UserName: username, ClientId: clientid, __RequestVerificationToken: anti }, function (data) {
+
+                if (data = 1) {
+
+                    $('#PartialCreateView').html('<p  class="alert alert-success">Save Sucess</p>');
+
+                }
+            });
+        }
+
+    </script>
+}

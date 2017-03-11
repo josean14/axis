@@ -207,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BusDevController.cs" />
+    <Compile Include="Controllers\CcallsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\FarmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -234,6 +235,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AXISDB.cs" />
+    <Compile Include="Models\Ccall.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Farm.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -348,6 +350,13 @@
     <Content Include="Views\Quotes\Edit.cshtml" />
     <Content Include="Views\Quotes\Index.cshtml" />
     <Content Include="Views\BusDev\PartialMenu.cshtml" />
+    <Content Include="Views\Ccalls\Create.cshtml" />
+    <Content Include="Views\Ccalls\Delete.cshtml" />
+    <Content Include="Views\Ccalls\Details.cshtml" />
+    <Content Include="Views\Ccalls\Edit.cshtml" />
+    <Content Include="Views\Ccalls\Index.cshtml" />
+    <Content Include="Views\Ccalls\PartialCallList.cshtml" />
+    <Content Include="Views\Ccalls\PartialCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

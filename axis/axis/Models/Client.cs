@@ -65,6 +65,7 @@ namespace AXIS.Models
         [Required(ErrorMessage = "The country is required.")]
         public virtual string Country { get; set; }
         public virtual ICollection<Farm> Farms { get; set; }
+        public virtual ICollection<Ccall> Ccalls { get; set; }
 
         public string FullName
         {get { return FirstName + " " + LastName; }
