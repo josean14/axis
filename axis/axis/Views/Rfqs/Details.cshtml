@@ -1,41 +1,49 @@
 ﻿@model AXIS.Models.Rfq
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Review RFQ";
 }
 
-<h2>Details</h2>
+<h2>Review RFQ</h2>
 
-<div>
-    <h4>Rfq</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Farm.FarmName)
-        </dt>
+<div class="panelright">
+    <div class="panel panel-axis right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">RFQ # @Html.DisplayFor(model => model.RfqId)</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Farm.FarmName)
-        </dd>
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Date:</p>
+                </th>
+                <th align="center">
+                    <p>Check server date GMT</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Project Name</p>
+                </th>
+                <th align="center">
+                    <p>@Html.DisplayFor(model => model.ProjectName)</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Site Name</p>
+                </th>
+                <th align="center">
+                @Html.DisplayFor(model => model.Farm.FarmName)
+                </th>
+            </tr>
+        </table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProjectName)
-        </dd>
-
-    </dl>
+    </div>
 </div>
+
+@*Agregar listado de Versiones...que tenga este RFQ*@
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.RfqId }) |
     @Html.ActionLink("Back to List", "Index")

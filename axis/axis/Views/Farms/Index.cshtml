@@ -91,7 +91,7 @@
     @Html.ActionLink(" ", "Edit", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-pencil" }) |
     <a href="" onclick="confirmDelete(@item.FarmId); return false;" class="glyphicon glyphicon-remove"></a>
                     *@
-                    @Html.ActionLink("Profile", "Details", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-user" })
+                    @Html.ActionLink("View", "Details", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-info-sign" })
                 </td>
             </tr>
         }
