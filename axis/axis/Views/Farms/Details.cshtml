@@ -14,77 +14,63 @@
                     <div class="row">
                         <div class="col-sm-6 form-group">
                             <label>Type of Farm</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.TypeFarm)</span>
+                            @Html.TextBoxFor(model => model.TypeFarm, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Farm Name</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.FarmName)</span>
+                            @Html.TextBoxFor(model => model.FarmName, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.StreetAddress)</span>
-
+                        @Html.TextAreaFor(model => model.StreetAddress, new { disabled = "disabled", @readonly = "readonly", @class = "form-control", @rows = "3" })
                     </div>
                     <div class="row">
                         <div class="col-sm-4 form-group">
                             <label>City</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.City)</span>
+                            @Html.TextBoxFor(model => model.City, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>State</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.State)</span>
+                            @Html.TextBoxFor(model => model.State, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>Zip</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.ZipCode)</span>
+                            @Html.TextBoxFor(model => model.ZipCode, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Country</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Country)</span>
+                        @Html.TextBoxFor(model => model.Country, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Manufacture</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Manufacture)</span>
+                        @Html.TextBoxFor(model => model.Manufacture, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Platform</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Platform)</span>
+                        @Html.TextBoxFor(model => model.Platform, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+
                     </div>
                     <div class="form-group">
                         <label>Convertor</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Convertor)</span>
+                        @Html.TextBoxFor(model => model.Convertor, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label># of Towers</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.NumberTowers)</span>
+                        @Html.TextBoxFor(model => model.NumberTowers, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>MW</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.NumberMws)</span>
+                        @Html.TextBoxFor(model => model.NumberMws, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Gearbox</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Gearbox)</span>
+                        @Html.TextBoxFor(model => model.Gearbox, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Site Manager</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Client.FullName)</span>
+                        @Html.TextBoxFor(model => model.Client.FullName, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
 
