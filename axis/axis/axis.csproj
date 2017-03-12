@@ -215,6 +215,7 @@
     <Compile Include="Controllers\QuotesController.cs" />
     <Compile Include="Controllers\RfqsController.cs" />
     <Compile Include="Controllers\RversionsController.cs" />
+    <Compile Include="Controllers\TechniciansController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -358,6 +359,8 @@
     <Content Include="Views\Ccalls\Index.cshtml" />
     <Content Include="Views\Ccalls\PartialCallList.cshtml" />
     <Content Include="Views\Ccalls\PartialCreate.cshtml" />
+    <Content Include="Views\Technicians\Index.cshtml" />
+    <Content Include="Views\Technicians\PartialMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -387,7 +390,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51817</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
