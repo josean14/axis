@@ -85,7 +85,7 @@
                 @item.ProjectDescription
             </td>
             <td>
-                @Html.ActionLink(" ", "DetailVersion", new { id = item.RversionId }, new { @class = "glyphicon glyphicon-list-alt" })
+                @Html.ActionLink(" ", "VersionDetails", new { RversionId = item.RversionId, RfqId = Model.RfqId }, new { @class = "glyphicon glyphicon-list-alt" })
             </td>
 
         </tr>

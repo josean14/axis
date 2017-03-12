@@ -153,7 +153,30 @@ namespace AXIS.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Rfqs/Edit/5
+        public ActionResult VersionDetails(int? RversionId, int? RfqId)
+        {
+            if ((RversionId == null) & (RfqId == null))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Rfq rfq = db.Rfqs.Find(RfqId);
+            if (rfq == null)
+            {
+                return HttpNotFound();
+            }
+            Rversion rversion = db.Rversions.Find(RversionId);
+            if (rfq == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.qoutes = db.Quotes.Where(f => f.RversionId == RversionId);
+            
+            return View(rfq);
+        }
+
     }
 
-
-}
+  }
