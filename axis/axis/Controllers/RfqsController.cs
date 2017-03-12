@@ -51,6 +51,7 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Rversion = db.Rversions.Where(f => f.RfqId == id).ToList();
             return View(rfq);
         }
 

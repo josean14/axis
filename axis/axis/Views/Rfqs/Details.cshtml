@@ -48,3 +48,46 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.RfqId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Number Version
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Project Description
+        </th>
+        <th>
+            Actions
+        </th>
+
+    </tr>
+    @foreach (var item in ViewBag.Rversion)
+    {
+        <tr id="@item.RversionId">
+            <td>
+                @item.NumberVersion
+            </td>
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @item.Status
+            </td>
+            <td>
+                @item.ProjectDescription
+            </td>
+            <td>
+                @Html.ActionLink(" ", "DetailVersion", new { id = item.RversionId }, new { @class = "glyphicon glyphicon-list-alt" })
+            </td>
+
+        </tr>
+    }
+</table>
