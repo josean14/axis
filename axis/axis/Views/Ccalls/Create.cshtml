@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Call Log</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Ccall</h4>
+        <h4>New</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -64,7 +64,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Index","Ccalls") class="btn btn-primary btn-xs">Notes List</a>
 </div>
 
 @section Scripts {
