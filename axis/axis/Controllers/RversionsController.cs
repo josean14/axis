@@ -51,10 +51,12 @@ namespace AXIS.Controllers
             ViewBag.ProjectName = projectname;
             ViewBag.RfqId = rfqid;
             ViewBag.FullName = rfq.Farm.Client.FullName;
-            ViewBag.Street = rfq.Farm.Client.Street;
-            ViewBag.City = rfq.Farm.Client.City;
-            ViewBag.State = rfq.Farm.Client.State;
-            ViewBag.Country = rfq.Farm.Client.Country;
+            ViewBag.Street = rfq.Farm.StreetAddress;
+            ViewBag.City = rfq.Farm.City;
+            ViewBag.State = rfq.Farm.State;
+            ViewBag.Country = rfq.Farm.Country;
+            ViewBag.SiteFarm = rfq.Farm.FarmName;
+
 
             ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work");
             return View(model);

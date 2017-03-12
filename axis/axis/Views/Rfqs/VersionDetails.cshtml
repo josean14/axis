@@ -1,0 +1,65 @@
+﻿@model AXIS.Models.Rfq
+
+@{
+    ViewBag.Title = "VersionDetails";
+
+    
+}
+
+<h2>VersionDetails</h2>
+
+
+            @ViewBag.VersionDate 
+            @ViewBag.NumberVersion
+            @ViewBag.ProjectDescription 
+            @ViewBag.ProjectName
+            @ViewBag.SiteFarm  
+            @ViewBag.FullName 
+            @ViewBag.Street
+            @ViewBag.Cit
+            @ViewBag.State
+            @ViewBag.Country
+
+<table class="table">
+    <tr>
+        <th>
+            Description
+        </th>
+        <th>
+            Um
+        </th>
+        <th>
+            Price per unit
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Currency
+        </th>
+
+    </tr>
+    @foreach (var item in ViewBag.Quotes)
+    {
+        <tr >
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.Um
+            </td>
+            <td>
+                @item.PricePerUnit
+            </td>
+            <td>
+                @item.Quantity
+            </td>
+            <td>
+                @item.Currency
+            </td>
+
+        </tr>
+    }
+</table>
+
+

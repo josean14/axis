@@ -171,9 +171,24 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
-
-            ViewBag.qoutes = db.Quotes.Where(f => f.RversionId == RversionId);
+        
             
+            ViewBag.VersionDate = rversion.Date;
+            ViewBag.NumberVersion = rversion.NumberVersion;
+            ViewBag.ProjectDescription = rversion.ProjectDescription;
+            ViewBag.ProjectName = rfq.ProjectName;
+            ViewBag.SiteFarm = rfq.Farm.FarmName;
+            ViewBag.FullName = rfq.Farm.Client.FullName;
+            ViewBag.Street = rfq.Farm.StreetAddress;
+            ViewBag.City = rfq.Farm.City;
+            ViewBag.State = rfq.Farm.State;
+            ViewBag.Country = rfq.Farm.Country;
+
+
+            var quotes = db.Quotes.Where(q => q.RversionId == rversion.RversionId).ToList();
+
+            ViewBag.Quotes = quotes;
+
             return View(rfq);
         }
 
