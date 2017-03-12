@@ -215,7 +215,6 @@
     <Compile Include="Controllers\QuotesController.cs" />
     <Compile Include="Controllers\RfqsController.cs" />
     <Compile Include="Controllers\RversionsController.cs" />
-    <Compile Include="Controllers\TechnisiansController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -359,8 +358,7 @@
     <Content Include="Views\Ccalls\Index.cshtml" />
     <Content Include="Views\Ccalls\PartialCallList.cshtml" />
     <Content Include="Views\Ccalls\PartialCreate.cshtml" />
-    <Content Include="Views\Techinisions\Index.cshtml" />
-    <Content Include="Views\Techinisions\PartialMenu.cshtml" />
+    <Content Include="Views\Rfqs\VersionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

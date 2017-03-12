@@ -3,22 +3,22 @@
 @{
     ViewBag.Title = "VersionDetails";
 
-
+    
 }
 
 <h2>VersionDetails</h2>
 
 
-@ViewBag.VersionDate
-@ViewBag.NumberVersion
-@ViewBag.ProjectDescription
-@ViewBag.ProjectName
-@ViewBag.SiteFarm
-@ViewBag.FullName
-@ViewBag.Street
-@ViewBag.Cit
-@ViewBag.State
-@ViewBag.Country
+            @ViewBag.VersionDate 
+            @ViewBag.NumberVersion
+            @ViewBag.ProjectDescription 
+            @ViewBag.ProjectName
+            @ViewBag.SiteFarm  
+            @ViewBag.FullName 
+            @ViewBag.Street
+            @ViewBag.Cit
+            @ViewBag.State
+            @ViewBag.Country
 
 <table class="table">
     <tr>
@@ -41,7 +41,7 @@
     </tr>
     @foreach (var item in ViewBag.Quotes)
     {
-        <tr>
+        <tr >
             <td>
                 @item.Description
             </td>
