@@ -1,58 +1,57 @@
 ﻿@model AXIS.Models.Ccall
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Call Log";
 }
 
-<h2>Details</h2>
+<h2>Call Log</h2>
 
-<div>
-    <h4>Ccall</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Client.FirstName)
-        </dt>
+<div class="container">
+    <div class="col-lg-12 well">
+        <h3>View Note</h3>
+        <h3></h3>
+        <div class="row">
+            <form>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.TextBoxFor(model => model.Title, new
+                                { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
 
-        <dd>
-            @Html.DisplayFor(model => model.Client.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-    </dl>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.TextBoxFor(model => model.Date, new
+                                { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.TextAreaFor(model => model.Note, new
+                                { disabled = "disabled", @readonly = "readonly", @class = "form-control", @rows = "10" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.TextBoxFor(model => model.UserName, new
+                                { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ClientId, "Client", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.TextBoxFor(model => model.Client.FullName, new
+                                { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CcallId }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href=@Url.Action("Index","Ccalls") class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Edit", "Ccalls", new { id = Model.CcallId}) class="btn btn-primary btn-xs"> Edit </a>
 </p>

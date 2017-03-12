@@ -13,70 +13,58 @@
                     <div class="row">
                         <div class="col-sm-6 form-group">
                             <label>First Name</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.FirstName)</span>
-                            
+                            @Html.TextBoxFor(model => model.FirstName, new { disabled = "disabled", @readonly = "readonly", @class = "form-control"})
+                          
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Last Name</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.LastName)</span>
+                            @Html.TextBoxFor(model => model.LastName, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Street)</span>                       
+                            @Html.TextAreaFor(model => model.Street, new { disabled = "disabled", @readonly = "readonly", @class = "form-control", @rows = "3" })                      
                     </div>
                     <div class="row">
                         <div class="col-sm-4 form-group">
                             <label>City</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.City)</span>                              
+                            @Html.TextBoxFor(model => model.City, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>State</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.State)</span> 
+                            @Html.TextBoxFor(model => model.State, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-4 form-group">
                             <label>Zip</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.ZipCode)</span> 
+                            @Html.TextBoxFor(model => model.ZipCode, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Country</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Country)</span>
+                        @Html.TextBoxFor(model => model.Country, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="row">
                         <div class="col-sm-6 form-group">
                             <label>Title</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Title)</span>
+                            @Html.TextBoxFor(model => model.Title, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Department</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Department)</span>
+                            @Html.TextBoxFor(model => model.Department, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Company</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Company)</span>
+                            @Html.TextBoxFor(model => model.Company, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Region</label>
-                            <p></p>
-                            <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.Region)</span>
+                            @Html.TextBoxFor(model => model.Region, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label>Work Phone Number</label>
-                        <p></p>
-                        <span class="labelaxis labelaxix-profile">@Html.DisplayFor(model => model.WorkPhone)</span>
+                        @Html.TextBoxFor(model => model.WorkPhone, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label>Email Address</label>
@@ -88,7 +76,7 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-0 col-md-5">
-                            <input type="button" value="New Call Log" class="btn btn-lg btn-info" id="PartialCreate" />
+                            <input type="button" value="New Call Log" class="btn btn-primary btn-xs" id="PartialCreate" />
                         </div>
                     </div>
                 
@@ -97,6 +85,10 @@
             </form>
         </div>
     </div>
+
+    <div id="PartialCreateView"></div>
+
+
 </div>
 
 @Html.HiddenFor(model => model.ClientId)
@@ -106,7 +98,7 @@
     <a href=@Url.Action("Edit", "Clients", new { id = Model.ClientId }) class="btn btn-primary btn-xs"> Edit </a>
 </p>
 
-<div id="PartialCreateView"></div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
