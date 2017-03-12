@@ -89,7 +89,8 @@ namespace AXIS.Controllers
             {
                 db.Rfqs.Add(rfq);
                 db.SaveChanges();
-                //  return RedirectToAction("Create", "Rversions", new { rfqid = rfq.RfqId, projectname = rfq.ProjectName, client = rfq.Farm.Client.FullName, city = rfq.Farm.Client.City, country = rfq.Farm.Client.Country, state = rfq.Farm.Client.State, street = rfq.Farm.Client.Street });
+                
+
                 return RedirectToAction("Create", "Rversions", new { rfqid = rfq.RfqId, projectname = rfq.ProjectName});
             }
 
@@ -152,4 +153,6 @@ namespace AXIS.Controllers
             base.Dispose(disposing);
         }
     }
+
+
 }
