@@ -28,9 +28,6 @@ namespace AXIS.Models
         [DisplayName("Type work")]
         public virtual TypeWork? TypeWork { get; set; }
 
-        [Required(ErrorMessage = "The Sope Work is required.")]
-        public virtual string ScopeWork { get; set; }
-
         [DisplayName("Project description")]
         [Required(ErrorMessage = "The project description is required.")]
         public virtual string ProjectDescription { get; set; }
@@ -47,7 +44,12 @@ namespace AXIS.Models
         [DisplayName("Number Project")]
         public virtual int RfqId { get; set; }
 
+        [DisplayName("Scope Work")]
+        public virtual int ScopeWorkId { get; set; }
+
         public virtual Rfq Rfq { get; set; }
+        public virtual ScopeWork ScopeWork { get; set; }
+
         public virtual List<Quote> Qoutes { get; set; }
     }
 }

@@ -31,7 +31,7 @@
                     <p>Date:</p>
                 </th>
                 <th align="center">
-                    <p>Check server date GMT</p>
+                    <p>@Model.Date</p>
                 </th>
             </tr>
             <tr>
@@ -63,17 +63,17 @@
             <table class="table table-bordered">
                 <tr>
                     <th align="center">
-                        <p>Name Client</p>
+                        <p>@ViewBag.FullName</p>
                     </th>
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Addess</p>
+                        <p>@ViewBag.Street</p>
                     </th>
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Adress</p>
+                        <p>@ViewBag.City,  @ViewBag.State,  @ViewBag.Country</p>
                     </th>
                 </tr>
             </table>
@@ -112,18 +112,17 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.TypeWork, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.TypeWork, htmlAttributes: new { @class = "form-control" })
+                    @Html.EnumDropDownListFor(model => model.TypeWork, htmlAttributes: new { @class = "form-control", @id = "SelectTypeWork" })
                     @Html.ValidationMessageFor(model => model.TypeWork, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ScopeWork, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ScopeWork, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ScopeWork, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.ScopeWorkId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" id="listscopework">
+                    <select class="form-control valid" id="ScopeWorkId" name="ScopeWorkId"></select>
                 </div>
-            </div>
+            </div>   
 
 
             <div class="form-group">
@@ -149,4 +148,37 @@
 
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+            $("#SelectTypeWork").change(function () {       // Funcion que se ejecuta cuando cambia la lista
+
+                var id = $(this).val();
+                var procemessage = "<option value='0'> Please wait...</option>";
+                $("#ScopeWorkId").html(procemessage).show();
+                var url = "/Rversions/GetScopeWork/";
+            
+                $.ajax({
+                    url: url,
+                    data: { typework: id },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value='0'>Select Work</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#ScopeWorkId").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert("error : " + reponse);
+                    }
+                });
+
+
+            });
+
+
+</script>
+
         }
+

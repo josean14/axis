@@ -15,10 +15,28 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
         // GET: Rfqs
-        public ActionResult Index()
+        public ActionResult Index(string typefarm)
         {
-            var rfqs = db.Rfqs.Include(r => r.Farm);
-            return View(rfqs.ToList());
+            
+            switch (typefarm)
+            {
+                
+                case "Wind":
+                    var rfqsWind = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
+                    return View(rfqsWind.ToList());
+                case "Solar":
+                    var rfqsSolar = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Solar);
+                    return View(rfqsSolar.ToList());
+                case "Other":
+                    var rfqsOther = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Other);
+                    return View(rfqsOther.ToList());
+                default:
+                    var rfqs = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
+                    return View(rfqs.ToList());
+
+            }
+
+
         }
 
         // GET: Rfqs/Details/5
@@ -71,7 +89,8 @@ namespace AXIS.Controllers
             {
                 db.Rfqs.Add(rfq);
                 db.SaveChanges();
-                return RedirectToAction("Create", "Rversions", new { rfqid = rfq.RfqId, projectname = rfq.ProjectName });
+                //  return RedirectToAction("Create", "Rversions", new { rfqid = rfq.RfqId, projectname = rfq.ProjectName, client = rfq.Farm.Client.FullName, city = rfq.Farm.Client.City, country = rfq.Farm.Client.Country, state = rfq.Farm.Client.State, street = rfq.Farm.Client.Street });
+                return RedirectToAction("Create", "Rversions", new { rfqid = rfq.RfqId, projectname = rfq.ProjectName});
             }
 
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName", rfq.FarmId);

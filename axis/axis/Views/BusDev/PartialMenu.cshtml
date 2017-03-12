@@ -37,9 +37,9 @@
                     <a href="#"><i class="fa fa-globe fa-lg"></i> Open RFQ <span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="ORFQ">
-                        <li><a href=@Url.Action("Index","Rfqs" )>Wind</a></li>
-                        <li>Solar</li>
-                        <li>Other</li>
+                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Wind" } )>Wind</a></li>
+                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Solar" } )>Solar</a></li>
+                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Other" } )>Other</a></li>
                     </ul>
                 </li>
 

@@ -18,6 +18,7 @@ namespace AXIS.Controllers
         public ActionResult Index()
         {
             var rversions = db.Rversions.Include(r => r.Rfq);
+            var scopeworks = db.Rversions.Include(r => r.ScopeWork);
             return View(rversions.ToList());
         }
 
@@ -43,11 +44,19 @@ namespace AXIS.Controllers
             {
                 RfqId = rfqid,
                 NumberVersion = 1,
-                Status = "Open"
+                Status = "Open",
+                Date = DateTime.Now
             };
-
+            Rfq rfq = db.Rfqs.Find(rfqid);
             ViewBag.ProjectName = projectname;
             ViewBag.RfqId = rfqid;
+            ViewBag.FullName = rfq.Farm.Client.FullName;
+            ViewBag.Street = rfq.Farm.Client.Street;
+            ViewBag.City = rfq.Farm.Client.City;
+            ViewBag.State = rfq.Farm.Client.State;
+            ViewBag.Country = rfq.Farm.Client.Country;
+
+            ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work");
             return View(model);
         }
 
@@ -56,16 +65,18 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ScopeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId")] Rversion rversion)
+        public ActionResult Create([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId,ScopeWorkId")] Rversion rversion)
         {
             if (ModelState.IsValid)
             {
+                rversion.Date = DateTime.Now;
                 db.Rversions.Add(rversion);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Quotes", new { rversionid = rversion.RversionId });
             }
 
             ViewBag.RfqId = new SelectList(db.Rfqs, "RfqId", "ProjectName", rversion.RfqId);
+            ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work", rversion.ScopeWorkId);
             return View(rversion);
         }
 
@@ -82,6 +93,7 @@ namespace AXIS.Controllers
                 return HttpNotFound();
             }
             ViewBag.RfqId = new SelectList(db.Rfqs, "RfqId", "Status", rversion.RfqId);
+            ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work", rversion.ScopeWorkId);
             return View(rversion);
         }
 
@@ -90,7 +102,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ScopeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId")] Rversion rversion)
+        public ActionResult Edit([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId,ScopeWorkId")] Rversion rversion)
         {
             if (ModelState.IsValid)
             {
@@ -99,10 +111,11 @@ namespace AXIS.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.RfqId = new SelectList(db.Rfqs, "RfqId", "Status", rversion.RfqId);
+            ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work", rversion.ScopeWorkId);
             return View(rversion);
         }
 
-      
+
 
         // POST: Rversions/Delete/5
         [HttpPost]
@@ -122,6 +135,29 @@ namespace AXIS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        //Action result for ajax call
+        [HttpPost]
+        public ActionResult GetScopeWork(int typework)
+        {
+            switch (typework)
+            {
+
+                case 0:
+                    var objservice = db.ScopeWorks.Where(m => m.TypeWork == "Services");
+                    SelectList listservice = new SelectList(objservice, "ScopeWorkId", "Work", 0);
+                    return Json(listservice);
+                case 1:
+                    var objconstruct = db.ScopeWorks.Where(m => m.TypeWork == "Construct");
+                    SelectList listconstruct = new SelectList(objconstruct, "ScopeWorkId", "Work", 0);
+                    return Json(listconstruct);
+                default:
+                    SelectList listdefault = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work", 0);
+                    return Json(listdefault);
+            }
+
         }
     }
 }
