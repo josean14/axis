@@ -2,11 +2,106 @@
 
 @{
     ViewBag.Title = "VersionDetails";
-
-
 }
 
 <h2>VersionDetails</h2>
+
+<div class="panelright">
+    <div class="panel panel-axis right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">RFQ # @ViewBag.RfqId</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Date:</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.VersionDate</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Version #</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.NumberVersion</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Site Farm</p>
+                </th>
+                <th align="center">
+                    @ViewBag.SiteFarm
+                </th>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axis right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Customer</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>@ViewBag.FullName</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>@ViewBag.Street</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>@ViewBag.City,  @ViewBag.State,  @ViewBag.Country</p>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axislg right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Quote/Project Description</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>Project Name: @ViewBag.ProjectName</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Type of Work</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Scope ok Work:@ViewBag.TypeWork</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        @ViewBag.ProjectDescription
+                    </th>
+                </tr>
+
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
 
 
 @ViewBag.VersionDate
@@ -16,9 +111,11 @@
 @ViewBag.SiteFarm
 @ViewBag.FullName
 @ViewBag.Street
-@ViewBag.Cit
+@ViewBag.City
 @ViewBag.State
 @ViewBag.Country
+@ViewBag.TypeWork
+@ViewBag.ScopeWork
 
 <table class="table">
     <tr>

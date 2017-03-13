@@ -14,14 +14,6 @@
         <table class="table table-bordered">
             <tr>
                 <th align="center">
-                    <p>Date:</p>
-                </th>
-                <th align="center">
-                    <p>Check server date GMT</p>
-                </th>
-            </tr>
-            <tr>
-                <th align="center">
                     <p>Project Name</p>
                 </th>
                 <th align="center">
@@ -43,51 +35,85 @@
 
 @*Agregar listado de Versiones...que tenga este RFQ*@
 
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Version List</div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Version #
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Type of Work
+            </th>
+            <th>
+                Scope of Work
+            </th>
+            <th>
+                Project Description
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+        @foreach (var item in ViewBag.Rversion)
+            {
+            <tr id="@item.RversionId">
+                <td>
+                    @item.NumberVersion
+                </td>
+                <td>
+                    @item.Date
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    @item.TypeWork
+                </td>               
+                <td>
+                    @item.ScopeWorkId
+                </td>                 
+                <td>
+                    @item.ProjectDescription
+                </td>
+                <td>
+                    @Html.ActionLink("Open", "VersionDetails", new { RversionId = item.RversionId, RfqId = Model.RfqId }, new { @class = "glyphicon glyphicon-list-alt" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col col-xs-4">
+                Page 1 of 5
+            </div>
+            <div class="col col-xs-8">
+                <ul class="pagination hidden-xs pull-right">
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                </ul>
+                <ul class="pagination visible-xs pull-right">
+                    <li><a href="#">«</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RfqId }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href=@Url.Action("Index", "Rfqs") class="btn btn-primary btn-xs">Back</a>
 </p>
-
-
-<table class="table">
-    <tr>
-        <th>
-            Number Version
-        </th>
-        <th>
-            Date
-        </th>
-        <th>
-            Status
-        </th>
-        <th>
-            Project Description
-        </th>
-        <th>
-            Actions
-        </th>
-
-    </tr>
-    @foreach (var item in ViewBag.Rversion)
-    {
-        <tr id="@item.RversionId">
-            <td>
-                @item.NumberVersion
-            </td>
-            <td>
-                @item.Date
-            </td>
-            <td>
-                @item.Status
-            </td>
-            <td>
-                @item.ProjectDescription
-            </td>
-            <td>
-                @Html.ActionLink(" ", "VersionDetails", new { RversionId = item.RversionId, RfqId = Model.RfqId }, new { @class = "glyphicon glyphicon-list-alt" })
-            </td>
-
-        </tr>
-    }
-</table>

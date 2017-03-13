@@ -48,6 +48,7 @@ namespace AXIS.Models
         public virtual int ScopeWorkId { get; set; }
 
         public virtual Rfq Rfq { get; set; }
+
         public virtual ScopeWork ScopeWork { get; set; }
 
         public virtual List<Quote> Qoutes { get; set; }
