@@ -176,6 +176,8 @@ namespace AXIS.Controllers
             ViewBag.VersionDate = rversion.Date;
             ViewBag.NumberVersion = rversion.NumberVersion;
             ViewBag.TypeWork = rversion.TypeWork;
+            ViewBag.ScopeWork = rversion.ScopeWork.Work;
+            ViewBag.Notes = rversion.NotesAndInstructions;
             ViewBag.ProjectDescription = rversion.ProjectDescription;
             ViewBag.ProjectName = rfq.ProjectName;
             ViewBag.SiteFarm = rfq.Farm.FarmName;

@@ -95,7 +95,7 @@
                 </tr>
                 <tr>
                     <th align="center">
-                        @Html.TextAreaFor(model => model.ProjectDescription, new { @class = "form-control", placeholder = "Enter description Here..", @rows = "10" } )
+                        @Html.TextAreaFor(model => model.ProjectDescription, new { @class = "form-control", placeholder = "Enter description Here..", @rows = "5" } )
                         @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })
                     </th>
                 </tr>

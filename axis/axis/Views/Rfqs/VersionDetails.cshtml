@@ -1,15 +1,21 @@
 ﻿@model AXIS.Models.Rfq
 
 @{
-    ViewBag.Title = "VersionDetails";
-}
+        ViewBag.Title = "VersionDetails";
+    }
 
-<h2>VersionDetails</h2>
+@{
+    double TotalPrice = 0;
+ }
+
+@Html.ActionLink("Back", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
+
+<h2>Version Details</h2>
 
 <div class="panelright">
     <div class="panel panel-axis right">
         <!-- Default panel contents -->
-        <div class="panel-heading">RFQ # @ViewBag.RfqId</div>
+        <div class="panel-heading">RFQ # @Html.DisplayFor(model => model.RfqId)</div>
 
         <table class="table table-bordered">
             <tr>
@@ -81,7 +87,7 @@
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Type of Work</p>
+                        <p>Type of Work: @ViewBag.ScopeWork</p>
                     </th>
                 </tr>
                 <tr>
@@ -103,60 +109,107 @@
 </div>
 
 
+<div class="panel panel-default">
+        <!-- Default panel contents -->
+        <table class="table table-bordered">
+            <thead class="tr-axis">
+                <tr>
+                    <th>
+                        Description
+                    </th>
+                    <th style="text-align:center">
+                        UM
+                    </th>
+                    <th style="text-align:center">
+                        Cost per Unit
+                    </th>
+                    <th style="text-align:center">
+                        Price per Unit
+                    </th>
+                    <th style="text-align:center">
+                        Quantity
+                    </th>
+                    <th style="text-align:center">
+                        Total Line
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in ViewBag.Quotes)
+            {
+                <tr class="trbodyaxis">
+                    <td style="text-align:left">
+                        @item.Description
+                    </td>
+                    <td style="text-align:center">
+                        UM
+                    </td>
+                    <td style="text-align:right">
+                        Colocar el valor del costo
+                    </td>
+                    <td style="text-align:right">
+                        @{
+                            @Convert.ToDecimal(item.PricePerUnit).ToString("$ #,##0.00");
+                        }
+                    </td>
+                    <td style="text-align:center">
+                        @item.Quantity
+                    </td>
+                    <td style="text-align:right">
+                        @{
+                            @Convert.ToDecimal(item.Currency).ToString("$ #,##0.00");
+                        }
+                    </td>
 
-@ViewBag.VersionDate
-@ViewBag.NumberVersion
-@ViewBag.ProjectDescription
-@ViewBag.ProjectName
-@ViewBag.SiteFarm
-@ViewBag.FullName
-@ViewBag.Street
-@ViewBag.City
-@ViewBag.State
-@ViewBag.Country
-@ViewBag.TypeWork
-@ViewBag.ScopeWork
+                </tr>
+                TotalPrice = TotalPrice + @item.Currency;
+              }
 
-<table class="table">
-    <tr>
-        <th>
-            Description
-        </th>
-        <th>
-            Um
-        </th>
-        <th>
-            Price per unit
-        </th>
-        <th>
-            Quantity
-        </th>
-        <th>
-            Currency
-        </th>
+            <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <td style="text-align:right">Total</td>
+                    <td style="text-align:right">
+                        @{
+                            @Convert.ToDecimal(TotalPrice).ToString("$ #,##0.00");
+                         }
+                        
+                    </td>
+                </tr>
+            </tfoot>
 
-    </tr>
-    @foreach (var item in ViewBag.Quotes)
-    {
-        <tr>
-            <td>
-                @item.Description
-            </td>
-            <td>
-                @item.Um
-            </td>
-            <td>
-                @item.PricePerUnit
-            </td>
-            <td>
-                @item.Quantity
-            </td>
-            <td>
-                @item.Currency
-            </td>
+        </table>
+</div>
 
-        </tr>
-    }
-</table>
+<div class="panelright">
+    <div class="panel panel-axis">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Special Notes and Instructions</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    @ViewBag.Notes
+                </th>
+
+            </tr>
+
+
+        </table>
+
+    </div>
+</div>
+
+<div style="text-align:center">
+    <p>
+        Above information is not an invoice and only an estimate of services/goods described above.<br />
+        Payment Terms: Net 30 days
+    </p>
+</div>
+
+<div style="color:red">
+    <p style="font-weight:bold">
+        Terms & Conditions
+    </p>
+</div>
 
 

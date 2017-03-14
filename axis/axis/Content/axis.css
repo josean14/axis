@@ -7072,3 +7072,14 @@ used to vertically center elements, may need modification if you're not using de
 .editor-field{
   margin-bottom: 15px;
 }
+
+.tr-axis{
+    background-color:#ee1d22;
+    color:#eeeeee;
+    text-align:center;
+}
+
+.trbodyaxis{
+    border-color:#ee1d22;
+
+}
