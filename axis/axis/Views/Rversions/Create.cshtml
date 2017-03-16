@@ -134,6 +134,14 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.TermsandConditions, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.TermsandConditions, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TermsandConditions, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -146,6 +154,118 @@
         <div>
             @Html.ActionLink("Back to List", "Index")
         </div>
+
+
+<div id="Terms" style="display:none;">
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            The above pricing is valid 30 days from the bid date
+            and is subject to change upon notice. All the above pricing does not include
+            state, federal, or any applicable taxes.                                                                                          
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            1. In the event of inclement weather, or other events
+            beyond the control of Axis Renewable Group Inc., where work is suspended, Axis
+            Renewable Group Inc. will receive compensation for actual hours lost not to
+            exceed 40 hours per Week $75.00/ hour (40 Hours/Week Guarantee).                  
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            2. No warranty or liability applies to any customer
+            directed or managed work scope.       
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            3. Rates include workers equipped with Hand Tools
+            commensurate with trade and Personal Protection Equipment including hard hat,
+            safety glasses, gloves, safety shoes, and climbing harnesses, lanyards, and
+            Lad-Safe.                                                                                                                                                                                 
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            4. Payment is due within 30 days of invoice date. A
+            finance charge of 2% per month will apply to overdue invoices starting at 60 days.                                                                                                                      
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            5. Crew skill mix will be optimized by Axis Renewable
+            Group, Inc. to control cost and ensure success.          
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            6. Each Axis Renewable Group, Inc. employee will be
+            furnished with on-site safety orientation by a Customer Site Representative or
+            Designee.
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            7. Customer will be responsible for the proper
+            disposal for all onsite generated waste, and will provide proper disposal
+            containers for waste storing while onsite.
+        </span>
+    </p>
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            8. Mobilization will occur upon Axis Renewable Group,
+            Inc. receiving purchase order from Nordex.              
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            9. Axis Renewable Group, Inc. technicians usually work
+            6 weeks with one long weekend at home for R&amp;R. This can be changed with any
+            agreements between Axis Renewable Group, Inc. and Nordex.              
+        </span>
+    </p>
+
+    <p style='line-height:normal'>
+        <span lang=EN-US
+              style='font-size:10.0pt'>
+            10. Any changes to the scope of work should be
+            discussed and approved by Nordex and the new scope of work should be clearly
+            provided to Axis Renewable Group, Inc. and a new proposal and contract
+            executed.                                                                                                                                                                        
+        </span>
+    </p>
+
+    <p align=center style='text-align:center;line-height:normal'>
+        <b>
+            <span lang=EN-US style='font-size:10.0pt'>
+                The terms of this contract will be accepted
+                by a purchase order or written acknowledgment to AxisRGG
+            </span>
+        </b>
+    </p>
+
+</div>
+
 
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")
@@ -175,11 +295,30 @@
                     }
                 });
 
-
             });
+
+            window.onload = function () {
+
+                var data = $('#Terms').html();
+               
+               
+               $('#TermsandConditions').html(data);
+               
+                CKEDITOR.replace("TermsandConditions",
+               {
+                   language: 'en',
+                   toolbar:
+                   [
+                       ['Source', '-', 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'TextColor', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight']
+
+                   ]
+               });
+
+            };
 
 
 </script>
 
         }
 
+<script src="../../Content/js/ckeditor/ckeditor.js" type="text/javascript"></script>

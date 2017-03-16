@@ -186,7 +186,7 @@ namespace AXIS.Controllers
             ViewBag.City = rfq.Farm.City;
             ViewBag.State = rfq.Farm.State;
             ViewBag.Country = rfq.Farm.Country;
-
+            ViewBag.TermsandConditions = rversion.TermsandConditions;
 
             var quotes = db.Quotes.Where(q => q.RversionId == rversion.RversionId).ToList();
 

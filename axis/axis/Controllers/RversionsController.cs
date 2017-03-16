@@ -67,7 +67,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId,ScopeWorkId")] Rversion rversion)
+        public ActionResult Create([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId,ScopeWorkId,TermsandConditions")] Rversion rversion)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId,ScopeWorkId")] Rversion rversion)
+        public ActionResult Edit([Bind(Include = "RversionId,NumberVersion,Date,TypeWork,ProjectDescription,TotalCost,Status,NotesAndInstructions,RfqId,ScopeWorkId,TermsandConditions")] Rversion rversion)
         {
             if (ModelState.IsValid)
             {

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AXIS.Models
 {
@@ -46,6 +47,11 @@ namespace AXIS.Models
 
         [DisplayName("Scope Work")]
         public virtual int ScopeWorkId { get; set; }
+
+        [AllowHtml]
+        [DisplayName("Terms & Conditions")]
+        [Required(ErrorMessage = "The Terms & conditions is required.")]
+        public virtual string TermsandConditions { get; set; }
 
         public virtual Rfq Rfq { get; set; }
 
