@@ -7,7 +7,7 @@
 <div class="panelright">
     <div class="panel panel-axis right">
         <!-- Default panel contents -->
-        <div class="panel-heading">RFQ # @ViewData["NumberRfq"]</div>
+        <div class="panel-heading">RFQ # @ViewBag.RfqId</div>
 
         <table class="table table-bordered">
             <tr>
@@ -15,7 +15,7 @@
                     <p>Date:</p>
                 </th>
                 <th align="center">
-                    <p>Check server date GMT</p>
+                    <p>@ViewBag.VersionDate</p>
                 </th>
             </tr>
             <tr>
@@ -23,7 +23,7 @@
                     <p>Version #</p>
                 </th>
                 <th align="center">
-                    <p>@ViewData["NumberVersion"]</p>
+                    <p>@ViewBag.NumberVersion</p>
                 </th>
             </tr>
             <tr>
@@ -31,6 +31,7 @@
                     <p>Wind Farm</p>
                 </th>
                 <th align="center">
+                    @ViewBag.SiteFarm
                 </th>
             </tr>
         </table>
@@ -47,17 +48,17 @@
             <table class="table table-bordered">
                 <tr>
                     <th align="center">
-                        <p>Name Client</p>
+                        <p>@ViewBag.FullName</p>
                     </th>
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Addess</p>
+                        <p>@ViewBag.Street</p>
                     </th>
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Adress</p>
+                        <p>@ViewBag.City , @ViewBag.State, @ViewBag.Country</p>
                     </th>
                 </tr>
             </table>
@@ -73,12 +74,12 @@
             <table class="table table-bordered">
                 <tr>
                     <th align="center">
-                        <p>Project Name: @ViewData["ProjectName"]</p>
+                        <p>Project Name: @ViewBag.ProjectName</p>
                     </th>
                 </tr>
                 <tr>
                     <th align="center">
-                        @ViewData["ProjectDescription"]
+                        @ViewBag.ProjectDescription
                     </th>
                 </tr>
 
@@ -110,6 +111,14 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CostPerUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CostPerUnit, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CostPerUnit, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -151,6 +160,11 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+<div>
+   
+
+        @Html.ActionLink("Finish Version", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "glyphicon glyphicon-off" })
+</div>
 
 @Html.AntiForgeryToken()
 
@@ -165,6 +179,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Um)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostPerUnit)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PricePerUnit)
@@ -182,6 +199,7 @@
 </table>
 
 
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
@@ -191,16 +209,20 @@
 
                 var Description = $('#Description').val();
                 var Um = $('#Um').val();
+                var CostPerUnit = $('#CostPerUnit').val();
                 var PricePerUnit = $('#PricePerUnit').val();
                 var Quantity = $('#Quantity').val();
                 var Currency = PricePerUnit * Quantity;
+             
 
                 $('#tabla tr:last').after(
                     '<tr id=Quote'+id+'><td>'+ Description +'</td><td>' + Um +'</td>'+
-                         '<td>'+ PricePerUnit +'</td><td>' + Quantity +'</td>'+
-                         '<td>'+ Currency +'</td>' +
+                         '<td>' + CostPerUnit + '</td><td>' + PricePerUnit + '</td><td>'
+                           + Quantity + '</td><td >' + Currency + '</td>' +
                            '<td><a href="" onclick="confirmDelete('+id+'); return false;" class = "glyphicon glyphicon-remove"></a></td>'
                     );
+
+                var band = clearform();
             }
 
             function addQuote(id) {
@@ -210,16 +232,17 @@
                 var Description = $('#Description').val();
                 var Um = $('#Um').val();
                 var PricePerUnit = $('#PricePerUnit').val();
+                var CostPerUnit = $('#CostPerUnit').val();
                 var Quantity = $('#Quantity').val();
                 var Currency = PricePerUnit * Quantity;
 
-                $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, __RequestVerificationToken: anti },
+                $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, CostPerUnit: CostPerUnit,  __RequestVerificationToken: anti },
                     function (data) {
                         var band = addtable(data);
 
                     });
 
-               // var band = clearform();
+               
             }
 
             function confirmDelete(id) {
@@ -238,6 +261,7 @@
                 var Description = $('#Description').val('');
                 var Um = $('#Um').val('');
                 var PricePerUnit = $('#PricePerUnit').val('');
+                var CostPerUnit = $('#CostPerUnit').val('');
                 var Quantity = $('#Quantity').val('');
                 var Currency = $('#Currency').val('');
 

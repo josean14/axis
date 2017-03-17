@@ -42,12 +42,28 @@ namespace AXIS.Controllers
             Rversion rversion = db.Rversions.Find(rversionid);
             Rfq rfq = db.Rfqs.Find(rversion.RfqId);
 
-            ViewData["ProjectDescription"] = rversion.ProjectDescription;
-            ViewData["TypeWork"] = rversion.TypeWork;
-            ViewData["NumberRfq"] = rversion.RfqId;
-            ViewData["NumberVersion"] = rversion.NumberVersion;
-            ViewData["ProjectName"] = rversion.Rfq.ProjectName;
-            ViewData["RversionId"] = rversionid;
+            
+            ViewBag.RfqId = rfq.RfqId;
+            ViewBag.VersionDate = rversion.Date;
+            ViewBag.NumberVersion = rversion.NumberVersion;
+            ViewBag.SiteFarm = rfq.Farm.FarmName;
+            ViewBag.FullName = rfq.Farm.Client.FullName;
+            ViewBag.Street = rfq.Farm.StreetAddress;
+            ViewBag.City = rfq.Farm.City;
+            ViewBag.State = rfq.Farm.State;
+            ViewBag.Country = rfq.Farm.Country;
+            ViewBag.ProjectDescription = rversion.ProjectDescription;
+            ViewBag.ProjectName = rfq.ProjectName;
+            ViewBag.RversionId = rversion.RversionId;
+
+            ViewBag.TypeWork = rversion.TypeWork;
+            ViewBag.Notes = rversion.NotesAndInstructions;
+            
+            
+            
+            
+
+
             return View();
         }
 
@@ -56,7 +72,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuoteId,Description,Um,PricePerUnit,Quantity,Currency,RversionId")] Quote quote)
+        public ActionResult Create([Bind(Include = "QuoteId,Description,Um,PricePerUnit,Quantity,Currency,RversionId,CostPerUnit")] Quote quote)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +106,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuoteId,Description,Um,PricePerUnit,Quantity,Currency,RversionId")] Quote quote)
+        public ActionResult Edit([Bind(Include = "QuoteId,Description,Um,PricePerUnit,Quantity,Currency,RversionId,CostPerUnit")] Quote quote)
         {
             if (ModelState.IsValid)
             {

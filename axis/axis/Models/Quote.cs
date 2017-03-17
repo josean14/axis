@@ -31,6 +31,11 @@ namespace AXIS.Models
         [DefaultValue(0)]
         [DisplayName("Currency")]
         public virtual double Currency { get; set; }
+
+        [DefaultValue(0)]
+        [DisplayName("Cost per Unit")]
+        public virtual double CostPerUnit { get; set; }
+
         public virtual int RversionId { get; set; }
 
         public virtual Rversion Rversion { get; set; }
