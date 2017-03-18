@@ -102,7 +102,7 @@
     <table class="table table-bordered">
         <thead class="tr-axis">
             <tr>
-                <th>
+                <th style="width:400px">
                     Description
                 </th>
                 <th style="text-align:center">
@@ -128,7 +128,7 @@
         <tbody>
             <tr>
                 <th>
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Descripcion Here.." } })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Descripcion Here..", @cols="20" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
@@ -150,11 +150,12 @@
                 <th style="text-align:right">
                     @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Create </a>
+                            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Add Item</a>
                         </div>
                     </div>
                 </th>
@@ -171,10 +172,10 @@
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <table class="table" id="tabla">
+    <table class="table table-bordered" id="tabla">
         <thead class="tr-axis">
             <tr>
-                <th>
+                <th style="width:400px">
                     Description
                 </th>
                 <th style="text-align:center">
