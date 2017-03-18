@@ -79,221 +79,249 @@
                 </tr>
                 <tr>
                     <th align="center">
+                        <p>Type of Work: @ViewBag.TypeWork</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Scope of Work:@ViewData["ScopeWork"]</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
                         @ViewBag.ProjectDescription
                     </th>
                 </tr>
-
-
             </table>
-
         </div>
     </div>
 </div>
 
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th>
+                    Description
+                </th>
+                <th style="text-align:center">
+                    UM
+                </th>
+                <th style="text-align:center">
+                    Cost per Unit
+                </th>
+                <th style="text-align:center">
+                    Price per Unit
+                </th>
+                <th style="text-align:center">
+                    Quantity
+                </th>
+                <th style="text-align:center">
+                    Total Line
+                </th>
+                <th style="text-align:center">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Descripcion Here.." } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:center">
+                    @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:center">
+                    @Html.EditorFor(model => model.CostPerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.CostPerUnit, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:center">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Create </a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
 
-
-<h4>Type work @ViewData["TypeWork"]</h4>
-
-<div class="form-horizontal">
-    <h4>Quote</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Um, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CostPerUnit, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CostPerUnit, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CostPerUnit, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PricePerUnit, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()" } })
-            @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()" } })
-            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Create </a>
-        </div>
-    </div>
+        </tbody>
+    </table>
 </div>
 
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<div>
-   
-
-        @Html.ActionLink("Finish Version", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "glyphicon glyphicon-off" })
-</div>
 
 @Html.AntiForgeryToken()
 
 <p id="msg"></p>
 
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table" id="tabla">
+        <thead class="tr-axis">
+            <tr>
+                <th>
+                    Description
+                </th>
+                <th style="text-align:center">
+                    UM
+                </th>
+                <th style="text-align:center">
+                    Cost per Unit
+                </th>
+                <th style="text-align:center">
+                    Price per Unit
+                </th>
+                <th style="text-align:center">
+                    Quantity
+                </th>
+                <th style="text-align:center">
+                    Total Line
+                </th>
+                <th style="text-align:center">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr></tr>
+        </tbody>
+   </table>
+</div>
 
-<table class="table" id="tabla">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Um)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CostPerUnit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PricePerUnit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Currency)
-            </th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
+
+        <div class="panelright">
+            <div class="panel panel-axis">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Special Notes and Instructions</div>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th align="center">
+                            @ViewBag.Notes
+                        </th>
+
+                    </tr>
 
 
+                </table>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+            </div>
+        </div>
+
+<div>
+    @Html.ActionLink(" Save Version", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })
+</div>
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
 
 
-    <script>
-            function addtable(id) {
+            <script>
 
-                var Description = $('#Description').val();
-                var Um = $('#Um').val();
-                var CostPerUnit = $('#CostPerUnit').val();
-                var PricePerUnit = $('#PricePerUnit').val();
-                var Quantity = $('#Quantity').val();
-                var Currency = PricePerUnit * Quantity;
-             
+                function addtable(id) {
 
-                $('#tabla tr:last').after(
-                    '<tr id=Quote'+id+'><td>'+ Description +'</td><td>' + Um +'</td>'+
-                         '<td>' + CostPerUnit + '</td><td>' + PricePerUnit + '</td><td>'
-                           + Quantity + '</td><td >' + Currency + '</td>' +
-                           '<td><a href="" onclick="confirmDelete('+id+'); return false;" class = "glyphicon glyphicon-remove"></a></td>'
-                    );
+                    var Description = $('#Description').val();
+                    var Um = $('#Um').val();
+                    var CostPerUnit = $('#CostPerUnit').val();
+                    var PricePerUnit = $('#PricePerUnit').val();
+                    var Quantity = $('#Quantity').val();
+                    var Currency = PricePerUnit * Quantity;
 
-                var band = clearform();
-            }
 
-            function addQuote(id) {
-                var url = "/Quotes/Create/";
-                var RversionId = id
-                var anti = $('[name=__RequestVerificationToken]').val();
-                var Description = $('#Description').val();
-                var Um = $('#Um').val();
-                var PricePerUnit = $('#PricePerUnit').val();
-                var CostPerUnit = $('#CostPerUnit').val();
-                var Quantity = $('#Quantity').val();
-                var Currency = PricePerUnit * Quantity;
+                    $('#tabla tr:last').after(
+                        '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + Um + '</td>' +
+                             '<td style="text-align:right">' + CostPerUnit + '</td><td style="text-align:right">' + PricePerUnit + '</td><td style="text-align:center">'
+                               + Quantity + '</td><td style="text-align:right">' + Currency + '</td>' +
+                               '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
+                        );
 
-                $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, CostPerUnit: CostPerUnit,  __RequestVerificationToken: anti },
-                    function (data) {
-                        var band = addtable(data);
+                    var band = clearform();
+                }
 
-                    });
+                function addQuote(id) {
+                    var url = "/Quotes/Create/";
+                    var RversionId = id
+                    var anti = $('[name=__RequestVerificationToken]').val();
+                    var Description = $('#Description').val();
+                    var Um = $('#Um').val();
+                    var PricePerUnit = $('#PricePerUnit').val();
+                    var CostPerUnit = $('#CostPerUnit').val();
+                    var Quantity = $('#Quantity').val();
+                    var Currency = PricePerUnit * Quantity;
 
-               
-            }
+                    $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, CostPerUnit: CostPerUnit, __RequestVerificationToken: anti },
+                        function (data) {
+                            var band = addtable(data);
 
-            function confirmDelete(id) {
-                var url = "/quotes/Delete/";
-                var QuoteId = id
-                var anti = $('[name=__RequestVerificationToken]').val();
+                        });
 
-                $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
-                    $("#Quote" + QuoteId).remove();
-                });
 
                 }
 
-            function clearform() {
+                function confirmDelete(id) {
+                    var url = "/quotes/Delete/";
+                    var QuoteId = id
+                    var anti = $('[name=__RequestVerificationToken]').val();
 
-                var Description = $('#Description').val('');
-                var Um = $('#Um').val('');
-                var PricePerUnit = $('#PricePerUnit').val('');
-                var CostPerUnit = $('#CostPerUnit').val('');
-                var Quantity = $('#Quantity').val('');
-                var Currency = $('#Currency').val('');
+                    $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
+                        $("#Quote" + QuoteId).remove();
+                    });
 
-            }
+                }
+
+                function clearform() {
+
+                    var Description = $('#Description').val('');
+                    var Um = $('#Um').val('');
+                    var PricePerUnit = $('#PricePerUnit').val('');
+                    var CostPerUnit = $('#CostPerUnit').val('');
+                    var Quantity = $('#Quantity').val('');
+                    var Currency = $('#Currency').val('');
+
+                }
 
 
-            function calctotal() {
+                function calctotal() {
                     var PricePerUnit = $('#PricePerUnit').val();
                     var Quantity = $('#Quantity').val();
 
 
-                    var result =  PricePerUnit * Quantity;
+                    var result = PricePerUnit * Quantity;
                     $('#Currency').val(result);
-            }
-            //$('input#PricePerUnit').keypress(function () {
+                }
+                //$('input#PricePerUnit').keypress(function () {
 
-            //    var PricePerUnit = $('#PricePerUnit').val();
-            //    var Quantity = $('#Quantity').val();
+                //    var PricePerUnit = $('#PricePerUnit').val();
+                //    var Quantity = $('#Quantity').val();
 
 
-            //    var result =  PricePerUnit * Quantity;
-            //    $('#Currency').val(result);
-            //});
+                //    var result =  PricePerUnit * Quantity;
+                //    $('#Currency').val(result);
+                //});
 
-            //$('input#Quantity').keypress(function () {
+                //$('input#Quantity').keypress(function () {
 
-            //    var PricePerUnit = $('#PricePerUnit').val();
-            //    var Quantity = $('#Quantity').val();
+                //    var PricePerUnit = $('#PricePerUnit').val();
+                //    var Quantity = $('#Quantity').val();
 
-            //    var result = PricePerUnit * Quantity;
-            //    $('#Currency').val(result);
-            //});
-    </script>
+                //    var result = PricePerUnit * Quantity;
+                //    $('#Currency').val(result);
+                //});
+            </script>
 
-}
+        }

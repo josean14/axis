@@ -9,6 +9,7 @@
  }
 
 @Html.ActionLink("Back", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
+@Html.ActionLink("Generate New Version", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
 
 <h2>Version Details</h2>
 
@@ -141,7 +142,7 @@
                         @item.Description
                     </td>
                     <td style="text-align:center">
-                        UM
+                        @item.Um
                     </td>
                     <td style="text-align:right">
                         @{
