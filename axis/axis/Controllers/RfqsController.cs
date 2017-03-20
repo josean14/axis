@@ -171,8 +171,8 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
-        
-            
+
+            ViewBag.RversionId = rversion.RversionId;
             ViewBag.VersionDate = rversion.Date;
             ViewBag.NumberVersion = rversion.NumberVersion;
             ViewBag.TypeWork = rversion.TypeWork;

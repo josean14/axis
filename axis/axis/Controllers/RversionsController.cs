@@ -161,5 +161,38 @@ namespace AXIS.Controllers
             }
 
         }
+
+        [HttpPost]
+        public ActionResult NewVersion(int? Id, int rfqId)
+        {
+
+            if (Id != null)
+            {
+                var sql = "SELECT Count(*) FROM axisdb.rversions where RfqId =" + rfqId;
+                var total = db.Database.SqlQuery<int>(sql).First();
+                Rversion rversion = db.Rversions.Find(Id);
+                rversion.Date = DateTime.Now;
+                rversion.NumberVersion = total + 1;
+                db.Rversions.Add(rversion);
+                db.SaveChanges();
+
+                var listquote = db.Quotes.Where(r => r.RversionId == Id).ToList();
+                foreach (var item in listquote)
+                {
+
+                    item.RversionId = rversion.RversionId;
+                    db.Quotes.Add(item);
+                    db.SaveChanges();
+                }
+
+
+                return RedirectToAction("PartialVersionEdit", "Quotes", new { rversionId = rversion.RversionId, rfqId = rfqId });
+            }
+            else
+            {
+                return new JsonResult() { Data = null };
+            }
+
+        }
     }
 }

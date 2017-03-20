@@ -362,6 +362,7 @@
     <Content Include="Views\Rfqs\VersionDetails.cshtml" />
     <Content Include="Views\Technicians\Index.cshtml" />
     <Content Include="Views\Technicians\PartialMenu.cshtml" />
+    <Content Include="Views\Quotes\PartialVersionEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

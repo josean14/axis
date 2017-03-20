@@ -59,11 +59,6 @@ namespace AXIS.Controllers
             ViewBag.TypeWork = rversion.TypeWork;
             ViewBag.Notes = rversion.NotesAndInstructions;
             
-            
-            
-            
-
-
             return View();
         }
 
@@ -85,40 +80,43 @@ namespace AXIS.Controllers
             return new JsonResult() { Data = quote.QuoteId };
         }
 
+
         // GET: Quotes/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult PartialVersionEdit(int? rversionId, int rfqId)
         {
-            if (id == null)
+            if (rversionId == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Details", "Rfqs", new { id = rfqId });
             }
-            Quote quote = db.Quotes.Find(id);
-            if (quote == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RversionId = new SelectList(db.Rversions, "RversionId", "ScopeWork", quote.RversionId);
-            return View(quote);
+            Rversion rversion = db.Rversions.Find(rversionId);
+            Rfq rfq = db.Rfqs.Find(rfqId);
+
+
+            ViewBag.VersionDate = rversion.Date;
+            ViewBag.NumberVersion = rversion.NumberVersion;
+            ViewBag.RfqId = rfqId;
+
+            ViewBag.SiteFarm = rfq.Farm.FarmName;
+            ViewBag.FullName = rfq.Farm.Client.FullName;
+            ViewBag.Street = rfq.Farm.StreetAddress;
+            ViewBag.City = rfq.Farm.City;
+            ViewBag.State = rfq.Farm.State;
+            ViewBag.Country = rfq.Farm.Country;
+            ViewBag.ProjectDescription = rversion.ProjectDescription;
+            ViewBag.ProjectName = rfq.ProjectName;
+            ViewBag.RversionId = rversion.RversionId;
+
+            ViewBag.TypeWork = rversion.TypeWork;
+            ViewBag.Notes = rversion.NotesAndInstructions;
+            ViewBag.ScopeWork = rversion.ScopeWork.Work;
+
+
+            ViewBag.Quotes = db.Quotes.Where(r => r.RversionId == rversionId).ToList();
+            return PartialView();
         }
 
-        // POST: Quotes/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "QuoteId,Description,Um,PricePerUnit,Quantity,Currency,RversionId,CostPerUnit")] Quote quote)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(quote).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.RversionId = new SelectList(db.Rversions, "RversionId", "ScopeWork", quote.RversionId);
-            return View(quote);
-        }
 
-       
+
 
         // POST: Quotes/Delete/5
         [HttpPost, ActionName("Delete")]

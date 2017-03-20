@@ -1,75 +1,51 @@
-﻿@model AXIS.Models.Rfq
+﻿<div id="allData">
 
-@{
+
+    @model AXIS.Models.Rfq
+
+    @{
         ViewBag.Title = "VersionDetails";
     }
 
-@{
-    double TotalPrice = 0;
- }
+    @{
+        double TotalPrice = 0;
+    }
 
-@Html.ActionLink("Back", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
-@Html.ActionLink("Generate New Version", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
-@Html.ActionLink("Generate Contract", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
-@Html.ActionLink("Close Version", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("Back", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
+    <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">Generate New Version</a>
+    @Html.ActionLink("Generate Contract", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("Close Version", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
 
-<h2>STATUS:</h2>
+    <h2>STATUS:</h2>
 
-<div class="panelright">
-    <div class="panel panel-axis right">
-        <!-- Default panel contents -->
-        <div class="panel-heading">RFQ # @Html.DisplayFor(model => model.RfqId)</div>
-
-        <table class="table table-bordered">
-            <tr>
-                <th align="center">
-                    <p>Date:</p>
-                </th>
-                <th align="center">
-                    <p>@ViewBag.VersionDate</p>
-                </th>
-            </tr>
-            <tr>
-                <th align="center">
-                    <p>Version #</p>
-                </th>
-                <th align="center">
-                    <p>@ViewBag.NumberVersion</p>
-                </th>
-            </tr>
-            <tr>
-                <th align="center">
-                    <p>Site Farm</p>
-                </th>
-                <th align="center">
-                    @ViewBag.SiteFarm
-                </th>
-            </tr>
-        </table>
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-6 form-group">
+    <div class="panelright">
         <div class="panel panel-axis right">
             <!-- Default panel contents -->
-            <div class="panel-heading">Customer</div>
+            <div class="panel-heading">RFQ # @Html.DisplayFor(model => model.RfqId)</div>
 
             <table class="table table-bordered">
                 <tr>
                     <th align="center">
-                        <p>@ViewBag.FullName</p>
+                        <p>Date:</p>
+                    </th>
+                    <th align="center">
+                        <p>@ViewBag.VersionDate</p>
                     </th>
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>@ViewBag.Street</p>
+                        <p>Version #</p>
+                    </th>
+                    <th align="center">
+                        <p>@ViewBag.NumberVersion</p>
                     </th>
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>@ViewBag.City,  @ViewBag.State,  @ViewBag.Country</p>
+                        <p>Site Farm</p>
+                    </th>
+                    <th align="center">
+                        @ViewBag.SiteFarm
                     </th>
                 </tr>
             </table>
@@ -77,42 +53,69 @@
         </div>
     </div>
 
-    <div class="col-sm-6 form-group">
-        <div class="panel panel-axislg right">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Quote/Project Description</div>
+    <div class="row">
+        <div class="col-sm-6 form-group">
+            <div class="panel panel-axis right">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Customer</div>
 
-            <table class="table table-bordered">
-                <tr>
-                    <th align="center">
-                        <p>Project Name: @ViewBag.ProjectName</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        <p>Type of Work: @ViewBag.ScopeWork</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        <p>Scope ok Work:@ViewBag.TypeWork</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        @ViewBag.ProjectDescription
-                    </th>
-                </tr>
+                <table class="table table-bordered">
+                    <tr>
+                        <th align="center">
+                            <p>@ViewBag.FullName</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            <p>@ViewBag.Street</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            <p>@ViewBag.City,  @ViewBag.State,  @ViewBag.Country</p>
+                        </th>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="col-sm-6 form-group">
+            <div class="panel panel-axislg right">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Quote/Project Description</div>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th align="center">
+                            <p>Project Name: @ViewBag.ProjectName</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            <p>Type of Work: @ViewBag.ScopeWork</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            <p>Scope ok Work:@ViewBag.TypeWork</p>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            @ViewBag.ProjectDescription
+                        </th>
+                    </tr>
 
 
-            </table>
+                </table>
 
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="panel panel-default">
+    <div class="panel panel-default">
         <!-- Default panel contents -->
         <table class="table table-bordered">
             <thead class="tr-axis">
@@ -166,8 +169,8 @@
                     </td>
 
                 </tr>
-                TotalPrice = TotalPrice + @item.Currency;
-              }
+                                TotalPrice = TotalPrice + @item.Currency;
+                            }
 
             <tfoot>
                 <tr>
@@ -176,48 +179,155 @@
                     <td style="text-align:right">
                         @{
                             @Convert.ToDecimal(TotalPrice).ToString("$ #,##0.00");
-                         }
-                        
+                        }
+
                     </td>
                 </tr>
             </tfoot>
 
         </table>
-</div>
+    </div>
 
-<div class="panelright">
-    <div class="panel panel-axis">
-        <!-- Default panel contents -->
-        <div class="panel-heading">Special Notes and Instructions</div>
+    <div class="panelright">
+        <div class="panel panel-axis">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Special Notes and Instructions</div>
 
-        <table class="table table-bordered">
-            <tr>
-                <th align="center">
-                    @ViewBag.Notes
-                </th>
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        @ViewBag.Notes
+                    </th>
 
-            </tr>
+                </tr>
 
 
-        </table>
+            </table>
 
+        </div>
+    </div>
+
+    <div style="text-align:center">
+        <p>
+            Above information is not an invoice and only an estimate of services/goods described above.<br />
+            Payment Terms: Net 30 days
+        </p>
+    </div>
+
+    <div style="color:red">
+        <p style="font-weight:bold">
+            Terms & Conditions
+        </p>
+    </div>
+    <div>
+        @Html.Raw(ViewBag.TermsandConditions)
     </div>
 </div>
 
-<div style="text-align:center">
-    <p>
-        Above information is not an invoice and only an estimate of services/goods described above.<br />
-        Payment Terms: Net 30 days
-    </p>
-</div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
 
-<div style="color:red">
-    <p style="font-weight:bold">
-        Terms & Conditions
-    </p>
-</div>
-<div>
-    @Html.Raw(ViewBag.TermsandConditions)
-</div>
+        <script>
+            function newVersion(id, rfqid) {
+
+                var url = "/Rversions/NewVersion";
+
+                var dialog = bootbox.dialog({
+                    title: 'Create New Version',
+                    message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>',
+                    setTimeout: setTimeout(function () {
+                        dialog.find('.bootbox-body').html('The new version was created successfully!');
+                    }, 4000)
+                });
 
 
+                $.post(url, { Id: id, rfqId: rfqid })
+                     .done(function (data) {
+
+
+                         $('#allData').html(data);
+                     })
+                    .fail(function () {
+                        alert("Fail create new registre")
+                    });
+            }
+
+
+            //NewVersion
+            function addtable(id) {
+
+                var Description = $('#Description').val();
+                var Um = $('#Um').val();
+                var CostPerUnit = $('#CostPerUnit').val();
+                var PricePerUnit = $('#PricePerUnit').val();
+                var Quantity = $('#Quantity').val();
+                var Currency = PricePerUnit * Quantity;
+
+
+
+                $('#tabla tr:last').after(
+                    '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + Um + '</td>' +
+                         '<td style="text-align:right">' + CostPerUnit + '</td><td style="text-align:right">' + PricePerUnit + '</td><td style="text-align:center">'
+                           + Quantity + '</td><td style="text-align:right">' + Currency + '</td>' +
+                           '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
+                    );
+
+                var band = clearform();
+            }
+
+            function addQuote(id) {
+                var url = "/Quotes/Create/";
+                var RversionId = id
+                var anti = $('[name=__RequestVerificationToken]').val();
+                var Description = $('#Description').val();
+                var Um = $('#Um').val();
+                var PricePerUnit = $('#PricePerUnit').val();
+                var CostPerUnit = $('#CostPerUnit').val();
+                var Quantity = $('#Quantity').val();
+                var Currency = PricePerUnit * Quantity;
+
+                $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, CostPerUnit: CostPerUnit, __RequestVerificationToken: anti },
+                    function (data) {
+                        var band = addtable(data);
+
+                    });
+
+
+            }
+
+            function confirmDelete(id) {
+                var url = "/quotes/Delete/";
+                var QuoteId = id
+                var anti = $('[name=__RequestVerificationToken]').val();
+                
+                $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
+                    $("#Quote" + QuoteId).remove();
+                });
+
+            }
+
+            function clearform() {
+
+                var Description = $('#Description').val('');
+                var Um = $('#Um').val('');
+                var PricePerUnit = $('#PricePerUnit').val('');
+                var CostPerUnit = $('#CostPerUnit').val('');
+                var Quantity = $('#Quantity').val('');
+                var Currency = $('#Currency').val('');
+
+            }
+
+
+            function calctotal() {
+                var PricePerUnit = $('#PricePerUnit').val();
+                var Quantity = $('#Quantity').val();
+
+
+                var result = PricePerUnit * Quantity;
+                $('#Currency').val(result);
+            }
+
+
+        </script>
+
+    }

@@ -1,8 +1,5 @@
-﻿@model AXIS.Models.Quote
-
-@{
-    ViewBag.Title = "Create Quote";
-}
+﻿
+@model AXIS.Models.Quote
 
 <div class="panelright">
     <div class="panel panel-axis right">
@@ -38,6 +35,7 @@
 
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-sm-6 form-group">
@@ -84,7 +82,7 @@
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Scope of Work:@ViewData["ScopeWork"]</p>
+                        <p>Scope of Work:@ViewBag.ScopeWork</p>
                     </th>
                 </tr>
                 <tr>
@@ -96,6 +94,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
@@ -128,7 +127,7 @@
         <tbody>
             <tr>
                 <th>
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Descripcion Here..", @cols="20" } })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Descripcion Here..", @cols = "20" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
@@ -150,12 +149,12 @@
                 <th style="text-align:right">
                     @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
-                
+
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Add Item</a>
+                            <a href="/" onclick="addQuote(@ViewBag.RversionId); return false;" class="glyphicon glyphicon-save">Add Item</a>
                         </div>
                     </div>
                 </th>
@@ -169,6 +168,8 @@
 @Html.AntiForgeryToken()
 
 <p id="msg"></p>
+
+
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
@@ -199,115 +200,62 @@
             </tr>
         </thead>
         <tbody>
-            <tr></tr>
+            @foreach (var item in ViewBag.Quotes)
+            {
+                var idquote = "Quote" + item.QuoteId;
+
+                <tr class="trbodyaxis" id=@idquote>
+                    <td style="text-align:left">
+                        @item.Description
+                    </td>
+                    <td style="text-align:center">
+                        @item.Um
+                    </td>
+                    <td style="text-align:right">
+                        @item.CostPerUnit
+                    </td>
+                    <td style="text-align:right">
+                        @item.PricePerUnit
+                    </td>
+                    <td style="text-align:center">
+                        @item.Quantity
+                    </td>
+                    <td style="text-align:right">
+                        @item.Currency
+                    </td>
+
+                    <td style="text-align:center">
+                        <a href="/" onclick="confirmDelete(@item.QuoteId); return false;" class="glyphicon glyphicon-remove"></a>
+                    </td>
+                </tr>
+            }
+
         </tbody>
-   </table>
+    </table>
 </div>
 
 
-        <div class="panelright">
-            <div class="panel panel-axis">
-                <!-- Default panel contents -->
-                <div class="panel-heading">Special Notes and Instructions</div>
+<div class="panelright">
+    <div class="panel panel-axis">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Special Notes and Instructions</div>
 
-                <table class="table table-bordered">
-                    <tr>
-                        <th align="center">
-                            @ViewBag.Notes
-                        </th>
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    @ViewBag.Notes
+                </th>
 
-                    </tr>
+            </tr>
 
 
-                </table>
+        </table>
 
-            </div>
-        </div>
+    </div>
+</div>
 
 <div>
     @Html.ActionLink(" Save Version", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })
 </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-
-
-            <script>
-
-                function addtable(id) {
-
-                    var Description = $('#Description').val();
-                    var Um = $('#Um').val();
-                    var CostPerUnit = $('#CostPerUnit').val();
-                    var PricePerUnit = $('#PricePerUnit').val();
-                    var Quantity = $('#Quantity').val();
-                    var Currency = PricePerUnit * Quantity;
-
-                    alert($('#PricePerUnit').formatCurrency())
-
-                    $('#tabla tr:last').after(
-                        '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + Um + '</td>' +
-                             '<td style="text-align:right">' + CostPerUnit + '</td><td style="text-align:right">' + PricePerUnit + '</td><td style="text-align:center">'
-                               + Quantity + '</td><td style="text-align:right">' + Currency + '</td>' +
-                               '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
-                        );
-
-                    var band = clearform();
-                }
-
-                function addQuote(id) {
-                    var url = "/Quotes/Create/";
-                    var RversionId = id
-                    var anti = $('[name=__RequestVerificationToken]').val();
-                    var Description = $('#Description').val();
-                    var Um = $('#Um').val();
-                    var PricePerUnit = $('#PricePerUnit').val();
-                    var CostPerUnit = $('#CostPerUnit').val();
-                    var Quantity = $('#Quantity').val();
-                    var Currency = PricePerUnit * Quantity;
-
-                    $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, CostPerUnit: CostPerUnit, __RequestVerificationToken: anti },
-                        function (data) {
-                            var band = addtable(data);
-
-                        });
-
-
-                }
-
-                function confirmDelete(id) {
-                    var url = "/quotes/Delete/";
-                    var QuoteId = id
-                    var anti = $('[name=__RequestVerificationToken]').val();
-
-                    $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
-                        $("#Quote" + QuoteId).remove();
-                    });
-
-                }
-
-                function clearform() {
-
-                    var Description = $('#Description').val('');
-                    var Um = $('#Um').val('');
-                    var PricePerUnit = $('#PricePerUnit').val('');
-                    var CostPerUnit = $('#CostPerUnit').val('');
-                    var Quantity = $('#Quantity').val('');
-                    var Currency = $('#Currency').val('');
-
-                }
-
-
-                function calctotal() {
-                    var PricePerUnit = $('#PricePerUnit').val();
-                    var Quantity = $('#Quantity').val();
-
-
-                    var result = PricePerUnit * Quantity;
-                    $('#Currency').val(result);
-                }
-               
-            </script>
-
-        }
 
