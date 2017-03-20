@@ -234,17 +234,15 @@
 
                 var dialog = bootbox.dialog({
                     title: 'Create New Version',
-                    message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>',
-                    setTimeout: setTimeout(function () {
-                        dialog.find('.bootbox-body').html('The new version was created successfully!');
-                    }, 4000)
+                    message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>'
+                    
                 });
 
-
+                
                 $.post(url, { Id: id, rfqId: rfqid })
                      .done(function (data) {
 
-
+                         dialog.modal('hide');
                          $('#allData').html(data);
                      })
                     .fail(function () {
