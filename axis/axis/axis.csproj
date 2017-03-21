@@ -205,6 +205,15 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Autentificacion\IdentityRole.cs" />
+    <Compile Include="Autentificacion\IdentityUser.cs" />
+    <Compile Include="Autentificacion\MySQLDatabase.cs" />
+    <Compile Include="Autentificacion\RoleStore.cs" />
+    <Compile Include="Autentificacion\UserClaimsTable.cs" />
+    <Compile Include="Autentificacion\UserLoginsTable.cs" />
+    <Compile Include="Autentificacion\UserRoleTable.cs" />
+    <Compile Include="Autentificacion\UserStore.cs" />
+    <Compile Include="Autentificacion\UserTable.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BusDevController.cs" />
     <Compile Include="Controllers\CcallsController.cs" />

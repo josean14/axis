@@ -42,6 +42,15 @@
                         <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Other" } )>Other</a></li>
                     </ul>
                 </li>
+                <li data-toggle="collapse" data-target="#CONTRACT" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> Contracts <span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="CONTRACT">
+                        <li><a href=@Url.Action("Index","Contracts" )>Open Contracts</a></li>
+                        <li><a href=@Url.Action("Index", "Contracts")>Open PO's</a></li>
+                    </ul>
+                </li>
+
 
                 <li data-toggle="collapse" data-target="#CALLLOG" class="collapsed">
                     <a href="#"><i class="fa fa-globe fa-lg"></i> Call Log <span class="arrow"></span></a>
