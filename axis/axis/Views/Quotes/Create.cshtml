@@ -243,8 +243,6 @@
                     var Quantity = $('#Quantity').val();
                     var Currency = PricePerUnit * Quantity;
 
-                    alert($('#PricePerUnit').formatCurrency())
-
                     $('#tabla tr:last').after(
                         '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + Um + '</td>' +
                              '<td style="text-align:right">' + CostPerUnit + '</td><td style="text-align:right">' + PricePerUnit + '</td><td style="text-align:center">'
