@@ -194,5 +194,22 @@ namespace AXIS.Controllers
             }
 
         }
+
+        public ActionResult close(int? rfqid, int rversionid)
+        {
+
+            if (rfqid != null)
+            {
+
+                var rversion = db.Rversions.Find(rversionid);
+                rversion.Status = "Close";
+                db.Entry(rversion).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "Rfqs", new { id = rfqid });
+            }
+
+            return RedirectToAction("Index", "Rfqs");
+        }
     }
 }

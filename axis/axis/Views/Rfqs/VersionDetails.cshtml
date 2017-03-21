@@ -12,11 +12,17 @@
     }
 
     @Html.ActionLink("Back", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
-    <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">Generate New Version</a>
-    @Html.ActionLink("Generate Contract", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
-    @Html.ActionLink("Close Version", "Details", new { id = Model.RfqId }, new { @class = "btn btn-primary btn-xs" })
+    @{
+        if (ViewBag.Status == "Open")
+        {
 
-    <h2>STATUS:</h2>
+
+            <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">Generate New Version</a>
+            @Html.ActionLink("Generate Contract", "Create", "Contracts", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("Close Version", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
+        }
+    }
+    <h2>STATUS: @ViewBag.Status</h2>
 
     <div class="panelright">
         <div class="panel panel-axis right">
