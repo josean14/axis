@@ -33,5 +33,7 @@ namespace AXIS.Models
         public System.Data.Entity.DbSet<AXIS.Models.ScopeWork> ScopeWorks { get; set; }
 
         public System.Data.Entity.DbSet<AXIS.Models.Contract> Contracts { get; set; }
+
+        public System.Data.Entity.DbSet<AXIS.Models.Purchaseorder> Purchaseorders { get; set; }
     }
 }

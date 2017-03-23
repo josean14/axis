@@ -57,3 +57,8 @@
     </dl>
 </div>
 
+<br />
+@Html.Action("PartialCreate", "Purchaseorders", new { contractId = Model.ContractId });
+
+<br />
+@Html.Action("PartialList", "Purchaseorders", new { contractId = Model.ContractId });

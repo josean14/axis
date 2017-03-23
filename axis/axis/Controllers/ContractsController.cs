@@ -19,7 +19,7 @@ namespace AXIS.Controllers
         // GET: Contracts
         public ActionResult Index()
         {
-            var contracts = db.Contracts.Include(c => c.Rfq).Include(c => c.Rversion);
+            var contracts = db.Contracts.Include(c => c.Rfq).Include(c => c.Rversion).OrderByDescending(c => c.Date);
             return View(contracts.ToList());
         }
 

@@ -1,0 +1,58 @@
+﻿@model AXIS.Models.Purchaseorder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Purchaseorder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Contract.OcClient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contract.OcClient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commentary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commentary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.File)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.File)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PurchaseOrderId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

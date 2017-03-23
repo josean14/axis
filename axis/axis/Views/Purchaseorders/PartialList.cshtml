@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AXIS.Models.Purchaseorder>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseOrderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Commentary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.File)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Commentary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.File)
+            </td>
+           @using (Html.BeginForm("Delete", "Purchaseorders", new { id = item.PurchaseOrderId, contractid = item.Contract.ContractId }, FormMethod.Post, null))
+           {
+            @Html.AntiForgeryToken()
+
+            <td>
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </td>
+
+           }
+        </tr>
+    }
+
+</table>
