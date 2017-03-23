@@ -31,8 +31,10 @@ namespace AXIS.Models
         [Required(ErrorMessage = "The user name is required.")]
         public virtual string UserName { get; set; }
 
+        [DisplayName("Client Name")]
         public virtual int ClientId { get; set; }
 
+        [DisplayName("Client Name")]
         public virtual Client Client { get; set; }
     }
 }

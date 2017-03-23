@@ -6,7 +6,7 @@
 
 <h2></h2>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -41,13 +41,13 @@
                         <input type="submit" value="Log in" class="btn btn-default" />
                     </div>
                 </div>
-                <p>
+                @*<p>
                     @Html.ActionLink("If you don't have access Please contact your administrator", "Contact","Home")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+                </p>*@
+                 @*Enable this once you have account confirmation enabled for password reset functionality*@
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                    </p>
             }
         </section>
     </div>

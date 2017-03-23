@@ -10,6 +10,7 @@ using AXIS.Models;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class QuotesController : Controller
     {
         private AXISDB db = new AXISDB();

@@ -10,6 +10,7 @@ using AXIS.Models;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class RversionsController : Controller
     {
         private AXISDB db = new AXISDB();

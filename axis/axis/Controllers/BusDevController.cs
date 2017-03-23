@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class BusDevController : Controller
     {
         // GET: BusDev
