@@ -303,6 +303,8 @@
     <Content Include="MainDBModel.edmx.diagram">
       <DependentUpon>MainDBModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\appsmerida.com - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Axis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
