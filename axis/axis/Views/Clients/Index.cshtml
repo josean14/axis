@@ -1,4 +1,6 @@
-﻿@model IEnumerable<AXIS.Models.Client>
+﻿@model PagedList.IPagedList<AXIS.Models.Client>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Clients";
@@ -13,99 +15,97 @@
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading">Axis Client List</div>
+    <div class="panel-heading">
+        @using (Html.BeginForm("Index", "Clients", FormMethod.Get))
+        {
+            <p>
+                Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="Search" />
+            </p>
+        }
+    </div>
 
-        <table class="table table-bordered">
-            <tr>
-                <th>
-                    <p>Full Name</p>
-                </th>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.ActionLink("Full Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Company)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Department)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.State)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Region)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Country)
-                </th>
-                <th>Actions</th>
-            </tr>
+            <th>
+                Title
+            </th>
+            <th>
+                @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanySortParm })
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                @Html.ActionLink("State", "Index", new { sortOrder = ViewBag.StateSortParm })
+            </th>
+            <th>
+                Region
+            </th>
+            <th>
+                Country
+            </th>
+            <th>Actions</th>
+        </tr>
 
-            @foreach (var item in Model)
+        @foreach (var item in Model)
             {
                 var ident = "Client" + @item.ClientId;
 
                 var fullname = @item.FirstName + " " + @item.LastName;
 
-                <tr id=@ident>
-                    <td>
-                        @Html.DisplayFor(modelItem => fullname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Company)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Department)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.State)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Region)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
-                    <td>
-                       
-                        @Html.ActionLink("Profile","Details", new { id = item.ClientId },new { @class = "glyphicon glyphicon-user" })
+            <tr id=@ident>
+                <td>
+                    @Html.DisplayFor(modelItem => fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Region)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
 
-                    </td>
-                </tr>
-            }
+                    @Html.ActionLink("Profile", "Details", new { id = item.ClientId }, new { @class = "glyphicon glyphicon-user" })
 
-        </table>
+                </td>
+            </tr>
+        }
+
+    </table>
     <div class="panel-footer">
         <div class="row">
-            <div class="col col-xs-4">
-                Page 1 of 5
-            </div>
-            <div class="col col-xs-8">
-                <ul class="pagination hidden-xs pull-right">
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
-                <ul class="pagination visible-xs pull-right">
-                    <li><a href="#">«</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
 </div>
+
+
 
 
 @Html.AntiForgeryToken()

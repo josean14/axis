@@ -1,4 +1,6 @@
-﻿@model IEnumerable<AXIS.Models.Farm>
+﻿@model PagedList.IPagedList<AXIS.Models.Farm>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Farms";
@@ -14,38 +16,46 @@
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading">Axis Farms List</div>
+    <div class="panel-heading">
+        @using (Html.BeginForm("Index", "Farms", FormMethod.Get))
+        {
+            <p>
+                Find by Site Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="Search" />
+            </p>
+        }
+    </div>
 
         <table class="table table-bordered">
             <tr>
                 <th align="center">
-                    <p>Site Name</p>
+                    @Html.ActionLink("Site Name", "Index", new { sortOrder = ViewBag.SiteSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    <p>Type of site</p>
+                    @Html.ActionLink("Type of Site", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th align="center">
                     <p>Site Manager</p>
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.City)
+                    City
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.State)
+                    State
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.Country)
+                    Country
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Manufacture)
+                    Manufacture
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Platform)
+                    Platform
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Convertor)
+                    Convertor
                 </th>
                 <th>Actions</th>
             </tr>
@@ -100,22 +110,10 @@
 
     <div class="panel-footer">
         <div class="row">
-            <div class="col col-xs-4">
-                Page 1 of 5
-            </div>
-            <div class="col col-xs-8">
-                <ul class="pagination hidden-xs pull-right">
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
-                <ul class="pagination visible-xs pull-right">
-                    <li><a href="#">«</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
 </div>

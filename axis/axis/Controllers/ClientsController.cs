@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using PagedList;
 
 namespace AXIS.Controllers
 {
@@ -16,9 +17,55 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
         // GET: Clients
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Clients.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CompanySortParm = sortOrder == "Company" ? "company_desc" : "Company";
+            ViewBag.StateSortParm = sortOrder == "State" ? "state_desc" : "State";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var clients = from s in db.Clients
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                clients = clients.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    clients = clients.OrderByDescending(s => s.FirstName);
+                    break;
+                case "Company":
+                    clients = clients.OrderBy(s => s.Company);
+                    break;
+                case "company_desc":
+                    clients = clients.OrderByDescending(s => s.Company);
+                    break;
+                case "State":
+                    clients = clients.OrderBy(s => s.State);
+                    break;
+                case "state_desc":
+                    clients = clients.OrderByDescending(s => s.State);
+                    break;
+                default: //Name ascending
+                    clients = clients.OrderBy(s => s.FirstName);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(clients.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Clients/Details/5
