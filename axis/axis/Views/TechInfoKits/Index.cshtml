@@ -1,0 +1,116 @@
+﻿@model IEnumerable<AXIS.Models.TechInfoKit>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tech.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HarnessManufacter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HarnessModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HarnessSerial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HarnessDateManufacture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HarnessRecertification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaynarManufacter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaynarModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaynarSerial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaynarDateManufacture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaynarRecertification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CableGrab)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Helment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uniforms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Other)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tech.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HarnessManufacter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HarnessModel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HarnessSerial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HarnessDateManufacture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HarnessRecertification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaynarManufacter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaynarModel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaynarSerial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaynarDateManufacture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaynarRecertification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CableGrab)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Helment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uniforms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Other)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TechId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TechId }) |
+        </td>
+    </tr>
+}
+
+</table>

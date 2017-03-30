@@ -1,0 +1,147 @@
+﻿@model AXIS.Models.TechInfoWork
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TechInfoWork</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TechInfoWorkId)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ManufacturerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ManufacturerName", null, htmlAttributes: new { @class = "form-control", @id = "SelectManufactere" })
+                @Html.ValidationMessageFor(model => model.ManufacturerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlatformName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" id="listsplatform">
+                @Html.DropDownList("PlatformName", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PlatformName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FarmId, "FarmId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("FarmId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FarmId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TypeOfService, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.TypeOfService, htmlAttributes: new { @class = "form-control", @id = "SelectTypeWork" })
+                @Html.ValidationMessageFor(model => model.TypeOfService, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ScopeWorkId, "ScopeWorkId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" id="listscopework">
+                @Html.DropDownList("ScopeWorkId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ScopeWorkId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TechId, "TechId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TechId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TechId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+            $("#SelectTypeWork").change(function () {       // Funcion que se ejecuta cuando cambia la lista
+
+                var id = $(this).val();
+                var procemessage = "<option value='0'> Please wait...</option>";
+                $("#ScopeWorkId").html(procemessage).show();
+                var url = "/TechInfoWorks/GetScopeWork/";
+
+                $.ajax({
+                    url: url,
+                    data: { typework: id },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value='0'>Select Work</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#ScopeWorkId").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert("Please select an type of service");
+                    }
+                });
+
+            });
+
+
+            $("#SelectManufactere").change(function () {       // Funcion que se ejecuta cuando cambia la lista
+
+                var name = $(this).val();
+                var procemessage = "<option value='0'> Please wait...</option>";
+                $("#PlatformName").html(procemessage).show();
+
+                var url = "/TechInfoWorks/GetPlatform/";
+
+                $.ajax({
+                    url: url,
+                    data: { ManufacturerName: name },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = "<option value='0'>Select Platform</option>";
+                        for (var x = 0; x < data.length; x++) {
+                            markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
+                        }
+                        $("#PlatformName").html(markup).show();
+                    },
+                    error: function (reponse) {
+                        alert(reponse);
+                    }
+                });
+
+            });
+    </script>
+}
+}
