@@ -1,56 +1,61 @@
 ﻿@model IEnumerable<AXIS.Models.Purchaseorder>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PurchaseOrderId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Commentary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.File)
-        </th>
-        <th></th>
-    </tr>
+<h4>PO List</h4>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th style="text-align:center">
+                    PO AXIS
+                </th>
+                <th style="text-align:center">
+                    PO Client
+                </th>
+                <th>
+                    Comments
+                </th>
+                <th style="text-align:center">
+                    Date
+                </th>
+                <th>
+                    Attached file
+                </th>
+                <th style="text-align:center">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.PO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Commentary)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink(@item.File, "Download", new { ImageName = @item.File, POid = @item.ContractId })
+                </td>
+                @using (Html.BeginForm("Delete", "Purchaseorders", new { id = item.PurchaseOrderId, contractid = item.Contract.ContractId }, FormMethod.Post, null))
+                {
+                    @Html.AntiForgeryToken()
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchaseOrderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Commentary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.File)
-            </td>
-           @using (Html.BeginForm("Delete", "Purchaseorders", new { id = item.PurchaseOrderId, contractid = item.Contract.ContractId }, FormMethod.Post, null))
-           {
-            @Html.AntiForgeryToken()
+                    <td style="text-align:center">
+                        <input type="submit" value="Delete" class="btn btn-default" />
+                    </td>
 
-            <td>
-                <input type="submit" value="Delete" class="btn btn-default" />
-            </td>
+                }
+            </tr>
+        }
+    </table>
 
-           }
-        </tr>
-    }
+</div>
 
-</table>

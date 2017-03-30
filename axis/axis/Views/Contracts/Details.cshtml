@@ -1,61 +1,62 @@
 ﻿@model AXIS.Models.Contract
 
 @{
-    ViewBag.Title = "Contract Details";
+    ViewBag.Title = "CONTRACT";
 }
-
-<h2>Business Development &raquo; Contracts Details</h2>
+<div style="text-align:center">
+    <h2>
+        Business Development <br />
+        CONTRACT
+    </h2>
+</div>
 
 <p>
     <a href=@Url.Action("Index","Contracts") class="btn btn-primary btn-xs">Back</a>
 </p>
 
-<div>
-    <h4>Contract #: @Html.DisplayFor(model => model.ContractId)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Rfq.Status)
-        </dt>
+<div class="panelright">
+    <div class="panel panel-axis right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">CONTRACT # @Html.DisplayFor(model => model.ContractId)</div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Rfq.Status)
-        </dd>
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Project Description</p>
+                </th>
+                <th align="center">
+                    <p>@Html.DisplayFor(model => model.Rversion.ProjectDescription)</p>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <p>Comments or Notes</p>
+                </th>
+                <th>
+                    <p>@Html.DisplayFor(model => model.OcClient)</p>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <p>Contract Date</p>
+                </th>
+                <th>
+                    @Html.DisplayFor(model => model.Date)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Contract File</p>
+                </th>
+                <th>
+                    @Html.ActionLink(Model.File, "Download", new { ImageName = Model.File, Rfqid = Model.RfqId })
+                </th>
+            </tr>
+        </table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Rversion.ProjectDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rversion.ProjectDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OcClient)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OcClient)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.File)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.File)
-        </dd>
-
-    </dl>
+    </div>
 </div>
+
 
 <br />
 @Html.Action("PartialCreate", "Purchaseorders", new { contractId = Model.ContractId });

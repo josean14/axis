@@ -11,6 +11,7 @@ using System.IO;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class TechInfoAxisController : Controller
     {
         private AXISDB db = new AXISDB();

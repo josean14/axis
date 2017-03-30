@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
 using System.IO;
+using PagedList;
 
 namespace AXIS.Controllers
 {
@@ -17,10 +18,71 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
         // GET: Contracts
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var contracts = db.Contracts.Include(c => c.Rfq).Include(c => c.Rversion).OrderByDescending(c => c.Date);
-            return View(contracts.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.ContractSortParm = String.IsNullOrEmpty(sortOrder) ? "contract_desc" : "";
+            ViewBag.FarmnameortParm = sortOrder == "Farmname" ? "farmname_desc" : "Farmname";
+            ViewBag.ProjectnameSortParm = sortOrder == "Projectname" ? "projectname_desc" : "Projectname";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var contracts = from s in db.Contracts
+                            select s;
+
+            contracts = contracts.Include(c => c.Rfq).Include(c => c.Rversion);
+            //var Contratos = db.Contracts.Include(c => c.Rfq).Include(c => c.Rversion).OrderByDescending(c => c.Date);
+            //contracts = db.Contracts.Include(c => c.Rfq).Include(c => c.Rversion).OrderByDescending(c => c.Date);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                int numVal;
+                if (Int32.TryParse(searchString, out numVal))
+                {
+                    contracts = contracts.Where(s => s.ContractId.Equals(numVal));
+                    //rfqss = rfqss.Where(s => s.RfqId.Equals(numVal) && s.Farm.TypeFarm == TypeFarm.Solar);
+                }
+                else
+                {
+                    contracts = contracts.Where(s => s.ContractId.Equals(0));
+                    ViewBag.Message = "Invalid Contract #";
+                }
+
+            }
+
+            switch (sortOrder)
+            {
+                case "contract_desc":
+                    contracts = contracts.OrderByDescending(s => s.ContractId);
+                    break;
+                case "Farmname":
+                    contracts = contracts.OrderBy(s => s.Rfq.Farm.FarmName);
+                    break;
+                case "farmname_desc":
+                    contracts = contracts.OrderByDescending(s => s.Rfq.Farm.FarmName);
+                    break;
+                case "Projectname":
+                    contracts = contracts.OrderBy(s => s.Rfq.ProjectName);
+                    break;
+                case "projectname_desc":
+                    contracts = contracts.OrderByDescending(s => s.Rfq.ProjectName);
+                    break;
+                default: //Contract ascending
+                    contracts = contracts.OrderBy(s => s.ContractId);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(contracts.ToPagedList(pageNumber, pageSize));
+
         }
 
         // GET: Contracts/Details/5
@@ -171,5 +233,12 @@ namespace AXIS.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Open Files
+        public FileResult Download(string ImageName, int Rfqid)
+        {
+            return File("~/Documents/Contracts/" + Rfqid + "/" + ImageName, System.Net.Mime.MediaTypeNames.Application.Octet, ImageName);
+        }
+
     }
 }

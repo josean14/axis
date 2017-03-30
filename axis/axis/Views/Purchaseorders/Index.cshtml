@@ -1,57 +1,140 @@
-﻿@model IEnumerable<AXIS.Models.Purchaseorder>
+﻿@model PagedList.IPagedList<AXIS.Models.Purchaseorder>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "POs";
 }
 
-<h2>Index</h2>
+<h2>Business Development &raquo; Purchase Orders</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Contract.OcClient)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Commentary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.File)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contract.OcClient)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Commentary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.File)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseOrderId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PurchaseOrderId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseOrderId })
-        </td>
-    </tr>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("Index", "Purchaseorders", FormMethod.Get))
+        {
+            <p>
+                Find by PO AXIS: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="Search" />
+            </p>
+        }
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                PO AXIS
+            </th>
+            <th>
+                Contract #
+            </th>
+            <th>
+                @Html.ActionLink("PO Client", "Index", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Comments
+            </th>
+            <th>
+                @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DatenameSortParm })
+            </th>
+            <th>
+                Attached file
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Commentary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.File)
+                </td>
+                <td>
+
+                    @Html.ActionLink(" Contract", "Details", "Contracts", new { id = item.ContractId }, new { @class = "glyphicon glyphicon-list-alt" })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="panel-footer">
+        <div class="row">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>
+
+
+
+
+@Html.AntiForgeryToken()
+<p id="msg"></p>
+
+@section scripts
+{
+    <script>
+    function confirmDelete(id) {
+        bootbox.confirm({
+            message: "Are you sure you want to delete this?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                if (result) {
+                    var url = "/clients/Delete/";
+                    var ClientId = id
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: ClientId, __RequestVerificationToken: anti }, function (data) {
+
+
+
+                        $("#Client" + ClientId).remove();
+                        $("#msg").last().addClass("alert alert-success");
+                        $("#msg").html(data);
+                    });
+
+                }
+            }
+        });
+
+
+    }
+    </script>
+
+
 }
 
-</table>
