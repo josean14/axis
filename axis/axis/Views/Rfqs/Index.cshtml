@@ -1,82 +1,87 @@
-﻿@model IEnumerable<AXIS.Models.Rfq>
+﻿@model PagedList.IPagedList<AXIS.Models.Rfq>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "RFQ LIST";
 }
 
 <h2>Request for Quote</h2>
+<h3>
+    Type of Site: @ViewBag.Typefarm
+</h3>
 
 <p>
     <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
 </p>
 
 
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading">RQF List</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @Html.Hidden("Typefarm")
+        <p>
+            Find by RFQ #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+            <input type="submit" value="Search" onclick="searchrfq()" />
+        </p>
 
-            <table class="table table-bordered">
+        <p style="color:red">
+            @ViewBag.Message
+        </p>
+
+    </div>
+
+    <table class="table table-bordered">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RfqId)
+                @Html.ActionLink("RFQ #", "Index", new { sortOrder = ViewBag.RfqSortParm, typefarm = ViewBag.Typefarm })
             </th>
 
             <th>
                 <P>Site Name</P>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm, typefarm = ViewBag.Typefarm })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProjectName)
+                Project Name
             </th>
             <th>Actions</th>
         </tr>
 
-    @foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
 
-        var ident = "Rfq" + @item.RfqId;
-        <tr id=@ident>
-            <td>
-                @Html.DisplayFor(modelItem => item.RfqId)
-            </td>           
-            <td>
-                @Html.DisplayFor(modelItem => item.Farm.FarmName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
-            <td>
-                @Html.ActionLink(" ", "Details", new { id = item.RfqId }, new { @class = "glyphicon glyphicon-list-alt" }) |
-                @Html.ActionLink(" ", "Edit", new { id = item.RfqId }, new { @class = "glyphicon glyphicon-pencil" }) |
-                <a href="" onclick="confirmDelete(@item.RfqId); return false;" class="glyphicon glyphicon-remove"></a>
-            </td>
-        </tr>
-    }
+            var ident = "Rfq" + @item.RfqId;
+            <tr id=@ident>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RfqId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Farm.FarmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Details", new { id = item.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "glyphicon glyphicon-list-alt" }) |
+                    @Html.ActionLink(" ", "Edit", new { id = item.RfqId }, new { @class = "glyphicon glyphicon-pencil" }) |
+                    <a href="" onclick="confirmDelete(@item.RfqId); return false;" class="glyphicon glyphicon-remove"></a>
+                </td>
+            </tr>
+        }
 
     </table>
 
-        <div class="panel-footer">
+    <div class="panel-footer">
         <div class="row">
-            <div class="col col-xs-4">
-                Page 1 of 5
-            </div>
-            <div class="col col-xs-8">
-                <ul class="pagination hidden-xs pull-right">
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
-                <ul class="pagination visible-xs pull-right">
-                    <li><a href="#">«</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                 new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
 </div>
@@ -122,6 +127,15 @@
             }
         });
 
+
+    }
+
+    function searchrfq() {
+        var typefarm = $("#Typefarm").val();
+        var searchval = $("#SearchString").val();
+        var url = "/rfqs/Index?searchString="+searchval+"&typefarm="+typefarm;
+
+        location.href = url;
 
     }
     </script>

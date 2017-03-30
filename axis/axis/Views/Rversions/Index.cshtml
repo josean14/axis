@@ -41,42 +41,43 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    var ident = "Rversion" + @item.RversionId;
-    <tr id=@ident>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rfq.ProjectName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberVersion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TypeWork)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScopeWork.Work)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProjectDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalCost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NotesAndInstructions)
-        </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.RversionId }, new { @class = "glyphicon glyphicon-pencil" }) |
-            <a href="" onclick="confirmDelete(@item.RversionId); return false;" class="glyphicon glyphicon-remove"></a>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        var ident = "Rversion" + @item.RversionId;
+        <tr id=@ident>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rfq.ProjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberVersion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeWork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScopeWork.Work)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProjectDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NotesAndInstructions)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.RversionId }, new { @class = "glyphicon glyphicon-pencil" }) |
+                <a href="" onclick="confirmDelete(@item.RversionId); return false;" class="glyphicon glyphicon-remove"></a>
+            </td>
+        </tr>
+    }
 
 </table>
 

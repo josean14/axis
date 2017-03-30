@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using PagedList;
 
 namespace AXIS.Controllers
 {
@@ -16,32 +17,92 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
         // GET: Rfqs
-        public ActionResult Index(string typefarm)
+        public ActionResult Index(string typefarm, string sortOrder, string currentFilter, string searchString, int? page)
         {
-            
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.RfqSortParm = String.IsNullOrEmpty(sortOrder) ? "rfq_desc" : "";
+            ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
+            ViewBag.Typefarm = typefarm;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            var rfqss = from s in db.Rfqs
+                        select s;
+
+
+            //Filtro por tipos de farm
             switch (typefarm)
             {
-                
                 case "Wind":
-                    var rfqsWind = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
-                    return View(rfqsWind.ToList());
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
+                    break;
+                //        var rfqsWind = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
+                //        return View(rfqsWind.ToPagedList(pageNumber, pageSize));
                 case "Solar":
-                    var rfqsSolar = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Solar);
-                    return View(rfqsSolar.ToList());
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Solar);
+                    break;
+                //        var rfqsSolar = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Solar);
+                //        return View(rfqsSolar.ToPagedList(pageNumber, pageSize));
                 case "Other":
-                    var rfqsOther = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Other);
-                    return View(rfqsOther.ToList());
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Other);
+                    break;
+                //        var rfqsOther = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Other);
+                //        return View(rfqsOther.ToPagedList(pageNumber, pageSize));
                 default:
-                    var rfqs = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
-                    return View(rfqs.ToList());
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
+                    break;
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                int numVal;
+                if (Int32.TryParse(searchString, out numVal))
+                {
+                    rfqss = rfqss.Where(s => s.RfqId.Equals(numVal));
+                    //rfqss = rfqss.Where(s => s.RfqId.Equals(numVal) && s.Farm.TypeFarm == TypeFarm.Solar);
+                }
+                else
+                {
+                    rfqss = rfqss.Where(s => s.RfqId.Equals(0));
+                    ViewBag.Message = "Invalid RFQ#";
+                }
 
             }
 
+            //Ordenamiento por RFQ# o Status
+            switch (sortOrder)
+            {
+                case "rfq_desc":
+                    rfqss = rfqss.OrderByDescending(s => s.RfqId);
+                    break;
+                case "Status":
+                    rfqss = rfqss.OrderBy(s => s.Status);
+                    break;
+                case "status_desc":
+                    rfqss = rfqss.OrderByDescending(s => s.Status);
+                    break;
+                default:
+                    rfqss = rfqss.OrderBy(s => s.RfqId);
+                    break;
+            }
 
+
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(rfqss.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Rfqs/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string typefarm)
         {
             if (id == null)
             {
@@ -53,6 +114,7 @@ namespace AXIS.Controllers
                 return HttpNotFound();
             }
             ViewBag.Rversion = db.Rversions.Where(f => f.RfqId == id).ToList();
+            ViewBag.Typefarm = typefarm;
             return View(rfq);
         }
 
@@ -60,7 +122,8 @@ namespace AXIS.Controllers
         public ActionResult Create(string typefarm)
         {
 
-            switch (typefarm) {
+            switch (typefarm)
+            {
 
                 case "Wind":
                     ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Wind), "FarmId", "FarmName");
@@ -72,7 +135,7 @@ namespace AXIS.Controllers
                     ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Other), "FarmId", "FarmName");
                     break;
             }
-        var model = new Rfq
+            var model = new Rfq
             {
                 Status = "Open"
             };
@@ -91,9 +154,9 @@ namespace AXIS.Controllers
             {
                 db.Rfqs.Add(rfq);
                 db.SaveChanges();
-                
 
-                return RedirectToAction("Create", "Rversions", new { rfqid = rfq.RfqId, projectname = rfq.ProjectName});
+
+                return RedirectToAction("Create", "Rversions", new { rfqid = rfq.RfqId, projectname = rfq.ProjectName });
             }
 
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName", rfq.FarmId);
@@ -133,7 +196,7 @@ namespace AXIS.Controllers
             return View(rfq);
         }
 
-        
+
 
         // POST: Rfqs/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -156,7 +219,7 @@ namespace AXIS.Controllers
         }
 
         // GET: Rfqs/Edit/5
-        public ActionResult VersionDetails(int? RversionId, int? RfqId)
+        public ActionResult VersionDetails(int? RversionId, int? RfqId, string typefarm)
         {
             if ((RversionId == null) & (RfqId == null))
             {
@@ -172,7 +235,7 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.Typefarm = typefarm;
             ViewBag.RversionId = rversion.RversionId;
             ViewBag.VersionDate = rversion.Date;
             ViewBag.NumberVersion = rversion.NumberVersion;
@@ -199,4 +262,4 @@ namespace AXIS.Controllers
 
     }
 
-  }
+}

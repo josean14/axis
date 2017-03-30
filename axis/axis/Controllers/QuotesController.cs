@@ -43,7 +43,7 @@ namespace AXIS.Controllers
             Rversion rversion = db.Rversions.Find(rversionid);
             Rfq rfq = db.Rfqs.Find(rversion.RfqId);
 
-            
+
             ViewBag.RfqId = rfq.RfqId;
             ViewBag.VersionDate = rversion.Date;
             ViewBag.NumberVersion = rversion.NumberVersion;
@@ -59,7 +59,7 @@ namespace AXIS.Controllers
 
             ViewBag.TypeWork = rversion.TypeWork;
             ViewBag.Notes = rversion.NotesAndInstructions;
-            
+
             return View();
         }
 
@@ -110,7 +110,7 @@ namespace AXIS.Controllers
             ViewBag.TypeWork = rversion.TypeWork;
             ViewBag.Notes = rversion.NotesAndInstructions;
             ViewBag.ScopeWork = rversion.ScopeWork.Work;
-
+            ViewBag.Typefarm = rfq.Farm.TypeFarm;
 
             ViewBag.Quotes = db.Quotes.Where(r => r.RversionId == rversionId).ToList();
             return PartialView();

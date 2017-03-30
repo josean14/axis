@@ -95,11 +95,11 @@ namespace AXIS.Controllers
                 }
 
 
-                return RedirectToAction("Details", "Rfqs", new { id = contract.RfqId });
+                return RedirectToAction("Index", "Contracts");
             }
 
 
-            return RedirectToAction("Details", "Rfqs", new { id = contract.RfqId });
+            return RedirectToAction("Index", "Contracts");
         }
 
         // GET: Contracts/Edit/5
