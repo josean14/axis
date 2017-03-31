@@ -3,19 +3,19 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Bio";
+    ViewBag.Title = "Assets";
 }
 
-<h2>Technicians &raquo; Bio</h2>
+<h2>Technicians &raquo; Assets</h2>
 
 <p>
-    <a href=@Url.Action("Index", "Technicians") class="btn btn-primary btn-xs">Back</a>
- </p>
+    <a href=@Url.Action("Index","Technicians") class="btn btn-primary btn-xs">Back</a>
+</p>
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
-        @using (Html.BeginForm("Index", "Teches", FormMethod.Get))
+        @using (Html.BeginForm("Assets", "Teches", FormMethod.Get))
         {
             <p>
                 Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
@@ -81,8 +81,8 @@
                     @Html.DisplayFor(modelItem => item.LocalAirport)
                 </td>
                 <td>
-                    @Html.ActionLink(" ", "Details", new { id = item.TechId }, new { @class = "glyphicon glyphicon-user" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.TechId })
+                    @Html.ActionLink("Tech Kit", "Edit", "TechInfoKits", new { id = item.TechId }, null) |
+                    @Html.ActionLink("CIP", "Edit", "TechInfoCims", new { id = item.TechId }, null)
                 </td>
             </tr>
         }
@@ -98,3 +98,66 @@
     </div>
 </div>
 
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Language)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cell)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocalAirport)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cell)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocalAirport)
+            </td>
+
+
+
+            <td>
+                @Html.ActionLink("Tech Kit", "Edit", "TechInfoKits", new { id = item.TechId }, null) |
+                @Html.ActionLink("CIP", "Edit", "TechInfoCims", new { id = item.TechId }, null)
+            </td>
+        </tr>
+    }
+
+</table>*@

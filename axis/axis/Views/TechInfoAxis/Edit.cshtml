@@ -18,10 +18,19 @@
         @Html.HiddenFor(model => model.TechInfoAxiId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ExperienceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("NFPA Expedition Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ExperienceDate, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ExperienceDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nfra70E, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Nfra70E)
+                @Html.EditorFor(model => model.Nfra70E, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                @Html.ValidationMessageFor(model => model.Nfra70E, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -58,15 +67,6 @@
                 @Html.DisplayFor(model => model.ConfinedSpace)
                 @Html.EditorFor(model => model.ConfinedSpace, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
                 @Html.ValidationMessageFor(model => model.ConfinedSpace, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nfra70E, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Nfra70E)
-                @Html.EditorFor(model => model.Nfra70E, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.Nfra70E, "", new { @class = "text-danger" })
             </div>
         </div>
 

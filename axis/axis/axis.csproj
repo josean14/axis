@@ -230,6 +230,7 @@
     <Compile Include="Controllers\FarmsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewhireController.cs" />
     <Compile Include="Controllers\PurchaseordersController.cs" />
     <Compile Include="Controllers\QuotesController.cs" />
     <Compile Include="Controllers\RfqsController.cs" />
@@ -511,6 +512,9 @@
     <Content Include="Views\TechInfoCims\Details.cshtml" />
     <Content Include="Views\TechInfoCims\Edit.cshtml" />
     <Content Include="Views\TechInfoCims\Index.cshtml" />
+    <Content Include="Views\Newhire\Index.cshtml" />
+    <Content Include="Views\Newhire\PartialMenu.cshtml" />
+    <Content Include="Views\Teches\Assets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

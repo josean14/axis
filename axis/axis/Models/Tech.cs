@@ -11,7 +11,7 @@ namespace AXIS.Models
 
     public enum TypePayRate
     {
-        HUNAL, DIEM
+        HUNAL, PER_DIEM
     }
 
     public enum MaritalStatus

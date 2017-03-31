@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using PagedList;
 
 namespace AXIS.Controllers
 {
@@ -16,9 +17,109 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
         // GET: Teches
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Teches.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CountrySortParm = sortOrder == "Country" ? "country_desc" : "Country";
+            ViewBag.AirportSortParm = sortOrder == "Airport" ? "airport_desc" : "Airport";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var Teches = from s in db.Teches
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Teches = Teches.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Teches = Teches.OrderByDescending(s => s.FirstName);
+                    break;
+                case "Country":
+                    Teches = Teches.OrderBy(s => s.Country);
+                    break;
+                case "country_desc":
+                    Teches = Teches.OrderByDescending(s => s.Country);
+                    break;
+                case "Airport":
+                    Teches = Teches.OrderBy(s => s.LocalAirport);
+                    break;
+                case "airport_desc":
+                    Teches = Teches.OrderByDescending(s => s.LocalAirport);
+                    break;
+                default: //Name ascending
+                    Teches = Teches.OrderBy(s => s.FirstName);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(Teches.ToPagedList(pageNumber, pageSize));
+        }
+
+
+
+        // GET: Teches/Assets
+        public ActionResult Assets(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CountrySortParm = sortOrder == "Country" ? "country_desc" : "Country";
+            ViewBag.AirportSortParm = sortOrder == "Airport" ? "airport_desc" : "Airport";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var Teches = from s in db.Teches
+                         select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Teches = Teches.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Teches = Teches.OrderByDescending(s => s.FirstName);
+                    break;
+                case "Country":
+                    Teches = Teches.OrderBy(s => s.Country);
+                    break;
+                case "country_desc":
+                    Teches = Teches.OrderByDescending(s => s.Country);
+                    break;
+                case "Airport":
+                    Teches = Teches.OrderBy(s => s.LocalAirport);
+                    break;
+                case "airport_desc":
+                    Teches = Teches.OrderByDescending(s => s.LocalAirport);
+                    break;
+                default: //Name ascending
+                    Teches = Teches.OrderBy(s => s.FirstName);
+                    break;
+            }
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(Teches.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Teches/Details/5

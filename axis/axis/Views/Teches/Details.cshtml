@@ -4,194 +4,120 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Tech</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Photo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Language)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Language)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StreetAdderess)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StreetAdderess)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CityAdderess)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CityAdderess)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Zip)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Zip)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cell)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cell)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocalAirport)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocalAirport)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SSN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SSN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DriveLicence)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DriveLicence)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PayRate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PayRate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TypePayRate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TypePayRate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Medical)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Medical)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Passport)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Passport)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaritalStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaritalStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Children)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Children)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Education)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Education)
-        </dd>
-
-    </dl>
-</div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TechId }) |
-    @Html.ActionLink("Add Info AXIS", "Edit", "TechInfoAxis", new { id = Model.TechId }, null) |
-    @Html.ActionLink("Add Info Kits", "Edit", "TechInfoKits", new { id = Model.TechId }, null) |
-    @Html.ActionLink("Add Info CIM", "Edit", "TechInfoCims", new { id = Model.TechId }, null) |
+    @Html.ActionLink(" View Certificates", "Edit", "TechInfoAxis", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
+    <br />
+    <div style="text-align:Center">
+    @Model.Photo
+        Photo
+    </div>
+</p>
+
+<div class="container">
+    <h1 class="well">@Model.FirstName @Model.LastName</h1>
+    <div class="col-lg-12 well">
+        <div class="row">
+            <form>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label>Address</label>
+                        @Html.TextAreaFor(model => model.StreetAdderess, new { disabled = "disabled", @readonly = "readonly", @class = "form-control", @rows = "3" })
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label>City</label>
+                            @Html.TextBoxFor(model => model.CityAdderess, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label>State</label>
+                            @Html.TextBoxFor(model => model.State, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label>Zip</label>
+                            @Html.TextBoxFor(model => model.Zip, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        @Html.TextBoxFor(model => model.Country, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Language</label>
+                            @Html.TextBoxFor(model => model.Language, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Cell Phone</label>
+                            @Html.TextBoxFor(model => model.Cell, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Local Airport</label>
+                            @Html.TextBoxFor(model => model.LocalAirport, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <p></p>
+                        <span class="labelaxis labelaxix-profile">
+                            <a href="mailto:@Html.DisplayFor(model => model.Email)">@Html.DisplayFor(model => model.Email)</a>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label>SSN</label>
+                        @Html.TextBoxFor(model => model.SSN, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Driver Licence</label>
+                        @Html.TextBoxFor(model => model.DriveLicence, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>PayRate</label>
+                        @Html.TextBoxFor(model => model.PayRate, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Type of PayRate</label>
+                        @Html.TextBoxFor(model => model.TypePayRate, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Medical</label>
+                        @Html.TextBoxFor(model => model.Medical, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Passport</label>
+                        @Html.TextBoxFor(model => model.Passport, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Marital Status</label>
+                        @Html.TextBoxFor(model => model.MaritalStatus, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Children</label>
+                        @Html.TextBoxFor(model => model.Children, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label>Education</label>
+                        @Html.TextBoxFor(model => model.Education, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="PartialCreateView"></div>
+
+
+</div>
+
+
+<p>
+    <a href=@Url.Action("Index", "Teches") class="btn btn-primary btn-xs">Back</a>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
     @using (Html.BeginForm("Delete", "Teches", new { id = Model.TechId }, FormMethod.Post, null))
     {
         @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+        <div class="form-actions">
+            <input type="submit" value="Delete" class="btn btn-primary btn-xs" /> 
         </div>
     }
-    @Html.ActionLink("Back to List", "Index")
+
 </p>
