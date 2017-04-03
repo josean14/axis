@@ -20,21 +20,21 @@
     <!-- Default panel contents -->
     <div class="panel-heading">
         @Html.Hidden("Typefarm")
-        <p>
-            Find by RFQ #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
-            <input type="submit" value="Search" onclick="searchrfq()" />
-        </p>
+            <p>
+                Find by RFQ #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="Search" onclick="searchrfq()" />
+            </p>
 
-        <p style="color:red">
-            @ViewBag.Message
-        </p>
-
+                <p style="color:red">
+                    @ViewBag.Message
+                </p>
+ 
     </div>
 
     <table class="table table-bordered">
         <tr>
             <th>
-                @Html.ActionLink("RFQ #", "Index", new { sortOrder = ViewBag.RfqSortParm, typefarm = ViewBag.Typefarm })
+                @Html.ActionLink("RFQ #", "Index", new { sortOrder = ViewBag.RfqSortParm, typefarm= ViewBag.Typefarm })
             </th>
 
             <th>

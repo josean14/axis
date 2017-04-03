@@ -230,10 +230,10 @@
     </div>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
 
-    <script>
+        <script>
             function newVersion(id, rfqid) {
 
                 var url = "/Rversions/NewVersion";
@@ -241,10 +241,10 @@
                 var dialog = bootbox.dialog({
                     title: 'Create New Version',
                     message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>'
-
+                    
                 });
 
-
+                
                 $.post(url, { Id: id, rfqId: rfqid })
                      .done(function (data) {
 
@@ -303,7 +303,7 @@
                 var url = "/quotes/Delete/";
                 var QuoteId = id
                 var anti = $('[name=__RequestVerificationToken]').val();
-
+                
                 $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
                     $("#Quote" + QuoteId).remove();
                 });
@@ -332,6 +332,6 @@
             }
 
 
-    </script>
+        </script>
 
-}
+    }

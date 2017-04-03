@@ -23,7 +23,7 @@ namespace AXIS.Controllers
             ViewBag.RfqSortParm = String.IsNullOrEmpty(sortOrder) ? "rfq_desc" : "";
             ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
             ViewBag.Typefarm = typefarm;
-
+            
             if (searchString != null)
             {
                 page = 1;
@@ -219,7 +219,7 @@ namespace AXIS.Controllers
         }
 
         // GET: Rfqs/Edit/5
-        public ActionResult VersionDetails(int? RversionId, int? RfqId, string typefarm)
+        public ActionResult VersionDetails(int? RversionId, int? RfqId, string typefarm )
         {
             if ((RversionId == null) & (RfqId == null))
             {

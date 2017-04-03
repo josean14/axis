@@ -25,7 +25,6 @@ namespace AXIS
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                        "~/Scripts/bootstrap.min.js",
-                        "~/Scripts/bootstrap-datepicker.js",
                        "~/Scripts/dropdown.js",
                        "~/Scripts/collapse.js",
                       "~/Scripts/respond.js"));
@@ -35,7 +34,6 @@ namespace AXIS
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                       "~/Content/bootstrap-datepicker.css",
                       "~/Content/site.css",
                       "~/Content/axis.css"));
         }

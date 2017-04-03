@@ -35,21 +35,5 @@ namespace AXIS.Models
         public System.Data.Entity.DbSet<AXIS.Models.Contract> Contracts { get; set; }
 
         public System.Data.Entity.DbSet<AXIS.Models.Purchaseorder> Purchaseorders { get; set; }
-
-        public System.Data.Entity.DbSet<AXIS.Models.Manufactere> Manufacteres { get; set; }
-
-        public System.Data.Entity.DbSet<AXIS.Models.Platform> Platforms { get; set; }
-
-        public System.Data.Entity.DbSet<AXIS.Models.Tech> Teches { get; set; }
-
-        public System.Data.Entity.DbSet<AXIS.Models.TechInfoAxi> TechInfoAxis { get; set; }
-
-        public System.Data.Entity.DbSet<AXIS.Models.TechInfoWork> TechInfoWorks { get; set; }
-
-        public System.Data.Entity.DbSet<AXIS.Models.TechInfoKit> TechInfoKits { get; set; }
-
-        public System.Data.Entity.DbSet<AXIS.Models.TechInfoCim> TechInfoCims { get; set; }
-
-
     }
 }
