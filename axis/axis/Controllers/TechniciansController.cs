@@ -7,6 +7,7 @@ using System.Web.Mvc;
 namespace AXIS.Controllers
 {
     [Authorize]
+    [Authorize]
     public class TechniciansController : Controller
     {
         // GET: Technicians

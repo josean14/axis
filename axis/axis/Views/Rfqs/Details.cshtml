@@ -1,14 +1,14 @@
 ﻿@model AXIS.Models.Rfq
 
 @{
-    ViewBag.Title = "Review RFQ";
+    ViewBag.Title = "REVIEW RFQ";
 }
 <p>
-    @Html.ActionLink("Back", "Index", new { typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("BACK", "Index", new { typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
 </p>
 
 
-<h2>Review RFQ</h2>
+<h2>REVIEW RFQ</h2>
 
 <div class="panelright">
     <div class="panel panel-axis right">
@@ -29,7 +29,7 @@
                     <p>Site Name</p>
                 </th>
                 <th align="center">
-                @Html.DisplayFor(model => model.Farm.FarmName)
+                    @Html.DisplayFor(model => model.Farm.FarmName)
                 </th>
             </tr>
         </table>
@@ -41,30 +41,30 @@
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading">Version List</div>
+    <div class="panel-heading">VERSION LIST</div>
 
     <table class="table table-bordered">
         <tr>
             <th>
-                Ver. #
+                VER. #
             </th>
             <th>
-                Date
+                DATE
             </th>
             <th>
-                Status
+                STATUS
             </th>
             <th>
-                Type of Work
+                TYPE OF WORK
             </th>
             <th>
-                Scope of Work
+                SCOPE OF WORK
             </th>
             <th>
-                Project Description
+                PROJECT DESCRIPTION
             </th>
             <th>
-                Actions
+                ACTIONS
             </th>
         </tr>
 
@@ -82,15 +82,15 @@
                 </td>
                 <td>
                     @item.TypeWork
-                </td>               
+                </td>
                 <td>
                     @item.ScopeWorkId
-                </td>                 
+                </td>
                 <td>
                     @item.ProjectDescription
                 </td>
                 <td>
-                    @Html.ActionLink("Open", "VersionDetails", new { RversionId = item.RversionId, RfqId = Model.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "glyphicon glyphicon-list-alt" })
+                    @Html.ActionLink(" OPEN", "VersionDetails", new { RversionId = item.RversionId, RfqId = Model.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "glyphicon glyphicon-list-alt" })
                 </td>
             </tr>
         }
@@ -98,22 +98,7 @@
     </table>
     <div class="panel-footer">
         <div class="row">
-            <div class="col col-xs-4">
-                Page 1 of 5
-            </div>
-            <div class="col col-xs-8">
-                <ul class="pagination hidden-xs pull-right">
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                </ul>
-                <ul class="pagination visible-xs pull-right">
-                    <li><a href="#">«</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
-            </div>
+
         </div>
     </div>
 </div>

@@ -1,27 +1,45 @@
 ﻿<div class="row">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <div class="nav-side-menu">
-        <div class="brand">HOME</div>
+        <div class="brand">
+            <a href=@Url.Action("Index","Home")>HOME</a>
+        </div>
         <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
         <div class="menu-list">
 
             <ul id="menu-content" class="menu-content collapse out">
+                <li data-toggle="collapse" data-target="#NEWTECH" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> NEW TECH <span class="arrow"></span></a>
 
+                    <ul class="sub-menu collapse" id="NEWTECH">
+                        <li><a href=@Url.Action("Create","Teches")>ADD</a></li>
+                    </ul>
+                </li>
                 <li data-toggle="collapse" data-target="#PROFILE" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> Tech Profile <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> TECH PROFILE<span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="PROFILE">
-                        <li>Bio</li>
-                        <li>Rates</li>
-                        <li>Tech Assets</li>
+                        <li><a href=@Url.Action("Index","Teches")>TECH PERSONAL INFO.</a></li>
+                        <li>CERTIFICATE</li>
+                        <li>BIO</li>
+                        <li><a href=@Url.Action("Assets","Teches")>ASSETS</a></li>
                     </ul>
                 </li>
                 <li data-toggle="collapse" data-target="#HANDBOOK" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> Employe Handbook<span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> EMPLOYE HANDBOOK<span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="HANDBOOK">
-                        <li>Opcion 1</li>
+                        <li>OPTION 1</li>
+                    </ul>
+                </li>
+                <li data-toggle="collapse" data-target="#REPORTS" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> TECH JOBS REPORTS<span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="REPORTS">
+                        <li>REPORT 1</li>
+                        <li>REPORT 2</li>
+                        <li>REPORT 3</li>
                     </ul>
                 </li>
                </ul>

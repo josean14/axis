@@ -3,15 +3,15 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Farms";
+    ViewBag.Title = "FARMS";
 }
 
-<h2>Business Development &raquo; Farms</h2>
+<h2>BUSINESS DEVELOPMENT &raquo; FARMS</h2>
 
 <p>
-    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">BACK</a>
 
-    <a href=@Url.Action("Create","Farms") class="btn btn-primary btn-xs">New Farm</a>
+    <a href=@Url.Action("Create","Farms") class="btn btn-primary btn-xs">NEW FARM</a>
 </p>
 
 <div class="panel panel-default">
@@ -29,35 +29,35 @@
         <table class="table table-bordered">
             <tr>
                 <th align="center">
-                    @Html.ActionLink("Site Name", "Index", new { sortOrder = ViewBag.SiteSortParm, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("SITE NAME", "Index", new { sortOrder = ViewBag.SiteSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.ActionLink("Type of Site", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("TYPE OF SITE", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th align="center">
-                    <p>Site Manager</p>
+                    <p>SITE MANAGER</p>
                 </th>
 
                 <th>
-                    City
+                    CITY
                 </th>
                 <th>
-                    State
+                    STATE
                 </th>
 
                 <th>
-                    Country
+                    COUNTRY
                 </th>
                 <th>
-                    Manufacture
+                    MANUFACTURE
                 </th>
                 <th>
-                    Platform
+                    PLATFORM
                 </th>
                 <th>
-                    Convertor
+                    CONVERTOR
                 </th>
-                <th>Actions</th>
+                <th>ACTIONS</th>
             </tr>
 
         @foreach (var item in Model)
@@ -101,7 +101,7 @@
     @Html.ActionLink(" ", "Edit", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-pencil" }) |
     <a href="" onclick="confirmDelete(@item.FarmId); return false;" class="glyphicon glyphicon-remove"></a>
                     *@
-                    @Html.ActionLink("View", "Details", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-info-sign" })
+                    @Html.ActionLink(" VIEW", "Details", new { id = item.FarmId }, new { @class = "glyphicon glyphicon-info-sign" })
                 </td>
             </tr>
         }

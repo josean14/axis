@@ -1,10 +1,10 @@
 ﻿@model AXIS.Models.Rversion
 
 @{
-    ViewBag.Title = "RFQ # Ver. 1";
+    ViewBag.Title = "RFQ # " + @ViewBag.RfqId + " Ver. 1";
 }
 
-<h2>Aditional info RFQ</h2>
+<h2>ADITIONAL INFO. RFQ, </h2>
 
 
 @using (Html.BeginForm()) 
@@ -59,7 +59,7 @@
     <div class="col-sm-6 form-group">
         <div class="panel panel-axis right">
             <!-- Default panel contents -->
-            <div class="panel-heading">Customer</div>
+            <div class="panel-heading">CUSTOMER</div>
 
             <table class="table table-bordered">
                 <tr>
@@ -85,7 +85,7 @@
     <div class="col-sm-6 form-group">
         <div class="panel panel-axislg right">
             <!-- Default panel contents -->
-            <div class="panel-heading">Quote/Project Description</div>
+            <div class="panel-heading">QUOTE / PROJECT DESCRIPTION</div>
 
             <table class="table table-bordered">
                 <tr>
@@ -132,15 +132,15 @@
 </div>
 
 <div class="panelright">
-    <div class="panel panel-axis">
+    <div class="panel panel-axislg">
         <!-- Default panel contents -->
-        <div class="panel-heading">Special Notes and Instructions</div>
+        <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
 
         <table class="table table-bordered">
             <tr>
                 <th align="center">
                     <div class="col-md-12">
-                        @Html.TextAreaFor(model => model.NotesAndInstructions, new { @class = "form-control", placeholder = "Enter Notes and Instructions Here..", @row = "10" })
+                        @Html.TextAreaFor(model => model.NotesAndInstructions, new { @class = "form-control", placeholder = "Enter Notes and Instructions Here..", @row = "15" })
                         @Html.ValidationMessageFor(model => model.NotesAndInstructions, "", new { @class = "text-danger" })
                     </div>
                 </th>
@@ -167,7 +167,7 @@
 
         <div class="form-group">
             <div class="col-md-10">
-                <input type="submit" value="Step 3" class="btn btn-default" />
+                <input type="submit" value="STEP 3" class="btn btn-default" />
             </div>
         </div>
 }

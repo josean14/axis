@@ -6,7 +6,7 @@
     ViewBag.Title = "RFQ LIST";
 }
 
-<h2>Request for Quote</h2>
+<h2>Request for Quote (RFQ, RFP)</h2>
 <h3>
     Type of Site: @ViewBag.Typefarm
 </h3>
@@ -20,33 +20,33 @@
     <!-- Default panel contents -->
     <div class="panel-heading">
         @Html.Hidden("Typefarm")
-            <p>
-                Find by RFQ #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
-                <input type="submit" value="Search" onclick="searchrfq()" />
-            </p>
+        <p>
+            Find by RFQ #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+            <input type="submit" value="Search" onclick="searchrfq()" />
+        </p>
 
-                <p style="color:red">
-                    @ViewBag.Message
-                </p>
- 
+        <p style="color:red">
+            @ViewBag.Message
+        </p>
+
     </div>
 
     <table class="table table-bordered">
         <tr>
             <th>
-                @Html.ActionLink("RFQ #", "Index", new { sortOrder = ViewBag.RfqSortParm, typefarm= ViewBag.Typefarm })
+                @Html.ActionLink("RFQ #", "Index", new { sortOrder = ViewBag.RfqSortParm, typefarm = ViewBag.Typefarm })
             </th>
 
             <th>
-                <P>Site Name</P>
+                <P>SITE NAME</P>
             </th>
             <th>
-                @Html.ActionLink("Status", "Index", new { sortOrder = ViewBag.StatusSortParm, typefarm = ViewBag.Typefarm })
+                @Html.ActionLink("STATUS", "Index", new { sortOrder = ViewBag.StatusSortParm, typefarm = ViewBag.Typefarm })
             </th>
             <th>
-                Project Name
+                PROJECT NAME
             </th>
-            <th>Actions</th>
+            <th>ACTIONS</th>
         </tr>
 
         @foreach (var item in Model)

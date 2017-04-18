@@ -3,13 +3,13 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Contracts";
+    ViewBag.Title = "JOBS";
 }
 
-<h2>Business Development &raquo; Contracts List</h2>
+<h2>BUSINESS DEVELOPMENT &raquo; JOBS</h2>
 
 <p>
-    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">BACK</a>
 </p>
 
 <div class="panel panel-default">
@@ -30,28 +30,28 @@
     <table class="table table-bordered">
         <tr>
             <th>
-                @Html.ActionLink("Contract #", "Index", new { sortOrder = ViewBag.ContractSortParm })
+                @Html.ActionLink("JOB #", "Index", new { sortOrder = ViewBag.ContractSortParm })
             </th>
 
             <th>
-                @Html.ActionLink("Site Name", "Index", new { sortOrder = ViewBag.FarmnameortParm })
+                @Html.ActionLink("SITE NAME", "Index", new { sortOrder = ViewBag.FarmnameortParm })
             </th>
             <th>
-                @Html.ActionLink("Project Name", "Index", new { sortOrder = ViewBag.ProjectnameSortParm })
+                @Html.ActionLink("PROJECT NAME", "Index", new { sortOrder = ViewBag.ProjectnameSortParm })
             </th>
             <th>
-                Project Description
+                PROJECT DESCRIPTION
             </th>
             <th>
-                Comments
+                COMMENTS
             </th>
             <th>
-                Contract Date
+                JOB INICIAL DATE
             </th>
             <th>
-                File
+                FILE JOB
             </th>
-            <th>Actions</th>
+            <th>ACTIONS</th>
         </tr>
         @foreach (var item in Model)
         {
@@ -81,7 +81,7 @@
                     @Html.ActionLink(@item.File, "Download", new { ImageName = @item.File, Rfqid = @item.RfqId })
                 </td>
                 <td>
-                    @Html.ActionLink("Open", "Details", new { id = item.ContractId })
+                    @Html.ActionLink("OPEN", "Details", new { id = item.ContractId })
 
                 </td>
             </tr>

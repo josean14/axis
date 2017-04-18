@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Field Operations";
+}
+
+
+<div class="row">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="nav-side-menu">
+        <div class="brand">
+            <a href=@Url.Action("Index","Home")>HOME</a>
+        </div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+
+                <li data-toggle="collapse" data-target="#MOB" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> MOBILIZATION <span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="MOB">
+                        <li><a href=@Url.Action("Index","Mobilization")>SETUP</a></li>
+                    </ul>
+                </li>
+                <li data-toggle="collapse" data-target="#JOB" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> JOB BOARD <span class="arrow"></span></a>
+                    <ul class="sub-menu collapse" id="JOB">
+                        <li><a href=@Url.Action("JobBoard","FieldOps")>MAP</a></li>
+                        <li><a href=@Url.Action("Index","")>CHANGES</a></li>
+                    </ul>
+                </li>
+                <li data-toggle="collapse" data-target="#DEMOB" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> DEMOBILIZATION <span class="arrow"></span></a>
+
+                    <ul class="sub-menu collapse" id="DEMOB">
+                        <li><a href=@Url.Action("Index","")>OPTION 1</a></li>
+                    </ul>
+                </li>
+                <li data-toggle="collapse" data-target="#REPORTS" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> REPORTS <span class="arrow"></span></a>
+                    <ul class="sub-menu collapse" id="REPORTS">
+                        <li><a href=@Url.Action("Index","")>REPORT 1</a></li>
+                        <li><a href=@Url.Action("Index","")>REPORT 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>

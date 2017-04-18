@@ -11,15 +11,16 @@
         double TotalPrice = 0;
     }
 
-    @Html.ActionLink("Back", "Details", new { id = Model.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink("BACK", "Details", new { id = Model.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
     @{
         if (ViewBag.Status == "Open")
         {
 
 
-            <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">Generate New Version</a>
-            @Html.ActionLink("Generate Contract", "Create", "Contracts", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
-            @Html.ActionLink("Close Version", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
+            <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">NEW VERSION</a>
+            @Html.ActionLink("GENERATE JOB", "Create", "Contracts", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
+            <label> </label>
+            @Html.ActionLink("CLOSE VERSION", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
         }
     }
     <h2>STATUS: @ViewBag.Status</h2>
@@ -63,7 +64,7 @@
         <div class="col-sm-6 form-group">
             <div class="panel panel-axis right">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Customer</div>
+                <div class="panel-heading">CUSTOMER</div>
 
                 <table class="table table-bordered">
                     <tr>
@@ -89,7 +90,7 @@
         <div class="col-sm-6 form-group">
             <div class="panel panel-axislg right">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Quote/Project Description</div>
+                <div class="panel-heading">QUOTE /PROJECT DESCRIPTION</div>
 
                 <table class="table table-bordered">
                     <tr>
@@ -127,22 +128,22 @@
             <thead class="tr-axis">
                 <tr>
                     <th>
-                        Description
+                        DESCRIPTION
                     </th>
                     <th style="text-align:center">
                         UM
                     </th>
                     <th style="text-align:center">
-                        Cost per Unit
+                        COST POR UNIR
                     </th>
                     <th style="text-align:center">
-                        Price per Unit
+                        PRICE PER UNIT
                     </th>
                     <th style="text-align:center">
-                        Quantity
+                        QUANTITY
                     </th>
                     <th style="text-align:center">
-                        Total Line
+                        TOTAL LINE
                     </th>
                 </tr>
             </thead>
@@ -195,9 +196,9 @@
     </div>
 
     <div class="panelright">
-        <div class="panel panel-axislg">
+        <div class="panel panel-axis">
             <!-- Default panel contents -->
-            <div class="panel-heading">Special Notes and Instructions</div>
+            <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
 
             <table class="table table-bordered">
                 <tr>
@@ -230,10 +231,10 @@
     </div>
 </div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
-        <script>
+    <script>
             function newVersion(id, rfqid) {
 
                 var url = "/Rversions/NewVersion";
@@ -241,10 +242,10 @@
                 var dialog = bootbox.dialog({
                     title: 'Create New Version',
                     message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>'
-                    
+
                 });
 
-                
+
                 $.post(url, { Id: id, rfqId: rfqid })
                      .done(function (data) {
 
@@ -303,7 +304,7 @@
                 var url = "/quotes/Delete/";
                 var QuoteId = id
                 var anti = $('[name=__RequestVerificationToken]').val();
-                
+
                 $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
                     $("#Quote" + QuoteId).remove();
                 });
@@ -332,6 +333,6 @@
             }
 
 
-        </script>
+    </script>
 
-    }
+}

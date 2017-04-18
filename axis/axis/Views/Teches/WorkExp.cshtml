@@ -1,0 +1,102 @@
+﻿@model PagedList.IPagedList<AXIS.Models.Tech>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Work Experience";
+}
+
+<h2>Technicians &raquo; Work Experience</h2>
+
+<p>
+    <a href=@Url.Action("Index", "Newhire") class="btn btn-primary btn-xs">Back</a>
+</p>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("WorkExp", "Teches", FormMethod.Get))
+        {
+            <p>
+                Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="Search" />
+            </p>
+        }
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.ActionLink("Full Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Language
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
+            </th>
+            <th>
+                Cell Phone
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th>
+                @Html.ActionLink("Local Airport", "Index", new { sortOrder = ViewBag.AirportSortParm })
+            </th>
+            <th>
+                Work Experience
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var ident = "Tech" + @item.TechId;
+
+            var fullname = @item.FirstName + " " + @item.LastName;
+
+            <tr id=@ident>
+                <td>
+                    @Html.DisplayFor(modelItem => fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Language)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cell)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalAirport)
+                </td>
+                <td>
+                    @Html.ActionLink(" Add/Remove ","Index", "TechInfoWorks", new { id = item.TechId }, new { @class = "glyphicon glyphicon-th-list" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="panel-footer">
+        <div class="row">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>
+
+
+
+

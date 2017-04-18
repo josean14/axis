@@ -1,0 +1,209 @@
+﻿@model AXIS.Models.TechInfoAxi
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TechInfoAxi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Techs.Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Techs.Photo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperienceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExperienceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Osha10)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Osha10)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstAidCPR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstAidCPR)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TowerRescue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TowerRescue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ConfinedSpace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ConfinedSpace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nfra70E)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nfra70E)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ergonomics)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ergonomics)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hazcom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hazcom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CraneSafety)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CraneSafety)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RiggingSignalMan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RiggingSignalMan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FireExtinguisher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FireExtinguisher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasI9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasI9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.I9File)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.I9File)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasW2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasW2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.W2File)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.W2File)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasW4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasW4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.W4File)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.W4File)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasApplicanceOffer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasApplicanceOffer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicanceOfferFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplicanceOfferFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasAxisLaborCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasAxisLaborCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AxisLaborCodeFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AxisLaborCodeFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TechnicalLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TechnicalLevel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TechInfoAxiId }) |
+    @Html.ActionLink("Back to List", "Details", "Teches", new { id = Model.TechId }, null)
+</p>

@@ -36,7 +36,7 @@ namespace AXIS.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var Purchaseorders = from s in db.Purchaseorders
-                            select s;
+                                 select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {

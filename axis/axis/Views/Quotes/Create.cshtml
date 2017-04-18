@@ -1,7 +1,7 @@
 ﻿@model AXIS.Models.Quote
 
 @{
-    ViewBag.Title = "Create Quote";
+    ViewBag.Title = "RFQ # " + @ViewBag.RfqId + " Ver. 1";
 }
 
 <div class="panelright">
@@ -43,7 +43,7 @@
     <div class="col-sm-6 form-group">
         <div class="panel panel-axis right">
             <!-- Default panel contents -->
-            <div class="panel-heading">Customer</div>
+            <div class="panel-heading">CUSTOMER</div>
 
             <table class="table table-bordered">
                 <tr>
@@ -69,7 +69,7 @@
     <div class="col-sm-6 form-group">
         <div class="panel panel-axislg right">
             <!-- Default panel contents -->
-            <div class="panel-heading">Quote/Project Description</div>
+            <div class="panel-heading">QUOTE / PROJECT DESCRIPTION</div>
 
             <table class="table table-bordered">
                 <tr>
@@ -208,7 +208,7 @@
         <div class="panelright">
             <div class="panel panel-axis">
                 <!-- Default panel contents -->
-                <div class="panel-heading">Special Notes and Instructions</div>
+                <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
 
                 <table class="table table-bordered">
                     <tr>
@@ -225,7 +225,7 @@
         </div>
 
 <div>
-    @Html.ActionLink(" Save Version", "Details", "rfqs", new { id = ViewBag.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink(" SAVE VERSION", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })
 </div>
 
         @section Scripts {

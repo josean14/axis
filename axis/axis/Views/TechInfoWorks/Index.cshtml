@@ -1,0 +1,131 @@
+﻿@model IEnumerable<AXIS.Models.TechInfoWork>
+
+@{
+    ViewBag.Title = "Work Experience";
+}
+
+<h2>WORK EXPERIENCE</h2>
+
+<p>
+    <a href=@Url.Action("WorkExp", "Teches") class="btn btn-primary btn-xs">BACK</a>
+    <a href=@Url.Action("Create", "TechInfoWorks") class="btn btn-primary btn-xs">ADD</a>
+</p>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        Tech ID:@ViewBag.Techid
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                SITE NAME
+            </th>
+            <th>
+                MANUFACTERE
+            </th>
+            <th>
+                PLATFORM
+            </th>
+            <th>
+                TYPE OF SERVICE
+            </th>
+            <th>
+                SCOPE OF WORK
+            </th>
+            <th>
+                NOTES
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var ident = "Tech" + @item.TechId;
+
+            var fullname = @item.Tech.FirstName + " " + @item.Tech.LastName;
+
+            <tr id=@ident>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Farm.FarmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManufacturerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlatformName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfService)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Scopework.Work)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TechInfoWorkId, idtech = item.TechId }) |
+                     @Html.ActionLink("Delete", "Delete", new { id = item.TechInfoWorkId, idtech = item.TechId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="panel-footer">
+        <div class="row">
+        </div>
+    </div>
+</div>
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Farm.FarmName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tech.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfService)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ManufacturerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlatformName)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farm.FarmName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tech.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfService)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManufacturerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlatformName)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TechInfoWorkId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TechInfoWorkId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TechInfoWorkId })
+            </td>
+        </tr>
+    }
+
+</table>*@

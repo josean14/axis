@@ -7,7 +7,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <div class="nav-side-menu">
         <div class="brand">
-            <a href=@Url.Action("Index","Home")>Home</a>
+            <a href=@Url.Action("Index","Home")>HOME</a>
         </div>
         <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
@@ -16,59 +16,59 @@
             <ul id="menu-content" class="menu-content collapse out">
 
                 <li data-toggle="collapse" data-target="#DB" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> Customer DB <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> CUSTOMER DB <span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="DB">
-                        <li><a href=@Url.Action("Index","Clients")>Clients</a></li>
-                        <li><a href=@Url.Action("Index","Farms")>Farms</a></li>
+                        <li><a href=@Url.Action("Index","Clients")>CLIENTS</a></li>
+                        <li><a href=@Url.Action("Index","Farms")>FARMS</a></li>
                     </ul>
                 </li>
                 <li data-toggle="collapse" data-target="#NRFQ" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> New RFQ <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> NEW RFQ <span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="NRFQ">
-                        <li><a href=@Url.Action("Create","Rfqs", new { typefarm = "Wind" })>Wind</a></li>
+                        <li><a href=@Url.Action("Create","Rfqs", new { typefarm = "Wind" })>WIND</a></li>
 
-                        <li><a href=@Url.Action("Create","Rfqs", new { typefarm = "Solar" })>Solar</a></li>
+                        <li><a href=@Url.Action("Create","Rfqs", new { typefarm = "Solar" })>SOLAR</a></li>
 
-                        <li><a href=@Url.Action("Create","Rfqs", new { typefarm = "Other" })>Other</a></li>
+                        <li><a href=@Url.Action("Create","Rfqs", new { typefarm = "Other" })>OTHER</a></li>
 
                     </ul>
                 </li>
                 <li data-toggle="collapse" data-target="#ORFQ" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> Open RFQ <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> OPEN RFQ <span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="ORFQ">
-                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Wind" } )>Wind</a></li>
-                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Solar" } )>Solar</a></li>
-                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Other" } )>Other</a></li>
+                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Wind" } )>WIND</a></li>
+                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Solar" } )>SOLAR</a></li>
+                        <li><a href=@Url.Action("Index","Rfqs", new { typefarm = "Other" } )>OTHER</a></li>
                     </ul>
                 </li>
                 <li data-toggle="collapse" data-target="#CONTRACT" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> Contracts <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> AXIS JOB (#) <span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="CONTRACT">
-                        <li><a href=@Url.Action("Index","Contracts" )>Open Contracts</a></li>
-                        <li><a href=@Url.Action("Index", "Purchaseorders")>Open PO's</a></li>
+                        <li><a href=@Url.Action("Index","Contracts" )>OPEN JOBS</a></li>
+                        <li><a href=@Url.Action("Index", "Purchaseorders")>OPEN PO's</a></li>
                     </ul>
                 </li>
 
 
                 <li data-toggle="collapse" data-target="#CALLLOG" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> Call Log <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> CALL LOG <span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="CALLLOG">
-                        <li><a href=@Url.Action("Create","Ccalls" )>New Note</a></li>
-                        <li><a href=@Url.Action("Index","Ccalls" )>Open Notes</a></li>
+                        <li><a href=@Url.Action("Create","Ccalls" )>NEW NOTE</a></li>
+                        <li><a href=@Url.Action("Index","Ccalls" )>OPEN NOTES</a></li>
                     </ul>
                 </li>
 
                 <li data-toggle="collapse" data-target="#REPORTS" class="collapsed">
-                    <a href="#"><i class="fa fa-globe fa-lg"></i> Reports <span class="arrow"></span></a>
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> REPORT <span class="arrow"></span></a>
 
                     <ul class="sub-menu collapse" id="REPORTS">
-                        <li>Option 1</li>
-                        <li>Option 2</li>
+                        <li>OPTION 1</li>
+                        <li>OPTION 2</li>
                     </ul>
                 </li>
 
