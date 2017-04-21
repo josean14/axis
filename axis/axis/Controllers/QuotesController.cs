@@ -58,7 +58,11 @@ namespace AXIS.Controllers
             ViewBag.RversionId = rversion.RversionId;
 
             ViewBag.TypeWork = rversion.TypeWork;
+            ViewBag.ScopeWork = rversion.ScopeWork.Work;
+
             ViewBag.Notes = rversion.NotesAndInstructions;
+
+            ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
 
             return View();
         }
@@ -76,7 +80,7 @@ namespace AXIS.Controllers
                 db.SaveChanges();
                 return new JsonResult() { Data = quote.QuoteId };
             }
-
+            ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
             ViewBag.RversionId = new SelectList(db.Rversions, "RversionId", "ScopeWork", quote.RversionId);
             return new JsonResult() { Data = quote.QuoteId };
         }
@@ -111,6 +115,10 @@ namespace AXIS.Controllers
             ViewBag.Notes = rversion.NotesAndInstructions;
             ViewBag.ScopeWork = rversion.ScopeWork.Work;
             ViewBag.Typefarm = rfq.Farm.TypeFarm;
+
+
+            ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
+
 
             ViewBag.Quotes = db.Quotes.Where(r => r.RversionId == rversionId).ToList();
             return PartialView();

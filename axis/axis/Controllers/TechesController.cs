@@ -35,7 +35,7 @@ namespace AXIS.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var Teches = from s in db.Teches
-                          select s;
+                         select s;
             if (!String.IsNullOrEmpty(searchString))
             {
                 Teches = Teches.Where(s => s.LastName.Contains(searchString)
@@ -201,7 +201,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TechId,Photo,FirstName,LastName,Language,StreetAdderess,CityAdderess,State,Zip,Country,Cell,Email,LocalAirport,SSN,DriveLicence,PayRate,TypePayRate,Medical,Passport,MaritalStatus,Children,Education")] Tech tech)
+        public ActionResult Create([Bind(Include = "TechId,Photo,FirstName,LastName,Language,StreetAdderess,CityAdderess,State,Zip,Country,Cell,Email,EmailCompany,LocalAirport,SSN,DriveLicence,PayRate,DayliPerDiem,Medical,Passport,MaritalStatus,Children,Education")] Tech tech)
         {
             if (ModelState.IsValid)
             {
@@ -260,7 +260,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TechId,Photo,FirstName,LastName,Language,StreetAdderess,CityAdderess,State,Zip,Country,Cell,Email,LocalAirport,SSN,DriveLicence,PayRate,TypePayRate,Medical,Passport,MaritalStatus,Children,Education")] Tech tech)
+        public ActionResult Edit([Bind(Include = "TechId,Photo,FirstName,LastName,Language,StreetAdderess,CityAdderess,State,Zip,Country,Cell,Email,EmailCompany,LocalAirport,SSN,DriveLicence,PayRate,DayliPerDiem,Medical,Passport,MaritalStatus,Children,Education")] Tech tech)
         {
             if (ModelState.IsValid)
             {

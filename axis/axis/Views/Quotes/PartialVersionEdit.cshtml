@@ -127,7 +127,7 @@
         <tbody>
             <tr>
                 <th>
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Descripcion Here..", @cols = "20" } })
+                    @Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
@@ -258,4 +258,38 @@
     @Html.ActionLink(" Save Version", "Details", "rfqs", new { id = ViewBag.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
 </div>
 
+<script>
+    $("#SelectQuotes").change(function () {       // Funcion que se ejecuta cuando cambia la lista
 
+        var name = $(this).val();
+
+        if (name != "") {
+            var url = "/QuotesLists/GetQuotes/";
+
+
+
+            $.ajax({
+                url: url,
+                data: { Description: name },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+
+                    $('#Um').val(data.Um);
+                    $('#PricePerUnit').val(data.Price);
+                    $('#CostPerUnit').val(data.Cost);
+
+                },
+                error: function (reponse) {
+                    alert(reponse);
+                }
+            });
+        } else {
+
+            $('#Um').val('');
+            $('#PricePerUnit').val('');
+            $('#CostPerUnit').val('');
+
+        }
+    });
+</script>

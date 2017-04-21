@@ -84,7 +84,7 @@
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Scope of Work:@ViewData["ScopeWork"]</p>
+                        <p>Scope of Work:@ViewBag.ScopeWork</p>
                     </th>
                 </tr>
                 <tr>
@@ -128,7 +128,7 @@
         <tbody>
             <tr>
                 <th>
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Descripcion Here..", @cols="20" } })
+                    @Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
@@ -150,7 +150,7 @@
                 <th style="text-align:right">
                     @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
-                
+
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
@@ -201,42 +201,42 @@
         <tbody>
             <tr></tr>
         </tbody>
-   </table>
+    </table>
 </div>
 
 
-        <div class="panelright">
-            <div class="panel panel-axis">
-                <!-- Default panel contents -->
-                <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
+<div class="panelright">
+    <div class="panel panel-axis">
+        <!-- Default panel contents -->
+        <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
 
-                <table class="table table-bordered">
-                    <tr>
-                        <th align="center">
-                            @ViewBag.Notes
-                        </th>
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    @ViewBag.Notes
+                </th>
 
-                    </tr>
+            </tr>
 
 
-                </table>
+        </table>
 
-            </div>
-        </div>
+    </div>
+</div>
 
 <div>
     @Html.ActionLink(" SAVE VERSION", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })
 </div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
 
-            <script>
+    <script>
 
                 function addtable(id) {
 
-                    var Description = $('#Description').val();
+                    var Description = $('#SelectQuotes').val();
                     var Um = $('#Um').val();
                     var CostPerUnit = $('#CostPerUnit').val();
                     var PricePerUnit = $('#PricePerUnit').val();
@@ -257,7 +257,7 @@
                     var url = "/Quotes/Create/";
                     var RversionId = id
                     var anti = $('[name=__RequestVerificationToken]').val();
-                    var Description = $('#Description').val();
+                    var Description = $('#SelectQuotes').val();
                     var Um = $('#Um').val();
                     var PricePerUnit = $('#PricePerUnit').val();
                     var CostPerUnit = $('#CostPerUnit').val();
@@ -304,8 +304,44 @@
                     var result = PricePerUnit * Quantity;
                     $('#Currency').val(result);
                 }
-               
-            </script>
 
-        }
+
+                $("#SelectQuotes").change(function () {       // Funcion que se ejecuta cuando cambia la lista
+
+                    var name = $(this).val();
+
+                    if (name != "")
+                    {     var url = "/QuotesLists/GetQuotes/";
+
+
+
+                        $.ajax({
+                            url: url,
+                            data: { Description: name },
+                            cache: false,
+                            type: "POST",
+                            success: function (data) {
+
+                                $('#Um').val(data.Um);
+                                $('#PricePerUnit').val(data.Price);
+                                $('#CostPerUnit').val(data.Cost);
+
+                            },
+                            error: function (reponse) {
+                                alert(reponse);
+                            }
+                        });
+                    }else{
+
+                        $('#Um').val('');
+                        $('#PricePerUnit').val('');
+                        $('#CostPerUnit').val('');
+
+                    }
+                });
+
+
+    </script>
+
+}
 

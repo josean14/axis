@@ -135,17 +135,7 @@ namespace AXIS.Controllers
 
        
 
-        // POST: Farms/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id)
-        {
-            Farm farm = db.Farms.Find(id);
-            db.Farms.Remove(farm);
-            db.SaveChanges();
-            return new JsonResult() { Data = 1 };
-        }
-
+     
         protected override void Dispose(bool disposing)
         {
             if (disposing)

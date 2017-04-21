@@ -235,6 +235,7 @@
     <Compile Include="Controllers\NewhireController.cs" />
     <Compile Include="Controllers\PurchaseordersController.cs" />
     <Compile Include="Controllers\QuotesController.cs" />
+    <Compile Include="Controllers\QuotesListsController.cs" />
     <Compile Include="Controllers\RfqsController.cs" />
     <Compile Include="Controllers\RversionsController.cs" />
     <Compile Include="Controllers\TechesController.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\Purchaseorder.cs" />
     <Compile Include="Models\Quote.cs" />
+    <Compile Include="Models\QuotesList.cs" />
     <Compile Include="Models\Rfq.cs" />
     <Compile Include="Models\Rversion.cs" />
     <Compile Include="Models\ScopeWork.cs" />
@@ -522,6 +524,11 @@
     <Content Include="Views\FieldOps\PartialMenu.cshtml" />
     <Content Include="Views\FieldOps\JobBoard.cshtml" />
     <Content Include="Views\Mobilization\Index.cshtml" />
+    <Content Include="Views\QuotesLists\Create.cshtml" />
+    <Content Include="Views\QuotesLists\Delete.cshtml" />
+    <Content Include="Views\QuotesLists\Details.cshtml" />
+    <Content Include="Views\QuotesLists\Edit.cshtml" />
+    <Content Include="Views\QuotesLists\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

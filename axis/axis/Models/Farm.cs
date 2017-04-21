@@ -60,7 +60,7 @@ namespace AXIS.Models
         public virtual int NumberTowers { get; set; }
 
         [DisplayName("MW")]
-        public virtual int NumberMws { get; set; }
+        public virtual double NumberMws { get; set; }
 
         [DisplayName("Gearbox")]
         public virtual string Gearbox { get; set; }

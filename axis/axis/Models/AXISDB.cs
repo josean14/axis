@@ -50,6 +50,6 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.TechInfoCim> TechInfoCims { get; set; }
 
-
+        public System.Data.Entity.DbSet<AXIS.Models.QuotesList> QuotesLists { get; set; }
     }
 }

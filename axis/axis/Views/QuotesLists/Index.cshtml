@@ -1,0 +1,104 @@
+﻿@model IEnumerable<AXIS.Models.QuotesList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Um)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var ident = "Quote" + @item.QuotesListId;
+        <tr id=@ident>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Um)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuotesListId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.QuotesListId }) |
+                <a href="" onclick="confirmDelete(@item.QuotesListId); return false;" class="glyphicon glyphicon-remove"></a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.AntiForgeryToken()
+<p id="msg"></p>
+
+@section scripts
+{
+    <script>
+            function confirmDelete(id) {
+                bootbox.confirm({
+                    message: "Are you sure you want to delete this?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+
+
+                        if (result) {
+
+                            var url = "/QuotesLists/Delete/";
+                            var QuotesListsId = id
+                            var anti = $('[name=__RequestVerificationToken]').val();
+
+                            $.post(url, { id: QuotesListsId, __RequestVerificationToken: anti }, function (data) {
+
+
+
+                                $("#Quote" + QuotesListsId).remove();
+                                $("#msg").last().addClass("alert alert-success");
+                                $("#msg").html("Delete success");
+
+
+
+                            });
+
+                        }
+                    }
+                });
+
+
+            }
+    </script>
+
+
+}

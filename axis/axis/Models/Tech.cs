@@ -9,10 +9,7 @@ using System.Web;
 namespace AXIS.Models
 {
 
-    public enum TypePayRate
-    {
-        HUNAL, PER_DIEM
-    }
+
 
     public enum MaritalStatus
     {
@@ -76,6 +73,13 @@ namespace AXIS.Models
             ErrorMessage = "Invalid email address.")]
         public virtual string Email { get; set; }
 
+        [DisplayName("E-mail Company")]
+        [Required(ErrorMessage = "The email is required.")]
+        [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+            ErrorMessage = "Invalid email address.")]
+        public virtual string EmailCompany { get; set; }
+
+
         [DisplayName("Local Airport")]
         [Required(ErrorMessage = "The Local Airport is required.")]
         public virtual string LocalAirport { get; set; }
@@ -92,9 +96,9 @@ namespace AXIS.Models
         [Required(ErrorMessage = "The Pay Rate is required.")]
         public virtual double PayRate { get; set; }
 
-        [DisplayName("Type Pay Rate")]
-        [Required(ErrorMessage = "The type pay rate is required.")]
-        public virtual TypePayRate? TypePayRate { get; set; }
+        [DisplayName("Daily Per Diem Rate")]
+        [Required(ErrorMessage = "The Daily Per Diem Rate is required.")]
+        public virtual double DayliPerDiem { get; set; }
 
         [DisplayName("Medical")]
         [Required(ErrorMessage = "The medical is required.")]
@@ -124,6 +128,6 @@ namespace AXIS.Models
         public virtual List<TechInfoAxi> TechInfoAxi { get; set; }
         public virtual List<TechInfoWork> TechInfoWork { get; set; }
         public virtual List<TechInfoKit> TechInfoKit { get; set; }
-   
+
     }
 }

@@ -9,7 +9,7 @@
     @Html.ActionLink(" WORK EXPERIENCE", "Index", "TechInfoWorks", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
     <br />
     <div style="text-align:Center">
-    @Model.Photo
+        @Model.Photo
         Photo
     </div>
 </p>
@@ -57,12 +57,21 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Email Address</label>
+                        <label>Personal Email Address</label>
                         <p></p>
                         <span class="labelaxis labelaxix-profile">
                             <a href="mailto:@Html.DisplayFor(model => model.Email)">@Html.DisplayFor(model => model.Email)</a>
                         </span>
                     </div>
+
+                    <div class="form-group">
+                        <label>Company Email Address</label>
+                        <p></p>
+                        <span class="labelaxis labelaxix-profile">
+                            <a href="mailto:@Html.DisplayFor(model => model.EmailCompany)">@Html.DisplayFor(model => model.EmailCompany)</a>
+                        </span>
+                    </div>
+
                     <div class="form-group">
                         <label>SSN</label>
                         @Html.TextBoxFor(model => model.SSN, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
@@ -75,10 +84,12 @@
                         <label>PayRate</label>
                         @Html.TextBoxFor(model => model.PayRate, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
+
                     <div class="form-group">
-                        <label>Type of PayRate</label>
-                        @Html.TextBoxFor(model => model.TypePayRate, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                        <label>Daily Per Diem Rate</label>
+                        @Html.TextBoxFor(model => model.DayliPerDiem, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                     </div>
+
                     <div class="form-group">
                         <label>Medical</label>
                         @Html.TextBoxFor(model => model.Medical, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
@@ -117,7 +128,7 @@
     {
         @Html.AntiForgeryToken()
         <div class="form-actions">
-            <input type="submit" value="Delete" class="btn btn-primary btn-xs" /> 
+            <input type="submit" value="Delete" class="btn btn-primary btn-xs" />
         </div>
     }
 
