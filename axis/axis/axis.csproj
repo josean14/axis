@@ -525,7 +525,6 @@
     <Content Include="Views\FieldOps\JobBoard.cshtml" />
     <Content Include="Views\Mobilization\Index.cshtml" />
     <Content Include="Views\QuotesLists\Create.cshtml" />
-    <Content Include="Views\QuotesLists\Delete.cshtml" />
     <Content Include="Views\QuotesLists\Details.cshtml" />
     <Content Include="Views\QuotesLists\Edit.cshtml" />
     <Content Include="Views\QuotesLists\Index.cshtml" />
