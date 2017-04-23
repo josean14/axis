@@ -7,10 +7,15 @@
 <p>
     @Html.ActionLink(" CERTIFICATES", "Edit", "TechInfoAxis", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
     @Html.ActionLink(" WORK EXPERIENCE", "Index", "TechInfoWorks", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
+    @Html.ActionLink(" ADD PHOTO", "Uploadimg", "Teches", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
     <br />
     <div style="text-align:Center">
-        @Model.Photo
-        Photo
+        <div>
+            <img id="user_img"
+                 height="140"
+                 width="130"
+                 style="border:solid" src=@Url.Content(@ViewBag.Src) />
+        </div>
     </div>
 </p>
 

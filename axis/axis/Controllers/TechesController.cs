@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
 using PagedList;
+using System.IO;
 
 namespace AXIS.Controllers
 {
@@ -187,6 +188,8 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Src = "~/Content/images/Users/" + tech.TechId + "/" + tech.Photo + "?width=100&height=90&mode=min";
             return View(tech);
         }
 
@@ -296,6 +299,74 @@ namespace AXIS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Uploadimg(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tech tech = db.Teches.Find(id);
+            if (tech == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Src = "~/Content/images/Users/" + tech.TechId + "/" + tech.Photo + "?width=140&height=130&mode=min";
+
+
+            return View(tech);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Uploadimg(HttpPostedFileBase Photo, int TechId)
+        {
+
+            string _FileName;
+            string path;
+            var dir = Server.MapPath("~/Content/images/Users/" + TechId);
+            var allowedExtensions = new[] {
+            ".Jpg", ".png", ".jpg", ".jpeg",".JPG"
+            };
+            var ext = "";
+            Tech tech = db.Teches.Find(TechId);
+
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+
+            if (Photo != null)
+            {
+                ext = System.IO.Path.GetExtension(Photo.FileName);
+            }
+
+
+            if (allowedExtensions.Contains(ext))
+            {
+
+                _FileName = System.IO.Path.GetFileName(Photo.FileName);
+                path = System.IO.Path.Combine(dir, _FileName);
+                Photo.SaveAs(path);
+
+                tech.Photo = _FileName;
+                db.Entry(tech).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", "Teches", new { id = TechId });
+            }
+            else
+            {
+                ViewBag.message = "Please choose only Image file";
+                ViewBag.Src = "~/Content/images/Users/" + tech.TechId + "/" + tech.Photo + "?width=140&height=130&mode=min";
+                return View(tech);
+            }
+
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {
