@@ -27,6 +27,12 @@ namespace AXIS.Models
         [DisplayName("File")]
         public virtual string File { get; set; }
 
+        [DisplayName("Supervisor")]
+        public virtual string Supervisor { get; set; }
+
+        [DisplayName("Status")]
+        public virtual string Status { get; set; }
+
         public virtual int ContractId { get; set; }
 
         public virtual Contract Contract { get; set; }

@@ -51,5 +51,14 @@ namespace AXIS.Models
         public System.Data.Entity.DbSet<AXIS.Models.TechInfoCim> TechInfoCims { get; set; }
 
         public System.Data.Entity.DbSet<AXIS.Models.QuotesList> QuotesLists { get; set; }
+
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Configurations.Add(new Purchaseorder());
+
+
+
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }

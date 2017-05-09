@@ -125,9 +125,16 @@ namespace AXIS.Models
             get { return FirstName + " " + LastName; }
         }
 
+        [DisplayName("Status")]
+        public virtual string Status { get; set; }
+
+        [DisplayName("PO Asigned")]
+        public virtual string POAsigned { get; set; }
+
         public virtual List<TechInfoAxi> TechInfoAxi { get; set; }
         public virtual List<TechInfoWork> TechInfoWork { get; set; }
         public virtual List<TechInfoKit> TechInfoKit { get; set; }
+        
 
     }
 }

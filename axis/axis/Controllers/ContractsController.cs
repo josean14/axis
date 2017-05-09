@@ -116,7 +116,7 @@ namespace AXIS.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContractId,OcClient,Date,RfqId,RversionId")] Contract contract, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ContractId,Comments,Date,StartDate,Status,EndDate,RfqId,RversionId")] Contract contract, HttpPostedFileBase file)
         {
             if (ModelState.IsValid && file != null)
             {
@@ -130,6 +130,7 @@ namespace AXIS.Controllers
                 file.SaveAs(path);
 
                 contract.Date = DateTime.Now;
+                contract.Status = "OPEN";
                 contract.File = _FileName;
                 db.Contracts.Add(contract);
                 db.SaveChanges();
@@ -186,7 +187,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContractId,OcClient,Date,File,RfqId,RversionId")] Contract contract)
+        public ActionResult Edit([Bind(Include = "ContractId,Comments,Date,StartDate,EndDate,File,RfqId,RversionId")] Contract contract)
         {
             if (ModelState.IsValid)
             {
