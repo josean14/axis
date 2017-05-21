@@ -44,11 +44,14 @@
                 <td>
                     @Html.ActionLink(@item.File, "Download", new { ImageName = @item.File, POid = @item.ContractId })
                 </td>
+
+
                 @using (Html.BeginForm("Delete", "Purchaseorders", new { id = item.PurchaseOrderId, contractid = item.Contract.ContractId }, FormMethod.Post, null))
                 {
                     @Html.AntiForgeryToken()
 
                     <td style="text-align:center">
+                        <a href=@Url.Action("Create", "FieldOperations", new {id = @item.PurchaseOrderId}) class="btn btn-primary btn-xs">Assigned</a>  |
                         <input type="submit" value="Delete" class="btn btn-default" />
                     </td>
 

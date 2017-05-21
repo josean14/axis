@@ -1,0 +1,74 @@
+﻿@model AXIS.Models.FieldOperations
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FieldOperations</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseOrder.PO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseOrder.PO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tech.Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tech.Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TechApproval)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TechApproval)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerDiemAdvance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerDiemAdvance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TechApprovalADV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TechApprovalADV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CertificatesStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CertificatesStatus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FieldOperationsId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

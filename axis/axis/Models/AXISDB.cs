@@ -52,6 +52,10 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.QuotesList> QuotesLists { get; set; }
 
+        public System.Data.Entity.DbSet<AXIS.Models.FieldOperations> FieldOperations { get; set; }
+
+        public System.Data.Entity.DbSet<AXIS.Models.Flight> Flights { get; set; }
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    modelBuilder.Configurations.Add(new Purchaseorder());

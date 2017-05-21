@@ -28,7 +28,7 @@ namespace AXIS.Models
         public virtual string File { get; set; }
 
         [DisplayName("Supervisor")]
-        public virtual string Supervisor { get; set; }
+        public virtual string UserName { get; set; }
 
         [DisplayName("Status")]
         public virtual string Status { get; set; }
@@ -36,5 +36,7 @@ namespace AXIS.Models
         public virtual int ContractId { get; set; }
 
         public virtual Contract Contract { get; set; }
+
+        public virtual List<FieldOperations> FieldOperations { get; set; }
     }
 }
