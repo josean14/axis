@@ -22,26 +22,33 @@ namespace AXIS.Controllers
         }
 
         // GET: FieldOperations/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int ContractId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             FieldOperations fieldOperations = db.FieldOperations.Find(id);
-            if (fieldOperations == null)
+            if (fieldOperations == null || fieldOperations.status != "ASSIGNED")
             {
                 return HttpNotFound();
             }
+            ViewBag.ContractId = ContractId;
             return View(fieldOperations);
         }
 
         // GET: FieldOperations/Create
-        public ActionResult Create(int? id)
+        public ActionResult Create(int? id, int? ContractId)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-
-            ViewBag.PurchaseOrderId = new SelectList(db.Purchaseorders, "PurchaseOrderId", "PO");
+            
+            ViewBag.ContractId = ContractId;
+            ViewBag.PurchaseOrderId = id;
+            
             ViewBag.TechId = new SelectList(db.Teches.Where(c => c.Status == "BANCH"), "TechId", "FullName");
             return View();
         }
@@ -51,22 +58,35 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FieldOperationsId,TechApproval,PerDiemAdvance,TechApprovalADV,status,CertificatesStatus,TechId,PurchaseOrderId")] FieldOperations fieldOperations)
+        public ActionResult Create([Bind(Include = "FieldOperationsId,TechApproval,PerDiemAdvance,TechApprovalADV,status,CertificatesStatus,TechId,PurchaseOrderId")] FieldOperations fieldOperations, int ContractId)
         {
             if (ModelState.IsValid)
             {
+
+                fieldOperations.status = "PENDING  APPROVAL";
+                fieldOperations.CertificatesStatus = 0;
+                fieldOperations.TechApprovalADV = 0;
                 db.FieldOperations.Add(fieldOperations);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                var tech = db.Teches.Find(fieldOperations.TechId);
+                tech.Status = "PENDING  APPROVAL";
+                db.Entry(tech).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+                return RedirectToAction("Details", "Contracts", new { id = ContractId });
             }
 
-            ViewBag.PurchaseOrderId = new SelectList(db.Purchaseorders, "PurchaseOrderId", "PO", fieldOperations.PurchaseOrderId);
-            ViewBag.TechId = new SelectList(db.Teches, "TechId", "FullName", fieldOperations.TechId);
+            ViewBag.ContractId = ContractId;
+            ViewBag.PurchaseOrderId = fieldOperations.PurchaseOrderId;
+
+            ViewBag.TechId = new SelectList(db.Teches.Where(c => c.Status == "BANCH"), "TechId", "FullName");
             return View(fieldOperations);
         }
 
         // GET: FieldOperations/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int PurchaseOrderId, int ContractId)
         {
             if (id == null)
             {
@@ -77,8 +97,9 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PurchaseOrderId = new SelectList(db.Purchaseorders, "PurchaseOrderId", "PO", fieldOperations.PurchaseOrderId);
-            ViewBag.TechId = new SelectList(db.Teches, "TechId", "FullName", fieldOperations.TechId);
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
+            ViewBag.ContractId = ContractId;
+
             return View(fieldOperations);
         }
 
@@ -91,8 +112,11 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                 
+               
                 db.Entry(fieldOperations).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.PurchaseOrderId = new SelectList(db.Purchaseorders, "PurchaseOrderId", "PO", fieldOperations.PurchaseOrderId);
@@ -123,7 +147,18 @@ namespace AXIS.Controllers
             FieldOperations fieldOperations = db.FieldOperations.Find(id);
             db.FieldOperations.Remove(fieldOperations);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return new JsonResult() { Data = "Deleted successfully" };
+        }
+
+
+
+        //Despliega la lista de Tecnicos asignados a la PO
+        public ActionResult PartialList(int Id, int ContractId)
+        {
+
+            ViewBag.ContractId = ContractId;
+            var fieldOperations = db.FieldOperations.Where(a => a.PurchaseOrderId == Id).Include(f => f.PurchaseOrder).Include(f => f.Tech);
+            return PartialView(fieldOperations.ToList());
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<AXIS.Models.Flight>
+
+<p>
+    @Html.ActionLink("NEW FLIGHT DATA","Create","Flights" ,new { PurchaseOrderId = @ViewBag.PurchaseOrderId, ContractId = @ViewBag.ContractId, FieldOperationsId = @ViewBag.FieldOperationsId }, null)
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataFlight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostFlight)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataFlight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostFlight)
+        </td>
+        <td>
+          
+            @* modificar eliminación de vuelo para que sea por ajax *@
+        
+            @Html.ActionLink("Delete", "Delete", new { id=item.FlightId })
+        </td>
+    </tr>
+}
+
+</table>

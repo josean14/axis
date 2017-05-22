@@ -84,6 +84,7 @@ namespace AXIS.Controllers
         public ActionResult PartialList(int contractid)
         {
             var purchaseorders = db.Purchaseorders.Include(p => p.Contract).Where(c => c.ContractId == contractid);
+            ViewBag.ContractId = contractid;
             return PartialView(purchaseorders.ToList());
         }
 

@@ -10,19 +10,31 @@ namespace AXIS.Models
 {
     public enum TechApproval
     {
-        Yes = 1, NO = 0
+        YES = 1, NO = 0
     }
 
     public enum TechApprovalADV
     {
-        Yes = 1, NO = 0
+
+        PROCESSING = 0,
+        YES = 1,
+        NO = 2
     }
 
     public enum CertificatesStatus
     {
-        Yes = 1, NO = 0
+        YES = 1, NO = 0
     }
 
+    public enum PerDiemAdvance
+    {
+        [Display(Name = "A = 7 DAYS")]
+        A = 7,
+        [Display(Name = "B = 14 DAYS")]
+        B = 14,
+        [Display(Name = "NOT AUTHORIZED")]
+        NO = 0
+    }
 
     [Table("FieldOperationsTechs")]
     public class FieldOperations
@@ -31,15 +43,15 @@ namespace AXIS.Models
         public virtual int FieldOperationsId { get; set; }
 
         [DisplayName("TECH APPROVAL")]
-        [Required(ErrorMessage = "The tech approval is required.")]
+        
         public virtual TechApproval? TechApproval { get; set; }
 
         [DisplayName("PER DIEM ADVANCE")]
-        [Required(ErrorMessage = "The per diem advance is required.")]
-        public virtual int PerDiemAdvance { get; set; }
+        
+        public virtual PerDiemAdvance? PerDiemAdvance { get; set; }
 
         [DisplayName("TECH APPROVAL ADV")]
-        [Required(ErrorMessage = "The tech approval is required.")]
+        
         public virtual TechApprovalADV? TechApprovalADV { get; set; }
 
         [DisplayName("STATUS")]

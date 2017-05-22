@@ -19,18 +19,14 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tech.Photo)
+            @Html.DisplayNameFor(model => model.Tech.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tech.Photo)
+            @Html.DisplayFor(model => model.Tech.FullName)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TechApproval)
-        </dt>
-
-        <dd>
+       <dd>
             @Html.DisplayFor(model => model.TechApproval)
         </dd>
 
@@ -39,7 +35,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PerDiemAdvance)
+            @{
+                if (Model.PerDiemAdvance != 0)
+                {
+                        @Html.DisplayFor(model => model.PerDiemAdvance)
+                }
+                else {
+                        <label></label>
+                }
+             }
         </dd>
 
         <dt>
@@ -69,6 +73,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.FieldOperationsId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Create", "FieldOperations", new { id = Model.PurchaseOrderId, ContractId = @ViewBag.ContractId}, null)
 </p>
+
+<br />
+@Html.Action("PartialList", "Flights", new { PurchaseOrderId = Model.PurchaseOrderId, ContractId = @ViewBag.ContractId, FieldOperationsId = Model.FieldOperationsId })

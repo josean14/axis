@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using System.IO;
 
 namespace AXIS.Controllers
 {
@@ -21,25 +22,15 @@ namespace AXIS.Controllers
             return View(flights.ToList());
         }
 
-        // GET: Flights/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Flight flight = db.Flights.Find(id);
-            if (flight == null)
-            {
-                return HttpNotFound();
-            }
-            return View(flight);
-        }
+      
 
         // GET: Flights/Create
-        public ActionResult Create()
+        public ActionResult Create(int PurchaseOrderId, int ContractId, int FieldOperationsId)
         {
-            ViewBag.FieldOperationsId = new SelectList(db.FieldOperations, "FieldOperationsId", "PurchaseOrderId");
+            
+            ViewBag.FieldOperationsId = FieldOperationsId;
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
+            ViewBag.ContractId = ContractId;
             return View();
         }
 
@@ -48,51 +39,33 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FlightId,Description,DataFlight,CostFlight,FieldOperationsId")] Flight flight)
+        public ActionResult Create([Bind(Include = "FlightId,Description,DataFlight,CostFlight,FieldOperationsId")] Flight flight, HttpPostedFileBase DataFlight, int PurchaseOrderId, int ContractId)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && DataFlight != null)
             {
+
+                var dir = Server.MapPath("~/Documents/Flights/" + flight.FieldOperationsId);
+                Directory.CreateDirectory(dir);
+
+                string _FileName = System.IO.Path.GetFileName(DataFlight.FileName);
+
+                string path = System.IO.Path.Combine(dir, _FileName);
+                DataFlight.SaveAs(path);
+
+
+                flight.DataFlight = _FileName;
                 db.Flights.Add(flight);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                
+                return RedirectToAction("Details","FieldOperations", new {id = flight.FieldOperationsId, ContractId = ViewBag.ContractId = ContractId });
             }
 
             ViewBag.FieldOperationsId = new SelectList(db.FieldOperations, "FieldOperationsId", "status", flight.FieldOperationsId);
             return View(flight);
         }
 
-        // GET: Flights/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Flight flight = db.Flights.Find(id);
-            if (flight == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.FieldOperationsId = new SelectList(db.FieldOperations, "FieldOperationsId", "status", flight.FieldOperationsId);
-            return View(flight);
-        }
-
-        // POST: Flights/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FlightId,Description,DataFlight,CostFlight,FieldOperationsId")] Flight flight)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(flight).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.FieldOperationsId = new SelectList(db.FieldOperations, "FieldOperationsId", "status", flight.FieldOperationsId);
-            return View(flight);
-        }
+       
 
         // GET: Flights/Delete/5
         public ActionResult Delete(int? id)
@@ -118,6 +91,16 @@ namespace AXIS.Controllers
             db.Flights.Remove(flight);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult PartialList(int PurchaseOrderId, int ContractId, int FieldOperationsId)
+        {
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
+            ViewBag.ContractId = ContractId;
+            ViewBag.FieldOperationsId = FieldOperationsId;
+            var flights = db.Flights.Where(c => c.FieldOperationsId == FieldOperationsId).Include(f => f.FieldOperarions);
+            return PartialView(flights.ToList());
         }
 
         protected override void Dispose(bool disposing)
