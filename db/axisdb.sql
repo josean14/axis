@@ -33,7 +33,7 @@ CREATE TABLE `ccalls` (
   PRIMARY KEY (`CcallId`),
   KEY `ClientId_idx` (`ClientId`),
   CONSTRAINT `FClientId` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='		';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='		';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `ccalls` (
 
 LOCK TABLES `ccalls` WRITE;
 /*!40000 ALTER TABLE `ccalls` DISABLE KEYS */;
-INSERT INTO `ccalls` VALUES (1,'2017-03-22','Prueba','Prueba','jose',NULL,1000),(2,'2017-03-30','eeee','eee','eeee',NULL,1001),(3,'2017-03-14','Prueba 34','eeee','eee',NULL,1001),(4,'2017-03-16','Prueba 34','eeee','eee',NULL,1001),(5,'2017-03-21','eeee','eee','eee',NULL,1001),(6,'2017-03-21','eee','eee','eee',NULL,1001),(7,'2017-03-21','eeee','eee','eee',NULL,1001),(8,'2017-03-21','Prueba nota mod','nota','nota',NULL,1000),(9,'2017-03-14','Prueba 55','Vista','Angel',NULL,1001),(10,'2017-03-07','Prueba','Esta es una prueba','prueba',NULL,1000),(11,'2017-03-26','Prueba 26 mar','eee','purba',NULL,1000);
+INSERT INTO `ccalls` VALUES (1,'2017-03-22','Prueba','Prueba','jose',NULL,1000),(2,'2017-03-30','eeee','eee','eeee',NULL,1001),(3,'2017-03-14','Prueba 34','eeee','eee',NULL,1001),(4,'2017-03-16','Prueba 34','eeee','eee',NULL,1001),(5,'2017-03-21','eeee','eee','eee',NULL,1001),(6,'2017-03-21','eee','eee','eee',NULL,1001),(7,'2017-03-21','eeee','eee','eee',NULL,1001),(8,'2017-03-21','Prueba nota mod','nota','nota',NULL,1000),(9,'2017-03-14','Prueba 55','Vista','Angel',NULL,1001),(10,'2017-03-07','Prueba','Esta es una prueba','prueba',NULL,1000),(11,'2017-03-26','Prueba 26 mar','eee','purba',NULL,1000),(12,'2017-05-16','Llamada de prueba','Nota','Usuario',NULL,1001);
 /*!40000 ALTER TABLE `ccalls` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,6 +139,8 @@ CREATE TABLE `farms` (
   `Gearbox` varchar(45) DEFAULT NULL,
   `ClientId` int(11) DEFAULT NULL,
   `Panel` varchar(45) DEFAULT NULL,
+  `GeoLong` float DEFAULT NULL,
+  `GeoLat` float DEFAULT NULL,
   PRIMARY KEY (`FarmId`),
   KEY `ClientId_idx` (`ClientId`),
   CONSTRAINT `ClientId` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientId`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -151,7 +153,7 @@ CREATE TABLE `farms` (
 
 LOCK TABLES `farms` WRITE;
 /*!40000 ALTER TABLE `farms` DISABLE KEYS */;
-INSERT INTO `farms` VALUES (1001,'0','Prueba 10','Conocida','Conocida','Conocida','Conocida','Mexico','Conocida','Conocida','Conocida',4,4.000,'Conocida',1000,NULL),(1002,'1','Solar Farm','Merida','Merida','cono','ojoj','Mexico','como','como','comco',3,3.000,'como',1000,NULL),(1003,'2','Other Farm','lklk','lklkl','lklk','lk','lklk','kl','lk','lk',8,8.000,'ljlj',1000,NULL),(1004,'1','Solar Farm Merida','Calle 66 #570 x 21','Merida','Yucaten','97314','Mexico','GAMESA','Conocida',NULL,5,300.000,NULL,1000,NULL);
+INSERT INTO `farms` VALUES (1001,'0','Prueba 10','Conocida','Conocida','Conocida','Conocida','Mexico','Conocida','Conocida','Conocida',4,4.000,'Conocida',1000,NULL,NULL,NULL),(1002,'1','Solar Farm','Merida','Merida','cono','ojoj','Mexico','como','como','comco',3,3.000,'como',1000,NULL,NULL,NULL),(1003,'2','Other Farm','lklk','lklkl','lklk','lk','lklk','kl','lk','lk',8,8.000,'ljlj',1000,NULL,NULL,NULL),(1004,'1','Solar Farm Merida','Calle 66 #570 x 21','Merida','Yucaten','97314','Mexico','GAMESA','Conocida',NULL,5,300.000,NULL,1000,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `farms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,22 +165,20 @@ DROP TABLE IF EXISTS `fieldoperationstechs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fieldoperationstechs` (
-  `FieldOperationsTechsId` int(11) NOT NULL,
+  `FieldOperationsId` int(11) NOT NULL AUTO_INCREMENT,
   `TechApproval` varchar(45) DEFAULT NULL,
   `PerDiemAdvance` int(3) DEFAULT NULL,
   `TechApprovalAdv` varchar(45) DEFAULT NULL,
-  `DataFlight` varchar(150) DEFAULT NULL,
-  `CostFlight` double(6,4) DEFAULT NULL,
   `CertificatesStatus` varchar(45) DEFAULT NULL,
-  `fieldoperationstechscol` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
   `PurchaseOrderId` int(11) DEFAULT NULL,
   `TechId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`FieldOperationsTechsId`),
+  PRIMARY KEY (`FieldOperationsId`),
   KEY `PurchesId_idx` (`PurchaseOrderId`),
   KEY `TechId_idx` (`TechId`),
-  CONSTRAINT `PurchaseOrderId` FOREIGN KEY (`PurchaseOrderId`) REFERENCES `purchaseorders` (`PurchaseOrderId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `TechId` FOREIGN KEY (`TechId`) REFERENCES `teches` (`TechId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `PurchaseOrderId` FOREIGN KEY (`PurchaseOrderId`) REFERENCES `purchaseorders` (`PurchaseOrderId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `TechId` FOREIGN KEY (`TechId`) REFERENCES `teches` (`TechId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +187,38 @@ CREATE TABLE `fieldoperationstechs` (
 
 LOCK TABLES `fieldoperationstechs` WRITE;
 /*!40000 ALTER TABLE `fieldoperationstechs` DISABLE KEYS */;
+INSERT INTO `fieldoperationstechs` VALUES (3,NULL,7,'0','0','ASSIGNED',4,11);
 /*!40000 ALTER TABLE `fieldoperationstechs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `flights`
+--
+
+DROP TABLE IF EXISTS `flights`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `flights` (
+  `FlightId` int(11) NOT NULL AUTO_INCREMENT,
+  `Description` varchar(100) DEFAULT NULL,
+  `DataFlight` varchar(150) DEFAULT NULL,
+  `CostFlight` double DEFAULT NULL,
+  `flightscol` varchar(45) DEFAULT NULL,
+  `FieldOperationsId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`FlightId`),
+  KEY `FieldOperationsTechsId_idx` (`FieldOperationsId`),
+  CONSTRAINT `FFieldOperationsTechsId` FOREIGN KEY (`FieldOperationsId`) REFERENCES `fieldoperationstechs` (`FieldOperationsId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `flights`
+--
+
+LOCK TABLES `flights` WRITE;
+/*!40000 ALTER TABLE `flights` DISABLE KEYS */;
+INSERT INTO `flights` VALUES (1,'Vuelo Mexico - Los Angeles','CAMBIO POR CONTINGENCIA.pdf',12413.43,NULL,3),(2,'Vuelo Mexico-Merida|','Adicionales (2).xlsx',12143.543,NULL,3);
+/*!40000 ALTER TABLE `flights` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -252,13 +283,14 @@ CREATE TABLE `purchaseorders` (
   `Commentary` varchar(200) DEFAULT NULL,
   `Date` date DEFAULT NULL,
   `File` varchar(200) DEFAULT NULL,
-  `Supervisor` int(11) DEFAULT NULL,
+  `UserName` varchar(200) DEFAULT NULL,
   `Status` varchar(45) DEFAULT NULL,
   `ContractId` int(11) DEFAULT NULL,
   PRIMARY KEY (`PurchaseOrderId`),
   KEY `FContractId_idx` (`ContractId`),
+  KEY `FUserId_idx` (`UserName`),
   CONSTRAINT `FContractId` FOREIGN KEY (`ContractId`) REFERENCES `contracts` (`ContractId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +299,7 @@ CREATE TABLE `purchaseorders` (
 
 LOCK TABLES `purchaseorders` WRITE;
 /*!40000 ALTER TABLE `purchaseorders` DISABLE KEYS */;
-INSERT INTO `purchaseorders` VALUES (4,'oc0050','comentario','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',NULL,NULL,6),(7,'OC9090','Comentaio','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',NULL,NULL,8);
+INSERT INTO `purchaseorders` VALUES (4,'oc0050','comentario','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',NULL,NULL,6),(7,'OC9090','Comentaio','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',NULL,NULL,8),(8,'OC0043','Comentario PO OC0043','2017-05-20','206940_9EC5B6FF-3C8C-447A-952E-76503A92E322_1471454379272.pdf',NULL,NULL,6);
 /*!40000 ALTER TABLE `purchaseorders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,7 +507,7 @@ CREATE TABLE `teches` (
   `Children` int(11) DEFAULT NULL,
   `Education` varchar(100) DEFAULT NULL,
   `Status` varchar(45) DEFAULT NULL,
-  `POAsigned` int(11) DEFAULT NULL,
+  `POAsigned` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`TechId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -486,7 +518,7 @@ CREATE TABLE `teches` (
 
 LOCK TABLES `teches` WRITE;
 /*!40000 ALTER TABLE `teches` DISABLE KEYS */;
-INSERT INTO `teches` VALUES (11,'IMG_2548.JPG','Jose ','Garcia','Español','Conocido','Conocido','Yucatan','97314','Mexico','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','Merida',909090909,'900999j09',890.000,100.000,'99090990',90999,'0',2,'Maestria',NULL,NULL),(12,'IMG_20161111_120019.jpg','Angel','Lavalle','Español','Otro','Otro','Otro','Otro','Otro','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','otro',89898989,'yyy9898',890.000,100.000,'898989jj',90909099,'0',8,'otro',NULL,NULL),(13,NULL,'Jose','Garcia2','Español','Conocida','Merida','Yuc','89898','Mexico','999-999-9999','jagr14@gmail.com','jose@axis.com','Merida',4432,'443ff',333.000,555.000,'32322',54453,'0',4,'Prueba',NULL,NULL);
+INSERT INTO `teches` VALUES (11,'IMG_2548.JPG','Jose ','Garcia','Español','Conocido','Conocido','Yucatan','97314','Mexico','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','Merida',909090909,'900999j09',890.000,100.000,'99090990',90999,'0',2,'Maestria','IN FIELD','oc0050'),(12,'IMG_20161111_120019.jpg','Angel','Lavalle','Español','Otro','Otro','Otro','Otro','Otro','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','otro',89898989,'yyy9898',890.000,100.000,'898989jj',90909099,'0',8,'otro','BANCH',NULL),(13,NULL,'Jose','Garcia2','Español','Conocida','Merida','Yuc','89898','Mexico','999-999-9999','jagr14@gmail.com','jose@axis.com','Merida',4432,'443ff',333.000,555.000,'32322',54453,'0',4,'Prueba','BANCH',NULL);
 /*!40000 ALTER TABLE `teches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -767,4 +799,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-09 10:19:49
+-- Dump completed on 2017-05-23 10:47:14
