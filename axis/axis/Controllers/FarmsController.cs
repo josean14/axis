@@ -55,7 +55,7 @@ namespace AXIS.Controllers
                     farms = farms.OrderBy(s => s.FarmName);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(farms.ToPagedList(pageNumber, pageSize));
         }
@@ -87,7 +87,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FarmId,TypeFarm,FarmName,StreetAddress,City,State,ZipCode,Country,Manufacture,Platform,Convertor,NumberTowers,NumberMws,Gearbox,ClientId")] Farm farm)
+        public ActionResult Create([Bind(Include = "FarmId,TypeFarm,FarmName,StreetAddress,City,State,ZipCode,Country,Manufacture,Platform,Convertor,NumberTowers,NumberMws,Gearbox,ClientId,GeoLong, GeoLat")] Farm farm)
         {
             if (ModelState.IsValid)
             {
@@ -121,7 +121,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FarmId,TypeFarm,FarmName,StreetAddress,City,State,ZipCode,Country,Manufacture,Platform,Convertor,NumberTowers,NumberMws,Gearbox,ClientId,Panel")] Farm farm)
+        public ActionResult Edit([Bind(Include = "FarmId,TypeFarm,FarmName,StreetAddress,City,State,ZipCode,Country,Manufacture,Platform,Convertor,NumberTowers,NumberMws,Gearbox,ClientId,Panel,GeoLong,GeoLat")] Farm farm)
         {
             if (ModelState.IsValid)
             {

@@ -96,7 +96,7 @@ namespace AXIS.Controllers
 
 
 
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(rfqss.ToPagedList(pageNumber, pageSize));
         }

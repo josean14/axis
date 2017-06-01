@@ -77,5 +77,12 @@ namespace AXIS.Models
 
         public virtual ICollection<Rfq> Rfqs { get; set; }
 
+        [DisplayName("GeoLong")]
+        [Required(ErrorMessage = "GeoLong is required.")]
+        public virtual double GeoLong { get; set; }
+
+        [DisplayName("GeoLat")]
+        [Required(ErrorMessage = "The GeoLat is required.")]
+        public virtual double GeoLat { get; set; }
     }
 }
