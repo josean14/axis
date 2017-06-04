@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using AXIS.Mailers;
 
 namespace AXIS.Controllers
 {
@@ -45,10 +46,10 @@ namespace AXIS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            
+
             ViewBag.ContractId = ContractId;
             ViewBag.PurchaseOrderId = id;
-            
+
             ViewBag.TechId = new SelectList(db.Teches.Where(c => c.Status == "BANCH"), "TechId", "FullName");
             return View();
         }
@@ -112,8 +113,8 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
-                 
-               
+
+
                 db.Entry(fieldOperations).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -160,6 +161,45 @@ namespace AXIS.Controllers
             var fieldOperations = db.FieldOperations.Where(a => a.PurchaseOrderId == Id).Include(f => f.PurchaseOrder).Include(f => f.Tech);
             return PartialView(fieldOperations.ToList());
         }
+
+        //Funciones para Mailer
+        private IFONMailer _FONMailer = new FONMailer();
+        public IFONMailer FONMailer
+        {
+            get { return _FONMailer; }
+            set { _FONMailer = value; }
+        }
+
+        public ActionResult SendCertificates(int FieldOperationsId, int ContractId, int TechId, string FullName)
+        {
+
+            TechInfoAxi model = db.TechInfoAxis.Where(c => c.TechId == TechId).Single();
+
+            //El correo de email debe ser el contacto del Farm (email)
+            string email = "jagr14@gmail.com";
+
+            //El correo de CC debe ser la persona que esta efecutando la acción
+            string emailCC = "jagr14@gmail.com";
+
+            string path = "~/Documents/Teches/" + TechId + "/";
+
+            try
+            {
+                FONMailer.Certificates(model, FullName, path, email, emailCC).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
+
+
+
+            return RedirectToAction("Index");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

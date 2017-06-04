@@ -25,54 +25,55 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    var ident = "FO" + @item.FieldOperationsId;
-    <tr id=@ident>
-        <td>
-            @Html.DisplayFor(modelItem => item.PurchaseOrder.PO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tech.FullName)
-        </td>
-        
-        <td>
+    @foreach (var item in Model)
+    {
+        var ident = "FO" + @item.FieldOperationsId;
+        <tr id=@ident>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseOrder.PO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tech.FullName)
+            </td>
+
+            <td>
                 @Html.DisplayFor(modelItem => item.PerDiemAdvance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TechApprovalADV)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CertificatesStatus)
-        </td>
-        <td>
-           
-        @{   
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TechApprovalADV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CertificatesStatus)
+            </td>
+            <td>
 
-            if (item.status == "ASSIGNED")
-            {
+                @{
 
-                    @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId }, new { @class = "glyphicon glyphicon-list-alt" }) <label>|</label>
-                    @Html.ActionLink("SEND CERTIFICATES", "Send", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId }) <label>|</label>
-            }
+                    if (item.status == "ASSIGNED")
+                    {
 
-        }
+                        @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId }, new { @class = "glyphicon glyphicon-list-alt" }) <label>|</label>
+                        @Html.ActionLink("SEND CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName }) <label>|</label>
+                    }
 
-        
-        @{ 
-
-            if (item.status == "DENIED") { 
-                <a href="" onclick="confirmDelete(@item.FieldOperationsId); return false;" class="glyphicon glyphicon-remove"></a>
-            }
-         }
+                }
 
 
-        </td>
-    </tr>
-}
+                @{
+
+                    if (item.status == "DENIED")
+                    {
+                        <a href="" onclick="confirmDelete(@item.FieldOperationsId); return false;" class="glyphicon glyphicon-remove"></a>
+                    }
+                }
+
+
+            </td>
+        </tr>
+                    }
 
 </table>
 @Html.AntiForgeryToken()

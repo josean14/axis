@@ -85,6 +85,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcMailer-vs2013.4.5.1-pre\lib\45\Mvc.Mailer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -257,6 +261,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mailers\FONMailer.cs" />
+    <Compile Include="Mailers\IFONMailer.cs" />
     <Compile Include="MainDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -554,6 +560,10 @@
     <Content Include="Views\Flights\Index.cshtml" />
     <Content Include="Views\FieldOperations\PartialList.cshtml" />
     <Content Include="Views\Flights\PartialList.cshtml" />
+    <Content Include="Views\FONMailer\_Layout.cshtml" />
+    <Content Include="Views\FONMailer\Certificates.cshtml" />
+    <Content Include="Views\FONMailer\TECHAPRV.cshtml" />
+    <Content Include="Views\FONMailer\TECHAPRVADV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
