@@ -84,5 +84,12 @@ namespace AXIS.Models
         [DisplayName("GeoLat")]
         [Required(ErrorMessage = "The GeoLat is required.")]
         public virtual double GeoLat { get; set; }
+
+
+        [DisplayName("E-mail")]
+        [Required(ErrorMessage = "The email is required.")]
+        [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+            ErrorMessage = "Invalid email address.")]
+        public virtual string Email { get; set; }
     }
 }

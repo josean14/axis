@@ -208,6 +208,7 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                tech.Status = "BANCH";
                 db.Teches.Add(tech);
                 db.SaveChanges();
 

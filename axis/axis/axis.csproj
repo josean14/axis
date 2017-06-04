@@ -551,10 +551,7 @@
     <Content Include="Views\QuotesLists\Index.cshtml" />
     <Content Include="Views\Teches\Uploadimg.cshtml" />
     <Content Include="Views\FieldOperations\Create.cshtml" />
-    <Content Include="Views\FieldOperations\Delete.cshtml" />
     <Content Include="Views\FieldOperations\Details.cshtml" />
-    <Content Include="Views\FieldOperations\Edit.cshtml" />
-    <Content Include="Views\FieldOperations\Index.cshtml" />
     <Content Include="Views\Flights\Create.cshtml" />
     <Content Include="Views\Flights\Delete.cshtml" />
     <Content Include="Views\Flights\Index.cshtml" />
