@@ -56,6 +56,8 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.Flight> Flights { get; set; }
 
+        public System.Data.Entity.DbSet<AXIS.Models.Role> Roles { get; set; }
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    modelBuilder.Configurations.Add(new Purchaseorder());

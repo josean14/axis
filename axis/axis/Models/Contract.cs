@@ -44,5 +44,6 @@ namespace AXIS.Models
 
         public virtual Rfq Rfq { get; set; }
         public virtual Rversion Rversion { get; set; }
+        public virtual List<Purchaseorder> PurchaseOrder { get; set; }
     }
 }

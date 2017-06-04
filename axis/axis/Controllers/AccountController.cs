@@ -15,6 +15,8 @@ namespace AXIS.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private AXISDB db = new AXISDB();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -165,6 +167,7 @@ namespace AXIS.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+
                 AddErrors(result);
             }
 

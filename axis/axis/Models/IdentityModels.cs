@@ -23,7 +23,9 @@ namespace AXIS.Models
         public ApplicationDbContext(string connectionName)
             : base(connectionName)
         {
+
         }
+        public System.Data.Entity.DbSet<AXIS.Models.Role> Roles { get; set; }
 
         public static ApplicationDbContext Create()
         {
