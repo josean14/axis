@@ -21,13 +21,14 @@
 
                     <ul class="sub-menu collapse" id="MOB">
                         <li><a href=@Url.Action("Index","Mobilization")>SETUP</a></li>
+                        <li><a href=@Url.Action("Authorization","Mobilization")>AUTHORIZATION</a></li>
                     </ul>
                 </li>
                 <li data-toggle="collapse" data-target="#JOB" class="collapsed">
                     <a href="#"><i class="fa fa-globe fa-lg"></i> JOB BOARD <span class="arrow"></span></a>
                     <ul class="sub-menu collapse" id="JOB">
                         <li><a href=@Url.Action("JobBoard","FieldOps")>MAP</a></li>
-                        <li><a href=@Url.Action("Index","")>CHANGES</a></li>
+                        <li><a href=@Url.Action("Viewtable","FieldOps")>TABLE</a></li>
                     </ul>
                 </li>
                 <li data-toggle="collapse" data-target="#DEMOB" class="collapsed">

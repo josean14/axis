@@ -64,7 +64,7 @@ namespace AXIS.Controllers
                     Teches = Teches.OrderBy(s => s.FirstName);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(Teches.ToPagedList(pageNumber, pageSize));
         }
@@ -264,7 +264,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TechId,Photo,FirstName,LastName,Language,StreetAdderess,CityAdderess,State,Zip,Country,Cell,Email,EmailCompany,LocalAirport,SSN,DriveLicence,PayRate,DayliPerDiem,Medical,Passport,MaritalStatus,Children,Education")] Tech tech)
+        public ActionResult Edit([Bind(Include = "TechId,Photo,FirstName,LastName,Language,StreetAdderess,CityAdderess,State,Zip,Country,Cell,Email,EmailCompany,LocalAirport,SSN,DriveLicence,PayRate,DayliPerDiem,Medical,Passport,MaritalStatus,Children,Education,Status")] Tech tech)
         {
             if (ModelState.IsValid)
             {

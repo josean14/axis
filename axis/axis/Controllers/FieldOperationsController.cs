@@ -59,19 +59,19 @@ namespace AXIS.Controllers
             if (ModelState.IsValid)
             {
 
-                fieldOperations.status = "PENDING  APPROVAL";
+                fieldOperations.status = "PENDING APPROVAL";
                 fieldOperations.CertificatesStatus = 0;
                 fieldOperations.TechApprovalADV = 0;
                 db.FieldOperations.Add(fieldOperations);
                 db.SaveChanges();
 
                 var tech = db.Teches.Find(fieldOperations.TechId);
-                tech.Status = "PENDING  APPROVAL";
+                tech.Status = "PENDING APPROVAL";
                 db.Entry(tech).State = EntityState.Modified;
                 db.SaveChanges();
 
 
-                return RedirectToAction("Details", "Contracts", new { id = ContractId });
+                return RedirectToAction("Create", "FieldOperations", new { id = fieldOperations.PurchaseOrderId, ContractId = ContractId });
             }
 
             ViewBag.ContractId = ContractId;

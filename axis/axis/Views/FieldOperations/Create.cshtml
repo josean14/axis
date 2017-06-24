@@ -4,8 +4,10 @@
     ViewBag.Title = "Create";
 }
 
-<h2>ASSING TECHNICIAN</h2>
-
+<h2>MOBILIZATION &raquo; SETUP &raquo; SELECT TECHNICIANS </h2>
+<p>
+    <a href=@Url.Action("Index", "Mobilization") class="btn btn-primary btn-xs">BACK</a>
+</p>
 
 @using (Html.BeginForm())
 {
@@ -17,42 +19,55 @@
 
 
     <div class="form-horizontal">
-        <h4>FieldOperations</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
        
-
         <div class="form-group">
-            @Html.LabelFor(model => model.TechId, "TECH", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TechId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TechId, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.TechId, "JOB #", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-control col-md-3">
+                @ViewBag.ContractId
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PerDiemAdvance, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.PerDiemAdvance, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PerDiemAdvance, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.TechId, "AXIS PO", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-control col-md-3">
+                @ViewBag.PurchaseOrderId
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(model => model.TechId, "TECH", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TechId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TechId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PerDiemAdvance, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.PerDiemAdvance, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PerDiemAdvance, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="CREATE" class="btn btn-primary btn-xs" />
+                </div>
+            </div>
+        </div>
 }
 
 
 <br />
 @Html.Action("PartialList", "FieldOperations", new { PurchaseOrderId = @ViewBag.PurchaseOrderId, ContractId = @ViewBag.ContractId })
 <br />
-<div>
+@*<div>
     @Html.ActionLink("Back to List", "Details", "Contracts", new { id = @ViewBag.ContractId }, null)
-</div>
+</div>*@
 
 
 @section Scripts {

@@ -1,0 +1,186 @@
+﻿@model PagedList.IPagedList<AXIS.Models.FieldOperations>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "AUTHORIZATION MOBILIZATION";
+}
+
+<h2>MOBILIZATION &raquo; AUTHORIZATION</h2>
+
+<p>
+    <a href=@Url.Action("Index", "FieldOps") class="btn btn-primary btn-xs">BACK</a>
+</p>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("Authorization", "Mobilization", FormMethod.Get))
+        {
+            <p>
+                FIND BY JOB #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="SEARCH" />
+            </p>
+        }
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th align="center" width="100 px">
+                @Html.ActionLink("JOB #", "Authorization", new { sortOrder = ViewBag.ContractSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                SITE NAME
+            </th>
+            <th>
+                @Html.ActionLink("AXIS P.O.", "Authorization", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th align="center">
+                TECHNICIAN
+            </th>
+            <th>
+                TECHNICIAN STATUS
+            </th>
+            <th>
+                ADVANCE STATUS
+            </th>
+            <th align="center">
+                PER DIEM ADVANCE
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var ident = "Contract" + @item.PurchaseOrder.ContractId;
+
+            <tr id=@ident>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseOrder.ContractId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseOrder.Contract.Rversion.Rfq.Farm.FarmName)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tech.FullName)
+                </td>
+                <td>
+                    @{
+                        if (item.status == "PENDING APPROVAL")
+                        {
+                            <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-ok btn btn-primary btn-xs"></a>
+                        }
+                    }
+
+                    @{
+                        if (item.status == "ASSIGNED")
+                        {
+                            <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-remove btn btn-primary btn-xs"></a>
+                        }
+                    }
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @{
+                        if (item.status == "ASSIGNED")
+                        {
+                            int a = (int)item.TechApprovalADV;
+
+
+
+                            if (a == 0)
+                            {
+                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-remove btn btn-primary btn-xs"></a>
+
+                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-ok btn btn-primary btn-xs"></a>
+                            }
+
+                            if (a == 1)
+                            {
+                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-remove btn btn-primary btn-xs"></a>
+                            }
+
+                            if (a == 2)
+                            {
+                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-ok btn btn-primary btn-xs"></a>
+                            }
+
+                        }
+                    }
+                    
+                    @Html.DisplayFor(modelItem => item.TechApprovalADV)
+                </td>
+                <td align="center">
+                    @{
+                        int b = (int)item.PerDiemAdvance;
+                        if (b==7)
+                        {
+                            <p>7 DAYS</p>
+                        }
+                        if (b == 14)
+                        {
+                            <p>14 DAYS</p>
+                        }
+                        if (b == 0)
+                        {
+                            <p>NOT AUTORIZED</p>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="panel-footer">
+        <div class="row">
+            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Authorization",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete() {
+        bootbox.confirm({
+            message: "Are you sure to approve this Technician ?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                if (result) {
+                    var url = "/Authorization/Edit/";
+                    var TechId = $('#TechId').val();
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: ClientId, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1){
+
+                            var url = '@Url.Action("Authorization", "Mobilization")';
+                            window.location.href = url;
+                        }
+
+
+
+
+                  });
+
+                }
+            }
+        });
+
+
+    }
+</script>

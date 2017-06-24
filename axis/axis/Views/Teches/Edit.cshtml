@@ -141,7 +141,11 @@
                             @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Pay Rate Here.." } })
                             @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
                         </div>
-
+                        <div class="form-group">
+                            <label>STATUS</label>
+                            @Html.TextBoxFor(model => model.Status, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
+                            @Html.HiddenFor(model => model.Status)
+                        </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" value="Save" class="btn btn-default" />

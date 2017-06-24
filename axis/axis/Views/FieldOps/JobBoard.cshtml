@@ -4,7 +4,7 @@
     ViewBag.Title = "JOB BOARD";
 }
 
-@*@ViewBag.Markers;*@
+@ViewBag.Markers;
 
 <h2>FIELD OPERATIONS &raquo; JOB BOARD</h2>
 
@@ -101,6 +101,7 @@
                         'Job #': item.Id,
                         'typefarm':item.TypeFarm,
                         'rfq': item.Rfq,
+                        'Teches': item.Teches,
                         'icon': icons[item.TypeFarm].icon,
                         'optimized': false
                     }
@@ -147,7 +148,7 @@
 
                     // put in some information about each json object - in this case, the opening hours.
                     var infowindow = new google.maps.InfoWindow({
-                        content: "<div class='infoDiv'><h3>" +"Project Name: "+ item.PlaceName + "<br>" +"Job#:" + item.Id + "<h4>"+"Type of Farm: "+item.TypeFarm +"<br>" +"RFQ # " + item.Rfq + "</div></div>"
+                        content: "<div class='infoDiv'><h3>" +"Project Name: "+ item.PlaceName + "<br>" +"Job#:" + item.Id + "<h4>"+"Type of Farm: "+item.TypeFarm +"<br>" +"RFQ # " + item.Rfq + "<br>" + "Technicians:" + item.Teches +"</div></div>"
                     });
 
                     // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!

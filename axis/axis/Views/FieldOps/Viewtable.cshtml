@@ -1,0 +1,113 @@
+﻿@model PagedList.IPagedList<AXIS.Models.Contract>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "JOB BOARD VIEWER";
+}
+
+<h2>JOB BOARD &raquo; VIEWER</h2>
+
+<p>
+    <a href=@Url.Action("Index", "FieldOps") class="btn btn-primary btn-xs">BACK</a>
+</p>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("Viewtable", "FieldOps", FormMethod.Get))
+        {
+            <p>
+                FILTER BY JOB#: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="SEARCH" />
+            </p>
+        }
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                OPERATIONS POC
+            </th>
+            <th align="center">
+                @Html.ActionLink("SITE NAME", "Index", new { sortOrder = ViewBag.SitenameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                OEM
+            </th>
+            <th>
+                @Html.ActionLink("JOB #", "Index", new { sortOrder = ViewBag.ContractSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                AXIS PO
+            </th>
+            <th align="center">
+                CLIENT P.O.
+            </th>
+            <th>
+                SCOPE OF WORK
+            </th>
+            <th>
+                @Html.ActionLink("STAR DATE", "Index", new { sortOrder = ViewBag.DatenameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+
+            <th>
+                LOCATION
+            </th>
+            <th>
+                TECHNIACIANS
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var ident = "Purchaseorder" + @item.ContractId;
+
+            <tr id=@ident>
+                <td>
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rversion.Rfq.Farm.FarmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rversion.Rfq.Farm.Manufacture)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractId)
+                </td>
+                <td>
+
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rversion.ScopeWork.Work) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rversion.Rfq.Farm.City),  @Html.DisplayFor(modelItem => item.Rversion.Rfq.Farm.State)
+                </td>
+                <td>
+                    @Html.Partial("~/views/FieldOps/PartialViewtable.cshtml");
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="panel-footer">
+        <div class="row">
+            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>
+
+
+
+
