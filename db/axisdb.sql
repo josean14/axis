@@ -78,7 +78,7 @@ CREATE TABLE `clients` (
 
 LOCK TABLES `clients` WRITE;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
-INSERT INTO `clients` VALUES (1000,'Jose','Garcia','Director','Operacion','999-445-9978','jagr14@gmail.com','Conocida','Merida','Yucatan','+52','Mexico','Xtx','Sur'),(1001,'Angel','Lavelle','Gerente','Operacion','999-999-6666','eduardo@eduardo.com','Conocida','Merida','Yucatan','64134','Mexico','Cmx','Centro');
+INSERT INTO `clients` VALUES (1000,'Jose','Garcia','Director','Operacion','999-445-9978','jagr14@gmail.com','Conocida','Merida','Yucatan','+52','Mexico','Xtx','Sur'),(1001,'Angel','Lavelle','Gerente','Operacion','999-999-6666','jagr14@gmail.com','Conocida','Merida','Yucatan','64134','Mexico','Cmx','Centro');
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,6 +141,7 @@ CREATE TABLE `farms` (
   `Panel` varchar(45) DEFAULT NULL,
   `GeoLong` float DEFAULT NULL,
   `GeoLat` float DEFAULT NULL,
+  `Email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`FarmId`),
   KEY `ClientId_idx` (`ClientId`),
   CONSTRAINT `ClientId` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`ClientId`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -153,7 +154,7 @@ CREATE TABLE `farms` (
 
 LOCK TABLES `farms` WRITE;
 /*!40000 ALTER TABLE `farms` DISABLE KEYS */;
-INSERT INTO `farms` VALUES (1001,'0','Prueba 10','Conocida','Conocida','Conocida','Conocida','Mexico','Conocida','Conocida','Conocida',4,4.000,'Conocida',1000,NULL,NULL,NULL),(1002,'1','Solar Farm','Merida','Merida','cono','ojoj','Mexico','como','como','comco',3,3.000,'como',1000,NULL,NULL,NULL),(1003,'2','Other Farm','lklk','lklkl','lklk','lk','lklk','kl','lk','lk',8,8.000,'ljlj',1000,NULL,NULL,NULL),(1004,'1','Solar Farm Merida','Calle 66 #570 x 21','Merida','Yucaten','97314','Mexico','GAMESA','Conocida',NULL,5,300.000,NULL,1000,NULL,NULL,NULL);
+INSERT INTO `farms` VALUES (1001,'0','Prueba 10','Conocida','Conocida','Conocida','Conocida','Mexico','Conocida','Conocida','Conocida',4,4.000,'Conocida',1000,NULL,16.5728,16.5728,NULL),(1002,'1','Solar Farm','Merida','Merida','cono','ojoj','Mexico','como','como','comco',3,3.000,'como',1000,NULL,32.7671,-117.139,NULL),(1003,'2','Other Farm','lklk','lklkl','lklk','lk','lklk','kl','lk','lk',8,8.000,'ljlj',1000,NULL,20.9749,-86.8646,NULL),(1004,'1','Solar Farm Merida','Calle 66 #570 x 21','Merida','Yucaten','97314','Mexico','GAMESA','Conocida',NULL,5,300.000,NULL,1000,NULL,16.5728,16.5728,NULL);
 /*!40000 ALTER TABLE `farms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +179,7 @@ CREATE TABLE `fieldoperationstechs` (
   KEY `TechId_idx` (`TechId`),
   CONSTRAINT `PurchaseOrderId` FOREIGN KEY (`PurchaseOrderId`) REFERENCES `purchaseorders` (`PurchaseOrderId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `TechId` FOREIGN KEY (`TechId`) REFERENCES `teches` (`TechId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +188,7 @@ CREATE TABLE `fieldoperationstechs` (
 
 LOCK TABLES `fieldoperationstechs` WRITE;
 /*!40000 ALTER TABLE `fieldoperationstechs` DISABLE KEYS */;
-INSERT INTO `fieldoperationstechs` VALUES (3,NULL,7,'0','0','ASSIGNED',4,11);
+INSERT INTO `fieldoperationstechs` VALUES (3,NULL,7,'NO','YES','ASSIGNED',4,11),(4,NULL,14,'PROCESSING','NO','CLOSED',4,14),(5,NULL,7,'YES','NO','ASSIGNED',8,12),(6,NULL,7,'NO','NO','DENIED',4,13);
 /*!40000 ALTER TABLE `fieldoperationstechs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,6 +411,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES ('1','Administrator');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -509,7 +511,7 @@ CREATE TABLE `teches` (
   `Status` varchar(45) DEFAULT NULL,
   `POAsigned` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`TechId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -518,7 +520,7 @@ CREATE TABLE `teches` (
 
 LOCK TABLES `teches` WRITE;
 /*!40000 ALTER TABLE `teches` DISABLE KEYS */;
-INSERT INTO `teches` VALUES (11,'IMG_2548.JPG','Jose ','Garcia','Español','Conocido','Conocido','Yucatan','97314','Mexico','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','Merida',909090909,'900999j09',890.000,100.000,'99090990',90999,'0',2,'Maestria','IN FIELD','oc0050'),(12,'IMG_20161111_120019.jpg','Angel','Lavalle','Español','Otro','Otro','Otro','Otro','Otro','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','otro',89898989,'yyy9898',890.000,100.000,'898989jj',90909099,'0',8,'otro','BANCH',NULL),(13,NULL,'Jose','Garcia2','Español','Conocida','Merida','Yuc','89898','Mexico','999-999-9999','jagr14@gmail.com','jose@axis.com','Merida',4432,'443ff',333.000,555.000,'32322',54453,'0',4,'Prueba','BANCH',NULL);
+INSERT INTO `teches` VALUES (11,'IMG_2548.JPG','Jose ','Garcia','Español','Conocido','Conocido','Yucatan','97314','Mexico','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','Merida',909090909,'900999j09',890.000,100.000,'99090990',90999,'0',2,'Maestria','IN FIELD','oc0050'),(12,'IMG_20161111_120019.jpg','Angel','Lavalle','Español','Otro','Otro','Otro','Otro','Otro','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','otro',89898989,'yyy9898',890.000,100.000,'898989jj',90909099,'0',8,'otro','IN FIELD','OC0043'),(13,NULL,'Jose','Garcia2','Español','Conocida','Merida','Yuc','89898','Mexico','999-999-9999','jagr14@gmail.com','jose@axis.com','Merida',4432,'443ff',333.000,555.000,'32322',54453,'0',4,'Prueba','BANCH',' '),(14,'JA.JPG','Jose','Robles','Español','Conocida ','Mérida','Yucatan','97314','Mexico','999-999-9999','jose@jose.com','jose@axis.com','Merida',78878,'0900909',18.300,102.000,'98998',322343,'0',3,'Maestria','BANCH',' ');
 /*!40000 ALTER TABLE `teches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -558,7 +560,7 @@ CREATE TABLE `techinfoaxis` (
   PRIMARY KEY (`TechInfoAxiId`),
   KEY `ATechId_idx` (`TechId`),
   CONSTRAINT `ATechId` FOREIGN KEY (`TechId`) REFERENCES `teches` (`TechId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -567,7 +569,7 @@ CREATE TABLE `techinfoaxis` (
 
 LOCK TABLES `techinfoaxis` WRITE;
 /*!40000 ALTER TABLE `techinfoaxis` DISABLE KEYS */;
-INSERT INTO `techinfoaxis` VALUES (9,'2014-11-02 00:00:00','IMG_4335.JPG',NULL,NULL,NULL,'IMG_4328.JPG',NULL,'IMG_4331.JPG',NULL,'IMG_4336.JPG','IMG_4339.JPG',NULL,1,'IMG_4352.JPG',1,'IMG_4336.JPG',1,'IMG_4337.JPG',0,NULL,1,'IMG_4356.JPG','1',11),(10,'2014-06-18 00:00:00','IMG_4327.JPG',NULL,NULL,NULL,'IMG_4337.JPG',NULL,NULL,NULL,NULL,NULL,NULL,1,'IMG_4340.JPG',0,NULL,0,NULL,1,'IMG_4355.JPG',0,NULL,'0',12),(11,'2017-04-20 20:54:59',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,0,NULL,0,NULL,0,NULL,0,NULL,NULL,13);
+INSERT INTO `techinfoaxis` VALUES (9,'2014-11-02 00:00:00','IMG_4335.JPG',NULL,NULL,NULL,'IMG_4328.JPG',NULL,'IMG_4331.JPG',NULL,'IMG_4336.JPG','IMG_4339.JPG',NULL,1,'IMG_4352.JPG',1,'IMG_4336.JPG',1,'IMG_4337.JPG',0,NULL,1,'IMG_4356.JPG','1',11),(10,'2014-06-18 00:00:00','IMG_4327.JPG',NULL,NULL,NULL,'IMG_4337.JPG',NULL,NULL,NULL,NULL,NULL,NULL,1,'IMG_4340.JPG',0,NULL,0,NULL,1,'IMG_4355.JPG',0,NULL,'0',12),(11,'2017-04-20 20:54:59',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,0,NULL,0,NULL,0,NULL,0,NULL,NULL,13),(12,'2016-06-22 00:00:00','Book1.xlsx','Costos Helados.xlsx','MOSECA 20 mar.xlsx',NULL,'Curso Tranpostre.pptx','PolizaUAA737720500_314.pdf',NULL,NULL,'Proceso atención Gobierno_v1.pptx',NULL,'velocc3admetro.xlsx',0,NULL,1,'c1_modulo2.pdf',0,NULL,1,'Garcia_Robles_Jose_Antonio.pdf',0,NULL,'1',14);
 /*!40000 ALTER TABLE `techinfoaxis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -588,7 +590,7 @@ CREATE TABLE `techinfocims` (
   PRIMARY KEY (`TechInfoCimId`),
   KEY `CTechId_idx` (`TechId`),
   CONSTRAINT `CTechId` FOREIGN KEY (`TechId`) REFERENCES `teches` (`TechId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -597,7 +599,7 @@ CREATE TABLE `techinfocims` (
 
 LOCK TABLES `techinfocims` WRITE;
 /*!40000 ALTER TABLE `techinfocims` DISABLE KEYS */;
-INSERT INTO `techinfocims` VALUES (1,'009090909','iphone','camar',11,'other'),(2,'878778','787878','787878',12,'787878'),(3,NULL,NULL,NULL,13,NULL);
+INSERT INTO `techinfocims` VALUES (1,'009090909','iphone','camar',11,'other'),(2,'878778','787878','787878',12,'787878'),(3,NULL,NULL,NULL,13,NULL),(4,NULL,NULL,NULL,14,NULL);
 /*!40000 ALTER TABLE `techinfocims` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -628,7 +630,7 @@ CREATE TABLE `techinfokits` (
   PRIMARY KEY (`TechInfoKitId`),
   KEY `KTechId_idx` (`TechId`),
   CONSTRAINT `KTechId` FOREIGN KEY (`TechId`) REFERENCES `teches` (`TechId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -637,7 +639,7 @@ CREATE TABLE `techinfokits` (
 
 LOCK TABLES `techinfokits` WRITE;
 /*!40000 ALTER TABLE `techinfokits` DISABLE KEYS */;
-INSERT INTO `techinfokits` VALUES (2,'Prueba','Prueba','Prueba','2010-06-24 00:00:00','Prueba2','Prueba2','Prueba','Prueba','2016-06-16 00:00:00','Prueba3','Prueba23','Prueba23','Prueba23','Prueba3',11),(3,'otro','otro','otro','2014-07-23 00:00:00','9989','98','98','98989','2014-07-30 00:00:00','88989','9889','898998','98989','8989',12),(4,NULL,NULL,NULL,'2017-04-20 20:54:59',NULL,NULL,NULL,NULL,'2017-04-20 20:54:59',NULL,NULL,NULL,NULL,NULL,13);
+INSERT INTO `techinfokits` VALUES (2,'Prueba','Prueba','Prueba','2010-06-24 00:00:00','Prueba2','Prueba2','Prueba','Prueba','2016-06-16 00:00:00','Prueba3','Prueba23','Prueba23','Prueba23','Prueba3',11),(3,'otro','otro','otro','2014-07-23 00:00:00','9989','98','98','98989','2014-07-30 00:00:00','88989','9889','898998','98989','8989',12),(4,NULL,NULL,NULL,'2017-04-20 20:54:59',NULL,NULL,NULL,NULL,'2017-04-20 20:54:59',NULL,NULL,NULL,NULL,NULL,13),(5,NULL,NULL,NULL,'2017-05-28 20:12:12',NULL,NULL,NULL,NULL,'2017-05-28 20:12:12',NULL,NULL,NULL,NULL,NULL,14);
 /*!40000 ALTER TABLE `techinfokits` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -753,6 +755,7 @@ CREATE TABLE `userroles` (
 
 LOCK TABLES `userroles` WRITE;
 /*!40000 ALTER TABLE `userroles` DISABLE KEYS */;
+INSERT INTO `userroles` VALUES ('72623156-9513-4195-8b76-ece439118b7a','1');
 /*!40000 ALTER TABLE `userroles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -799,4 +802,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 10:47:14
+-- Dump completed on 2017-07-02 17:49:48
