@@ -60,8 +60,8 @@ namespace AXIS.Controllers
             {
 
                 fieldOperations.status = "PENDING APPROVAL";
-                fieldOperations.CertificatesStatus = 0;
-                fieldOperations.TechApprovalADV = 0;
+                fieldOperations.CertificatesStatus = "NO";
+                fieldOperations.TechApprovalADV = "PROCESSING";
                 db.FieldOperations.Add(fieldOperations);
                 db.SaveChanges();
 

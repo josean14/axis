@@ -44,7 +44,7 @@ namespace AXIS.Models
 
         [DisplayName("TECH APPROVAL")]
         
-        public virtual TechApproval? TechApproval { get; set; }
+        public virtual string TechApproval { get; set; }
 
         [DisplayName("PER DIEM ADVANCE")]
         
@@ -52,13 +52,13 @@ namespace AXIS.Models
 
         [DisplayName("TECH APPROVAL ADV")]
         
-        public virtual TechApprovalADV? TechApprovalADV { get; set; }
+        public virtual string TechApprovalADV { get; set; }
 
         [DisplayName("STATUS")]
         public virtual string status { get; set; }
 
         [DisplayName("CERTIFICATES STATUS")]
-        public virtual CertificatesStatus? CertificatesStatus { get; set; }
+        public virtual string CertificatesStatus { get; set; }
 
         [DisplayName("TECH")]
         public virtual int TechId { get; set; }

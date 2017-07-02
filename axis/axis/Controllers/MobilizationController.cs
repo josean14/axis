@@ -106,7 +106,7 @@ namespace AXIS.Controllers
                 if (Int32.TryParse(searchString, out numVal))
                 {
                     approvaltech = approvaltech.Where(s => s.PurchaseOrder.ContractId.Equals(numVal));
-                    
+
                 }
                 else
                 {
@@ -126,7 +126,7 @@ namespace AXIS.Controllers
                     break;
                 case "poname_desc":
                     approvaltech = approvaltech.OrderByDescending(s => s.PurchaseOrderId);
-                    break;  
+                    break;
                 case "Statusname":
                     approvaltech = approvaltech.OrderBy(s => s.status);
                     break;
@@ -141,5 +141,109 @@ namespace AXIS.Controllers
             int pageNumber = (page ?? 1);
             return View(approvaltech.ToPagedList(pageNumber, pageSize));
         }
+
+
+        // POST: Assigned
+        [HttpPost, ActionName("Assigned")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Assigned(int id)
+        {
+            FieldOperations fo = db.FieldOperations.Find(id);
+
+            FieldOperations field = new FieldOperations();
+
+            var a = 3;
+
+            fo.status = "ASSIGNED";
+
+
+            db.Entry(fo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Tech tech = db.Teches.Find(fo.TechId);
+            tech.Status = "IN FIELD";
+            tech.POAsigned = fo.PurchaseOrder.PO;
+            db.Entry(tech).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return new JsonResult() { Data = "Assigned successfully" };
+        }
+
+
+        [HttpPost, ActionName("Denied")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Denied(int id)
+        {
+            FieldOperations fo = db.FieldOperations.Find(id);
+
+            var techid = fo.TechId;
+
+            fo.status = "DENIED";
+            fo.TechApprovalADV = "NO";
+            db.Entry(fo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Tech tech = db.Teches.Find(techid);
+            tech.Status = "BANCH";
+            tech.POAsigned = " ";
+            db.Entry(tech).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return new JsonResult() { Data = "Denied successfully" };
+        }
+
+        [HttpPost, ActionName("Liberty")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Liberty(int id)
+        {
+            FieldOperations fo = db.FieldOperations.Find(id);
+
+            var techid = fo.TechId;
+
+            fo.status = "CLOSED";
+            db.Entry(fo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Tech tech = db.Teches.Find(techid);
+            tech.Status = "BANCH";
+            tech.POAsigned = " ";
+            db.Entry(tech).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return new JsonResult() { Data = "Liberty successfully" };
+        }
+
+
+        [HttpPost, ActionName("ApprovalADV")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApprovalADV(int id)
+        {
+            FieldOperations fo = db.FieldOperations.Find(id);
+
+            var techid = fo.TechId;
+
+            fo.TechApprovalADV = "YES";
+            db.Entry(fo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return new JsonResult() { Data = "Liberty successfully" };
+        }
+
+        [HttpPost, ActionName("UnapprovalADV")]
+        [ValidateAntiForgeryToken]
+        public ActionResult UnapprovalADV(int id)
+        {
+            FieldOperations fo = db.FieldOperations.Find(id);
+
+            var techid = fo.TechId;
+
+            fo.TechApprovalADV = "NO";
+            db.Entry(fo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return new JsonResult() { Data = "Liberty successfully" };
+        }
+
     }
+
 }

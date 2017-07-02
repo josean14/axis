@@ -68,14 +68,16 @@
                     @{
                         if (item.status == "PENDING APPROVAL")
                         {
-                            <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-ok btn btn-primary btn-xs"></a>
+                            @Html.ActionLink(" ",null, null, new { href="", onclick = "approval("+item.FieldOperationsId+"); return false;", @class="glyphicon glyphicon-ok btn btn-primary btn-xs"})
+                            
                         }
                     }
 
                     @{
                         if (item.status == "ASSIGNED")
                         {
-                            <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-remove btn btn-primary btn-xs"></a>
+                            @Html.ActionLink(" ", null, null, new { href = "", onclick = "liberty(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
+                            
                         }
                     }
                     @Html.DisplayFor(modelItem => item.status)
@@ -84,25 +86,24 @@
                     @{
                         if (item.status == "ASSIGNED")
                         {
-                            int a = (int)item.TechApprovalADV;
-
-
-
-                            if (a == 0)
+                            
+                            if (item.TechApprovalADV == "PROCESSING")
                             {
-                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-remove btn btn-primary btn-xs"></a>
+                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "unapprovalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })                                 
 
-                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-ok btn btn-primary btn-xs"></a>
+                                <span> </span>
+                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
+                                
                             }
 
-                            if (a == 1)
+                            if (item.TechApprovalADV == "YES")
                             {
-                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-remove btn btn-primary btn-xs"></a>
+                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "unapprovalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
                             }
 
-                            if (a == 2)
+                            if (item.TechApprovalADV == "NO")
                             {
-                                <a href="" onclick="confirmDelete(); return false;" class="glyphicon glyphicon-ok btn btn-primary btn-xs"></a>
+                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
                             }
 
                         }
@@ -141,11 +142,62 @@
         </div>
     </div>
 </div>
-
+@Html.AntiForgeryToken()
 <script>
-    function confirmDelete() {
+    function approval(id) {
         bootbox.confirm({
             message: "Are you sure to approve this Technician ?",
+            buttons: {
+                confirm: {
+                    label: 'Approve',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'Deny',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                var url2 = '@Url.Action("Authorization", "Mobilization")';
+
+                if (result) {
+                    var url = "/Mobilization/Assigned/";
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+                    });
+
+                } else {
+
+                    var url = "/Mobilization/Denied/";
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+                    });
+                }
+            }
+        });
+
+
+    }
+
+
+    function liberty(id) {
+        bootbox.confirm({
+            message: "Are you sure to liberty this Technician ?",
             buttons: {
                 confirm: {
                     label: 'Yes',
@@ -159,28 +211,86 @@
             callback: function (result) {
 
                 if (result) {
-                    var url = "/Authorization/Edit/";
-                    var TechId = $('#TechId').val();
+                    var url = "/Mobilization/Liberty/";
 
                     var anti = $('[name=__RequestVerificationToken]').val();
 
-                    $.post(url, { id: ClientId, __RequestVerificationToken: anti }, function (data) {
+                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
 
-                        if (data = 1){
-
-                            var url = '@Url.Action("Authorization", "Mobilization")';
-                            window.location.href = url;
+                        if (data = 1) {
+                            var url2 = '@Url.Action("Authorization", "Mobilization")';
+                            window.location.href = url2;
                         }
 
-
-
-
-                  });
-
+                    });
                 }
             }
         });
+    }
 
+    function approvalADV(id) {
+        bootbox.confirm({
+            message: "Are you sure to approval this Technician ?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
 
+                if (result) {
+                    var url = "/Mobilization/ApprovalADV/";
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+                            var url2 = '@Url.Action("Authorization", "Mobilization")';
+                            window.location.href = url2;
+                        }
+
+                    });
+                }
+            }
+        });
+    }
+
+    function unapprovalADV(id) {
+        bootbox.confirm({
+            message: "Are you sure to unapproval this Technician ?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                if (result) {
+                    var url = "/Mobilization/UnapprovalADV/";
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+                            var url2 = '@Url.Action("Authorization", "Mobilization")';
+                            window.location.href = url2;
+                        }
+
+                    });
+                }
+            }
+        });
     }
 </script>
