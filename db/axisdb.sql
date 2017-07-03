@@ -223,6 +223,33 @@ INSERT INTO `flights` VALUES (1,'Vuelo Mexico - Los Angeles','CAMBIO POR CONTING
 UNLOCK TABLES;
 
 --
+-- Table structure for table `kitcomponents`
+--
+
+DROP TABLE IF EXISTS `kitcomponents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `kitcomponents` (
+  `KitComponentsId` int(11) NOT NULL AUTO_INCREMENT,
+  `Description` varchar(60) DEFAULT NULL,
+  `ComponentType` varchar(45) DEFAULT NULL,
+  `ToolKitsId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`KitComponentsId`),
+  KEY `ToolKitsId_key_idx` (`ToolKitsId`),
+  CONSTRAINT `ToolKitsId_key` FOREIGN KEY (`ToolKitsId`) REFERENCES `toolkits` (`ToolKitsId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `kitcomponents`
+--
+
+LOCK TABLES `kitcomponents` WRITE;
+/*!40000 ALTER TABLE `kitcomponents` DISABLE KEYS */;
+/*!40000 ALTER TABLE `kitcomponents` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `manufacterers`
 --
 
@@ -679,6 +706,57 @@ LOCK TABLES `techinfoworks` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `toolkits`
+--
+
+DROP TABLE IF EXISTS `toolkits`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `toolkits` (
+  `ToolKitsId` int(11) NOT NULL AUTO_INCREMENT,
+  `Description` varchar(60) DEFAULT NULL,
+  `KitType` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ToolKitsId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `toolkits`
+--
+
+LOCK TABLES `toolkits` WRITE;
+/*!40000 ALTER TABLE `toolkits` DISABLE KEYS */;
+/*!40000 ALTER TABLE `toolkits` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tools`
+--
+
+DROP TABLE IF EXISTS `tools`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tools` (
+  `ToolId` int(11) NOT NULL AUTO_INCREMENT,
+  `Description` varchar(60) DEFAULT NULL,
+  `NumberItem` varchar(45) DEFAULT NULL,
+  `ToolType` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ToolId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tools`
+--
+
+LOCK TABLES `tools` WRITE;
+/*!40000 ALTER TABLE `tools` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tools` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `userclaims`
 --
 
@@ -802,4 +880,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-02 17:49:48
+-- Dump completed on 2017-07-02 20:12:00
