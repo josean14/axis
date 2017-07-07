@@ -39,7 +39,7 @@ namespace AXIS.Controllers
         }
 
         // GET: TechInfoKits/Details/6
-        public ActionResult Kitdetails(int id)
+        public ActionResult PartialKitdetails(int id)
         {
             var Techkit = db.TechInfoKits.Where(c => c.TechId == id);
             ViewBag.TechId = id;
