@@ -41,23 +41,23 @@ namespace AXIS.Controllers
             //Filtro por tipos de farm
             switch (typefarm)
             {
-                case "Wind":
-                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
+                case "WIND":
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.WIND);
                     break;
                 //        var rfqsWind = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
                 //        return View(rfqsWind.ToPagedList(pageNumber, pageSize));
-                case "Solar":
-                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Solar);
+                case "SOLAR":
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.SOLAR);
                     break;
                 //        var rfqsSolar = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Solar);
                 //        return View(rfqsSolar.ToPagedList(pageNumber, pageSize));
-                case "Other":
-                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Other);
+                case "OTHER":
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.OTHER);
                     break;
                 //        var rfqsOther = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Other);
                 //        return View(rfqsOther.ToPagedList(pageNumber, pageSize));
                 default:
-                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.Wind);
+                    rfqss = db.Rfqs.Include(r => r.Farm).Where(r => r.Farm.TypeFarm == TypeFarm.WIND);
                     break;
             }
 
@@ -125,14 +125,14 @@ namespace AXIS.Controllers
             switch (typefarm)
             {
 
-                case "Wind":
-                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Wind), "FarmId", "FarmName");
+                case "WIND":
+                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.WIND), "FarmId", "FarmName");
                     break;
-                case "Solar":
-                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Solar), "FarmId", "FarmName");
+                case "SOLAR":
+                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.SOLAR), "FarmId", "FarmName");
                     break;
-                case "Other":
-                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.Other), "FarmId", "FarmName");
+                case "OTHER":
+                    ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.OTHER), "FarmId", "FarmName");
                     break;
             }
             var model = new Rfq

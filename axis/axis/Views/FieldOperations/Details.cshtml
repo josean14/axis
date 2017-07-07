@@ -1,80 +1,76 @@
-﻿@model AXIS.Models.FieldOperations
+﻿
+@model AXIS.Models.FieldOperations
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "ADITIONAL INFORMATION";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>FieldOperations</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PurchaseOrder.PO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PurchaseOrder.PO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tech.FullName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tech.FullName)
-        </dd>
-
-       <dd>
-            @Html.DisplayFor(model => model.TechApproval)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PerDiemAdvance)
-        </dt>
-
-        <dd>
-            @{
-                if (Model.PerDiemAdvance != 0)
-                {
-                        @Html.DisplayFor(model => model.PerDiemAdvance)
-                }
-                else {
-                        <label></label>
-                }
-             }
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TechApprovalADV)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TechApprovalADV)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CertificatesStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CertificatesStatus)
-        </dd>
-
-    </dl>
-</div>
+<h2>MOBILIZATION &raquo; SETUP</h2>
 <p>
-    @Html.ActionLink("Back to List", "Create", "FieldOperations", new { id = Model.PurchaseOrderId, ContractId = @ViewBag.ContractId}, null)
+    @Html.ActionLink("BACK", "Create", "FieldOperations", new { id = Model.PurchaseOrderId, ContractId = @ViewBag.ContractId }, new { @class = "btn btn-primary btn-xs" })
 </p>
+
+<h4>ADITIONAL INFORMATION</h4>
+<hr />
+
+
+<div class="panelright">
+    <div class="panel panel-axislg right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">JOB # @ViewBag.ContractId  AXIS PO # @ViewBag.PurchaseOrderId</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>CLIENT PO:</p>
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.PurchaseOrder.PO)
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>TECHNICIAN FULL NAME</p>     
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.Tech.FullName) @Html.DisplayFor(model => model.TechId)
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>TECHICIAN STATUS</p>
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.status)
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>PER DIEM ADVANCE</p>
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+                        @Html.DisplayFor(model => model.PerDiemAdvance)
+                    </div>
+                </th>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+
+
+
 
 <br />
 @Html.Action("PartialList", "Flights", new { PurchaseOrderId = Model.PurchaseOrderId, ContractId = @ViewBag.ContractId, FieldOperationsId = Model.FieldOperationsId })
+
+<br />
+@Html.Action("PartialKitdetails", "TechInfoKit", new { TechId = Model.TechId })

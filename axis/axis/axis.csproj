@@ -570,6 +570,8 @@
     <Content Include="Views\FieldOps\Viewtable.cshtml" />
     <Content Include="Views\FieldOps\PartialViewtable.cshtml" />
     <Content Include="Views\Mobilization\Authorization.cshtml" />
+    <Content Include="Views\Account\RegisterRole.cshtml" />
+    <Content Include="Views\TechInfoKits\PartialKitdetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

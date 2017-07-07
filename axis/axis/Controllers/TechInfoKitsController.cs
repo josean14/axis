@@ -38,7 +38,14 @@ namespace AXIS.Controllers
             return View(techInfoKit);
         }
 
-       
+        // GET: TechInfoKits/Details/6
+        public ActionResult Kitdetails(int id)
+        {
+            var Techkit = db.TechInfoKits.Where(c => c.TechId == id);
+            ViewBag.TechId = id;
+            return PartialView(Techkit.ToList());
+        }
+
 
         // GET: TechInfoKits/Edit/5
         public ActionResult Edit(int id)

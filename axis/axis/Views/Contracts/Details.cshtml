@@ -4,25 +4,22 @@
     ViewBag.Title = "CONTRACT";
 }
 <div style="text-align:center">
-    <h2>
-        Business Development <br />
-        CONTRACT
-    </h2>
+    <h2>BUSINESS DEVELOPMENT &raquo; JOBS</h2>
 </div>
 
 <p>
-    <a href=@Url.Action("Index","Contracts") class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Index","Contracts") class="btn btn-primary btn-xs">BACK</a>
 </p>
 
 <div class="panelright">
     <div class="panel panel-axis right">
         <!-- Default panel contents -->
-        <div class="panel-heading">CONTRACT # @Html.DisplayFor(model => model.ContractId)</div>
+        <div class="panel-heading">JOB # @Html.DisplayFor(model => model.ContractId)</div>
 
         <table class="table table-bordered">
             <tr>
                 <th align="center">
-                    <p>Project Description</p>
+                    <p>PROJECT DESCRIPTION</p>
                 </th>
                 <th align="center">
                     <p>@Html.DisplayFor(model => model.Rversion.ProjectDescription)</p>
@@ -30,7 +27,7 @@
             </tr>
             <tr>
                 <th>
-                    <p>Comments or Notes</p>
+                    <p>COMMENTS OR NOTES</p>
                 </th>
                 <th>
                     <p>@Html.DisplayFor(model => model.Comments)</p>
@@ -38,7 +35,7 @@
             </tr>
             <tr>
                 <th>
-                    <p>Contract Date</p>
+                    <p>JOB CONTRACTED DATE</p>
                 </th>
                 <th>
                     @Html.DisplayFor(model => model.Date)
@@ -46,7 +43,7 @@
             </tr>
             <tr>
                 <th align="center">
-                    <p>Contract File</p>
+                    <p>JOB FILE</p>
                 </th>
                 <th>
                     @Html.ActionLink(Model.File, "Download", new { ImageName = Model.File, Rfqid = Model.RfqId })

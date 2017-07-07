@@ -10,7 +10,7 @@ namespace AXIS.Models
 
     public enum TypeFarm
     {
-        Wind, Solar, Other
+        WIND, SOLAR, OTHER
     }
 
 

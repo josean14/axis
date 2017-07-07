@@ -18,9 +18,9 @@
 
 
             <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">NEW VERSION</a>
-            @Html.ActionLink("GENERATE JOB", "Create", "Contracts", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("GENERATE JOB", "Create", "Contracts", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId, version = ViewBag.NumberVersion }, new { @class = "btn btn-primary btn-xs" })
             <label> </label>
-            @Html.ActionLink("CLOSE VERSION", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("CLOSE VERSION", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId}, new { @class = "btn btn-primary btn-xs" })
         }
     }
     <h2>STATUS: @ViewBag.Status</h2>

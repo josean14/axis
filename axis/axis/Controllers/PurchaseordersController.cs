@@ -135,7 +135,7 @@ namespace AXIS.Controllers
                 string path = System.IO.Path.Combine(dir, _FileName);
                 file.SaveAs(path);
 
-
+                purchaseorder.Status = "OPEN";
                 purchaseorder.Date = DateTime.Now;
                 purchaseorder.File = _FileName;
                 db.Purchaseorders.Add(purchaseorder);

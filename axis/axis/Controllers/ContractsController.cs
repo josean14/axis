@@ -79,7 +79,7 @@ namespace AXIS.Controllers
                     contracts = contracts.OrderBy(s => s.ContractId);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(contracts.ToPagedList(pageNumber, pageSize));
 
@@ -101,7 +101,7 @@ namespace AXIS.Controllers
         }
 
         // GET: Contracts/Create
-        public ActionResult Create(int rfqid, int rversionid)
+        public ActionResult Create(int rfqid, int rversionid, int version)
         {
             var model = new Contract
             {
@@ -111,6 +111,7 @@ namespace AXIS.Controllers
 
             ViewBag.RfqId = rfqid;
             ViewBag.RversionId = rversionid;
+            ViewBag.rversion = version;
             return View();
         }
 

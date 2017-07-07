@@ -34,7 +34,7 @@
                 @Html.ActionLink("AXIS P.O.", "Authorization", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th align="center">
-                TECHNICIAN
+                TECHNICIAN NAME
             </th>
             <th>
                 TECHNICIAN STATUS
@@ -149,11 +149,11 @@
             message: "Are you sure to approve this Technician ?",
             buttons: {
                 confirm: {
-                    label: 'Approve',
+                    label: 'APPROVE',
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'Deny',
+                    label: 'REJECTED',
                     className: 'btn-danger'
                 }
             },
@@ -197,7 +197,7 @@
 
     function liberty(id) {
         bootbox.confirm({
-            message: "Are you sure to liberty this Technician ?",
+            message: "Are you sure to Demob this Technician ?",
             buttons: {
                 confirm: {
                     label: 'Yes',

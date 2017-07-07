@@ -6,18 +6,19 @@
         <th>
             @Html.DisplayNameFor(model => model.PurchaseOrder.PO)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tech.FullName)
+        <th align="center">
+            FULL NAME
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.status)
+            
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PerDiemAdvance)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TechApprovalADV)
-        </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.status)
+            @Html.DisplayNameFor(model => model.TechApprovalADV)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CertificatesStatus)
@@ -37,15 +38,29 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.PerDiemAdvance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TechApprovalADV)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.status)
             </td>
-            <td>
+            <td align="center">
+                @{
+                    int b = (int)item.PerDiemAdvance;
+                    if (b == 7)
+                    {
+                        <p>7 DAYS</p>
+                    }
+                    if (b == 14)
+                    {
+                        <p>14 DAYS</p>
+                    }
+                    if (b == 0)
+                    {
+                        <p>NOT AUTORIZED</p>
+                    }
+                }
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.TechApprovalADV)
+            </td>
+            <td align="center">
                 @Html.DisplayFor(modelItem => item.CertificatesStatus)
             </td>
             <td>
@@ -55,7 +70,7 @@
                     if (item.status == "ASSIGNED")
                     {
 
-                        @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId }, new { @class = "glyphicon glyphicon-list-alt" }) <label>|</label>
+                        @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId, PurchaseOrderId = item.PurchaseOrderId }, new { @class = "glyphicon glyphicon-list-alt" }) <label>|</label>
                         @Html.ActionLink("SEND CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName }) <label>|</label>
                     }
 

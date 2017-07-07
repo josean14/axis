@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AXIS.Models.Flight>
 
 <p>
-    @Html.ActionLink("NEW FLIGHT DATA","Create","Flights" ,new { PurchaseOrderId = @ViewBag.PurchaseOrderId, ContractId = @ViewBag.ContractId, FieldOperationsId = @ViewBag.FieldOperationsId }, null)
+    @Html.ActionLink("NEW FLIGHT INFO.","Create","Flights" ,new { PurchaseOrderId = @ViewBag.PurchaseOrderId, ContractId = @ViewBag.ContractId, FieldOperationsId = @ViewBag.FieldOperationsId }, new { @class = "btn btn-primary btn-xs" })
 </p>
 <table class="table">
     <tr>
@@ -15,7 +15,12 @@
         <th>
             @Html.DisplayNameFor(model => model.CostFlight)
         </th>
-        <th></th>
+        <th>
+            STATUS
+        </th>
+        <th>
+            ACTIONS
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -25,10 +30,16 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DataFlight)
+            @Html.ActionLink(@item.DataFlight, "Download", new { FieldOperationId = @item.FieldOperationsId, ImageName = @item.DataFlight })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CostFlight)
+            @{
+                @Convert.ToDecimal(item.CostFlight).ToString("$ #,##0.00");
+            }
+        </td>
+        <td>
+            @Html.ActionLink(" ", null, null, new { href = "", onclick = "unapprovalFLT(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
+            @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalFLT(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
         </td>
         <td>
           

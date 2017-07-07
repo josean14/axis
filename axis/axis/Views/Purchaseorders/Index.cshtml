@@ -6,10 +6,10 @@
     ViewBag.Title = "POs";
 }
 
-<h2>Business Development &raquo; Purchase Orders</h2>
+<h2>BUSINESS DEVELOPMENT &raquo; PURCHASE ORDERS</h2>
 
 <p>
-    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Index","BusDev") class="btn btn-primary btn-xs">BACK</a>
 </p>
 
 <div class="panel panel-default">
@@ -18,7 +18,7 @@
         @using (Html.BeginForm("Index", "Purchaseorders", FormMethod.Get))
         {
             <p>
-                Find by PO AXIS: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                SEARCH BY PO AXIS: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
                 <input type="submit" value="Search" />
             </p>
         }
@@ -30,22 +30,22 @@
                 PO AXIS
             </th>
             <th>
-                Contract #
+                JOB #
             </th>
             <th>
-                @Html.ActionLink("PO Client", "Index", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("PO CLIENT", "Index", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
-                Comments
+                COMMENTS
             </th>
             <th>
-                @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DatenameSortParm })
+                @Html.ActionLink("DATE", "Index", new { sortOrder = ViewBag.DatenameSortParm })
             </th>
             <th>
-                Attached file
+                ATTACHED FILE
             </th>
             <th>
-                Actions
+                ACTIONS
             </th>
         </tr>
 
@@ -72,7 +72,7 @@
                 </td>
                 <td>
 
-                    @Html.ActionLink(" Contract", "Details", "Contracts", new { id = item.ContractId }, new { @class = "glyphicon glyphicon-list-alt" })
+                    @Html.ActionLink(" JOB DETAILS", "Details", "Contracts", new { id = item.ContractId }, new { @class = "glyphicon glyphicon-list-alt" })
 
                 </td>
             </tr>
@@ -81,7 +81,7 @@
     </table>
     <div class="panel-footer">
         <div class="row">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
 
             @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

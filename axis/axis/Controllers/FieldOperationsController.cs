@@ -18,7 +18,7 @@ namespace AXIS.Controllers
        
 
         // GET: FieldOperations/Details/5
-        public ActionResult Details(int? id, int ContractId)
+        public ActionResult Details(int? id, int ContractId, int PurchaseOrderId)
         {
             if (id == null)
             {
@@ -30,6 +30,7 @@ namespace AXIS.Controllers
                 return HttpNotFound();
             }
             ViewBag.ContractId = ContractId;
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
             return View(fieldOperations);
         }
 
@@ -151,6 +152,12 @@ namespace AXIS.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Open Files
+        public FileResult Download(int FieldOperationsId, string ImageName)
+        {
+            return File("~/Documents/Flights/" + FieldOperationsId + "/" + ImageName, System.Net.Mime.MediaTypeNames.Application.Octet, ImageName);
         }
     }
 }

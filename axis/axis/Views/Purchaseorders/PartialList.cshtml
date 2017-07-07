@@ -10,19 +10,19 @@
                     PO AXIS
                 </th>
                 <th style="text-align:center">
-                    PO Client
+                    PO CLIENT
                 </th>
                 <th>
-                    Comments
+                    COMMENTS
                 </th>
                 <th style="text-align:center">
-                    Date
+                    DATE
                 </th>
                 <th>
-                    Attached file
+                    ATTACHED FILE
                 </th>
                 <th style="text-align:center">
-                    Action
+                    ACTION
                 </th>
             </tr>
         </thead>
@@ -51,7 +51,7 @@
                     @Html.AntiForgeryToken()
 
                     <td style="text-align:center">
-                        <a href=@Url.Action("Create", "FieldOperations", new {id = @item.PurchaseOrderId, ContractId = @ViewBag.ContractId}) class="btn btn-primary btn-xs">Assigned</a>  |
+                        @*<a href=@Url.Action("Create", "FieldOperations", new {id = @item.PurchaseOrderId, ContractId = @ViewBag.ContractId}) class="btn btn-primary btn-xs">Assigned</a>*@ 
                         <input type="submit" value="Delete" class="btn btn-default" />
                     </td>
 

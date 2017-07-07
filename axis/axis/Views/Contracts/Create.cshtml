@@ -1,13 +1,16 @@
 ﻿@model AXIS.Models.Contract
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "GENERATE JOB";
 
 }
 
 
-<h2>Create</h2>
+<h2>BUSINESS DEVELOPMENT &raquo; NEW JOB</h2>
 
+<p>
+    <a href=@Url.Action("Index","Contracts") class="btn btn-primary btn-xs">BACK</a>
+</p>
 
 @using (Html.BeginForm("Create",
                                                 "Contracts",
@@ -17,35 +20,64 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Contract</h4>
+        <h4>ADITIONAL INFORMATION</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("Comments", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+        
+        <div class="panelright">
+            <div class="panel panel-axis right">
+                <!-- Default panel contents -->
+                <div class="panel-heading">RFQ # @ViewBag.RfqId  VER # @ViewBag.rversion</div>
+
+                <table class="table table-bordered">
+                    <tr>
+                        <th align="center">
+                            <p>COMMENTS</p>
+                        </th>
+                        <th align="center">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            <p>FILE</p>
+                        </th>
+                        <th align="center">
+                            <div class="col-md-10">
+                                <input type="file" name="File" id="File" />
+                                <br />
+                                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            <p>START CONTRACT</p>
+                        </th>
+                        <th align="center">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th align="center">
+                            <p>END CONTRACT</p>
+                        </th>
+                        <th align="center">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="file" name="File" id="File" />
-                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
         </div>
 
         @Html.HiddenFor(model => model.RfqId)
@@ -54,15 +86,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary btn-lg" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

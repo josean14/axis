@@ -111,5 +111,10 @@ namespace AXIS.Controllers
             }
             base.Dispose(disposing);
         }
+        //Open Files
+        public FileResult Download(int FieldOperationId, string ImageName)
+        {
+            return File("~/Documents/Flights/" + FieldOperationId + "/" + ImageName, System.Net.Mime.MediaTypeNames.Application.Octet, ImageName);
+        }
     }
 }

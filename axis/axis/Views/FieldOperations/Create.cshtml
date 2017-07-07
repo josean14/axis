@@ -4,11 +4,12 @@
     ViewBag.Title = "Create";
 }
 
-<h2>MOBILIZATION &raquo; SETUP &raquo; SELECT TECHNICIANS </h2>
+<h2>MOBILIZATION &raquo; SETUP</h2>
 <p>
     <a href=@Url.Action("Index", "Mobilization") class="btn btn-primary btn-xs">BACK</a>
 </p>
 
+<h4>SELECT TECHNICIANS</h4>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -17,49 +18,47 @@
     
     @Html.Hidden("PurchaseOrderId", (Int32)ViewBag.PurchaseOrderId)
 
+    <div class="panelright">
+        <div class="panel panel-axislg right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">JOB # @ViewBag.ContractId  AXIS PO # @ViewBag.PurchaseOrderId</div>
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
-        <div class="form-group">
-            @Html.LabelFor(model => model.TechId, "JOB #", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="form-control col-md-3">
-                @ViewBag.ContractId
-            </div>
-        </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>TECHNICIAN:</p>
+                    </th>
+                    <th align="center">
+                        <div class="col-md-10">
+                            @Html.DropDownList("TechId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TechId, "", new { @class = "text-danger" })
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>PER DIEM ADVANCE:</p>
+                    </th>
+                    <th align="center">
+                        <div class="col-md-10">
+                            @Html.EnumDropDownListFor(model => model.PerDiemAdvance, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PerDiemAdvance, "", new { @class = "text-danger" })
+                        </div>
+                    </th>
+                </tr>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TechId, "AXIS PO", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="form-control col-md-3">
-                @ViewBag.PurchaseOrderId
-            </div>
-        </div>
+            </table>
 
-        <div class="row">
-            <div class="form-group">
-                @Html.LabelFor(model => model.TechId, "TECH", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("TechId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.TechId, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PerDiemAdvance, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.PerDiemAdvance, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.PerDiemAdvance, "", new { @class = "text-danger" })
-                </div>
-            </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="ASSIGN TECHNICIAN" class="btn btn-primary btn-xs" />
         </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="CREATE" class="btn btn-primary btn-xs" />
-                </div>
-            </div>
-        </div>
-}
+    </div>
+    }
 
 
 <br />

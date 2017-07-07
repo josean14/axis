@@ -68,6 +68,8 @@ namespace AXIS.Models
 
     public class RegisterViewModel
     {
+        [Display(Name = "Axis User")]
+        public string Name { get; set; }
 
         [Required]
         [EmailAddress]
