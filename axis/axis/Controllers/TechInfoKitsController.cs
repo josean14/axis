@@ -39,11 +39,19 @@ namespace AXIS.Controllers
         }
 
         // GET: TechInfoKits/Details/6
-        public ActionResult PartialKitdetails(int id)
+        public ActionResult PartialKitdetails(int TechId)
         {
-            var Techkit = db.TechInfoKits.Where(c => c.TechId == id);
-            ViewBag.TechId = id;
-            return PartialView(Techkit.ToList());
+            if (TechId < 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TechInfoKit techInfoKit = db.TechInfoKits.Where(c => c.TechId == TechId).Single();
+            if (techInfoKit == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TechId = TechId;
+            return PartialView(techInfoKit);
         }
 
 

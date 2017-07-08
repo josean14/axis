@@ -45,7 +45,7 @@
                 STATUS
             </th>
             <th align="center">
-                ACTION
+                <p>ACTIONS</p>
             </th>
         </tr>
 
@@ -73,7 +73,10 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td align="center">
-                    <a href=@Url.Action("Create", "FieldOperations", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-cog btn btn-primary btn-xs"></a>
+                    <a href=@Url.Action("Create", "FieldOperations", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-user btn btn-primary btn-xs"></a> |
+                    <a href=@Url.Action("List", "Tools", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-wrench btn btn-primary btn-xs"></a> |
+                    <a href=@Url.Action("List", "Trucks", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-road btn btn-primary btn-xs"></a> |
+                    <a href=@Url.Action("List", "Shipping", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-check btn btn-primary btn-xs"></a>
                 </td>
             </tr>
         }

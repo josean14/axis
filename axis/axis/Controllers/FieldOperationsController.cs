@@ -120,10 +120,10 @@ namespace AXIS.Controllers
             TechInfoAxi model = db.TechInfoAxis.Where(c => c.TechId == TechId).Single();
 
             //El correo de email debe ser el contacto del Farm (email)
-            string email = "jagr14@gmail.com";
+            string email = "eduardin23@hotmail.com";
 
             //El correo de CC debe ser la persona que esta efecutando la acción
-            string emailCC = "jagr14@gmail.com";
+            string emailCC = "eduardin23@hotmail.com";
 
             string path = "~/Documents/Teches/" + TechId + "/";
 

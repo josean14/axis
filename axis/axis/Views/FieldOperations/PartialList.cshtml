@@ -70,8 +70,8 @@
                     if (item.status == "ASSIGNED")
                     {
 
-                        @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId, PurchaseOrderId = item.PurchaseOrderId }, new { @class = "glyphicon glyphicon-list-alt" }) <label>|</label>
-                        @Html.ActionLink("SEND CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName }) <label>|</label>
+                        @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId, PurchaseOrderId = item.PurchaseOrderId }, new { @class = "glyphicon glyphicon-plane" }) <label>|</label>
+                        @Html.ActionLink(" CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName }, new { @class = "glyphicon glyphicon-envelope" }) <label>|</label>
                     }
 
                 }

@@ -257,12 +257,15 @@
     <Compile Include="Controllers\RfqsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RversionsController.cs" />
+    <Compile Include="Controllers\ShippingController.cs" />
     <Compile Include="Controllers\TechesController.cs" />
     <Compile Include="Controllers\TechInfoAxisController.cs" />
     <Compile Include="Controllers\TechInfoCimsController.cs" />
     <Compile Include="Controllers\TechInfoKitsController.cs" />
     <Compile Include="Controllers\TechInfoWorksController.cs" />
     <Compile Include="Controllers\TechniciansController.cs" />
+    <Compile Include="Controllers\ToolsController.cs" />
+    <Compile Include="Controllers\TrucksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -572,6 +575,9 @@
     <Content Include="Views\Mobilization\Authorization.cshtml" />
     <Content Include="Views\Account\RegisterRole.cshtml" />
     <Content Include="Views\TechInfoKits\PartialKitdetails.cshtml" />
+    <Content Include="Views\Tools\List.cshtml" />
+    <Content Include="Views\Trucks\List.cshtml" />
+    <Content Include="Views\Shipping\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,44 @@
+﻿@model AXIS.Models.FieldOperations
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>MOBILIZATION &raquo; SETUP</h2>
+<p>
+    <a href=@Url.Action("Index", "Mobilization") class="btn btn-primary btn-xs">BACK</a>
+</p>
+
+<h4>TRUCKS INFO.</h4>
+
+<div class="panelright">
+    <div class="panel panel-axislg right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">JOB # @ViewBag.ContractId  AXIS PO # @ViewBag.PurchaseOrderId</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>NUMBER OF TRUCKS:</p>
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>RENTAL AGENCY:</p>
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+
+                    </div>
+                </th>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
