@@ -87,7 +87,7 @@
                     
                     
 
-                    <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="@item.RejectionComment"> @Html.DisplayFor(modelItem => item.status, new { @title = "Tooltip on top", @class = "btn btn-secondary" }) </a>
+                    <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="@item.RejectionComment"> @Html.DisplayFor(modelItem => item.status) </a>
                 </td>
                 <td>
                     @{
@@ -213,8 +213,6 @@
                 var url2 = '@Url.Action("Authorization", "Mobilization")';
 
                 if (result) {
-
-                    alert(result);
                     
                     var url = "/Mobilization/Denied/";
                     var anti = $('[name=__RequestVerificationToken]').val();

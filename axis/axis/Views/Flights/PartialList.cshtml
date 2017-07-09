@@ -23,7 +23,8 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         
         <td>
@@ -38,8 +39,15 @@
             }
         </td>
         <td>
-            @Html.ActionLink(" ", null, null, new { href = "", onclick = "unapprovalFLT(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
-            @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalFLT(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
+            @{
+                if (item.Status == "PENDING APPROVAL")
+                {
+                    @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectdFLT(" + item.FlightId + "," + @ViewBag.ContractId + "," + @ViewBag.PurchaseOrderId + "," + @item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
+                    <span> </span>
+                    @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalFLT(" + item.FlightId + "," + @ViewBag.ContractId + "," + @ViewBag.PurchaseOrderId + "," + @item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
+                 }
+                }
+            <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="@item.RejectionComment"> @Html.DisplayFor(modelItem => item.Status) </a>
         </td>
         <td>
           
@@ -51,3 +59,87 @@
 }
 
 </table>
+<script src="/Scripts/jquery.min.js"></script>
+<script>
+    function approvalFLT(id, ContractId, PurchaseOrderId, FieldOperationsId) {
+        bootbox.confirm({
+            message: "Are you sure to approve this Technician ?",
+            buttons: {
+                confirm: {
+                    label: 'APPROVE',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'CANCEL',
+                    className: 'btn-danger'
+                }
+
+
+
+            },
+            callback: function (result) {
+                var url2 = '@Url.Action("Details", "FieldOperations")/' + FieldOperationsId + "?ContractId=" + ContractId + "&PurchaseOrderId=" + PurchaseOrderId;
+                
+                if (result) {
+
+                    var url = "/Flights/ApprovedF/";
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+                    });
+
+                }
+            }
+        });
+
+
+    }
+
+    function rejectdFLT(id, ContractId, PurchaseOrderId, FieldOperationsId) {
+
+        bootbox.prompt({
+            title: "Are you sure to reject this flight?",
+            inputType: 'textarea',
+            buttons: {
+                confirm: {
+                    label: 'REJECTED',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'CANCEL',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                var url2 = '@Url.Action("Details", "FieldOperations")/' + FieldOperationsId + "?ContractId=" + ContractId + "&PurchaseOrderId=" + PurchaseOrderId;
+                
+                if (result) {
+
+                    var url = "/Flights/DeniedF/";
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, comment: result, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+                    });
+                }
+            }
+        });
+
+
+    }
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

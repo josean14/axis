@@ -25,6 +25,12 @@ namespace AXIS.Models
         [Required(ErrorMessage = "The cost flight s required.")]
         public virtual double CostFlight { get; set; }
 
+        [DisplayName("STATUS")]
+        public virtual string Status { get; set; }
+
+        [DisplayName("REJECTION COMMENT")]
+        public virtual string RejectionComment { get; set; }
+
         public virtual int FieldOperationsId { get; set; }
 
 

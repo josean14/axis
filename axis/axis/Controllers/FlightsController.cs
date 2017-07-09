@@ -39,7 +39,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FlightId,Description,DataFlight,CostFlight,FieldOperationsId")] Flight flight, HttpPostedFileBase DataFlight, int PurchaseOrderId, int ContractId)
+        public ActionResult Create([Bind(Include = "FlightId,Description,DataFlight,CostFlight,Status,RejectionComment,FieldOperationsId")] Flight flight, HttpPostedFileBase DataFlight, int PurchaseOrderId, int ContractId)
         {
             if (ModelState.IsValid && DataFlight != null)
             {
@@ -52,7 +52,7 @@ namespace AXIS.Controllers
                 string path = System.IO.Path.Combine(dir, _FileName);
                 DataFlight.SaveAs(path);
 
-
+                flight.Status = "PENDING APPROVAL";
                 flight.DataFlight = _FileName;
                 db.Flights.Add(flight);
                 db.SaveChanges();
@@ -117,5 +117,38 @@ namespace AXIS.Controllers
         {
             return File("~/Documents/Flights/" + FieldOperationId + "/" + ImageName, System.Net.Mime.MediaTypeNames.Application.Octet, ImageName);
         }
+
+
+
+        //Aprueba la compra del vuelo
+        [HttpPost, ActionName("ApprovedF")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApprovedF(int id)
+        {
+            Flight flight = db.Flights.Find(id);
+            
+            flight.Status = "APPROVED";
+
+            db.Entry(flight).State = EntityState.Modified;
+            db.SaveChanges();            
+
+            return new JsonResult() { Data = "Assigned successfully" };
+        }
+
+        //Aprueba la compra del vuelo
+        [HttpPost, ActionName("DeniedF")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeniedF(int id, string comment)
+        {
+            Flight flight = db.Flights.Find(id);
+
+            flight.Status = "DENIED";
+            flight.RejectionComment = comment;
+            db.Entry(flight).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return new JsonResult() { Data = "Assigned successfully" };
+        }
+
     }
 }
