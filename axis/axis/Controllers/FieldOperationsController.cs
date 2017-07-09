@@ -55,7 +55,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FieldOperationsId,TechApproval,PerDiemAdvance,TechApprovalADV,status,CertificatesStatus,TechId,PurchaseOrderId")] FieldOperations fieldOperations, int ContractId)
+        public ActionResult Create([Bind(Include = "FieldOperationsId,TechApproval,PerDiemAdvance,TechApprovalADV,status,CertificatesStatus,RejectionComment,ARejectionComment,TechId,PurchaseOrderId")] FieldOperations fieldOperations, int ContractId)
         {
             if (ModelState.IsValid)
             {

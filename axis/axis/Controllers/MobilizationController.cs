@@ -152,8 +152,6 @@ namespace AXIS.Controllers
 
             FieldOperations field = new FieldOperations();
 
-            var a = 3;
-
             fo.status = "ASSIGNED";
 
 
@@ -172,7 +170,7 @@ namespace AXIS.Controllers
 
         [HttpPost, ActionName("Denied")]
         [ValidateAntiForgeryToken]
-        public ActionResult Denied(int id)
+        public ActionResult Denied(int id, string comment)
         {
             FieldOperations fo = db.FieldOperations.Find(id);
 
@@ -180,6 +178,7 @@ namespace AXIS.Controllers
 
             fo.status = "DENIED";
             fo.TechApprovalADV = "NO";
+            fo.RejectionComment = comment;
             db.Entry(fo).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -231,13 +230,14 @@ namespace AXIS.Controllers
 
         [HttpPost, ActionName("UnapprovalADV")]
         [ValidateAntiForgeryToken]
-        public ActionResult UnapprovalADV(int id)
+        public ActionResult UnapprovalADV(int id, string comment)
         {
             FieldOperations fo = db.FieldOperations.Find(id);
 
             var techid = fo.TechId;
 
             fo.TechApprovalADV = "NO";
+            fo.ARejectionComment = comment;
             db.Entry(fo).State = EntityState.Modified;
             db.SaveChanges();
 

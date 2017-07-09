@@ -60,6 +60,12 @@ namespace AXIS.Models
         [DisplayName("CERTIFICATES STATUS")]
         public virtual string CertificatesStatus { get; set; }
 
+        [DisplayName("REJECTION COMMENT")]
+        public virtual string RejectionComment { get; set; }
+
+        public virtual string ARejectionComment { get; set; }
+
+
         [DisplayName("TECH")]
         public virtual int TechId { get; set; }
 

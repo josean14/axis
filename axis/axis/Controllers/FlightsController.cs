@@ -56,9 +56,10 @@ namespace AXIS.Controllers
                 flight.DataFlight = _FileName;
                 db.Flights.Add(flight);
                 db.SaveChanges();
+                ViewBag.ContractId = ContractId;
 
-                
-                return RedirectToAction("Details","FieldOperations", new {id = flight.FieldOperationsId, ContractId = ViewBag.ContractId = ContractId });
+
+                return RedirectToAction("Details","FieldOperations", new {id = flight.FieldOperationsId, ContractId = ContractId, PurchaseOrderId = PurchaseOrderId });
             }
 
             ViewBag.FieldOperationsId = new SelectList(db.FieldOperations, "FieldOperationsId", "status", flight.FieldOperationsId);

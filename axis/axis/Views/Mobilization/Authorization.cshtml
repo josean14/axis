@@ -68,7 +68,11 @@
                     @{
                         if (item.status == "PENDING APPROVAL")
                         {
-                            @Html.ActionLink(" ",null, null, new { href="", onclick = "approval("+item.FieldOperationsId+"); return false;", @class="glyphicon glyphicon-ok btn btn-primary btn-xs"})
+
+                            @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectd(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
+                            <span> </span>
+
+                             @Html.ActionLink(" ",null, null, new { href="", onclick = "approval("+item.FieldOperationsId+"); return false;", @class="glyphicon glyphicon-ok btn btn-primary btn-xs"})
                             
                         }
                     }
@@ -80,7 +84,10 @@
                             
                         }
                     }
-                    @Html.DisplayFor(modelItem => item.status)
+                    
+                    
+
+                    <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="@item.RejectionComment"> @Html.DisplayFor(modelItem => item.status, new { @title = "Tooltip on top", @class = "btn btn-secondary" }) </a>
                 </td>
                 <td>
                     @{
@@ -89,7 +96,7 @@
                             
                             if (item.TechApprovalADV == "PROCESSING")
                             {
-                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "unapprovalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })                                 
+                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectdADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })                                 
 
                                 <span> </span>
                                 @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
@@ -98,19 +105,19 @@
 
                             if (item.TechApprovalADV == "YES")
                             {
-                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "unapprovalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
+                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectdADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" }) 
                             }
 
                             if (item.TechApprovalADV == "NO")
                             {
-                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
+                                  @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" }) 
                             }
 
                         }
                     }
                     
-                    @Html.DisplayFor(modelItem => item.TechApprovalADV)
-                </td>
+                    <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="@item.ARejectionComment">  @Html.DisplayFor(modelItem => item.TechApprovalADV) </a>
+</td>
                 <td align="center">
                     @{
                         int b = (int)item.PerDiemAdvance;
@@ -143,6 +150,7 @@
     </div>
 </div>
 @Html.AntiForgeryToken()
+<script src="/Scripts/jquery.min.js"></script>
 <script>
     function approval(id) {
         bootbox.confirm({
@@ -153,15 +161,19 @@
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'REJECTED',
+                    label: 'CANCEL',
                     className: 'btn-danger'
                 }
+
+
+
             },
             callback: function (result) {
 
                 var url2 = '@Url.Action("Authorization", "Mobilization")';
 
                 if (result) {
+
                     var url = "/Mobilization/Assigned/";
                     var anti = $('[name=__RequestVerificationToken]').val();
 
@@ -174,12 +186,40 @@
 
                     });
 
-                } else {
+                } 
+            }
+        });
 
+
+    }
+
+    function rejectd(id) {
+        
+        bootbox.prompt({
+            title: "Are you sure to rejectd this Technician ?",
+            inputType: 'textarea',
+            buttons: {
+                    confirm: {
+                        label: 'REJECTED',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'CANCEL',
+                        className: 'btn-danger'
+                    }
+                },
+            callback: function (result) {
+
+                var url2 = '@Url.Action("Authorization", "Mobilization")';
+
+                if (result) {
+
+                    alert(result);
+                    
                     var url = "/Mobilization/Denied/";
                     var anti = $('[name=__RequestVerificationToken]').val();
 
-                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+                    $.post(url, { id: id, comment: result, __RequestVerificationToken: anti }, function (data) {
 
                         if (data = 1) {
 
@@ -187,6 +227,7 @@
                         }
 
                     });
+
                 }
             }
         });
@@ -200,11 +241,11 @@
             message: "Are you sure to Demob this Technician ?",
             buttons: {
                 confirm: {
-                    label: 'Yes',
+                    label: 'YES',
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'No',
+                    label: 'NO',
                     className: 'btn-danger'
                 }
             },
@@ -233,11 +274,11 @@
             message: "Are you sure to approval this Technician ?",
             buttons: {
                 confirm: {
-                    label: 'Yes',
+                    label: 'YES',
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'No',
+                    label: 'NO',
                     className: 'btn-danger'
                 }
             },
@@ -261,27 +302,29 @@
         });
     }
 
-    function unapprovalADV(id) {
-        bootbox.confirm({
-            message: "Are you sure to unapproval this Technician ?",
+    function rejectdADV(id) {
+        bootbox.prompt({
+            title: "Are you sure to rejectd this Technician ?",
+            inputType: 'textarea',
             buttons: {
                 confirm: {
-                    label: 'Yes',
+                    label: 'REJECTED',
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'No',
+                    label: 'CANCEL',
                     className: 'btn-danger'
                 }
             },
             callback: function (result) {
 
                 if (result) {
+                    
                     var url = "/Mobilization/UnapprovalADV/";
 
                     var anti = $('[name=__RequestVerificationToken]').val();
 
-                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+                    $.post(url, { id: id, comment: result, __RequestVerificationToken: anti }, function (data) {
 
                         if (data = 1) {
                             var url2 = '@Url.Action("Authorization", "Mobilization")';
@@ -293,4 +336,7 @@
             }
         });
     }
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    }); 
 </script>
