@@ -154,7 +154,7 @@ CREATE TABLE `farms` (
 
 LOCK TABLES `farms` WRITE;
 /*!40000 ALTER TABLE `farms` DISABLE KEYS */;
-INSERT INTO `farms` VALUES (1001,'0','Prueba 10','Conocida','Conocida','Conocida','Conocida','Mexico','Conocida','Conocida','Conocida',4,4.000,'Conocida',1000,NULL,16.5728,16.5728,NULL),(1002,'1','Solar Farm','Merida','Merida','cono','ojoj','Mexico','como','como','comco',3,3.000,'como',1000,NULL,32.7671,-117.139,NULL),(1003,'2','Other Farm','lklk','lklkl','lklk','lk','lklk','kl','lk','lk',8,8.000,'ljlj',1000,NULL,20.9749,-86.8646,NULL),(1004,'1','Solar Farm Merida','Calle 66 #570 x 21','Merida','Yucaten','97314','Mexico','GAMESA','Conocida',NULL,5,300.000,NULL,1000,NULL,16.5728,16.5728,NULL);
+INSERT INTO `farms` VALUES (1001,'0','Prueba 10','Conocida','Conocida','Conocida','Conocida','Mexico','Conocida','Conocida','Conocida',4,4.000,'Conocida',1000,NULL,16.5728,16.5728,NULL),(1002,'1','Solar Farm','Merida','Merida','cono','ojoj','Mexico','como','como','comco',3,3.000,'como',1000,NULL,32.7671,-117.139,NULL),(1003,'2','Other Farm','lklk','lklkl','lklk','lk','lklk','kl','lk','lk',8,8.000,'ljlj',1000,NULL,20.9749,-86.8646,NULL),(1004,'1','Solar Farm Merida','Calle 66 #570 x 21','Merida','Yucaten','97314','Mexico','GAMESA','Conocida',NULL,5,9.999,NULL,1000,NULL,16.5728,16.5728,NULL);
 /*!40000 ALTER TABLE `farms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,6 +172,8 @@ CREATE TABLE `fieldoperationstechs` (
   `TechApprovalAdv` varchar(45) DEFAULT NULL,
   `CertificatesStatus` varchar(45) DEFAULT NULL,
   `Status` varchar(45) DEFAULT NULL,
+  `RejectionComment` varchar(200) DEFAULT NULL,
+  `ARejectionComment` varchar(200) DEFAULT NULL,
   `PurchaseOrderId` int(11) DEFAULT NULL,
   `TechId` int(11) DEFAULT NULL,
   PRIMARY KEY (`FieldOperationsId`),
@@ -179,7 +181,7 @@ CREATE TABLE `fieldoperationstechs` (
   KEY `TechId_idx` (`TechId`),
   CONSTRAINT `PurchaseOrderId` FOREIGN KEY (`PurchaseOrderId`) REFERENCES `purchaseorders` (`PurchaseOrderId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `TechId` FOREIGN KEY (`TechId`) REFERENCES `teches` (`TechId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +190,7 @@ CREATE TABLE `fieldoperationstechs` (
 
 LOCK TABLES `fieldoperationstechs` WRITE;
 /*!40000 ALTER TABLE `fieldoperationstechs` DISABLE KEYS */;
-INSERT INTO `fieldoperationstechs` VALUES (3,NULL,7,'NO','YES','ASSIGNED',4,11),(4,NULL,14,'PROCESSING','NO','CLOSED',4,14),(5,NULL,7,'YES','NO','ASSIGNED',8,12),(6,NULL,7,'NO','NO','DENIED',4,13);
+INSERT INTO `fieldoperationstechs` VALUES (3,NULL,7,'NO','YES','CLOSED',NULL,NULL,4,11),(4,NULL,14,'PROCESSING','NO','CLOSED',NULL,NULL,4,14),(5,NULL,7,'YES','NO','ASSIGNED',NULL,NULL,8,12),(6,NULL,7,'NO','NO','DENIED',NULL,NULL,4,13),(7,NULL,14,'NO','NO','DENIED',NULL,NULL,8,14),(8,NULL,14,'NO','NO','DENIED','Esta es una prueba del motivo de rechazo ',NULL,7,13),(9,NULL,14,'NO','NO','ASSIGNED',NULL,'Esta es un prueba de rechazo de anticipo',7,14);
 /*!40000 ALTER TABLE `fieldoperationstechs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,12 +206,13 @@ CREATE TABLE `flights` (
   `Description` varchar(100) DEFAULT NULL,
   `DataFlight` varchar(150) DEFAULT NULL,
   `CostFlight` double DEFAULT NULL,
-  `flightscol` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  `RejectionComment` varchar(200) DEFAULT NULL,
   `FieldOperationsId` int(11) DEFAULT NULL,
   PRIMARY KEY (`FlightId`),
   KEY `FieldOperationsTechsId_idx` (`FieldOperationsId`),
   CONSTRAINT `FFieldOperationsTechsId` FOREIGN KEY (`FieldOperationsId`) REFERENCES `fieldoperationstechs` (`FieldOperationsId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,35 +221,8 @@ CREATE TABLE `flights` (
 
 LOCK TABLES `flights` WRITE;
 /*!40000 ALTER TABLE `flights` DISABLE KEYS */;
-INSERT INTO `flights` VALUES (1,'Vuelo Mexico - Los Angeles','CAMBIO POR CONTINGENCIA.pdf',12413.43,NULL,3),(2,'Vuelo Mexico-Merida|','Adicionales (2).xlsx',12143.543,NULL,3);
+INSERT INTO `flights` VALUES (1,'Vuelo Mexico - Los Angeles','CAMBIO POR CONTINGENCIA.pdf',12413.43,'PENDING APPROVAL',NULL,3),(2,'Vuelo Mexico-Merida|','Adicionales (2).xlsx',12143.543,'PENDING APPROVAL',NULL,3),(3,'Vuelo Mexico-Londres','7139 CENTRAL.pdf',8900,'DENIED','Esta es una prueba de rechazo de compra del vuelo',5),(4,'Vuelo Londres-Mexico','Fichas Tamuin.xlsb',9600,'DENIED','Esta es una segunda prueba de cancelación del vuelo ',5);
 /*!40000 ALTER TABLE `flights` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `kitcomponents`
---
-
-DROP TABLE IF EXISTS `kitcomponents`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `kitcomponents` (
-  `KitComponentsId` int(11) NOT NULL AUTO_INCREMENT,
-  `Description` varchar(60) DEFAULT NULL,
-  `ComponentType` varchar(45) DEFAULT NULL,
-  `ToolKitsId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`KitComponentsId`),
-  KEY `ToolKitsId_key_idx` (`ToolKitsId`),
-  CONSTRAINT `ToolKitsId_key` FOREIGN KEY (`ToolKitsId`) REFERENCES `toolkits` (`ToolKitsId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `kitcomponents`
---
-
-LOCK TABLES `kitcomponents` WRITE;
-/*!40000 ALTER TABLE `kitcomponents` DISABLE KEYS */;
-/*!40000 ALTER TABLE `kitcomponents` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -547,7 +523,7 @@ CREATE TABLE `teches` (
 
 LOCK TABLES `teches` WRITE;
 /*!40000 ALTER TABLE `teches` DISABLE KEYS */;
-INSERT INTO `teches` VALUES (11,'IMG_2548.JPG','Jose ','Garcia','Español','Conocido','Conocido','Yucatan','97314','Mexico','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','Merida',909090909,'900999j09',890.000,100.000,'99090990',90999,'0',2,'Maestria','IN FIELD','oc0050'),(12,'IMG_20161111_120019.jpg','Angel','Lavalle','Español','Otro','Otro','Otro','Otro','Otro','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','otro',89898989,'yyy9898',890.000,100.000,'898989jj',90909099,'0',8,'otro','IN FIELD','OC0043'),(13,NULL,'Jose','Garcia2','Español','Conocida','Merida','Yuc','89898','Mexico','999-999-9999','jagr14@gmail.com','jose@axis.com','Merida',4432,'443ff',333.000,555.000,'32322',54453,'0',4,'Prueba','BANCH',' '),(14,'JA.JPG','Jose','Robles','Español','Conocida ','Mérida','Yucatan','97314','Mexico','999-999-9999','jose@jose.com','jose@axis.com','Merida',78878,'0900909',18.300,102.000,'98998',322343,'0',3,'Maestria','BANCH',' ');
+INSERT INTO `teches` VALUES (11,'IMG_2548.JPG','Jose ','Garcia','Español','Conocido','Conocido','Yucatan','97314','Mexico','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','Merida',909090909,'900999j09',890.000,100.000,'99090990',90999,'0',2,'Maestria','BANCH',' '),(12,'IMG_20161111_120019.jpg','Angel','Lavalle','Español','Otro','Otro','Otro','Otro','Otro','999-999-9999','joseantonio@axis.com','joseantonio@axis.com','otro',89898989,'yyy9898',890.000,100.000,'898989jj',90909099,'0',8,'otro','IN FIELD','OC0043'),(13,NULL,'Jose','Garcia2','Español','Conocida','Merida','Yuc','89898','Mexico','999-999-9999','jagr14@gmail.com','jose@axis.com','Merida',4432,'443ff',333.000,555.000,'32322',54453,'0',4,'Prueba','BANCH',' '),(14,'JA.JPG','Jose','Robles','Español','Conocida ','Mérida','Yucatan','97314','Mexico','999-999-9999','jose@jose.com','jose@axis.com','Merida',78878,'0900909',18.300,102.000,'98998',322343,'0',3,'Maestria','IN FIELD','OC9090');
 /*!40000 ALTER TABLE `teches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -706,57 +682,6 @@ LOCK TABLES `techinfoworks` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `toolkits`
---
-
-DROP TABLE IF EXISTS `toolkits`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `toolkits` (
-  `ToolKitsId` int(11) NOT NULL AUTO_INCREMENT,
-  `Description` varchar(60) DEFAULT NULL,
-  `KitType` varchar(45) DEFAULT NULL,
-  `Status` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ToolKitsId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `toolkits`
---
-
-LOCK TABLES `toolkits` WRITE;
-/*!40000 ALTER TABLE `toolkits` DISABLE KEYS */;
-/*!40000 ALTER TABLE `toolkits` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tools`
---
-
-DROP TABLE IF EXISTS `tools`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tools` (
-  `ToolId` int(11) NOT NULL AUTO_INCREMENT,
-  `Description` varchar(60) DEFAULT NULL,
-  `NumberItem` varchar(45) DEFAULT NULL,
-  `ToolType` varchar(45) DEFAULT NULL,
-  `Status` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ToolId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tools`
---
-
-LOCK TABLES `tools` WRITE;
-/*!40000 ALTER TABLE `tools` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tools` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `userclaims`
 --
 
@@ -880,4 +805,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-02 20:12:00
+-- Dump completed on 2017-07-09 17:29:27
