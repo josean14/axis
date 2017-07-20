@@ -123,7 +123,7 @@ namespace AXIS.Controllers
             string email = "eduardin23@hotmail.com";
 
             //El correo de CC debe ser la persona que esta efecutando la acción
-            string emailCC = "eduardin23@hotmail.com";
+            string emailCC = "iprice@axisrg.com";
 
             string path = "~/Documents/Teches/" + TechId + "/";
 
