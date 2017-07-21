@@ -1,0 +1,11 @@
+U: no-reply@appsmerida.com
+P: Prueba.2017
+
+U: pruebamail@appsmerida.com
+P: Prueba.2017
+
+Protocol	Server		Port
+POP3 SSL	mail.negox.com	995
+IMAP SSL	mail.negox.com	993
+SMTP SSL	mail.negox.com	465
+SMTP TLS	mail.negox.com	587
