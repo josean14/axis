@@ -16,22 +16,21 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
         // GET: Flights
-        public ActionResult Index()
+        public ActionResult Index(string msg)
         {
             var flights = db.Flights.Include(f => f.FieldOperarions);
+            ViewBag.Msg = msg;
             return View(flights.ToList());
         }
 
-      
-
-        // GET: Flights/Create
-        public ActionResult Create(int PurchaseOrderId, int ContractId, int FieldOperationsId)
+        // PartialCreate
+        public ActionResult PartialCreate(int PurchaseOrderId, int ContractId, int FieldOperationsId)
         {
-            
+
             ViewBag.FieldOperationsId = FieldOperationsId;
             ViewBag.PurchaseOrderId = PurchaseOrderId;
             ViewBag.ContractId = ContractId;
-            return View();
+            return PartialView();
         }
 
         // POST: Flights/Create
@@ -59,29 +58,13 @@ namespace AXIS.Controllers
                 ViewBag.ContractId = ContractId;
 
 
-                return RedirectToAction("Details","FieldOperations", new {id = flight.FieldOperationsId, ContractId = ContractId, PurchaseOrderId = PurchaseOrderId });
+                return RedirectToAction("Details", "FieldOperations", new { id = flight.FieldOperationsId, ContractId = ContractId, PurchaseOrderId = PurchaseOrderId });
             }
 
-            ViewBag.FieldOperationsId = new SelectList(db.FieldOperations, "FieldOperationsId", "status", flight.FieldOperationsId);
-            return View(flight);
+            return RedirectToAction("Details", "FieldOperations", new { id = flight.FieldOperationsId, ContractId = ContractId, PurchaseOrderId = PurchaseOrderId });
+            //return RedirectToAction("Index", "Flights",new { msg = "FAILED TO SAVE FLIGHT"});
         }
 
-       
-
-        // GET: Flights/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Flight flight = db.Flights.Find(id);
-            if (flight == null)
-            {
-                return HttpNotFound();
-            }
-            return View(flight);
-        }
 
         // POST: Flights/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -91,7 +74,7 @@ namespace AXIS.Controllers
             Flight flight = db.Flights.Find(id);
             db.Flights.Remove(flight);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return new JsonResult() { Data = "Deleted successfully" };
         }
 
 
@@ -126,11 +109,11 @@ namespace AXIS.Controllers
         public ActionResult ApprovedF(int id)
         {
             Flight flight = db.Flights.Find(id);
-            
+
             flight.Status = "APPROVED";
 
             db.Entry(flight).State = EntityState.Modified;
-            db.SaveChanges();            
+            db.SaveChanges();
 
             return new JsonResult() { Data = "Assigned successfully" };
         }

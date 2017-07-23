@@ -71,7 +71,7 @@
                     {
 
                         @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId, PurchaseOrderId = item.PurchaseOrderId }, new { @class = "glyphicon glyphicon-plane" }) <label>|</label>
-                        @Html.ActionLink(" CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName }, new { @class = "glyphicon glyphicon-envelope" }) <label>|</label>
+                        @Html.ActionLink(" CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName, PurchaseOrderId = ViewBag.PurchaseOrderId }, new { @class = "glyphicon glyphicon-envelope" }) <label>|</label>
                     }
 
                 }

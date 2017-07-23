@@ -4,13 +4,13 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h4>ADD FLIGHTS</h4>
 
 
 @using (Html.BeginForm("Create",
-                                                "Flights",
-                                                FormMethod.Post,
-                                                new { enctype = "multipart/form-data" })) 
+                                                                        "Flights",
+                                                                        FormMethod.Post,
+                                                                        new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -19,10 +19,10 @@
     @Html.Hidden("PurchaseOrderId", (Int32)ViewBag.PurchaseOrderId)
 
     @Html.Hidden("FieldOperationsId", (Int32)ViewBag.FieldOperationsId)
-    
+
 
     <div class="form-horizontal">
-        <h4>Flight</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -58,10 +58,11 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+
+
+

@@ -6,9 +6,7 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -23,7 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CostFlight)
         </th>
-        <th></th>
+ 
     </tr>
 
 @foreach (var item in Model) {
@@ -40,12 +38,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.CostFlight)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FlightId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FlightId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FlightId })
-        </td>
+
     </tr>
 }
 
 </table>
+
+<div class="alert alert-warning">@ViewBag.Msg</div>

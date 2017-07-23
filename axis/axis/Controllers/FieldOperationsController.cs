@@ -15,7 +15,7 @@ namespace AXIS.Controllers
     {
         private AXISDB db = new AXISDB();
 
-       
+
 
         // GET: FieldOperations/Details/5
         public ActionResult Details(int? id, int ContractId, int PurchaseOrderId)
@@ -61,7 +61,7 @@ namespace AXIS.Controllers
             {
 
                 fieldOperations.status = "PENDING APPROVAL";
-                fieldOperations.CertificatesStatus = "NO";
+                fieldOperations.CertificatesStatus = "NO SENDING";
                 fieldOperations.TechApprovalADV = "PROCESSING";
                 db.FieldOperations.Add(fieldOperations);
                 db.SaveChanges();
@@ -82,7 +82,7 @@ namespace AXIS.Controllers
             return View(fieldOperations);
         }
 
-        
+
 
         // POST: FieldOperations/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -102,6 +102,7 @@ namespace AXIS.Controllers
         {
 
             ViewBag.ContractId = ContractId;
+            ViewBag.PurchaseOrderId = Id;
             var fieldOperations = db.FieldOperations.Where(a => a.PurchaseOrderId == Id).Include(f => f.PurchaseOrder).Include(f => f.Tech);
             return PartialView(fieldOperations.ToList());
         }
@@ -114,22 +115,29 @@ namespace AXIS.Controllers
             set { _FONMailer = value; }
         }
 
-        public ActionResult SendCertificates(int FieldOperationsId, int ContractId, int TechId, string FullName)
+        public ActionResult SendCertificates(int FieldOperationsId, int ContractId, int TechId, string FullName, int PurchaseOrderId)
         {
 
             TechInfoAxi model = db.TechInfoAxis.Where(c => c.TechId == TechId).Single();
 
             //El correo de email debe ser el contacto del Farm (email)
-            string email = "eduardin23@hotmail.com";
+            //string email = "eduardin23@hotmail.com";
+            string email = "jagr14@gmail.com";
 
             //El correo de CC debe ser la persona que esta efecutando la acción
-            string emailCC = "iprice@axisrg.com";
+            //string emailCC = "iprice@axisrg.com";
+            string emailCC = "jagr14@gmail.com";
 
             string path = "~/Documents/Teches/" + TechId + "/";
 
             try
             {
                 FONMailer.Certificates(model, FullName, path, email, emailCC).Send();
+
+                var FO = db.FieldOperations.Find(FieldOperationsId);
+                FO.CertificatesStatus = "SENDING";
+                db.Entry(FO).State = EntityState.Modified;
+                db.SaveChanges();
 
             }
             catch (Exception ex)
@@ -140,8 +148,8 @@ namespace AXIS.Controllers
             }
 
 
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Create", "FieldOperations", new { id = PurchaseOrderId, ContractId = ContractId });
+            // return RedirectToAction("Index");
         }
 
 
