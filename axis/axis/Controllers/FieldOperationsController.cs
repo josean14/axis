@@ -120,13 +120,37 @@ namespace AXIS.Controllers
 
             TechInfoAxi model = db.TechInfoAxis.Where(c => c.TechId == TechId).Single();
 
+            Contract contract = db.Contracts.Find(ContractId);
+
+            //foreach(var item in Model)
+
             //El correo de email debe ser el contacto del Farm (email)
-            //string email = "eduardin23@hotmail.com";
-            string email = "jagr14@gmail.com";
+            string email = contract.Rfq.Farm.Email;
+            //string email = "jagr14@gmail.com";
 
             //El correo de CC debe ser la persona que esta efecutando la acción
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "1");
+            string emailCC = "";
+            bool bd = false;
+
+            foreach (var item in users) {
+                
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+                   
+
+            }
+            
             //string emailCC = "iprice@axisrg.com";
-            string emailCC = "jagr14@gmail.com";
+            //string emailCC = "jagr14@gmail.com";
 
             string path = "~/Documents/Teches/" + TechId + "/";
 

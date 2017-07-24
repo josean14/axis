@@ -53,6 +53,23 @@
                             </div>
                         </th>
                     </tr>
+
+                    <tr>
+                        <th align="center">
+                            <p>RESOURCE MANAGER</p>
+                        </th>
+                    <th align="center">
+                        <div class="col-md-10">
+                            @Html.DropDownList("UserId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </th>
+
+
+                    </tr>
+
                     <tr>
                         <th align="center">
                             <p>START CONTRACT</p>

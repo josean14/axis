@@ -112,12 +112,15 @@ namespace AXIS.Controllers
             ViewBag.RfqId = rfqid;
             ViewBag.RversionId = rversionid;
             ViewBag.rversion = version;
+            
+            //Aqui se genera una lista con el usuario del ROL RM
+            ViewBag.UserId = new SelectList(db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7"), "Id", "UserName");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContractId,Comments,Date,StartDate,Status,EndDate,RfqId,RversionId")] Contract contract, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "ContractId,Comments,Date,StartDate,Status,EndDate,RfqId,RversionId,UserId")] Contract contract, HttpPostedFileBase file)
         {
             if (ModelState.IsValid && file != null)
             {
@@ -188,7 +191,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContractId,Comments,Date,StartDate,EndDate,File,RfqId,RversionId")] Contract contract)
+        public ActionResult Edit([Bind(Include = "ContractId,Comments,Date,StartDate,EndDate,File,RfqId,RversionId,UserId")] Contract contract)
         {
             if (ModelState.IsValid)
             {

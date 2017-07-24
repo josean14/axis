@@ -14,10 +14,6 @@ namespace AXIS.Models
         [DisplayName("Comments")]
         public virtual string Comments { get; set; }
 
-        //[DisplayName("Date")]
-        //[Required(ErrorMessage = "The date is required.")]
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public virtual DateTime Date { get; set; }
 
         [DisplayName("File")]
@@ -38,6 +34,9 @@ namespace AXIS.Models
         [DisplayName("Status")]
         public virtual string Status { get; set; }
 
+        [DisplayName("User")]
+        public virtual string UserId { get; set; }
+
         public virtual int RfqId { get; set; }
 
         public virtual int RversionId { get; set; }
@@ -45,5 +44,6 @@ namespace AXIS.Models
         public virtual Rfq Rfq { get; set; }
         public virtual Rversion Rversion { get; set; }
         public virtual List<Purchaseorder> PurchaseOrder { get; set; }
+        public virtual User User { get; set; }
     }
 }

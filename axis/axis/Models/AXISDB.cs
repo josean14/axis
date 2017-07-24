@@ -60,10 +60,16 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.User> Users { get; set; }
 
+
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
-        //    modelBuilder.Configurations.Add(new Purchaseorder());
-
+        //    modelBuilder.Entity<User>().
+        //          HasMany(p => p.Roles).
+        //          WithMany(p => p.Users).
+        //          Map(p => p.ToTable("userroles").
+        //            MapLeftKey("UserId").
+        //            MapRightKey("RoleId"));
 
 
         //    base.OnModelCreating(modelBuilder);
