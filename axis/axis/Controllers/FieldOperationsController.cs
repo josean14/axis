@@ -130,7 +130,7 @@ namespace AXIS.Controllers
 
             //El correo de CC debe ser la persona que esta efecutando la acción
 
-            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "1");
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
             string emailCC = "";
             bool bd = false;
 

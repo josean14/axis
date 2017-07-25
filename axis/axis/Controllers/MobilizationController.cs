@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
 using PagedList;
+using AXIS.Mailers;
 
 namespace AXIS.Controllers
 {
@@ -143,6 +144,14 @@ namespace AXIS.Controllers
         }
 
 
+        //Funciones para Mailer
+        private IFONMailer _FONMailer = new FONMailer();
+        public IFONMailer FONMailer
+        {
+            get { return _FONMailer; }
+            set { _FONMailer = value; }
+        }
+
         // POST: Assigned
         [HttpPost, ActionName("Assigned")]
         [ValidateAntiForgeryToken]
@@ -163,6 +172,68 @@ namespace AXIS.Controllers
             tech.POAsigned = fo.PurchaseOrder.PO;
             db.Entry(tech).State = EntityState.Modified;
             db.SaveChanges();
+
+            string email = "";
+            //string email = "jagr14@gmail.com";
+            
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+            
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com";
+
+
+            //
+            //string emailCC = "jagr14@gmail.com";
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+            //Prueba
+            emailCC = "jagr14@gmail.com";
+
+            try
+            {
+                FONMailer.TECHAPRV(tech.FullName, fo.status, email, emailCC,"",fo.PurchaseOrderId).Send();
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
+
 
             return new JsonResult() { Data = "Assigned successfully" };
         }
@@ -187,6 +258,68 @@ namespace AXIS.Controllers
             tech.POAsigned = " ";
             db.Entry(tech).State = EntityState.Modified;
             db.SaveChanges();
+
+            string email = "";
+            //string email = "jagr14@gmail.com";
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com";
+
+            //
+            //string emailCC = "jagr14@gmail.com";
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "4");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+
+            //Prueba
+            emailCC = "jagr14@gmail.com";
+
+            try
+            {
+                FONMailer.TECHAPRV(tech.FullName, fo.status, email, emailCC, comment, fo.PurchaseOrderId).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
+
 
             return new JsonResult() { Data = "Denied successfully" };
         }

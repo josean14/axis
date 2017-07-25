@@ -201,26 +201,64 @@ namespace AXIS.Mailers
 
         }
 
-        public virtual MvcMailMessage TECHAPRV()
+        public virtual MvcMailMessage TECHAPRV(string FullName, string status, string email, string emailCC, string comment, int PO)
         {
             //ViewBag.Data = someObject;
-            return Populate(x =>
+
+            ViewBag.FullName = FullName;
+            var mailMessage = new MvcMailMessage();
+
+            switch (status)
             {
-                x.Subject = "TECHAPRV";
-                x.ViewName = "TECHAPRV";
-                x.To.Add("some-email@example.com");
-            });
+                case "ASSIGNED":
+                    mailMessage.Subject = "The technician has been approved";
+                    ViewBag.Msg = "The technician "+ FullName +" has been approved for PO "+ PO ;
+                    break;
+
+                case "DENIED":
+                    mailMessage.Subject = "The technician has been denied";
+                    ViewBag.Msg = "The technician " + FullName + " has been denied for PO " + PO;
+                    break;
+
+            }
+
+            
+            ViewBag.Comment = comment;
+
+            mailMessage.To.Add(email);
+            mailMessage.CC.Add(emailCC);
+            PopulateBody(mailMessage, "TECHAPRV", null);
+
+
+            SmtpClient mailClient = new SmtpClient();
+
+            mailClient.Timeout = 10;
+            return mailMessage;
+
+
         }
 
         public virtual MvcMailMessage TECHAPRVADV()
         {
             //ViewBag.Data = someObject;
+
+
+
             return Populate(x =>
             {
                 x.Subject = "TECHAPRVADV";
                 x.ViewName = "TECHAPRVADV";
                 x.To.Add("some-email@example.com");
             });
+        }
+
+     
+
+  
+
+        MvcMailMessage IFONMailer.TECHAPRVADV(string FullName, string status, string email, string emailCC)
+        {
+            throw new NotImplementedException();
         }
     }
 }
