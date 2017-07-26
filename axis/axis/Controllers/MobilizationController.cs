@@ -174,8 +174,7 @@ namespace AXIS.Controllers
             db.SaveChanges();
 
             string email = "";
-            //string email = "jagr14@gmail.com";
-            
+                        
             var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
             
             bool bd = false;
@@ -197,9 +196,7 @@ namespace AXIS.Controllers
             //Prueba
             email = "jagr14@gmail.com";
 
-
-            //
-            //string emailCC = "jagr14@gmail.com";
+            
             string emailCC = "";
             users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
 
@@ -260,8 +257,7 @@ namespace AXIS.Controllers
             db.SaveChanges();
 
             string email = "";
-            //string email = "jagr14@gmail.com";
-
+           
             var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
 
             bool bd = false;
@@ -324,6 +320,158 @@ namespace AXIS.Controllers
             return new JsonResult() { Data = "Denied successfully" };
         }
 
+        
+
+        [HttpPost, ActionName("ApprovalADV")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApprovalADV(int id)
+        {
+            FieldOperations fo = db.FieldOperations.Find(id);
+
+            var techid = fo.TechId;
+
+            
+            fo.TechApprovalADV = "YES";
+            db.Entry(fo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            string email = "";
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com";
+
+
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "4");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+            //Prueba
+            emailCC = "jagr14@gmail.com";
+
+            try
+            {
+                FONMailer.TECHAPRVADV(fo.Tech.FullName, fo.TechApprovalADV, email, emailCC, "", fo.PurchaseOrderId).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
+
+            
+            return new JsonResult() { Data = "Liberty successfully" };
+        }
+
+        [HttpPost, ActionName("UnapprovalADV")]
+        [ValidateAntiForgeryToken]
+        public ActionResult UnapprovalADV(int id, string comment)
+        {
+            FieldOperations fo = db.FieldOperations.Find(id);
+
+            var techid = fo.TechId;
+
+            fo.TechApprovalADV = "NO";
+            fo.ARejectionComment = comment;
+            db.Entry(fo).State = EntityState.Modified;
+            db.SaveChanges();
+
+            string email = "";
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com";
+
+
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "4");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+            //Prueba
+            emailCC = "jagr14@gmail.com";
+
+            try
+            {
+                FONMailer.TECHAPRVADV(fo.Tech.FullName, fo.TechApprovalADV, email, emailCC, comment, fo.PurchaseOrderId).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
+
+            return new JsonResult() { Data = "Liberty successfully" };
+        }
+
+
         [HttpPost, ActionName("Liberty")]
         [ValidateAntiForgeryToken]
         public ActionResult Liberty(int id)
@@ -345,38 +493,10 @@ namespace AXIS.Controllers
             return new JsonResult() { Data = "Liberty successfully" };
         }
 
-
-        [HttpPost, ActionName("ApprovalADV")]
-        [ValidateAntiForgeryToken]
-        public ActionResult ApprovalADV(int id)
-        {
-            FieldOperations fo = db.FieldOperations.Find(id);
-
-            var techid = fo.TechId;
-
-            fo.TechApprovalADV = "YES";
-            db.Entry(fo).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return new JsonResult() { Data = "Liberty successfully" };
-        }
-
-        [HttpPost, ActionName("UnapprovalADV")]
-        [ValidateAntiForgeryToken]
-        public ActionResult UnapprovalADV(int id, string comment)
-        {
-            FieldOperations fo = db.FieldOperations.Find(id);
-
-            var techid = fo.TechId;
-
-            fo.TechApprovalADV = "NO";
-            fo.ARejectionComment = comment;
-            db.Entry(fo).State = EntityState.Modified;
-            db.SaveChanges();
-
-            return new JsonResult() { Data = "Liberty successfully" };
-        }
-
     }
+
+
+   
+
 
 }

@@ -238,27 +238,46 @@ namespace AXIS.Mailers
 
         }
 
-        public virtual MvcMailMessage TECHAPRVADV()
+        public virtual MvcMailMessage TECHAPRVADV(string FullName, string status, string email, string emailCC, string comment, int PO)
         {
             //ViewBag.Data = someObject;
+            ViewBag.FullName = FullName;
+            var mailMessage = new MvcMailMessage();
 
-
-
-            return Populate(x =>
+            switch (status)
             {
-                x.Subject = "TECHAPRVADV";
-                x.ViewName = "TECHAPRVADV";
-                x.To.Add("some-email@example.com");
-            });
+                case "YES":
+                    mailMessage.Subject = "The technician has been approved";
+                    ViewBag.Msg = "The technician " + FullName + " has been approved for PO " + PO;
+                    break;
+
+                case "NO":
+                    mailMessage.Subject = "The technician has been denied";
+                    ViewBag.Msg = "The technician " + FullName + " has been denied for PO " + PO;
+                    break;
+
+            }
+
+
+            ViewBag.Comment = comment;
+
+            mailMessage.To.Add(email);
+            mailMessage.CC.Add(emailCC);
+            PopulateBody(mailMessage, "TECHAPRVADV", null);
+
+
+            SmtpClient mailClient = new SmtpClient();
+
+            mailClient.Timeout = 10;
+            return mailMessage;
+
+
         }
 
      
 
   
 
-        MvcMailMessage IFONMailer.TECHAPRVADV(string FullName, string status, string email, string emailCC)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
