@@ -143,6 +143,19 @@ namespace AXIS.Controllers
             return View(approvaltech.ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult EmployeMob(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Purchaseorder purchaseorder = db.Purchaseorders.Find(id);
+            if (purchaseorder == null)
+            {
+                return HttpNotFound();
+            }
+            return View(purchaseorder);
+        }
 
         //Funciones para Mailer
         private IFONMailer _FONMailer = new FONMailer();

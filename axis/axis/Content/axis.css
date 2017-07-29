@@ -5477,7 +5477,11 @@ a.list-group-item:focus {
 .panel-axislg {
     border-color:#ee1d22;
     width: 500px;
-  
+}
+
+.panel-axisxl {
+    border-color:#ee1d22;
+    width: 750px;
 }
 
 .panel-axis > .panel-heading {
@@ -5488,6 +5492,13 @@ a.list-group-item:focus {
 }
 
 .panel-axislg > .panel-heading {
+  color: #eeeeee;
+  background-color: #ee1d22;
+  border-color: #dddddd;
+
+}
+
+.panel-axisxl > .panel-heading {
   color: #eeeeee;
   background-color: #ee1d22;
   border-color: #dddddd;

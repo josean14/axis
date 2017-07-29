@@ -1,95 +1,102 @@
 ﻿@model IEnumerable<AXIS.Models.FieldOperations>
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PurchaseOrder.PO)
-        </th>
-        <th align="center">
-            FULL NAME
-        </th>
-        <th align="center">
-            @Html.DisplayNameFor(model => model.status)
-            
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PerDiemAdvance)
-        </th>
+<div class="panel panel-default">
 
-        <th>
-            @Html.DisplayNameFor(model => model.TechApprovalADV)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CertificatesStatus)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaseOrder.PO)
+                </th>
+                <th align="center">
+                    FULL NAME
+                </th>
+                <th align="center">
+                    @Html.DisplayNameFor(model => model.status)
 
-    @foreach (var item in Model)
-    {
-        var ident = "FO" + @item.FieldOperationsId;
-        <tr id=@ident>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchaseOrder.PO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tech.FullName)
-            </td>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PerDiemAdvance)
+                </th>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td align="center">
-                @{
-                    int b = (int)item.PerDiemAdvance;
-                    if (b == 7)
-                    {
-                        <p>7 DAYS</p>
-                    }
-                    if (b == 14)
-                    {
-                        <p>14 DAYS</p>
-                    }
-                    if (b == 0)
-                    {
-                        <p>NOT AUTORIZED</p>
-                    }
-                }
-            </td>
-            <td align="center">
-                @Html.DisplayFor(modelItem => item.TechApprovalADV)
-            </td>
-            <td align="center">
-                @Html.DisplayFor(modelItem => item.CertificatesStatus)
-            </td>
-            <td>
+                <th>
+                    @Html.DisplayNameFor(model => model.TechApprovalADV)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CertificatesStatus)
+                </th>
+                <th align="center">
+                    ACTIONS
+                </th>
+            </tr>
+        </thead>
+            @foreach (var item in Model)
+            {
+                var ident = "FO" + @item.FieldOperationsId;
+                <tr id=@ident>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PurchaseOrder.PO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tech.FullName)
+                    </td>
 
-                @{
+                    <td>
+                        @Html.DisplayFor(modelItem => item.status)
+                    </td>
+                    <td align="center">
+                        @{
+                            int b = (int)item.PerDiemAdvance;
+                            if (b == 7)
+                            {
+                                <p>7 DAYS</p>
+                            }
+                            if (b == 14)
+                            {
+                                <p>14 DAYS</p>
+                            }
+                            if (b == 0)
+                            {
+                                <p>NOT AUTORIZED</p>
+                            }
+                        }
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.TechApprovalADV)
+                    </td>
+                    <td align="center">
+                        @Html.DisplayFor(modelItem => item.CertificatesStatus)
+                    </td>
+                    <td>
 
-                    if (item.status == "ASSIGNED")
-                    {
+                        @{
 
-                        @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId, PurchaseOrderId = item.PurchaseOrderId }, new { @class = "glyphicon glyphicon-plane" }) <label>|</label>
-                        @Html.ActionLink(" CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName, PurchaseOrderId = ViewBag.PurchaseOrderId }, new { @class = "glyphicon glyphicon-envelope" }) <label>|</label>
-                    }
+                            if (item.status == "ASSIGNED")
+                            {
 
-                }
+                                @Html.ActionLink(" ", "Details", new { id = item.FieldOperationsId, ContractId = ViewBag.ContractId, PurchaseOrderId = item.PurchaseOrderId }, new { @class = "glyphicon glyphicon-plane" }) <label>|</label>
+                                @Html.ActionLink(" CERTIFICATES", "SendCertificates", new { FieldOperationsId = item.FieldOperationsId, ContractId = ViewBag.ContractId, TechId = item.TechId, FullName = item.Tech.FullName, PurchaseOrderId = ViewBag.PurchaseOrderId }, new { @class = "glyphicon glyphicon-envelope" }) <label>|</label>
+                            }
 
-
-                @{
-
-                    if (item.status == "DENIED")
-                    {
-                        <a href="" onclick="confirmDelete(@item.FieldOperationsId); return false;" class="glyphicon glyphicon-remove"></a>
-                    }
-                }
+                        }
 
 
-            </td>
-        </tr>
-                    }
+                        @{
+
+                            if (item.status == "DENIED")
+                            {
+                                <a href="" onclick="confirmDelete(@item.FieldOperationsId); return false;" class="glyphicon glyphicon-remove"></a>
+                            }
+                        }
+
+
+                    </td>
+                </tr>
+                            }
 
 </table>
-@Html.AntiForgeryToken()
-<p id="msg"></p>
+</div>
+
+    @Html.AntiForgeryToken()
+    <p id="msg"></p>

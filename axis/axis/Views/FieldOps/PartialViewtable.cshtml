@@ -1,1 +1,34 @@
-﻿<h4>Technicinas</h4>
+﻿@model IEnumerable<AXIS.Models.FieldOperations>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                AXIS P.O.
+            </th>
+            <th>
+                CLIENT P.O.
+            </th>
+            <th align="center">
+                FULL NAME
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+            {
+                var ident = "FO" + @item.FieldOperationsId;
+        <tr id=@ident>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseOrder.PurchaseOrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseOrder.PO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tech.FullName)
+            </td>
+        </tr>
+                    }
+
+</table>

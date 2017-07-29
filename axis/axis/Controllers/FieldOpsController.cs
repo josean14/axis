@@ -67,6 +67,13 @@ namespace AXIS.Controllers
             return View();
         }
 
+        public ActionResult PartialViewtable(int ContractId)
+        {
+
+            ViewBag.ContractId = ContractId;
+            var fieldOperations = db.FieldOperations.Where(a => a.PurchaseOrder.ContractId == ContractId).Include(f => f.PurchaseOrder).Include(f => f.Tech);
+            return PartialView(fieldOperations.ToList());
+        }
 
         // GET: VIEWTABLE
         public ActionResult Viewtable(string sortOrder, string currentFilter, string searchString, int? page)

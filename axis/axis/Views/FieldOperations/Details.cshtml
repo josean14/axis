@@ -56,7 +56,22 @@
                 </th>
                 <th align="center">
                     <div class="col-md-10">
-                        @Html.DisplayFor(model => model.PerDiemAdvance)
+                        @{
+                            int b = (int)Model.PerDiemAdvance;
+                            if (b == 7)
+                            {
+                                <p>7 DAYS</p>
+                            }
+                            if (b == 14)
+                            {
+                                <p>14 DAYS</p>
+                            }
+                            if (b == 0)
+                            {
+                                <p>NOT AUTORIZED</p>
+                            }
+                        }
+
                     </div>
                 </th>
             </tr>
@@ -73,4 +88,21 @@
 @Html.Action("PartialList", "Flights", new { PurchaseOrderId = Model.PurchaseOrderId, ContractId = @ViewBag.ContractId, FieldOperationsId = Model.FieldOperationsId })
 
 <br />
-@Html.Action("PartialKitdetails", "TechInfoKits", new { TechId = Model.TechId })
+
+<p>
+
+    <div class="btn btn-primary btn-xs" id="PPE">PPE INFO.</div>
+</p>
+
+<div id="PartialKitdetails" style="display: none">
+    @Html.Action("PartialKitdetails", "TechInfoKits", new { TechId = Model.TechId })
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#PPE").click(function () {
+            $("#PartialKitdetails").toggle("slow");
+        });
+    });
+
+</script>

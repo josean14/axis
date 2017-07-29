@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h4>ADD FLIGHTS</h4>
+<h4>INFORMATION</h4>
 
 
 @using (Html.BeginForm("Create",
@@ -20,48 +20,61 @@
 
     @Html.Hidden("FieldOperationsId", (Int32)ViewBag.FieldOperationsId)
 
+    <div class="panelright">
+        <table class="table table-bordered">
+            <thead class="tr-axis">
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.DataFlight, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.CostFlight, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </th>
+                    <th>
+                        STATUS
+                    </th>
+                    <th>
+                        ACTION
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <th>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </th>
+                <th>
+                    @Html.EditorFor(model => model.DataFlight, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                    @Html.ValidationMessageFor(model => model.DataFlight, "", new { @class = "text-danger" })
+                </th>
+                <th>
+                    @Html.EditorFor(model => model.CostFlight, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CostFlight, "", new { @class = "text-danger" })
+                </th>
+                <th>
+                    PLANING
+                </th>
+                <th>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </th>
+            </tr>
 
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+</table>
+</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DataFlight, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DataFlight, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.DataFlight, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        }
+  
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CostFlight, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CostFlight, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CostFlight, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
 
 
 

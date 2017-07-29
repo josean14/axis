@@ -56,6 +56,10 @@
       <HintPath>..\packages\ImageProcessor.Plugins.WebP.1.0.5.0\lib\net45\ImageProcessor.Plugins.WebP.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -582,6 +586,7 @@
     <Content Include="Views\Trucks\List.cshtml" />
     <Content Include="Views\Shipping\List.cshtml" />
     <Content Include="Views\Flights\PartialCreate.cshtml" />
+    <Content Include="Views\Mobilization\EmployeMob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

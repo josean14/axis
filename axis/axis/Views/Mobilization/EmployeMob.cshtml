@@ -1,0 +1,214 @@
+﻿@model AXIS.Models.Purchaseorder
+@{
+    ViewBag.Title = "Employee Mobilization";
+}
+
+<h2>MOBILIZATION &raquo; SETUP &raquo; EMPLOYEE MOBILIZATION</h2>
+
+<p>
+    <a href=@Url.Action("Index", "Mobilization") class="btn btn-primary btn-xs">BACK</a>
+
+    <a href=@Url.Action("Index", "Mobilization") class="btn btn-primary btn-xs">TECHNICIANS</a>
+
+    <a href=@Url.Action("Index", "Mobilization") class="btn btn-primary btn-xs">GENERATE EMPLOYEE MOBILIZTION FILE</a>
+</p>
+
+<div class="panelright">
+    <div class="panel panel-axislg">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Project Site Information</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Customer:</p>
+                </th>
+                <th align="center">
+                    <p>@Html.DisplayFor(model => model.Contract.Rfq.Farm.FarmName)</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Axis Job #:</p>
+                </th>
+                <th align="center">
+                    <p>@Html.DisplayFor(model => model.ContractId)</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Customer PO #:</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.PO)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Technicians:</p>
+                </th>
+                <th align="center">
+
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Project Site Name:</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.Contract.Rfq.ProjectName)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Project Site address:</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.Contract.Rfq.Farm.StreetAddress), @Html.DisplayFor(model => model.Contract.Rfq.Farm.City), @Html.DisplayFor(model => model.Contract.Rfq.Farm.State), @Html.DisplayFor(model => model.Contract.Rfq.Farm.ZipCode)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Site Manager:</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.Contract.Rfq.Farm.Client.FullName)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Site Manager Contact:</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.Contract.Rfq.Farm.Client.Street), @Html.DisplayFor(model => model.Contract.Rfq.Farm.Client.City), @Html.DisplayFor(model => model.Contract.Rfq.Farm.Client.State), @Html.DisplayFor(model => model.Contract.Rfq.Farm.Client.ZipCode)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Job Description:</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.Contract.Rversion.ProjectDescription)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Project Start Date:</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.Contract.StartDate)
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Project Start Time:</p>
+                </th>
+                <th align="center">
+                    
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Tooling:</p>
+                </th>
+                <th align="center">
+                    @*@Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter First Name Here.." } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })*@
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Required PPE:</p>
+                </th>
+                <th align="center">
+
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Specialty Item:</p>
+                </th>
+                <th align="center">
+
+                </th>
+            </tr>
+
+        </table>
+
+    </div>
+    
+    <div class="panel panel-axislg">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Travel Information</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Airport Destination:</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.VersionDate</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Departure Date:</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.NumberVersion</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Travel Plans:</p>
+                </th>
+                <th align="center">
+                    @ViewBag.SiteFarm
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Airport Cargo Address</p>
+                </th>
+                <th align="center">
+
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Airport Cargo Contact:</p>
+                </th>
+                <th align="center">
+
+                </th>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="panel panel-axislg">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Lodging Information</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Lodging in Area:</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.VersionDate</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Notes:</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.NumberVersion</p>
+                </th>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
