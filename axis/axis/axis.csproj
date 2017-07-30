@@ -587,6 +587,7 @@
     <Content Include="Views\Shipping\List.cshtml" />
     <Content Include="Views\Flights\PartialCreate.cshtml" />
     <Content Include="Views\Mobilization\EmployeMob.cshtml" />
+    <Content Include="Views\FONMailer\FlightAPV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

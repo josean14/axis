@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
 using System.IO;
+using AXIS.Mailers;
 
 namespace AXIS.Controllers
 {
@@ -101,7 +102,12 @@ namespace AXIS.Controllers
             return File("~/Documents/Flights/" + FieldOperationId + "/" + ImageName, System.Net.Mime.MediaTypeNames.Application.Octet, ImageName);
         }
 
-
+        private IFONMailer _FONMailer = new FONMailer();
+        public IFONMailer FONMailer
+        {
+            get { return _FONMailer; }
+            set { _FONMailer = value; }
+        }
 
         //Aprueba la compra del vuelo
         [HttpPost, ActionName("ApprovedF")]
@@ -114,6 +120,64 @@ namespace AXIS.Controllers
 
             db.Entry(flight).State = EntityState.Modified;
             db.SaveChanges();
+
+            string email = "";
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com";
+
+
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+            //Prueba
+            emailCC = "jagr14@gmail.com";
+
+            try
+            {
+                FONMailer.FlightAPV(flight.FieldOperarions.Tech.FullName, flight.Status, email, emailCC, "", flight.FieldOperarions.PurchaseOrderId).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
 
             return new JsonResult() { Data = "Assigned successfully" };
         }
@@ -129,6 +193,64 @@ namespace AXIS.Controllers
             flight.RejectionComment = comment;
             db.Entry(flight).State = EntityState.Modified;
             db.SaveChanges();
+
+            string email = "";
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com";
+
+
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+            //Prueba
+            emailCC = "jagr14@gmail.com";
+
+            try
+            {
+                FONMailer.FlightAPV(flight.FieldOperarions.Tech.FullName, flight.Status, email, emailCC, comment, flight.FieldOperarions.PurchaseOrderId).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
 
             return new JsonResult() { Data = "Assigned successfully" };
         }

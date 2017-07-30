@@ -274,10 +274,44 @@ namespace AXIS.Mailers
 
         }
 
-     
+        public virtual MvcMailMessage FlightAPV(string FullName, string status, string email, string emailCC, string comment, int PO)
+        {
+            //ViewBag.Data = someObject;
+            ViewBag.FullName = FullName;
+            var mailMessage = new MvcMailMessage();
 
-  
+            switch (status)
+            {
+                case "APPROVED":
+                    mailMessage.Subject = "The flight has been approved";
+                    ViewBag.Msg = "The flight for technician " + FullName + " has been approved for PO " + PO;
+                    break;
 
-       
+                case "DENIED":
+                    mailMessage.Subject = "The flight has been denied";
+                    ViewBag.Msg = "The flight technician for" + FullName + " has been denied for PO " + PO;
+                    break;
+
+            }
+
+
+            ViewBag.Comment = comment;
+
+            mailMessage.To.Add(email);
+            mailMessage.CC.Add(emailCC);
+            PopulateBody(mailMessage, "FlightAPV", null);
+
+
+            SmtpClient mailClient = new SmtpClient();
+
+            mailClient.Timeout = 10;
+            return mailMessage;
+
+
+        }
+
+
+
+
     }
 }
