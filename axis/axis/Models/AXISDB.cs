@@ -60,7 +60,7 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.User> Users { get; set; }
 
-
+        public System.Data.Entity.DbSet<AXIS.Models.AssignmentOfTool> AssignmentOfTools { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

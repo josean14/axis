@@ -38,5 +38,7 @@ namespace AXIS.Models
         public virtual Contract Contract { get; set; }
 
         public virtual List<FieldOperations> FieldOperations { get; set; }
+
+        public virtual AssignmentOfTool AssignmentOfTool { get; set; }
     }
 }

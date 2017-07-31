@@ -80,5 +80,6 @@ namespace AXIS.Models
 
         public virtual List<Flight> Fligh { get; set; }
 
+      
     }
 }

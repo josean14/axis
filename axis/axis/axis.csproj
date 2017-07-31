@@ -243,6 +243,7 @@
     <Compile Include="Autentificacion\UserStore.cs" />
     <Compile Include="Autentificacion\UserTable.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AToolsController.cs" />
     <Compile Include="Controllers\BusDevController.cs" />
     <Compile Include="Controllers\CcallsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
@@ -291,6 +292,7 @@
       <DependentUpon>MainDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AssignmentOfTool.cs" />
     <Compile Include="Models\AXISDB.cs" />
     <Compile Include="Models\Ccall.cs" />
     <Compile Include="Models\Client.cs" />
@@ -588,6 +590,8 @@
     <Content Include="Views\Flights\PartialCreate.cshtml" />
     <Content Include="Views\Mobilization\EmployeMob.cshtml" />
     <Content Include="Views\FONMailer\FlightAPV.cshtml" />
+    <Content Include="Views\ATools\Edit.cshtml" />
+    <Content Include="Views\ATools\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
