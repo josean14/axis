@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -145,6 +147,7 @@ namespace AXIS.Controllers
 
         public ActionResult EmployeMob(int? id)
         {
+            ViewBag.Poid = id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -155,6 +158,25 @@ namespace AXIS.Controllers
                 return HttpNotFound();
             }
             return View(purchaseorder);
+        }
+
+        public ActionResult EmployeMobPDF(int? id)
+        {
+            var allCustomer = db.Purchaseorders.ToList();
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "EmployeeMob.rpt"));
+
+            rd.SetDataSource(allCustomer);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Employee Mobilization.pdf");
         }
 
         //Funciones para Mailer
