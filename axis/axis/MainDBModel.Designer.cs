@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Axis\AXIS RENEWABLE GROUP\AXIS\AXIS\MainDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Axis\Axis website - Copy\Resp 310717\axis\MainDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

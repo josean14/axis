@@ -17,8 +17,8 @@ namespace AXIS.Mailers
             ViewBag.FullName = FullName;
             var mailMessage = new MvcMailMessage
             {
-                Subject = "Sending certificates",
-                ViewName = "Sending certificates"
+                Subject = "Axis Employee Safety Certifications",
+                ViewName = "Axis Employee Safety Certifications"
             };
             var attachmentPath = "";
             var file = "";
