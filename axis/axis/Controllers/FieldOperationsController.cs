@@ -91,7 +91,12 @@ namespace AXIS.Controllers
         {
             FieldOperations fieldOperations = db.FieldOperations.Find(id);
             db.FieldOperations.Remove(fieldOperations);
+
+            Tech tech = db.Teches.Find(fieldOperations.TechId);
+            tech.Status = "BANCH";
+            db.Entry(tech).State = EntityState.Modified;
             db.SaveChanges();
+
             return new JsonResult() { Data = "Deleted successfully" };
         }
 

@@ -235,8 +235,11 @@
                     $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
 
                         if (data = 1) {
-                            var url2 = '@Url.Action("Authorization", "Mobilization")';
-                            window.location.href = url2;
+                          
+
+                            $("#FO" + id).remove();
+                            $("#msg").last().addClass("alert alert-success");
+                            $("#msg").html("Liberty successfully");
                         }
 
                     });
