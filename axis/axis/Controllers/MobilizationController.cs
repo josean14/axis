@@ -242,7 +242,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            email = "jagr14@gmail.com";
+            //email = "jagr14@gmail.com, eduardin23@hotmail.com";
 
 
             string emailCC = "";
@@ -265,7 +265,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            emailCC = "jagr14@gmail.com";
+            //emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
 
             try
             {
@@ -325,12 +325,12 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            email = "jagr14@gmail.com";
+            //email = "jagr14@gmail.com, eduardin23@hotmail.com";
 
             //
             //string emailCC = "jagr14@gmail.com";
             string emailCC = "";
-            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "4");
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
 
             bd = false;
 
@@ -350,7 +350,7 @@ namespace AXIS.Controllers
             }
 
             //Prueba
-            emailCC = "jagr14@gmail.com";
+            //emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
 
             try
             {
@@ -404,7 +404,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            email = "jagr14@gmail.com";
+            //email = "jagr14@gmail.com, eduardin23@hotmail.com";
 
 
             string emailCC = "";
@@ -427,7 +427,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            emailCC = "jagr14@gmail.com";
+            //emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
 
             try
             {
@@ -479,7 +479,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            email = "jagr14@gmail.com";
+            //email = "jagr14@gmail.com, eduardin23@hotmail.com";
 
 
             string emailCC = "";
@@ -502,7 +502,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            emailCC = "jagr14@gmail.com";
+            //emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
 
             try
             {

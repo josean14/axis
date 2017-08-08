@@ -101,6 +101,9 @@
                             $("#FO" + FOId).remove();
                             $("#msg").last().addClass("alert alert-success");
                             $("#msg").html(data);
+
+                            var url2 = '@Url.Action("Create", "FieldOperations")?ContractId=@ViewBag.ContractId';
+                            window.location.href = url2;
                         });
 
                     }

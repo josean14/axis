@@ -77,7 +77,7 @@
                     <a href=@Url.Action("Edit", "ATools", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-wrench btn btn-primary btn-xs" , title="TOOLS"></a> |
                     <a href=@Url.Action("List", "Trucks", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-road btn btn-primary btn-xs" , title="TUCKS"></a> |
                     <a href=@Url.Action("List", "Shipping", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-check btn btn-primary btn-xs" , title="SHIPPING"></a> |
-                    <a href=@Url.Action("EmployeMob", "Mobilization", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-plus-sign btn btn-primary btn-xs" , title="ADD JOB/PO"> P.O.</a>
+                    <a href=@Url.Action("Details", "Contracts", new {id = @item.ContractId }) class="glyphicon glyphicon-plus-sign btn btn-primary btn-xs" , title="ADD JOB/PO"> P.O.</a>
                 </td>
             </tr>
         }

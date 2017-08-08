@@ -122,7 +122,7 @@
 </div>
 
 <p>
-    <a href=@Url.Action("JobChanges", "FieldOps") class="btn btn-primary btn-xs">ADD TECHNICIAN</a>
+    <a href=@Url.Action("Create", "FieldOperations", new { id = @ViewBag.PurchaseOrderId, ContractId = @ViewBag.ContractId }) class="btn btn-primary btn-xs">ADD TECHNICIAN</a>
 </p>
 
 
@@ -214,7 +214,7 @@
 
     function liberty(id) {
         bootbox.confirm({
-            message: "Are you sure to Demob this Technician ?",
+            message: "ARE YOU SURE DEMOB THIS TECHNICIAN?",
             buttons: {
                 confirm: {
                     label: 'YES',
@@ -240,6 +240,9 @@
                             $("#FO" + id).remove();
                             $("#msg").last().addClass("alert alert-success");
                             $("#msg").html("Liberty successfully");
+
+                            var url2 = '@Url.Action("ChangeTeches", "FieldOps")?ContractId=@ViewBag.ContractId';
+                            window.location.href = url2;
                         }
 
                     });

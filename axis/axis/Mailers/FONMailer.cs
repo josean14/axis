@@ -215,7 +215,7 @@ namespace AXIS.Mailers
                     ViewBag.Msg = "The technician "+ FullName +" has been approved for PO "+ PO ;
                     break;
 
-                case "DENIED":
+                case "REJECTED":
                     mailMessage.Subject = "The technician has been denied";
                     ViewBag.Msg = "The technician " + FullName + " has been denied for PO " + PO;
                     break;
@@ -247,12 +247,12 @@ namespace AXIS.Mailers
             switch (status)
             {
                 case "YES":
-                    mailMessage.Subject = "The technician has been approved";
+                    mailMessage.Subject = "APPROVED ADVANCE";
                     ViewBag.Msg = "The technician " + FullName + " has been approved for PO " + PO;
                     break;
 
                 case "NO":
-                    mailMessage.Subject = "The technician has been denied";
+                    mailMessage.Subject = "REJECTED ADVANCE";
                     ViewBag.Msg = "The technician " + FullName + " has been denied for PO " + PO;
                     break;
 
@@ -283,12 +283,12 @@ namespace AXIS.Mailers
             switch (status)
             {
                 case "APPROVED":
-                    mailMessage.Subject = "The flight has been approved";
+                    mailMessage.Subject = "FLIGHT APPROVED";
                     ViewBag.Msg = "The flight for technician " + FullName + " has been approved for PO " + PO;
                     break;
 
-                case "DENIED":
-                    mailMessage.Subject = "The flight has been denied";
+                case "REJECTED":
+                    mailMessage.Subject = "FLIGHT REJECTED";
                     ViewBag.Msg = "The flight technician for" + FullName + " has been denied for PO " + PO;
                     break;
 

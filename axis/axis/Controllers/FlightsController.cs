@@ -142,7 +142,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            email = "jagr14@gmail.com";
+            //email = "jagr14@gmail.com, eduardin23@hotmail.com";
 
 
             string emailCC = "";
@@ -165,7 +165,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            emailCC = "jagr14@gmail.com";
+            //emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
 
             try
             {
@@ -189,7 +189,7 @@ namespace AXIS.Controllers
         {
             Flight flight = db.Flights.Find(id);
 
-            flight.Status = "DENIED";
+            flight.Status = "REJECTED";
             flight.RejectionComment = comment;
             db.Entry(flight).State = EntityState.Modified;
             db.SaveChanges();
@@ -215,7 +215,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            email = "jagr14@gmail.com";
+            //email = "jagr14@gmail.com, eduardin23@hotmail.com";
 
 
             string emailCC = "";
@@ -238,7 +238,7 @@ namespace AXIS.Controllers
                 }
             }
             //Prueba
-            emailCC = "jagr14@gmail.com";
+            //emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
 
             try
             {
