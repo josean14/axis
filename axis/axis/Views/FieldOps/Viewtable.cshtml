@@ -79,7 +79,7 @@
                     @Html.DisplayFor(modelItem => item.Rversion.Rfq.Farm.City),  @Html.DisplayFor(modelItem => item.Rversion.Rfq.Farm.State)
                 </td>
                 <td>
-                    <a href="#" onclick="detailsC(@item.ContractId)" class="glyphicon glyphicon-plus-sign"> Details</a> 
+                    <a href="#" onclick="detailsC(@item.ContractId)" class="glyphicon glyphicon-plus-sign btn btn-primary btn-xs"> Details</a> 
                     <div id="@item.ContractId" style="display: none">
                         @Html.Action("PartialViewtable", "FieldOps", new { ContractId = item.ContractId })
                     </div>

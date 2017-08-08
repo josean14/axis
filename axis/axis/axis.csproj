@@ -346,6 +346,12 @@
       <DependentUpon>EmployeeMob.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\EmployeeMob2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeMob2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Table.cs">
       <DependentUpon>MainDBModel.tt</DependentUpon>
@@ -384,8 +390,6 @@
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -415,6 +419,8 @@
     <None Include="Properties\PublishProfiles\appsmerida.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Axis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\collapse.js" />
     <Content Include="Scripts\dropdown.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -636,6 +642,8 @@
     <Content Include="Views\FONMailer\FlightAPV.cshtml" />
     <Content Include="Views\ATools\Edit.cshtml" />
     <Content Include="Views\ATools\Index.cshtml" />
+    <Content Include="Views\FieldOps\JobChanges.cshtml" />
+    <Content Include="Views\FieldOps\ChangeTeches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -656,6 +664,10 @@
     <EmbeddedResource Include="Reports\EmployeeMob.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeeMob.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\EmployeeMob2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EmployeeMob2.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

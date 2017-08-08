@@ -39,6 +39,8 @@ namespace AXIS.Controllers
             var Purchaseorders = from s in db.Purchaseorders.Include(c => c.Contract).Include(d => d.Contract.Rfq.Farm)
                                  select s;
 
+            Purchaseorders = Purchaseorders.Where(a => a.Status == "OPEN");
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 int numVal;
@@ -76,7 +78,7 @@ namespace AXIS.Controllers
                     Purchaseorders = Purchaseorders.OrderBy(s => s.ContractId);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(Purchaseorders.ToPagedList(pageNumber, pageSize));
         }
@@ -102,6 +104,9 @@ namespace AXIS.Controllers
             //                     select s;
             var approvaltech = from s in db.FieldOperations.Include(c => c.PurchaseOrder).Include(d => d.Tech)
                                select s;
+
+            approvaltech = approvaltech.Where(a => a.status != "REJECTED").Where(a=> a.status != "DEMOBILIZED").Where(b=> b.TechApprovalADV == "PROCESSING");
+            //approvaltech = approvaltech.Where(a => a.status.Contains("PENDING APPROVAL"));
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -162,13 +167,21 @@ namespace AXIS.Controllers
 
         public ActionResult EmployeMobPDF(int? id)
         {
-            var allCustomer = db.Purchaseorders.ToList();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Purchaseorder purchaseorder = db.Purchaseorders.Find(id);
+            if (purchaseorder == null)
+            {
+                return HttpNotFound();
+            }
+            var allCustomer = db.Clients.ToList();
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "EmployeeMob.rpt"));
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "EmployeeMob2.rpt"));
 
             rd.SetDataSource(allCustomer);
-
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
@@ -209,9 +222,9 @@ namespace AXIS.Controllers
             db.SaveChanges();
 
             string email = "";
-                        
+
             var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
-            
+
             bool bd = false;
 
             foreach (var item in users)
@@ -231,7 +244,7 @@ namespace AXIS.Controllers
             //Prueba
             email = "jagr14@gmail.com";
 
-            
+
             string emailCC = "";
             users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
 
@@ -256,8 +269,8 @@ namespace AXIS.Controllers
 
             try
             {
-                FONMailer.TECHAPRV(tech.FullName, fo.status, email, emailCC,"",fo.PurchaseOrderId).Send();
-                
+                FONMailer.TECHAPRV(tech.FullName, fo.status, email, emailCC, "", fo.PurchaseOrderId).Send();
+
             }
             catch (Exception ex)
             {
@@ -279,7 +292,7 @@ namespace AXIS.Controllers
 
             var techid = fo.TechId;
 
-            fo.status = "DENIED";
+            fo.status = "REJECTED";
             fo.TechApprovalADV = "NO";
             fo.RejectionComment = comment;
             db.Entry(fo).State = EntityState.Modified;
@@ -292,7 +305,7 @@ namespace AXIS.Controllers
             db.SaveChanges();
 
             string email = "";
-           
+
             var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
 
             bool bd = false;
@@ -355,7 +368,7 @@ namespace AXIS.Controllers
             return new JsonResult() { Data = "Denied successfully" };
         }
 
-        
+
 
         [HttpPost, ActionName("ApprovalADV")]
         [ValidateAntiForgeryToken]
@@ -365,7 +378,7 @@ namespace AXIS.Controllers
 
             var techid = fo.TechId;
 
-            
+
             fo.TechApprovalADV = "YES";
             db.Entry(fo).State = EntityState.Modified;
             db.SaveChanges();
@@ -428,7 +441,7 @@ namespace AXIS.Controllers
 
             }
 
-            
+
             return new JsonResult() { Data = "Liberty successfully" };
         }
 
@@ -515,7 +528,7 @@ namespace AXIS.Controllers
 
             var techid = fo.TechId;
 
-            fo.status = "CLOSED";
+            fo.status = "DEMOBILIZED";
             db.Entry(fo).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -531,7 +544,7 @@ namespace AXIS.Controllers
     }
 
 
-   
+
 
 
 }

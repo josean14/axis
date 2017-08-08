@@ -139,5 +139,84 @@ namespace AXIS.Controllers
             int pageNumber = (page ?? 1);
             return View(jobboard.ToPagedList(pageNumber, pageSize));
         }
-    }
+
+        // GET: JobChanges
+        public ActionResult JobChanges(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.ContractSortParm = String.IsNullOrEmpty(sortOrder) ? "contract_desc" : "";
+            ViewBag.PonameSortParm = sortOrder == "Poname" ? "poname_desc" : "Poname";
+            ViewBag.DatenameSortParm = sortOrder == "Datetname" ? "datename_desc" : "Datetname";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var Purchaseorders = from s in db.Purchaseorders.Include(c => c.Contract).Include(d => d.Contract.Rfq.Farm)
+                                 select s;
+
+            Purchaseorders = Purchaseorders.Where(a => a.Status == "OPEN");
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                int numVal;
+                if (Int32.TryParse(searchString, out numVal))
+                {
+                    Purchaseorders = Purchaseorders.Where(s => s.ContractId.Equals(numVal));
+                    //rfqss = rfqss.Where(s => s.RfqId.Equals(numVal) && s.Farm.TypeFarm == TypeFarm.Solar);
+                }
+                else
+                {
+                    Purchaseorders = Purchaseorders.Where(s => s.PurchaseOrderId.Equals(0));
+                    ViewBag.Message = "Invalid PO AXIS#";
+                }
+
+            }
+
+            switch (sortOrder)
+            {
+                case "contract_desc":
+                    Purchaseorders = Purchaseorders.OrderByDescending(s => s.ContractId);
+                    break;
+                case "Poname":
+                    Purchaseorders = Purchaseorders.OrderBy(s => s.PurchaseOrderId);
+                    break;
+                case "poname_desc":
+                    Purchaseorders = Purchaseorders.OrderByDescending(s => s.PurchaseOrderId);
+                    break;
+                case "Datename":
+                    Purchaseorders = Purchaseorders.OrderBy(s => s.Date);
+                    break;
+                case "datename_desc":
+                    Purchaseorders = Purchaseorders.OrderByDescending(s => s.Date);
+                    break;
+                default: //Contract ascending
+                    Purchaseorders = Purchaseorders.OrderBy(s => s.ContractId);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(Purchaseorders.ToPagedList(pageNumber, pageSize));
+        }
+
+        // GET: ChangeTeches
+        public ActionResult ChangeTeches(int? id, int? ContractId)
+        {
+            ViewBag.ContractId = ContractId;
+            ViewBag.PurchaseOrderId = id;
+
+            var technicians = from s in db.FieldOperations.Include(c => c.PurchaseOrder).Where(d => d.PurchaseOrderId == id)
+                              select s;
+
+            technicians = technicians.Where(a=> a.status == "ASSIGNED");
+
+            return View(technicians.ToList());
+        }
+     }
 }

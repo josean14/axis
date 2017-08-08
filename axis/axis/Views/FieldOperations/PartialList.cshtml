@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AXIS.Models.FieldOperations>
+﻿    @model IEnumerable<AXIS.Models.FieldOperations>
 
 
 <div class="panel panel-default">
@@ -84,7 +84,7 @@
 
                         @{
 
-                            if (item.status == "DENIED")
+                            if (item.status == "PENDING APPROVAL")
                             {
                                 <a href="" onclick="confirmDelete(@item.FieldOperationsId); return false;" class="glyphicon glyphicon-remove"></a>
                             }

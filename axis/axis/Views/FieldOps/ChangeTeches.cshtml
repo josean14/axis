@@ -1,127 +1,95 @@
-﻿@model PagedList.IPagedList<AXIS.Models.FieldOperations>
-@using PagedList.Mvc;
+﻿@model IEnumerable<AXIS.Models.FieldOperations>
+
 @{
-    ViewBag.Title = "AUTHORIZATION MOBILIZATION";
+    ViewBag.Title = "MOBILIZATION CHANGES";
 }
 
-<h2>MOBILIZATION &raquo; AUTHORIZATION</h2>
+<h2>MOBILIZATION &raquo; JOB CHANGES &raquo; TECHNICIANS</h2>
 
 <p>
-    <a href=@Url.Action("Index", "FieldOps") class="btn btn-primary btn-xs">BACK</a>
+    <a href=@Url.Action("JobChanges", "FieldOps") class="btn btn-primary btn-xs">BACK</a>
 </p>
 
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading">
-        @using (Html.BeginForm("Authorization", "Mobilization", FormMethod.Get))
-        {
-            <p>
-                FIND BY JOB #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
-                <input type="submit" value="SEARCH" />
-            </p>
-        }
+<div class="panelright">
+    <div class="panel panel-axislg right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">JOB # @ViewBag.ContractId  AXIS PO # @ViewBag.PurchaseOrderId</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>SITE NAME:</p>
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+                        
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>RESOURCE MANAGER:</p>
+                </th>
+                <th align="center">
+                    <div class="col-md-10">
+
+                    </div>
+                </th>
+            </tr>
+        </table>
+
     </div>
+</div>
+
+
+<div class="panel panel-default">
 
     <table class="table table-bordered">
-        <tr>
-            <th align="center" width="100 px">
-                @Html.ActionLink("JOB #", "Authorization", new { sortOrder = ViewBag.ContractSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th>
-                SITE NAME
-            </th>
-            <th>
-                @Html.ActionLink("AXIS P.O.", "Authorization", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th align="center">
-                TECHNICIAN NAME
-            </th>
-            <th>
-                TECHNICIAN STATUS
-            </th>
-            <th>
-                ADVANCE STATUS
-            </th>
-            <th align="center">
-                PER DIEM ADVANCE
-            </th>
-        </tr>
+        <thead class="tr-axis">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaseOrder.PO)
+                </th>
+                <th align="center">
+                    FULL NAME
+                </th>
+                <th align="center">
+                    @Html.DisplayNameFor(model => model.status)
 
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PerDiemAdvance)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.TechApprovalADV)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CertificatesStatus)
+                </th>
+                <th align="center">
+                    ACTIONS
+                </th>
+            </tr>
+        </thead>
         @foreach (var item in Model)
-        {
-            var ident = "Contract" + @item.PurchaseOrder.ContractId;
-
+            {
+                var ident = "FO" + @item.FieldOperationsId;
             <tr id=@ident>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PurchaseOrder.ContractId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PurchaseOrder.Contract.Rversion.Rfq.Farm.FarmName)
-                </td>
-                <td align="center">
-                    @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+                    @Html.DisplayFor(modelItem => item.PurchaseOrder.PO)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Tech.FullName)
                 </td>
+
                 <td>
-                    @{
-                        if (item.status == "PENDING APPROVAL")
-                        {
-
-                            @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectd(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
-                            <span> </span>
-
-                             @Html.ActionLink(" ",null, null, new { href="", onclick = "approval("+item.FieldOperationsId+"); return false;", @class="glyphicon glyphicon-ok btn btn-primary btn-xs"})
-                            
-                        }
-                    }
-
-                    @*@{
-                        if (item.status == "ASSIGNED")
-                        {
-                            @Html.ActionLink(" ", null, null, new { href = "", onclick = "liberty(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
-                            
-                        }
-                    }*@
-                    
-                    
-
-                    <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="@item.RejectionComment"> @Html.DisplayFor(modelItem => item.status) </a>
+                    @Html.DisplayFor(modelItem => item.status)
                 </td>
-                <td>
-                    @{
-                        if (item.status == "ASSIGNED")
-                        {
-                            
-                            if (item.TechApprovalADV == "PROCESSING")
-                            {
-                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectdADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })                                 
-
-                                <span> </span>
-                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
-                                
-                            }
-
-                            @*if (item.TechApprovalADV == "YES")
-                            {
-                                @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectdADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" }) 
-                            }
-
-                            if (item.TechApprovalADV == "NO")
-                            {
-                                  @Html.ActionLink(" ", null, null, new { href = "", onclick = "approvalADV(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" }) 
-                            }*@
-
-                        }
-                    }
-                    
-                    <a class="test" href="#" data-toggle="tooltip" data-placement="top" title="@item.ARejectionComment">  @Html.DisplayFor(modelItem => item.TechApprovalADV) </a>
-</td>
                 <td align="center">
                     @{
                         int b = (int)item.PerDiemAdvance;
-                        if (b==7)
+                        if (b == 7)
                         {
                             <p>7 DAYS</p>
                         }
@@ -135,22 +103,32 @@
                         }
                     }
                 </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.TechApprovalADV)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.CertificatesStatus)
+                </td>
+                <td>
+                    @{
+                        @Html.ActionLink(" DEMOB", null, null, new { href = "", onclick = "liberty(" + item.FieldOperationsId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
+                     }
+
+                </td>
             </tr>
-        }
+                        }
 
     </table>
-
-    <div class="panel-footer">
-        <div class="row">
-            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
-
-            @Html.PagedListPager(Model, page => Url.Action("Authorization",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-        </div>
-    </div>
 </div>
+
+<p>
+    <a href=@Url.Action("JobChanges", "FieldOps") class="btn btn-primary btn-xs">ADD TECHNICIAN</a>
+</p>
+
+
 @Html.AntiForgeryToken()
-<script src="/Scripts/jquery.min.js"></script>
+<p id="msg"></p>
+
 <script>
     function approval(id) {
         bootbox.confirm({
@@ -186,7 +164,7 @@
 
                     });
 
-                } 
+                }
             }
         });
 
@@ -194,7 +172,7 @@
     }
 
     function rejectd(id) {
-        
+
         bootbox.prompt({
             title: "Are you sure to rejectd this Technician ?",
             inputType: 'textarea',
@@ -213,7 +191,7 @@
                 var url2 = '@Url.Action("Authorization", "Mobilization")';
 
                 if (result) {
-                    
+
                     var url = "/Mobilization/Denied/";
                     var anti = $('[name=__RequestVerificationToken]').val();
 
@@ -317,7 +295,7 @@
             callback: function (result) {
 
                 if (result) {
-                    
+
                     var url = "/Mobilization/UnapprovalADV/";
 
                     var anti = $('[name=__RequestVerificationToken]').val();
@@ -336,5 +314,5 @@
     }
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
-    }); 
+    });
 </script>
