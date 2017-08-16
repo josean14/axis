@@ -16,6 +16,7 @@ namespace AXIS.Controllers
     {
         private AXISDB db = new AXISDB();
         private AXISDB db2 = new AXISDB();
+        private AXISDB db3 = new AXISDB();
 
         // GET: FieldOps
         public ActionResult Index()
@@ -28,11 +29,12 @@ namespace AXIS.Controllers
         {
             //var rversions = db.Rversions.Where(c => c.Status == "Contract").Include(Rfq);
             //var datos2 = db.Rfqs.Include(c => c.Farm).Where(r => r.Status == "Contract");
-            var datos = db.Contracts.Include(c => c.Rversion).Include(d => d.Rversion.Rfq.Farm).Where(r => r.Rversion.Status == "Contract");
+            var datos = db.Contracts.Include(c => c.Rversion).Include(d => d.Rversion.Rfq.Farm).Include(t=>t.User).Where(r => r.Rversion.Status == "Contract");
             var teches = db2.FieldOperations.Include(b => b.Tech).Include(g => g.PurchaseOrder);
-            
+            var pos = db3.Purchaseorders.Include(c => c.Contract);
             string markers = "[";
             string markers2 = "";
+            string markers3 = "";
             int numVal;
             foreach (var item in datos)
             {
@@ -42,13 +44,25 @@ namespace AXIS.Controllers
 
                 markers += "{";
                 markers += string.Format("'Id': '{0}',", item.ContractId);
+
+                var pos2 = pos.Where(n => n.ContractId == item.ContractId).Where(m => m.Status == "OPEN");
+                foreach (var item3 in pos2)
+                {
+                    markers3 += "";
+                    markers3 += string.Format(" {0}, ", item3.PO);
+                }
+                markers += string.Format("'POS': '{0}',", markers3);
+                markers3 = "";
+
                 markers += string.Format("'PlaceName': '{0}',", item.Rversion.Rfq.Farm.FarmName);
+                markers += string.Format("'ProjectName': '{0}',", item.Rversion.Rfq.ProjectName);
+                markers += string.Format("'ResouceManager': '{0}',", item.User.UserName);
                 markers += string.Format("'TypeFarm': '{0}',", item.Rversion.Rfq.Farm.TypeFarm);
                 markers += string.Format("'GeoLat': '{0}',", item.Rversion.Rfq.Farm.GeoLat);
                 markers += string.Format("'GeoLong': '{0}',", item.Rversion.Rfq.Farm.GeoLong);
                 markers += string.Format("'Rfq': '{0}',", item.RfqId);
 
-                var teches2 = teches.Where(s => s.PurchaseOrder.ContractId == item.ContractId);
+                var teches2 = teches.Where(s => s.PurchaseOrder.ContractId == item.ContractId).Where(r => r.status == "ASSIGNED");
                 foreach (var item2 in teches2)
                 {
                     markers2 += "";

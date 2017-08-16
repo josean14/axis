@@ -24,8 +24,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         
-        <div class="panelright">
-            <div class="panel panel-axis right">
+            <div class="panel panel-axisxl right">
                 <!-- Default panel contents -->
                 <div class="panel-heading">RFQ # @ViewBag.RfqId  VER # @ViewBag.rversion</div>
 
@@ -95,7 +94,7 @@
                 </table>
 
             </div>
-        </div>
+
 
         @Html.HiddenFor(model => model.RfqId)
         @Html.HiddenFor(model => model.RversionId)
