@@ -62,6 +62,12 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.AssignmentOfTool> AssignmentOfTools { get; set; }
 
+        public System.Data.Entity.DbSet<AXIS.Models.Truck> Trucks { get; set; }
+
+        public System.Data.Entity.DbSet<AXIS.Models.AssignmentOfToolsByJob> AssignmentOfToolsByJobs { get; set; }
+
+        public System.Data.Entity.DbSet<AXIS.Models.AssignmentOfToolsByTruck> AssignmentOfToolsByTrucks { get; set; }
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<User>().

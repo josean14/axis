@@ -40,5 +40,8 @@ namespace AXIS.Models
         public virtual List<FieldOperations> FieldOperations { get; set; }
 
         public virtual AssignmentOfTool AssignmentOfTool { get; set; }
+
+        public virtual Truck Truck { get; set; }
+
     }
 }

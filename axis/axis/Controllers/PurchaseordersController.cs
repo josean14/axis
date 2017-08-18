@@ -139,7 +139,23 @@ namespace AXIS.Controllers
                 purchaseorder.Date = DateTime.Now;
                 purchaseorder.File = _FileName;
                 db.Purchaseorders.Add(purchaseorder);
+
+
+                AssignmentOfTool ATool = new AssignmentOfTool();
+
+                Truck Truck = new Truck();
+
+                ATool.PurchaseOrderId = purchaseorder.PurchaseOrderId;
+                Truck.PurchaseOrderId = purchaseorder.PurchaseOrderId;
+                Truck.Status = "Pending";
+
+                db.AssignmentOfTools.Add(ATool);
+                db.Trucks.Add(Truck);
+
                 db.SaveChanges();
+
+                
+
                 return RedirectToAction("Details", "Contracts", new { id = purchaseorder.ContractId });
             }
 

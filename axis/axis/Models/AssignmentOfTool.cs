@@ -29,7 +29,6 @@ namespace AXIS.Models
         public virtual int PurchaseOrderId { get; set; }
 
         [DisplayName("SUPPLIED BY")]
-        [Required(ErrorMessage = "The 'supplied by' is required.")]
         public virtual SuppliedBy? SuppliedBy { get; set; }
 
         [DisplayName("ADITIONAL INFO.")]
