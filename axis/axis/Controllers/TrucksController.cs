@@ -1,17 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AXIS.Models;
 
 namespace AXIS.Controllers
 {
     public class TrucksController : Controller
     {
-        // GET: Trucks
-        public ActionResult List()
+        private AXISDB db = new AXISDB();
+
+
+       
+
+        // GET: Trucks/Edit/5
+        public ActionResult Edit(int? id, int ContractId)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Truck truck = db.Trucks.Find(id);
+            if (truck == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PurchaseOrderId = id;
+            ViewBag.ContractId = id;
+            return View(truck);
+        }
+
+        // POST: Trucks/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "PurchaseOrderId,NumberTrucks,RentalAgency,Status")] Truck truck, int ContractId)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(truck).State = EntityState.Modified;
+                db.SaveChanges();
+
+                if (truck.Status == "Pending") {
+                    // Se agregan los registros de trucks
+
+                }
+
+                return RedirectToAction("Index", "Mobilization");
+            }
+           
+            return View(truck);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
