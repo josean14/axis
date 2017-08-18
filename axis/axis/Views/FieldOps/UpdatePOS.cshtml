@@ -1,0 +1,91 @@
+﻿@model PagedList.IPagedList<AXIS.Models.Purchaseorder>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "UPDATE POS INFORMATION";
+}
+
+<h2>JOB PROCESS &raquo; UPDATE PO´S INFORMATION</h2>
+<p>
+    <a href=@Url.Action("Index", "FieldOps") class="btn btn-primary btn-xs">BACK</a>
+</p>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("Index", "Mobilization", FormMethod.Get))
+        {
+            <p>
+                FIND BY JOB #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="SEARCH" />
+            </p>
+        }
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th align="center" width="100 px">
+                @Html.ActionLink("JOB #", "Index", new { sortOrder = ViewBag.ContractSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                SITE NAME
+            </th>
+            <th>
+                @Html.ActionLink("AXIS P.O.", "Index", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th align="center">
+                CLIENT P.O.
+            </th>
+
+            <th>
+                @Html.ActionLink("DATE P.O.", "Index", new { sortOrder = ViewBag.DatenameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+
+            <th>
+                STATUS
+            </th>
+            <th align="center">
+                <p>ACTIONS</p>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var ident = "Purchaseorder" + @item.ContractId;
+
+            <tr id=@ident>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContractId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contract.Rversion.Rfq.Farm.FarmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td align="center">
+                    <a href=@Url.Action("Create", "FieldOperations", new {id = @item.PurchaseOrderId, ContractId = @item.ContractId }) class="glyphicon glyphicon-refresh btn btn-primary btn-xs" , title="TECHNICIANS"></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="panel-footer">
+        <div class="row">
+            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>

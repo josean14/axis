@@ -648,6 +648,8 @@
     <Content Include="Views\ATools\Index.cshtml" />
     <Content Include="Views\FieldOps\JobChanges.cshtml" />
     <Content Include="Views\FieldOps\ChangeTeches.cshtml" />
+    <Content Include="Views\FieldOps\UpdatePOS.cshtml" />
+    <Content Include="Views\ATools\PartialToolsbyJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

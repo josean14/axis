@@ -32,9 +32,14 @@
                         <li><a href=@Url.Action("JobChanges","FieldOps")>JOB CHANGES</a></li>
                     </ul>
                 </li>
+                <li data-toggle="collapse" data-target="#JOBPROCESS" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> JOB PROCESS <span class="arrow"></span></a>
+                    <ul class="sub-menu collapse" id="JOBPROCESS">
+                        <li><a href=@Url.Action("UpdatePOS","FieldOps")>UPDATE PO'S</a></li>
+                    </ul>
+                </li>
                 <li data-toggle="collapse" data-target="#DEMOB" class="collapsed">
                     <a href="#"><i class="fa fa-globe fa-lg"></i> DEMOBILIZATION <span class="arrow"></span></a>
-
                     <ul class="sub-menu collapse" id="DEMOB">
                         <li><a href=@Url.Action("Index","")>CLOSE PO'S</a></li>
                         <li><a href=@Url.Action("Index","")>CLOSE JOB'S</a></li>

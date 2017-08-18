@@ -85,5 +85,10 @@ namespace AXIS.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult PartialToolsbyJob()
+        {
+            return PartialView();
+        }
     }
 }
