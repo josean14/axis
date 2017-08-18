@@ -264,6 +264,7 @@
     <Compile Include="Autentificacion\UserStore.cs" />
     <Compile Include="Autentificacion\UserTable.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\AToolsController.cs" />
     <Compile Include="Controllers\BusDevController.cs" />
     <Compile Include="Controllers\CcallsController.cs" />
@@ -664,6 +665,10 @@
     <Content Include="Views\ToolsByTrucks\Details.cshtml" />
     <Content Include="Views\ToolsByTrucks\Edit.cshtml" />
     <Content Include="Views\ToolsByTrucks\Index.cshtml" />
+    <Content Include="Views\Assets\Inventory.cshtml" />
+    <Content Include="Views\Assets\PartialMenu.cshtml" />
+    <Content Include="Views\Assets\InvWarehouse.cshtml" />
+    <Content Include="Views\Assets\PartialInvWarehousebyJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

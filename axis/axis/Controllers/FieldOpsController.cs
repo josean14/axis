@@ -98,7 +98,7 @@ namespace AXIS.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.ContractSortParm = String.IsNullOrEmpty(sortOrder) ? "contract_desc" : "";
             ViewBag.SitenameSortParm = sortOrder == "Sitename" ? "sitename_desc" : "Sitename";
-            ViewBag.DatenameSortParm = sortOrder == "Datetname" ? "datename_desc" : "Datetname";
+            ViewBag.DatenameSortParm = sortOrder == "Datename" ? "datename_desc" : "Datename";
             if (searchString != null)
             {
                 page = 1;
@@ -149,7 +149,7 @@ namespace AXIS.Controllers
                     jobboard = jobboard.OrderBy(s => s.ContractId);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(jobboard.ToPagedList(pageNumber, pageSize));
         }

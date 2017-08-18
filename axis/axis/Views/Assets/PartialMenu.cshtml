@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Field Operations";
+}
+
+
+<div class="row">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="nav-side-menu">
+        <div class="brand">
+            <a href=@Url.Action("Index","Home")>HOME</a>
+        </div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+        <div class="menu-list">
+
+            <ul id="menu-content" class="menu-content collapse out">
+
+                <li data-toggle="collapse" data-target="#INV" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> INVENTORY<span class="arrow"></span></a>
+                    <ul class="sub-menu collapse" id="INV">
+                        <li><a href=@Url.Action("Index","Home")>BY TECHNICIAN</a></li>
+                        <li><a href=@Url.Action("Index", "ToolbyJob")>BY JOB</a></li>
+                        <li><a href=@Url.Action("Index","ToolsByTrucks")>BY TRUCK</a></li>
+                        <li><a href=@Url.Action("InvWarehouse","Assets")>WAREHOUSE</a></li>
+                        <li><a href=@Url.Action("Index","Home")>NEW CATEGORY</a></li>
+                    </ul>
+                </li>
+                <li data-toggle="collapse" data-target="#REPORTS" class="collapsed">
+                    <a href="#"><i class="fa fa-globe fa-lg"></i> REPORTS<span class="arrow"></span></a>
+                    <ul class="sub-menu collapse" id="REPORTS">
+                        <li><a href=@Url.Action("Index","Home")>BY TECHNICIAN</a></li>
+                        <li><a href=@Url.Action("Index", "ToolbyJob")>BY JOB</a></li>
+                        <li><a href=@Url.Action("Index","ToolsByTrucks")>TRUCK</a></li>
+                        <li><a href=@Url.Action("Index","Home")>FULL INVENTORY</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+

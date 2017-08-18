@@ -1,0 +1,75 @@
+﻿@model IEnumerable<AXIS.Models.AssignmentOfToolsByJob>
+
+<div class="panel panel-default">
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("MANUFACTURER", "Index", new { sortOrder = ViewBag.ManufacturerSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                MODEL
+            </th>
+            <th>
+                SERIAL # 1
+            </th>
+            <th>
+                SERIAL # 2
+            </th>
+            <th>
+                STATUS
+            </th>
+            <th>
+                CALIBRATION DATE
+            </th>
+            <th>
+                ADITIONAL INFO 1
+            </th>
+            <th>
+                ADITIONAL INFO 2
+            </th>
+            <th>
+                @Html.ActionLink("CATEGORY", "Index", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serial1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Serial2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CDMD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Additional1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Additional2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>
+
+@Html.AntiForgeryToken()
+<p id="msg"></p>
