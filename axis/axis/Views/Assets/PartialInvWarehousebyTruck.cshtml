@@ -1,27 +1,16 @@
-﻿@model PagedList.IPagedList<AXIS.Models.AssignmentOfToolsByTruck>
-@using PagedList.Mvc;
-@{
-    ViewBag.Title = "INVENTORY BY TRUCKS";
-}
-
-<h2>ASSETS &raquo; INVENTORY BY TRUCKS</h2>
-
-<p>
-    <a href=@Url.Action("Inventory", "Assets") class="btn btn-primary btn-xs">BACK</a>
-</p>
+﻿@model IEnumerable<AXIS.Models.AssignmentOfToolsByTruck>
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
-        @using (Html.BeginForm("Index", "ToolbyTrucks", FormMethod.Get))
+        @using (Html.BeginForm("PartialInvWarehousebyTruck", "Assets", FormMethod.Get))
         {
             <p>
-                FIND BY JOB #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                FIND BY CATEGORY NAME: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
                 <input type="submit" value="SEARCH" />
             </p>
         }
     </div>
-
     <table class="table">
         <tr>
             <th>
@@ -47,9 +36,6 @@
             </th>
             <th>
                 @Html.ActionLink("CATEGORY", "PartialInvWarehousebyTruck", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th>
-                @Html.ActionLink("CATEGORY", "PartialInvWarehousebyTruck", new { sortOrder = ViewBag.TruckSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
 
         </tr>
@@ -86,13 +72,7 @@
         }
 
     </table>
-
-    <div class="panel-footer">
-        <div class="row">
-            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
-
-            @Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-        </div>
-    </div>
 </div>
+
+@Html.AntiForgeryToken()
+<p id="msg"></p>

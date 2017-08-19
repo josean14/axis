@@ -1,20 +1,26 @@
 ﻿@model IEnumerable<AXIS.Models.AssignmentOfToolsByJob>
 
 <div class="panel panel-default">
-
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("PartialInvWarehousebyJob", "Assets", FormMethod.Get))
+        {
+            <p>
+                FIND BY CATEGORY NAME: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="SEARCH" />
+            </p>
+        }
+    </div>
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("MANUFACTURER", "Index", new { sortOrder = ViewBag.ManufacturerSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("MANUFACTURER", "PartialInvWarehousebyJob", new { sortOrder = ViewBag.ManufacturerSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
                 MODEL
             </th>
             <th>
-                SERIAL # 1
-            </th>
-            <th>
-                SERIAL # 2
+                SERIAL #
             </th>
             <th>
                 STATUS
@@ -22,14 +28,9 @@
             <th>
                 CALIBRATION DATE
             </th>
+
             <th>
-                ADITIONAL INFO 1
-            </th>
-            <th>
-                ADITIONAL INFO 2
-            </th>
-            <th>
-                @Html.ActionLink("CATEGORY", "Index", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("CATEGORY", "PartialInvWarehousebyJob", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
 
         </tr>
@@ -47,19 +48,10 @@
                     @Html.DisplayFor(modelItem => item.Serial1)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Serial2)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CDMD)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Additional1)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Additional2)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Category)

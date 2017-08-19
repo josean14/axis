@@ -669,6 +669,7 @@
     <Content Include="Views\Assets\PartialMenu.cshtml" />
     <Content Include="Views\Assets\InvWarehouse.cshtml" />
     <Content Include="Views\Assets\PartialInvWarehousebyJob.cshtml" />
+    <Content Include="Views\Assets\PartialInvWarehousebyTruck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

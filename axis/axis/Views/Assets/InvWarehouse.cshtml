@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-md-4">
-        <div class="btnaxis btnaxis-axis btnaxis-lg" id="Tuck">A TUCK</div>
+        <div class="btnaxis btnaxis-axis btnaxis-lg" id="Truck">A TRUCK</div>
     </div>
 
     <div class="col-md-4">
@@ -26,18 +26,31 @@
 
 </div>
 
+<br />
+
 <div id="Byjob" style="display: none">
     @Html.Action("PartialInvWarehousebyJob", "Assets")
 </div>
+
+<div id="Bytruck" style="display: none">
+    @Html.Action("PartialInvWarehousebyTruck", "Assets")
+</div>
+
 <script src="/Scripts/jquery.min.js"></script>
 @*<br />
-@Html.Action("PartialInvWarehousebyJob", "Assets")
+    @Html.Action("PartialInvWarehousebyTruck", "Assets")
 <br />*@
 
 <script>
     $(document).ready(function () {
         $("#Job").click(function () {
             $("#Byjob").toggle("slow");
+        });
+    });
+
+    $(document).ready(function () {
+        $("#Truck").click(function () {
+            $("#Bytruck").toggle("slow");
         });
     });
 

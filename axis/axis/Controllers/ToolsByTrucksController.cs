@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using PagedList;
 
 namespace AXIS.Controllers
 {
@@ -15,9 +16,65 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
         // GET: ToolsByTrucks
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.AssignmentOfToolsByTrucks.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TruckIdSortParm = String.IsNullOrEmpty(sortOrder) ? "truckId_desc" : "";
+            ViewBag.CategorySortParm = sortOrder == "Category" ? "category_desc" : "Category";
+            ViewBag.ManufacturerSortParm = sortOrder == "Manufacturer" ? "manufacturer_desc" : "Manufacturer";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var ToolsbyTruck = from s in db.AssignmentOfToolsByTrucks.Where(c => c.Location == "JOB")
+                             select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                int numVal;
+                if (Int32.TryParse(searchString, out numVal))
+                {
+                    ToolsbyTruck = ToolsbyTruck.Where(s => s.TruckId.Equals(numVal));
+                }
+                else
+                {
+                    ToolsbyTruck = ToolsbyTruck.Where(s => s.TruckId.Equals(0));
+                    ViewBag.Message = "Invalid TruckId#";
+                }
+
+            }
+
+            switch (sortOrder)
+            {
+                case "truckId_desc":
+                    ToolsbyTruck = ToolsbyTruck.OrderByDescending(s => s.TruckId);
+                    break;
+                case "Category":
+                    ToolsbyTruck = ToolsbyTruck.OrderBy(s => s.Category);
+                    break;
+                case "category_desc":
+                    ToolsbyTruck = ToolsbyTruck.OrderByDescending(s => s.Category);
+                    break;
+                case "Manufacturer":
+                    ToolsbyTruck = ToolsbyTruck.OrderBy(s => s.Manufacturer);
+                    break;
+                case "manufacturer_desc":
+                    ToolsbyTruck = ToolsbyTruck.OrderByDescending(s => s.Manufacturer);
+                    break;
+                default: //Contract ascending
+                    ToolsbyTruck = ToolsbyTruck.OrderBy(s => s.TruckId);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(ToolsbyTruck.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: ToolsByTrucks/Details/5
