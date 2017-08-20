@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AXIS.Models.TruckDetail>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Truck.RentalAgency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlateNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Other1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Truck.RentalAgency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlateNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Other1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TruckId, ContractId = @ViewBag.ContractId }) 
+
+        </td>
+    </tr>
+}
+
+</table>

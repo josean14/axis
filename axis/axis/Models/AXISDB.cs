@@ -68,6 +68,8 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.AssignmentOfToolsByTruck> AssignmentOfToolsByTrucks { get; set; }
 
+        public System.Data.Entity.DbSet<AXIS.Models.TruckDetail> TruckDetails { get; set; }
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<User>().

@@ -40,7 +40,7 @@
                                 else
                                 {
                                     <div class="col-md-10">
-                                        <label>Model.NumberTrucks</label>
+                                        <label>@Model.NumberTrucks</label>
                                         @Html.HiddenFor(model => model.NumberTrucks)
                                     </div>
                                 }
@@ -73,8 +73,14 @@
 
         </div>
     </div>
-    
-}
+
+   
+    <div>
+        @Html.Action("PartialList", "TruckDetails", new { PurchaseOrderId = @Model.PurchaseOrderId, ContractId = @ViewBag.ContractId })
+    </div>
+
+        
+  }
 
 
 

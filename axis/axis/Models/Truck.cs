@@ -28,5 +28,7 @@ namespace AXIS.Models
 
 
         public virtual Purchaseorder Purchaseorder { get; set; }
+
+        public virtual ICollection<TruckDetail> TruckDetails { get; set; }
     }
 }

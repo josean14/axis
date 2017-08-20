@@ -43,19 +43,37 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                TruckDetail truckdetail = new TruckDetail();
+
                 db.Entry(truck).State = EntityState.Modified;
-                db.SaveChanges();
+                
 
                 if (truck.Status == "Pending") {
                     // Se agregan los registros de trucks
+                    int bd = 0;
+                    for (int i = 0; i < truck.NumberTrucks; i++)
+                    {
+                        truckdetail.PurchaseOrderId = truck.PurchaseOrderId;
+                        db.TruckDetails.Add(truckdetail);
+                        db.SaveChanges();
+
+                        if (bd == 0) {
+                            truck.Status = "Completed";
+                            bd = 1;
+                        }
+
+                    }
 
                 }
+
+                db.SaveChanges();
 
                 return RedirectToAction("Index", "Mobilization");
             }
            
             return View(truck);
         }
+
 
         protected override void Dispose(bool disposing)
         {
