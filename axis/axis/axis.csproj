@@ -674,6 +674,7 @@
     <Content Include="Views\Assets\PartialInvWarehousebyTruck.cshtml" />
     <Content Include="Views\TruckDetails\Edit.cshtml" />
     <Content Include="Views\TruckDetails\PartialList.cshtml" />
+    <Content Include="Views\Mobilization\AuthorizationTrucks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

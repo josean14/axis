@@ -47,8 +47,13 @@ namespace AXIS.Controllers
 
                 db.Entry(truck).State = EntityState.Modified;
                 
+                //if (truck.Status== "PENDING ASSIGNMENT")
+                //{
+                //    truck.Status = "PENDING APPROVAL";
+                //}
 
-                if (truck.Status == "Pending") {
+                if (truck.Status == "PENDING ASSIGNMENT")
+                {
                     // Se agregan los registros de trucks
                     int bd = 0;
                     for (int i = 0; i < truck.NumberTrucks; i++)
@@ -57,13 +62,12 @@ namespace AXIS.Controllers
                         db.TruckDetails.Add(truckdetail);
                         db.SaveChanges();
 
-                        if (bd == 0) {
-                            truck.Status = "Completed";
+                        if (bd == 0)
+                        {
+                            truck.Status = "COMPLETED";
                             bd = 1;
                         }
-
                     }
-
                 }
 
                 db.SaveChanges();

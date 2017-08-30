@@ -1,0 +1,186 @@
+﻿@model PagedList.IPagedList<AXIS.Models.Truck>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "AUTHORIZATION MOBILIZATION";
+}
+
+<h2>MOBILIZATION &raquo; AUTHORIZATION OF TRUCKS</h2>
+
+<p>
+    <a href=@Url.Action("Index", "FieldOps") class="btn btn-primary btn-xs">BACK</a>
+</p>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("AuthorizationTrucks", "Mobilization", FormMethod.Get))
+        {
+            <p>
+                FIND BY JOB #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="SEARCH" />
+            </p>
+        }
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th align="center" width="100 px">
+                @Html.ActionLink("JOB #", "Authorization", new { sortOrder = ViewBag.ContractSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                SITE NAME
+            </th>
+            <th>
+                @Html.ActionLink("AXIS P.O.", "Authorization", new { sortOrder = ViewBag.PonameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th align="center">
+                CLIENT P.O.
+            </th>
+            <th>
+                STATUS
+            </th>
+            <th>
+                NUMBER OF TRUCK REQUIRED
+            </th>
+            <th>
+                ACTIONS
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var ident = @item.PurchaseOrderId;
+
+            <tr id=@ident>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchaseorder.ContractId)
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchaseorder.Contract.Rfq.Farm.FarmName)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.PurchaseOrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Purchaseorder.PO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberTrucks)
+                </td>
+                <td>
+                    @{
+                        if (item.Status == "PENDING APPROVAL")
+                        {
+
+                            @Html.ActionLink(" ", null, null, new { href = "", onclick = "rejectd(" + item.PurchaseOrderId + "); return false;", @class = "glyphicon glyphicon-remove btn btn-primary btn-xs" })
+                            <span> </span>
+
+                            @Html.ActionLink(" ", null, null, new { href = "", onclick = "approval(" + item.PurchaseOrderId + "); return false;", @class = "glyphicon glyphicon-ok btn btn-primary btn-xs" })
+
+                        }
+                    }
+                </td>
+
+            </tr>
+                        }
+
+    </table>
+
+    <div class="panel-footer">
+        <div class="row">
+            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Authorization",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>
+
+@Html.AntiForgeryToken()
+<script src="/Scripts/jquery.min.js"></script>
+<script>
+    function approval(id) {
+        bootbox.confirm({
+            message: "ARE YOU SURE TO APPROVE THIS TRUCKS?",
+            buttons: {
+                confirm: {
+                    label: 'APPROVE',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'CANCEL',
+                    className: 'btn-danger'
+                }
+
+
+
+            },
+            callback: function (result) {
+
+                var url2 = '@Url.Action("Authorization", "Mobilization")';
+
+                if (result) {
+
+                    var url = "/Mobilization/Assigned/";
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+                    });
+
+                }
+            }
+        });
+
+
+    }
+
+    function rejectd(id) {
+
+        bootbox.prompt({
+            title: "ARE YOU SURE TO REJECT THIS TRUCKS?",
+            inputType: 'textarea',
+            buttons: {
+                confirm: {
+                    label: 'REJECTED',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'CANCEL',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                var url2 = '@Url.Action("Authorization", "Mobilization")';
+
+                if (result) {
+
+                    var url = "/Mobilization/Denied/";
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: id, comment: result, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+                    });
+
+                }
+            }
+        });
+
+
+    }
+</script>

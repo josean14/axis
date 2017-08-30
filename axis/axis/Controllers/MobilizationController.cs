@@ -36,10 +36,10 @@ namespace AXIS.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
+      
             var Purchaseorders = from s in db.Purchaseorders.Include(c => c.Contract).Include(d => d.Contract.Rfq.Farm)
                                  select s;
-
-            Purchaseorders = Purchaseorders.Where(a => a.Status == "OPEN");
+      Purchaseorders = Purchaseorders.Where(a => a.Status == "OPEN");
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -148,6 +148,70 @@ namespace AXIS.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(approvaltech.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult AuthorizationTrucks(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.ContractSortParm = String.IsNullOrEmpty(sortOrder) ? "contract_desc" : "";
+            ViewBag.PonameSortParm = sortOrder == "Poname" ? "poname_desc" : "Poname";
+            ViewBag.DatenameSortParm = sortOrder == "Datetname" ? "datename_desc" : "Datetname";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+            var Trucks = from s in db.Trucks.Include(b => b.Purchaseorder).Include(c => c.Purchaseorder.Contract).Include(d => d.Purchaseorder.Contract.Rfq.Farm)
+                         select s;
+               Trucks = Trucks.Where(a => a.Status == "PENDING APPROVAL");
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                int numVal;
+                if (Int32.TryParse(searchString, out numVal))
+                {
+                    Trucks = Trucks.Where(s => s.Purchaseorder.Contract.ContractId.Equals(numVal));
+                    //rfqss = rfqss.Where(s => s.RfqId.Equals(numVal) && s.Farm.TypeFarm == TypeFarm.Solar);
+                }
+                else
+                {
+                    Trucks = Trucks.Where(s => s.PurchaseOrderId.Equals(0));
+                    ViewBag.Message = "Invalid PO AXIS#";
+                }
+
+            }
+
+            switch (sortOrder)
+            {
+                case "contract_desc":
+                    Trucks = Trucks.OrderByDescending(s => s.Purchaseorder.Contract.ContractId);
+                    break;
+                case "Poname":
+                    Trucks = Trucks.OrderBy(s => s.PurchaseOrderId);
+                    break;
+                case "poname_desc":
+                    Trucks = Trucks.OrderByDescending(s => s.PurchaseOrderId);
+                    break;
+                case "Datename":
+                    Trucks = Trucks.OrderBy(s => s.Purchaseorder.Date);
+                    break;
+                case "datename_desc":
+                    Trucks = Trucks.OrderByDescending(s => s.Purchaseorder.Date);
+                    break;
+                default: //Contract ascending
+                    Trucks = Trucks.OrderBy(s => s.Purchaseorder.Contract.ContractId);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(Trucks.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult EmployeMob(int? id)

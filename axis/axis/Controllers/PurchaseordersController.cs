@@ -147,7 +147,7 @@ namespace AXIS.Controllers
 
                 ATool.PurchaseOrderId = purchaseorder.PurchaseOrderId;
                 Truck.PurchaseOrderId = purchaseorder.PurchaseOrderId;
-                Truck.Status = "Pending";
+                Truck.Status = "PENDING ASSIGNMENT";
 
                 db.AssignmentOfTools.Add(ATool);
                 db.Trucks.Add(Truck);
