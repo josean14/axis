@@ -150,7 +150,7 @@ namespace AXIS.Controllers
             return View(approvaltech.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult AuthorizationTrucks(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult AuthorizationTrucks(string sortOrder, string currentFilter, string searchString, int? page) 
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.ContractSortParm = String.IsNullOrEmpty(sortOrder) ? "contract_desc" : "";
