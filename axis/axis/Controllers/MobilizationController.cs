@@ -433,7 +433,6 @@ namespace AXIS.Controllers
         }
 
 
-
         [HttpPost, ActionName("ApprovalADV")]
         [ValidateAntiForgeryToken]
         public ActionResult ApprovalADV(int id)
@@ -582,6 +581,185 @@ namespace AXIS.Controllers
 
             return new JsonResult() { Data = "Liberty successfully" };
         }
+
+
+        /// <summary>
+
+        // POST: Assigned
+        [HttpPost, ActionName("ApprovalTruck")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApprovalTruck(int id)
+        {
+            
+            Truck truck = db.Trucks.Find(id);
+
+            truck.Status = "COMPLETED";
+
+            db.Entry(truck).State = EntityState.Modified;
+            db.SaveChanges();
+
+            TruckDetail truckdetail = new TruckDetail();
+            
+                // Se agregan los registros de trucks
+                        
+            for (int i = 0; i < truck.NumberTrucks; i++)
+            {
+                truckdetail.PurchaseOrderId = truck.PurchaseOrderId;
+                truckdetail.Status = "PENDING RENT";
+
+                db.TruckDetails.Add(truckdetail);
+                db.SaveChanges();
+
+
+             }
+            
+
+
+
+            string email = "";
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com, eduardin23@hotmail.com";
+
+
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+            //Prueba
+            emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
+
+            try
+            {
+                FONMailer.TRUCKAPV(truck.Status, email, emailCC, "", truck.PurchaseOrderId).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
+
+
+            return new JsonResult() { Data = "Assigned successfully" };
+        }
+
+
+        [HttpPost, ActionName("RejectdTruck")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RejectdTruck(int id, string comment)
+        {
+            Truck truck = db.Trucks.Find(id);
+
+            truck.Status = "REJECTED";
+            truck.RejectionComment = comment;
+
+            db.Entry(truck).State = EntityState.Modified;
+            db.SaveChanges();
+
+
+            string email = "";
+
+            var users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "7");
+
+            bool bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    email = email + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    email = item.Email;
+                }
+            }
+            //Prueba
+            email = "jagr14@gmail.com, eduardin23@hotmail.com";
+
+
+            string emailCC = "";
+            users = db.Users.Include(r => r.UserRoles).Where(r => r.UserRoles.RoleId == "3");
+
+            bd = false;
+
+            foreach (var item in users)
+            {
+
+                if (bd)
+                {
+                    emailCC = emailCC + "," + item.Email;
+
+                }
+                else
+                {
+                    bd = true;
+                    emailCC = item.Email;
+                }
+            }
+            //Prueba
+            emailCC = "jagr14@gmail.com, eduardin23@hotmail.com";
+
+            try
+            {
+                FONMailer.TRUCKAPV(truck.Status, email, emailCC, comment, truck.PurchaseOrderId).Send();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateTimeoutTestMessage(): {0}",
+                  ex.ToString());
+
+            }
+
+
+            return new JsonResult() { Data = "Assigned successfully" };
+        }
+
+
+
+
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
 
         [HttpPost, ActionName("Liberty")]

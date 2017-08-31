@@ -310,6 +310,41 @@ namespace AXIS.Mailers
 
         }
 
+        public virtual MvcMailMessage TRUCKAPV(string status, string email, string emailCC, string comment, int PO)
+        {
+            //ViewBag.Data = someObject;
+            
+            var mailMessage = new MvcMailMessage();
+
+            switch (status)
+            {
+                case "COMPLETED":
+                    mailMessage.Subject = "TRUCK APPROVED";
+                    ViewBag.Msg = "The trucks has been approved for PO " + PO;
+                    break;
+
+                case "REJECTED":
+                    mailMessage.Subject = "TRUCK REJECTED";
+                    ViewBag.Msg = "The trucks has been denied for PO " + PO;
+                    break;
+
+            }
+
+
+            ViewBag.Comment = comment;
+
+            mailMessage.To.Add(email);
+            mailMessage.CC.Add(emailCC);
+            PopulateBody(mailMessage, "TRUCKAPV", null);
+
+
+            SmtpClient mailClient = new SmtpClient();
+
+            mailClient.Timeout = 10;
+            return mailMessage;
+
+
+        }
 
 
 

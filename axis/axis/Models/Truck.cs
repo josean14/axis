@@ -22,10 +22,11 @@ namespace AXIS.Models
         [DisplayName("RENTAL AGENCY.")]
         public virtual string RentalAgency { get; set; }
 
-        
+        [DisplayName("STATUS.")]
         public virtual string Status { get; set; }
-        //Se utiiza para saber si ya fue asignado el numero de trucks
-
+        
+        [DisplayName("REJECTION COMMENT.")]
+        public virtual string RejectionComment { get; set; }
 
         public virtual Purchaseorder Purchaseorder { get; set; }
 

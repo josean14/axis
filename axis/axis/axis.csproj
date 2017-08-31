@@ -675,6 +675,7 @@
     <Content Include="Views\TruckDetails\Edit.cshtml" />
     <Content Include="Views\TruckDetails\PartialList.cshtml" />
     <Content Include="Views\Mobilization\AuthorizationTrucks.cshtml" />
+    <Content Include="Views\FONMailer\TRUCKAPV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,5 +9,6 @@ namespace AXIS.Mailers
         MvcMailMessage TECHAPRV(string FullName, string status, string email, string emailCC,string comment, int PO);
         MvcMailMessage TECHAPRVADV(string FullName, string status, string email, string emailCC, string comment, int PO);
         MvcMailMessage FlightAPV(string FullName, string status, string email, string emailCC, string comment, int PO);
+        MvcMailMessage TRUCKAPV(string status, string email, string emailCC, string comment, int PO);
     }
 }

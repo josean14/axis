@@ -43,36 +43,19 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
-                TruckDetail truckdetail = new TruckDetail();
+                
 
                 db.Entry(truck).State = EntityState.Modified;
-                
-                //if (truck.Status== "PENDING ASSIGNMENT")
-                //{
-                //    truck.Status = "PENDING APPROVAL";
-                //}
 
-                if (truck.Status == "PENDING ASSIGNMENT")
+                if (truck.Status == "PENDING ASSIGNMENT" || truck.Status == "REJECTED")
                 {
-                    // Se agregan los registros de trucks
-                    int bd = 0;
-                    for (int i = 0; i < truck.NumberTrucks; i++)
-                    {
-                        truckdetail.PurchaseOrderId = truck.PurchaseOrderId;
-                        db.TruckDetails.Add(truckdetail);
-                        db.SaveChanges();
-
-                        if (bd == 0)
-                        {
-                            truck.Status = "COMPLETED";
-                            bd = 1;
-                        }
-                    }
+                    truck.Status = "PENDING APPROVAL";
                 }
-
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Mobilization");
+
+
             }
            
             return View(truck);

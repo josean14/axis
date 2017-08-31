@@ -121,11 +121,11 @@
             },
             callback: function (result) {
 
-                var url2 = '@Url.Action("Authorization", "Mobilization")';
+                var url2 = '@Url.Action("AuthorizationTrucks", "Mobilization")';
 
                 if (result) {
 
-                    var url = "/Mobilization/Assigned/";
+                    var url = "/Mobilization/ApprovalTruck/";
                     var anti = $('[name=__RequestVerificationToken]').val();
 
                     $.post(url, { id: id, __RequestVerificationToken: anti }, function (data) {
@@ -161,11 +161,11 @@
             },
             callback: function (result) {
 
-                var url2 = '@Url.Action("Authorization", "Mobilization")';
+                var url2 = '@Url.Action("AuthorizationTrucks", "Mobilization")';
 
                 if (result) {
 
-                    var url = "/Mobilization/Denied/";
+                    var url = "/Mobilization/RejectdTruck/";
                     var anti = $('[name=__RequestVerificationToken]').val();
 
                     $.post(url, { id: id, comment: result, __RequestVerificationToken: anti }, function (data) {

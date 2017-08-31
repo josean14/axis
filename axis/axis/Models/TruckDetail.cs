@@ -35,6 +35,9 @@ namespace AXIS.Models
         [DisplayName("PURCHASE ORDER.")]
         public virtual int PurchaseOrderId { get; set; }
 
+        [DisplayName("STATUS.")]
+        public virtual string Status { get; set; }
+
         public virtual Truck Truck { get; set; }
 
     }
