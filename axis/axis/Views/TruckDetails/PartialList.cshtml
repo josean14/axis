@@ -3,46 +3,42 @@
 
 <table class="table">
     <tr>
+       
         <th>
-            @Html.DisplayNameFor(model => model.Truck.RentalAgency)
+            @Html.DisplayNameFor(model => model.LicencePlate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PlateNumber)
+            @Html.DisplayNameFor(model => model.MakeModel)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brand)
+            @Html.DisplayNameFor(model => model.SiteLocation)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Model)
+            @Html.DisplayNameFor(model => model.VIN)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Other1)
+            @Html.DisplayNameFor(model => model.DateRent)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+       
         <td>
-            @Html.DisplayFor(modelItem => item.Truck.RentalAgency)
+            @Html.DisplayFor(modelItem => item.LicencePlate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PlateNumber)
+            @Html.DisplayFor(modelItem => item.MakeModel)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Brand)
+            @Html.DisplayFor(modelItem => item.SiteLocation)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Model)
+            @Html.DisplayFor(modelItem => item.VIN)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Other1)
+            @Html.DisplayFor(modelItem => item.DateRent)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TruckId, ContractId = @ViewBag.ContractId }) 
