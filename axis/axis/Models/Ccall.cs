@@ -19,7 +19,7 @@ namespace AXIS.Models
         [DisplayName("Date")]
         [Required(ErrorMessage = "The date is required.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public virtual DateTime Date { get; set; }
 
         [DisplayName("Note")]
