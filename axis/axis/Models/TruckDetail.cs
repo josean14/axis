@@ -47,82 +47,82 @@ namespace AXIS.Models
         [DisplayName("INSURANCE DOCUMENTACION.")]
         public virtual string InsuranceDocumentacion { get; set; }
 
-        [DisplayName("ITEM INTERIOR 1.")]
+        [DisplayName("SEAT BELTS WORK AND FREE OF DEMAGE")]
         public virtual string ItemInterior1 { get; set; }
 
-        [DisplayName("ITEM INTERIOR 2.")]
+        [DisplayName("NO WARNING LIGHTS ARE ON")]
         public virtual string ItemInterior2 { get; set; }
 
-        [DisplayName("ITEM INTERIOR 3.")]
+        [DisplayName("OIL LAVEL IS SUFFICIENTLY HIGH")]
         public virtual string ItemInterior3 { get; set; }
 
-        [DisplayName("ITEM INTERIOR 4.")]
+        [DisplayName("RADIATOR FLUID LEVELS ARE SUFFICIENT")]
         public virtual string ItemInterior4 { get; set; }
 
-        [DisplayName("ITEM INTERIOR 5.")]
+        [DisplayName("EMERGENCY ROADSIDE SUPPLIES ARE PROPERLY STOCKED")]
         public virtual string ItemInterior5 { get; set; }
 
-        [DisplayName("ENGINE COMPARMENT 1.")]
+        [DisplayName("ENGINE OIL LEVEL")]
         public virtual string EngineComparment1 { get; set; }
 
-        [DisplayName("ENGINE COMPARMENT 2.")]
+        [DisplayName("COOLANT LEVEL (ANTI-FREEZE)")]
         public virtual string EngineComparment2 { get; set; }
 
-        [DisplayName("ENGINE COMPARMENT 3.")]
+        [DisplayName("BRAKE FLUID LEVEL")]
         public virtual string EngineComparment3 { get; set; }
 
-        [DisplayName("ENGINE COMPARMENT 4.")]
+        [DisplayName("TRANSMISSION FLUID LEVEL")]
         public virtual string EngineComparment4 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 1.")]
+        [DisplayName("WINDOWS/WINDSHIELD NOT CRAKED")]
         public virtual string ItemExterior1 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 2.")]
+        [DisplayName("FUNCTIONAL WINDSHIELD WIPERS")]
         public virtual string ItemExterior2 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 3.")]
+        [DisplayName("HEADLIGHTS (HIGH/LOW BEAM)")]
         public virtual string ItemExterior3 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 4.")]
+        [DisplayName("TAIL LIGHT / BRAKE LIGHTS")]
         public virtual string ItemExterior4 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 5.")]
+        [DisplayName("EMERGENCY BRAKE IN GOOD WORKING ORDER")]
         public virtual string ItemExterior5 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 6.")]
+        [DisplayName("POWER BRAKES ARE IN GOOD WORKING ORDER")]
         public virtual string ItemExterior6 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 7.")]
+        [DisplayName("HORN")]
         public virtual string ItemExterior7 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 8.")]
+        [DisplayName("TIRE IN GOOD SHAPE (NO BALD TIRES / PROPERLY INFLATED")]
         public virtual string ItemExterior8 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 9.")]
+        [DisplayName("NO AIR LEAKS IN TIRES")]
         public virtual string ItemExterior9 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 10.")]
+        [DisplayName("NO OIL / GREASE LEAKS (UNDER THE VEHICLE)")]
         public virtual string ItemExterior10 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 11.")]
+        [DisplayName("NO FUEL LEAKS OR ODOR OF GASOLINE DETECTED")]
         public virtual string ItemExterior11 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 12.")]
+        [DisplayName("EXHAUST SYSTEM IS IN GOOD WORKING ORDER")]
         public virtual string ItemExterior12 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 13.")]
+        [DisplayName("TURN SIGNALS")]
         public virtual string ItemExterior13 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 14.")]
+        [DisplayName("VEHICLE IS FREE OF EXCESSIVE DEMAGE")]
         public virtual string ItemExterior14 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 15.")]
+        [DisplayName("VEHICLE CONDITION IS SATISFACTORY")]
         public virtual string ItemExterior15 { get; set; }
 
-        [DisplayName("ITEM EXTERIOR 16.")]
+        [DisplayName("DEFECTS REPORTED")]
         public virtual string ItemExterior16 { get; set; }
 
-        [DisplayName("ADITIONAL COMMENTS.")]
+        [DisplayName("ADDITIONAL COMMENTS.")]
         public virtual string AditionalComments { get; set; }
 
         [DisplayName("PURCHASE ORDER.")]

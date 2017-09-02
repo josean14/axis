@@ -44,7 +44,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TruckId,LicencePlate,MakeModel,SiteLocation,VIN,DateRent,Year,GasDiesel,GasCard,InsuranceDocumentacion,ItemInterior1,ItemInterior2,ItemInterior3,ItemInterior4,ItemInterior5,EngineComparment1,EngineComparment2,EngineComparment3,EngineComparment4,ItemExterior1,ItemExterior2,ItemExterior3,ItemExterior4,ItemExterior5,ItemExterior6,ItemExterior8,ItemExterior9,ItemExterior10,ItemExterior11,ItemExterior12,ItemExterior13,ItemExterior14,ItemExterior15,ItemExterior16,AditionalComments,PurchaseOrderId")] TruckDetail truckDetail, int ContractId)
+        public ActionResult Edit([Bind(Include = "TruckId,LicencePlate,MakeModel,SiteLocation,VIN,DateRent,Year,GasDiesel,GasCard,InsuranceDocumentacion,ItemInterior1,ItemInterior2,ItemInterior3,ItemInterior4,ItemInterior5,EngineComparment1,EngineComparment2,EngineComparment3,EngineComparment4,ItemExterior1,ItemExterior2,ItemExterior3,ItemExterior4,ItemExterior5,ItemExterior6,ItemExterior7,ItemExterior8,ItemExterior9,ItemExterior10,ItemExterior11,ItemExterior12,ItemExterior13,ItemExterior14,ItemExterior15,ItemExterior16,AditionalComments,PurchaseOrderId")] TruckDetail truckDetail, int ContractId)
         {
             if (ModelState.IsValid)
             {

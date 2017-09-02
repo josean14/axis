@@ -5,14 +5,13 @@
 
 }
 
-<h2>Edit</h2>
+<h2>VEHICLE INSPECTION CHECKLIST</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>TruckDetail</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.TruckId)
@@ -32,291 +31,407 @@
 
          }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LicencePlate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LicencePlate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LicencePlate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>DRIVER NAME:</p>
+                </th>
+                <th align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateRent, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DateRent, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateRent, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SiteLocation, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SiteLocation, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SiteLocation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </th>
+                <th align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LicencePlate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LicencePlate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LicencePlate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MakeModel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MakeModel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MakeModel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </th>
+                <th align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VIN, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.VIN, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.VIN, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </th>
+                <th align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GasDiesel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.GasDiesel, selectList, Model.GasDiesel, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GasDiesel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        </table>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MakeModel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MakeModel, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MakeModel, "", new { @class = "text-danger" })
+            <div>
+                <div class="panel panel-axisxl">
+                    <div class="panel-heading">DOCUMENTATION</div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                <p>ITEM</p>
+                            </th>
+                            <th align="center">
+                                <p>SATISFACTORY Y / N</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.InsuranceDocumentacion, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.InsuranceDocumentacion, selectList, Model.InsuranceDocumentacion, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.InsuranceDocumentacion, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.GasCard, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.GasCard, selectList, Model.GasCard, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GasCard, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SiteLocation, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SiteLocation, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.SiteLocation, "", new { @class = "text-danger" })
+            <div>
+                <div class="panel panel-axisxl">
+                    <div class="panel-heading">VEHICLE - INTERIOR</div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                <p>ITEM</p>
+                            </th>
+                            <th align="center">
+                                <p>SATISFACTORY Y / N</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemInterior1, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemInterior1, selectList, Model.ItemInterior1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemInterior1, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemInterior2, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemInterior2, selectList, Model.ItemInterior2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemInterior2, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemInterior3, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemInterior3, selectList, Model.ItemInterior3, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemInterior3, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemInterior4, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemInterior4, selectList, Model.ItemInterior4, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemInterior4, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemInterior5, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemInterior5, selectList, Model.ItemInterior5, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemInterior5, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.VIN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VIN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.VIN, "", new { @class = "text-danger" })
+            <div>
+                <div class="panel panel-axisxl">
+                    <div class="panel-heading">ENGINE COMPARTMENT</div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                <p>ITEM</p>
+                            </th>
+                            <th align="center">
+                                <p>SATISFACTORY Y / N</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.EngineComparment1, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.EngineComparment1, selectList, Model.EngineComparment1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EngineComparment1, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.EngineComparment2, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.EngineComparment2, selectList, Model.EngineComparment2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EngineComparment2, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.EngineComparment3, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.EngineComparment3, selectList, Model.EngineComparment3, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EngineComparment1, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.EngineComparment4, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.EngineComparment4, selectList, Model.EngineComparment4, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EngineComparment4, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateRent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DateRent, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DateRent, "", new { @class = "text-danger" })
+            <div>
+                <div class="panel panel-axisxl">
+                    <div class="panel-heading">VEHICLE EXTERIOR</div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                <p>ITEM</p>
+                            </th>
+                            <th align="center">
+                                <p>SATISFACTORY Y / N</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior1, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior1, selectList, Model.ItemExterior1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior1, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior2, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior2, selectList, Model.ItemExterior2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior2, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior3, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior3, selectList, Model.ItemExterior3, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior3, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior4, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior4, selectList, Model.ItemExterior4, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior4, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior5, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior5, selectList, Model.ItemExterior5, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior5, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior6, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior6, selectList, Model.ItemExterior6, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior6, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior7, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior7, selectList, Model.ItemExterior7, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior7, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior8, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior8, selectList, Model.ItemExterior8, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior8, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior9, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior9, selectList, Model.ItemExterior9, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior9, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior10, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior10, selectList, Model.ItemExterior10, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior10, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior11, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior11, selectList, Model.ItemExterior11, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior11, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior12, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior12, selectList, Model.ItemExterior12, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior12, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior13, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior13, selectList, Model.ItemExterior13, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior13, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior14, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior14, selectList, Model.ItemExterior14, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior14, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior15, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior15, selectList, Model.ItemExterior15, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior15, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                @Html.LabelFor(model => model.ItemExterior16, htmlAttributes: new { @class = "control-labelaxis col-md-12" })
+                            </th>
+                            <th align="center">
+                                @Html.DropDownListFor(model => model.ItemExterior16, selectList, Model.ItemExterior16, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ItemExterior16, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+            <div>
+                <div class="panel panel-axisxl">
+                    <div class="panel-heading">ADDITIONAL COMMENTS</div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                @Html.EditorFor(model => model.AditionalComments, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AditionalComments, "", new { @class = "text-danger" })
+                            </th>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GasDiesel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.GasDiesel, selectList, Model.GasDiesel, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.GasDiesel, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GasCard, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.GasCard, selectList, Model.GasCard, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.GasCard, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.InsuranceDocumentacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.InsuranceDocumentacion, selectList, Model.InsuranceDocumentacion, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.InsuranceDocumentacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemInterior1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemInterior1, selectList, Model.ItemInterior1, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemInterior1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemInterior2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemInterior2, selectList, Model.ItemInterior2, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemInterior2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemInterior3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemInterior3, selectList, Model.ItemInterior3, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemInterior3, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemInterior4, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemInterior4, selectList, Model.ItemInterior4, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemInterior4, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemInterior5, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemInterior5, selectList, Model.ItemInterior5, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemInterior5, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EngineComparment1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.EngineComparment1, selectList, Model.EngineComparment1, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EngineComparment1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EngineComparment2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.EngineComparment2, selectList, Model.EngineComparment2, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EngineComparment2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EngineComparment3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.EngineComparment3, selectList, Model.EngineComparment3, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EngineComparment1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EngineComparment4, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.EngineComparment4, selectList, Model.EngineComparment4, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EngineComparment4, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior1, selectList, Model.ItemExterior1, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior2, selectList, Model.ItemExterior2, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior3, selectList, Model.ItemExterior3, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior3, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior4, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior4, selectList, Model.ItemExterior4, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior4, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior5, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior5, selectList, Model.ItemExterior5, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior5, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior6, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior6, selectList, Model.ItemExterior6, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior6, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior7, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior7, selectList, Model.ItemExterior7, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior7, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior8, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior8, selectList, Model.ItemExterior8, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior8, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior9, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior9, selectList, Model.ItemExterior9, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior9, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior10, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior10, selectList, Model.ItemExterior10, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior10, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior11, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior11, selectList, Model.ItemExterior11, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior11, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior12, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior12, selectList, Model.ItemExterior12, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior12, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior13, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior13, selectList, Model.ItemExterior13, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior13, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior14, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior14, selectList, Model.ItemExterior14, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior14, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior15, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior15, selectList, Model.ItemExterior15, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior15, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ItemExterior16, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ItemExterior16, selectList, Model.ItemExterior16, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ItemExterior16, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AditionalComments, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AditionalComments, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AditionalComments, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+</div>
 }
