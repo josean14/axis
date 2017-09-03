@@ -43,5 +43,7 @@ namespace AXIS.Models
 
         public virtual Truck Truck { get; set; }
 
+        public virtual Shipping Shipping { get; set; }
+
     }
 }

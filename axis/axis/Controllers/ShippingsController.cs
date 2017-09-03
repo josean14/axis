@@ -10,58 +10,67 @@ using AXIS.Models;
 
 namespace AXIS.Controllers
 {
-    public class TrucksController : Controller
+    public class ShippingsController : Controller
     {
         private AXISDB db = new AXISDB();
 
+        
 
-       
+        // GET: Shippings/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Shipping shipping = db.Shippings.Find(id);
+            if (shipping == null)
+            {
+                return HttpNotFound();
+            }
+            return View(shipping);
+        }
 
-        // GET: Trucks/Edit/5
+        
+        
+
+        // GET: Shippings/Edit/5
         public ActionResult Edit(int? id, int ContractId)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Truck truck = db.Trucks.Find(id);
-            if (truck == null)
+            Shipping shipping = db.Shippings.Find(id);
+            if (shipping == null)
             {
                 return HttpNotFound();
             }
             ViewBag.PurchaseOrderId = id;
             ViewBag.ContractId = ContractId;
-            return View(truck);
+            return View(shipping);
         }
 
-        // POST: Trucks/Edit/5
+        // POST: Shippings/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PurchaseOrderId,NumberTrucks,RentalAgency,Status")] Truck truck, int ContractId)
+        public ActionResult Edit([Bind(Include = "PurchaseOrderId,PackingList,AirwayBill,Cost,Comment")] Shipping shipping, int ContractId)
         {
             if (ModelState.IsValid)
             {
-                
-
-                db.Entry(truck).State = EntityState.Modified;
-
-                if (truck.Status == "PENDING ASSIGNMENT" || truck.Status == "REJECTED")
-                {
-                    truck.Status = "PENDING APPROVAL";
-                }
+                db.Entry(shipping).State = EntityState.Modified;
                 db.SaveChanges();
-
                 return RedirectToAction("Index", "Mobilization");
-
-
             }
-            ViewBag.PurchaseOrderId = truck.PurchaseOrderId;
+
+            ViewBag.PurchaseOrderId = shipping.PurchaseOrderId;
             ViewBag.ContractId = ContractId;
-            return View(truck);
+            return View(shipping);
         }
 
+        
 
         protected override void Dispose(bool disposing)
         {

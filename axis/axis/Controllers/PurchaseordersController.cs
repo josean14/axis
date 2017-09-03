@@ -145,12 +145,18 @@ namespace AXIS.Controllers
 
                 Truck Truck = new Truck();
 
+                Shipping Shipping = new Shipping();
+
                 ATool.PurchaseOrderId = purchaseorder.PurchaseOrderId;
+
                 Truck.PurchaseOrderId = purchaseorder.PurchaseOrderId;
                 Truck.Status = "PENDING ASSIGNMENT";
 
+                Shipping.PurchaseOrderId = purchaseorder.PurchaseOrderId;
+
                 db.AssignmentOfTools.Add(ATool);
                 db.Trucks.Add(Truck);
+                db.Shippings.Add(Shipping);
 
                 db.SaveChanges();
 

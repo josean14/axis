@@ -70,6 +70,8 @@ namespace AXIS.Models
 
         public System.Data.Entity.DbSet<AXIS.Models.TruckDetail> TruckDetails { get; set; }
 
+        public System.Data.Entity.DbSet<AXIS.Models.Shipping> Shippings { get; set; }
+
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<User>().

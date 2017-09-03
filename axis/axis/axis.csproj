@@ -284,7 +284,7 @@
     <Compile Include="Controllers\RfqsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RversionsController.cs" />
-    <Compile Include="Controllers\ShippingController.cs" />
+    <Compile Include="Controllers\ShippingsController.cs" />
     <Compile Include="Controllers\TechesController.cs" />
     <Compile Include="Controllers\TechInfoAxisController.cs" />
     <Compile Include="Controllers\TechInfoCimsController.cs" />
@@ -339,6 +339,7 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Rversion.cs" />
     <Compile Include="Models\ScopeWork.cs" />
+    <Compile Include="Models\Shipping.cs" />
     <Compile Include="Models\Tech.cs" />
     <Compile Include="Models\TechInfoAxi.cs" />
     <Compile Include="Models\TechInfoCim.cs" />
@@ -646,7 +647,6 @@
     <Content Include="Views\Mobilization\Authorization.cshtml" />
     <Content Include="Views\Account\RegisterRole.cshtml" />
     <Content Include="Views\TechInfoKits\PartialKitdetails.cshtml" />
-    <Content Include="Views\Shipping\List.cshtml" />
     <Content Include="Views\Flights\PartialCreate.cshtml" />
     <Content Include="Views\Mobilization\EmployeMob.cshtml" />
     <Content Include="Views\FONMailer\FlightAPV.cshtml" />
@@ -676,6 +676,8 @@
     <Content Include="Views\TruckDetails\PartialList.cshtml" />
     <Content Include="Views\Mobilization\AuthorizationTrucks.cshtml" />
     <Content Include="Views\FONMailer\TRUCKAPV.cshtml" />
+    <Content Include="Views\Shippings\Details.cshtml" />
+    <Content Include="Views\Shippings\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
