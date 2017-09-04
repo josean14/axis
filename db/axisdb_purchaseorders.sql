@@ -28,11 +28,23 @@ CREATE TABLE `purchaseorders` (
   `Commentary` varchar(200) DEFAULT NULL,
   `Date` date DEFAULT NULL,
   `File` varchar(200) DEFAULT NULL,
+  `UserName` varchar(200) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  `Tooling` varchar(100) DEFAULT NULL,
+  `SpecialtyItems` varchar(100) DEFAULT NULL,
+  `AirportDestination` varchar(200) DEFAULT NULL,
+  `DepartureDate` date DEFAULT NULL,
+  `TravelPlans` text,
+  `AirportCargoAddress` varchar(200) DEFAULT NULL,
+  `AirportCargoContact` varchar(200) DEFAULT NULL,
+  `LodgingInArea` varchar(200) DEFAULT NULL,
+  `Notes` text,
   `ContractId` int(11) DEFAULT NULL,
   PRIMARY KEY (`PurchaseOrderId`),
   KEY `FContractId_idx` (`ContractId`),
+  KEY `FUserId_idx` (`UserName`),
   CONSTRAINT `FContractId` FOREIGN KEY (`ContractId`) REFERENCES `contracts` (`ContractId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +53,7 @@ CREATE TABLE `purchaseorders` (
 
 LOCK TABLES `purchaseorders` WRITE;
 /*!40000 ALTER TABLE `purchaseorders` DISABLE KEYS */;
-INSERT INTO `purchaseorders` VALUES (1,'ac90049','Comentario','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',10),(2,'AC90069','Comentario','2017-03-22','Adicionales (3).xlsx',10),(3,'oc54959','Comentario','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',10);
+INSERT INTO `purchaseorders` VALUES (4,'oc0050','comentario','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',NULL,'OPEN',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,6),(7,'OC9090','Comentaio','2017-03-22','CAMBIO POR CONTINGENCIA.pdf',NULL,'OPEN',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,8),(8,'OC0043','Comentario PO OC0043','2017-05-20','206940_9EC5B6FF-3C8C-447A-952E-76503A92E322_1471454379272.pdf',NULL,'OPEN',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,6),(9,'POPRUEBA','Esta es una prueba','2017-08-17','7139 CENTRAL.pdf',NULL,'OPEN',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,13),(10,'POPRUEBA2','Esta es una prueba 2','2017-08-17','7139 CENTRAL.pdf',NULL,'OPEN',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,13),(11,'PO434','Prueba','2017-08-30','7139 CENTRAL.pdf',NULL,'OPEN','Tooling','Specialty Item','Airport Destination Merida','2017-10-31','1.- Este es el paso 1\r\n2.- Este es el paso 2\r\n3.- Este es el paso 3 que comprende el 1\r\n4.- Este es el paso 4\r\n5.- Prueba','Airport Cargo Address','Airport Cargo Contact','Lodging in Area','Esta es una nota corta',6),(12,'PO434Septiembre','Comentario','2017-09-03','7139 CENTRAL.pdf',NULL,'OPEN',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,7);
 /*!40000 ALTER TABLE `purchaseorders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-22 21:23:54
+-- Dump completed on 2017-09-04  9:21:27
