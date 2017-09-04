@@ -229,6 +229,34 @@ namespace AXIS.Controllers
             return View(purchaseorder);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EmployeMob([Bind(Include = "PurchaseOrderId,Tooling,SpecialtyItems,AirportDestination,DepartureDate,TravelPlans,AirportCargoAddress,AirportCargoContact,LodgingInArea,Notes,ContractId,Commentary")] Purchaseorder POrder)
+        {
+            if (ModelState.IsValid)
+            {
+                Purchaseorder purchaseorder = db.Purchaseorders.Find(POrder.PurchaseOrderId);
+                purchaseorder.Tooling = POrder.Tooling;
+                purchaseorder.SpecialtyItems = POrder.SpecialtyItems;
+                purchaseorder.AirportDestination = POrder.AirportDestination;
+                purchaseorder.DepartureDate = POrder.DepartureDate;
+                purchaseorder.TravelPlans = POrder.TravelPlans;
+                purchaseorder.AirportCargoAddress = POrder.AirportCargoAddress;
+                purchaseorder.AirportCargoContact = POrder.AirportCargoContact;
+                purchaseorder.LodgingInArea = POrder.LodgingInArea;
+                purchaseorder.Notes = POrder.Notes;
+
+                db.Entry(purchaseorder).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("EmployeMob", "Mobilization", new { id = POrder.PurchaseOrderId });
+            }
+
+            
+            return View(POrder);
+        }
+
         public ActionResult EmployeMobPDF(int? id)
         {
             if (id == null)

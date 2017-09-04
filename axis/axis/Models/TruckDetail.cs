@@ -32,7 +32,7 @@ namespace AXIS.Models
         [DisplayName("DATE RENT.")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public virtual DateTime DateRent { get; set; }
+        public virtual DateTime? DateRent { get; set; }
 
 
         [DisplayName("YEAR.")]
