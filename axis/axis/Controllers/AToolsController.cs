@@ -48,6 +48,7 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                assignmentOfTool = db.AssignmentOfTools.Find(assignmentOfTool.PurchaseOrderId);
                 assignmentOfTool.AditionalInfo = AditionalInfo;
                 assignmentOfTool.OrderNumber = OrderNumber;
                 assignmentOfTool.Cost = Cost;
@@ -75,7 +76,30 @@ namespace AXIS.Controllers
             }
             
             return View(assignmentOfTool);
-        }    
+        }
+
+
+        //
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditJson([Bind(Include = "PurchaseOrderId,SuppliedBy")] AssignmentOfTool assignmentOfTool,  int ContractId, string AditionalInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                assignmentOfTool.AditionalInfo = AditionalInfo;
+
+
+                db.Entry(assignmentOfTool).State = EntityState.Modified;
+                db.SaveChanges();
+                return new JsonResult() { Data = "1" };
+            }
+
+            return new JsonResult() { Data = "0" };
+        }
+
+        //
+
+
 
         protected override void Dispose(bool disposing)
         {

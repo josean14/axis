@@ -111,6 +111,7 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.AssignmentOfToolsByJobs.Add(assignmentOfToolsByJob);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -174,6 +175,59 @@ namespace AXIS.Controllers
             db.AssignmentOfToolsByJobs.Remove(assignmentOfToolsByJob);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult PartialListContract(int? ContractId) {
+
+            if (ContractId == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Where(f => f.ContractId == ContractId);
+            
+            if (assignmentOfToolsByJob == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(assignmentOfToolsByJob);
+
+        }
+
+        public ActionResult PartialList(int? Id)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Where(f => f.ContractId == 0);
+            ViewBag.ContractId = Id;
+            if (assignmentOfToolsByJob == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(assignmentOfToolsByJob);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveListA(int ContractId, string[] values)
+        {
+            ViewBag.ContractId = ContractId;
+
+            AssignmentOfToolsByJob assignmentOfToolsByJob;
+            foreach (var item in values) {
+
+                int id = Int32.Parse(item);
+                assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Find(id);
+                
+                assignmentOfToolsByJob.ContractId = ContractId;
+                assignmentOfToolsByJob.CheckJob = true;
+                db.Entry(assignmentOfToolsByJob).State = EntityState.Modified;
+                db.SaveChanges();
+                
+            }
+
+            return new JsonResult() { Data = "Assigned successfully" };
+            
         }
 
         protected override void Dispose(bool disposing)

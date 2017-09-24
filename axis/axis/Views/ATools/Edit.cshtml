@@ -10,10 +10,7 @@
 
 <h4>ASSIGNMENT OF TOOLS</h4>
 
-@using (Html.BeginForm("Edit",
-                                                                        "ATools",
-                                                                        FormMethod.Post,
-                                                                        new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "ATools", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -31,14 +28,33 @@
                     @Html.HiddenFor(model => model.PurchaseOrderId)
                     @Html.Hidden("ContractId", (Int32)ViewBag.ContractId)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.SuppliedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EnumDropDownListFor(model => model.SuppliedBy, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.SuppliedBy, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                  @{
 
+                      if (Model.SuppliedBy == null)
+                      {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SuppliedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EnumDropDownListFor(model => model.SuppliedBy, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SuppliedBy, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                      }
+                      else
+                      {
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SuppliedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.LabelFor(model => model.SuppliedBy, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SuppliedBy, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.SuppliedBy)
+                                @Html.HiddenFor(model => model.Cost)
+                            </div>
+                        </div>
+
+                      }
+                }
                     <div class="form-group">
                         @Html.LabelFor(model => model.AditionalInfo, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -46,48 +62,104 @@
                             @Html.ValidationMessageFor(model => model.AditionalInfo, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                @{ 
+                    if (Model.SuppliedBy == null)
+                    {
 
-                    <div id="selectSB" style="display:none">
+                            <div id="selectSB" style="display:none">
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.OrderNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.OrderNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.OrderNumber, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.OrderNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.OrderNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.OrderNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Cost, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FileT, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.FileT, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                        @Html.ValidationMessageFor(model => model.FileT, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                    }
+                    else
+                    {
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Cost, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
+                        if ((Int32)Model.SuppliedBy == 1 || (Int32)Model.SuppliedBy == 2)
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.OrderNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.OrderNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.OrderNumber, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-                        </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Cost, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Cost, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FileT, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.FileT, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                        @Html.ValidationMessageFor(model => model.FileT, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                        }
+
+
+                    }
+                    }
+                   
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.FileT, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.FileT, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                                @Html.ValidationMessageFor(model => model.FileT, "", new { @class = "text-danger" })
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
-                    </div>
-                </div>
             </table>
 
         </div>
     </div>
-
-    @Html.Action("PartialToolsbyJob", "ATools")
-
 }
+@{ 
+    if ((Int32)Model.SuppliedBy == 3)
+    {
 
+
+        //Muestra el listado de las herramientas ya seleccionadas
+        @Html.Action("PartialListContract", "ToolbyJob", new { Id = @ViewBag.ContractId })
+        //Muestra listado de herramientas que se pueden asignar
+        @Html.Action("PartialList", "ToolbyJob", new { Id = @ViewBag.ContractId })
+            //PEndiente renderizar la vista cuando se selecciona el inventario de herramientas
+        }
+
+    }
+
+
+<div id="ListTools" style="display:none">
+    @Html.Action("PartialList", "ToolbyJob", new { Id = @ViewBag.ContractId })
+
+</div>
 
 <script src="/Scripts/jquery.min.js"></script>
 <script>
@@ -99,24 +171,47 @@
             $("#Cost").val("0.0");
             $("#FileT").val("");
 
-            if ($(this).val() != 0 ) {
-                if ($(this).val() == 3) {
+            var s = $(this).val();
+
+            switch (parseInt(s)) {
+
+                case 0: 
                     if (!$('#selectSB').is(":hidden")) {
                         $("#selectSB").toggle("slow");
-
                     }
-                } else {
+                    if (!$('#ListTools').is(":hidden")) {
+                        $("#ListTools").toggle("slow");
+                    }
+                    break;
+                case 1:
+                case 2:
+                    
                     if ($('#selectSB').is(":hidden")) {
                         $("#selectSB").toggle("slow");
                     }
-                   
-                }
-            } else {
-                if (!$('#selectSB').is(":hidden")) {
-                    $("#selectSB").toggle("slow");
+                    if (!$('#ListTools').is(":hidden")) {
+                        $("#ListTools").toggle("slow");
+                    }
+                    break;
+                case 3:
                     
-                }
+                    if (!$('#selectSB').is(":hidden")) {
+                        $("#selectSB").toggle("slow");
+                    }
+                    $("#ListTools").toggle("slow");
+                    break;
+
+                default:
+                    if (!$('#selectSB').is(":hidden")) {
+                        $("#selectSB").toggle("slow");
+                    }
+                    if (!$('#ListTools').is(":hidden")) {
+                        $("#ListTools").toggle("slow");
+                    }
+                    break;
+
             }
+
             
         });
     });

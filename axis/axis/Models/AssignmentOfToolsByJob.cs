@@ -50,5 +50,7 @@ namespace AXIS.Models
         public virtual string Category { get; set; }
 
         public virtual int ContractId { get; set; }
+
+        public virtual bool CheckJob { get; set; }
     }
 }

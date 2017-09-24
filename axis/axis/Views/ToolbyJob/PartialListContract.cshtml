@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AXIS.Models.AssignmentOfToolsByJob>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Serial1)
+        </th>
+ 
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Serial1)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Remove", "Mobilization")
+        </td>
+    </tr>
+}
+
+</table>

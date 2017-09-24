@@ -678,6 +678,8 @@
     <Content Include="Views\FONMailer\TRUCKAPV.cshtml" />
     <Content Include="Views\Shippings\Details.cshtml" />
     <Content Include="Views\Shippings\Edit.cshtml" />
+    <Content Include="Views\ToolbyJob\PartialList.cshtml" />
+    <Content Include="Views\ToolbyJob\PartialListContract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
