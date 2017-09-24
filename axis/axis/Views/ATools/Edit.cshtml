@@ -142,16 +142,19 @@
     </div>
 }
 @{ 
-    if ((Int32)Model.SuppliedBy == 3)
+    if (Model.SuppliedBy != null)
     {
+        if ((Int32)Model.SuppliedBy == 3)
+        {
 
 
-        //Muestra el listado de las herramientas ya seleccionadas
+            //Muestra el listado de las herramientas ya seleccionadas
         @Html.Action("PartialListContract", "ToolbyJob", new { Id = @ViewBag.ContractId })
-        //Muestra listado de herramientas que se pueden asignar
+            //Muestra listado de herramientas que se pueden asignar
         @Html.Action("PartialList", "ToolbyJob", new { Id = @ViewBag.ContractId })
-            //PEndiente renderizar la vista cuando se selecciona el inventario de herramientas
-        }
+                //PEndiente renderizar la vista cuando se selecciona el inventario de herramientas
+            }
+     }
 
     }
 
