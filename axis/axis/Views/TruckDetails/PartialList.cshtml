@@ -41,8 +41,9 @@
             @Html.DisplayFor(modelItem => item.DateRent)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TruckId, ContractId = @ViewBag.ContractId }) 
-
+            <a href=@Url.Action("Edit", "TruckDetails", new { id = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-pencil" , title="EDIT"></a> |
+            <a href=@Url.Action("AToolsbyTruck", "ToolsByTrucks", new { TruckId = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-plus" , title="ASSIGN TOOLS"></a> 
+            
         </td>
     </tr>
 }

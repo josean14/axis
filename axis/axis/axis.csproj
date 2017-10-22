@@ -680,6 +680,8 @@
     <Content Include="Views\Shippings\Edit.cshtml" />
     <Content Include="Views\ToolbyJob\PartialList.cshtml" />
     <Content Include="Views\ToolbyJob\PartialListContract.cshtml" />
+    <Content Include="Views\ToolsByTrucks\AToolsbyTruck.cshtml" />
+    <Content Include="Views\ToolsByTrucks\PartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

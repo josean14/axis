@@ -172,6 +172,76 @@ namespace AXIS.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult AToolsbyTruck(int? TruckId, int ContractId)
+        {
+
+            if (TruckId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Where(f => f.TruckId == TruckId);
+            ViewBag.TrucktId = TruckId;
+            if (assignmentOfToolsByTruck == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ContractId = ContractId;
+            return View(assignmentOfToolsByTruck);
+
+        }
+
+        public ActionResult PartialList(int? Id, int ContractId)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Where(f => f.TruckId == 0);
+            ViewBag.TrucktId = Id;
+            ViewBag.ContractId = ContractId;
+            if (assignmentOfToolsByTruck == null)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(assignmentOfToolsByTruck);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveListA(int TruckId,int ContractId, string[] values)
+        {
+            ViewBag.TruckId = TruckId;
+
+            AssignmentOfToolsByTruck assignmentOfToolsByTruck;
+            foreach (var item in values)
+            {
+
+                int id = Int32.Parse(item);
+                assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Find(id);
+
+                assignmentOfToolsByTruck.TruckId = TruckId;
+                db.SaveChanges();
+
+            }
+
+            return new JsonResult() { Data = "Assigned successfully" };
+
+        }
+
+        // Liberar inventario de trucks
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Remove(int Id)
+        {
+            AssignmentOfToolsByTruck assignmentOfToolsByTruck;
+            assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Find(Id);
+            assignmentOfToolsByTruck.TruckId = 0;
+            db.SaveChanges();
+            return new JsonResult() { Data = 1 };
+
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

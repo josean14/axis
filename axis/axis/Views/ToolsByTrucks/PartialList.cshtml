@@ -1,0 +1,151 @@
+﻿@model IEnumerable<AXIS.Models.AssignmentOfToolsByTruck>
+
+<p>
+    <h3>Select Tools</h3>
+    
+</p>
+<p><button id="checar">Save Tools</button></p>
+
+@Html.AntiForgeryToken()
+@Html.Hidden("ContractId", (Int32)ViewBag.ContractId)
+@Html.Hidden("TruckId", (Int32)ViewBag.TrucktId)
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Serial1)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CDMD)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+
+        <th>
+            Select
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manufacturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Serial1)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CDMD)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+
+        <td>
+            @Html.CheckBoxFor(modelItem => item.CheckTruck, new { value = item.Id })
+        </td>
+
+    </tr>
+}
+
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="/Scripts/jquery.min.js"></script>
+<script>
+    var array = [];
+
+$('#checar').click(function () {
+    $('input:checkbox:checked').each(function () {
+        array.push($(this).val());
+    });
+
+
+    var url = "/ToolsbyTrucks/SaveListA/";
+    var anti = $('[name=__RequestVerificationToken]').val();
+    var ContractId = $('#ContractId').val();
+    var TruckId = $('#TruckId').val();
+    var url2 = '@Url.Action("AToolsbyTruck", "ToolsbyTrucks")'+"?TruckId="+TruckId+"&ContractId="+ContractId;
+    ////Aqui me quede
+    $.post(url, { TruckId: TruckId, ContractId: ContractId, values: array, __RequestVerificationToken: anti }, function (data) {
+
+        if (data = 1) {
+
+            window.location.href = url2;
+        }
+
+    });
+});
+
+
+    function confirmRemove(id) {
+        bootbox.confirm({
+            message: "Are you sure you want to remove this?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                if (result) {
+                    var url = "/ToolsbyTrucks/Remove/";
+                    var ContractId = $('#ContractId').val();
+                    var TruckId = $('#TruckId').val();
+                    var url2 = '@Url.Action("AToolsbyTruck", "ToolsbyTrucks")' + "?TruckId=" + TruckId + "&ContractId=" + ContractId;
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { Id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+
+
+
+                    });
+
+                }
+            }
+        });
+
+
+    }
+
+</script>

@@ -220,8 +220,7 @@ namespace AXIS.Controllers
                 assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Find(id);
                 
                 assignmentOfToolsByJob.ContractId = ContractId;
-                assignmentOfToolsByJob.CheckJob = true;
-                db.Entry(assignmentOfToolsByJob).State = EntityState.Modified;
+
                 db.SaveChanges();
                 
             }
@@ -229,6 +228,20 @@ namespace AXIS.Controllers
             return new JsonResult() { Data = "Assigned successfully" };
             
         }
+
+        // Liberar inventario de trucks
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Remove(int Id)
+        {
+            AssignmentOfToolsByJob assignmentOfToolsByJob;
+            assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Find(Id);
+            assignmentOfToolsByJob.ContractId = 0;
+            db.SaveChanges();
+            return new JsonResult() { Data = 1 };
+
+        }
+
 
         protected override void Dispose(bool disposing)
         {
