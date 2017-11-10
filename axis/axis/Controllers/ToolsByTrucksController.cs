@@ -34,7 +34,7 @@ namespace AXIS.Controllers
             ViewBag.CurrentFilter = searchString;
 
             var ToolsbyTruck = from s in db.AssignmentOfToolsByTrucks.Where(c => c.Location == "JOB")
-                             select s;
+                               select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -208,7 +208,7 @@ namespace AXIS.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveListA(int TruckId,int ContractId, string[] values)
+        public ActionResult SaveListA(int TruckId, int ContractId, string[] values)
         {
             ViewBag.TruckId = TruckId;
 

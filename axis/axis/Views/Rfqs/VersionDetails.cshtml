@@ -20,7 +20,7 @@
             <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">NEW VERSION</a>
             @Html.ActionLink("GENERATE JOB", "Create", "Contracts", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId, version = ViewBag.NumberVersion }, new { @class = "btn btn-primary btn-xs" })
             <label> </label>
-            @Html.ActionLink("CLOSE VERSION", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId}, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("CLOSE VERSION", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
         }
     }
     <h2>STATUS: @ViewBag.Status</h2>
@@ -133,16 +133,16 @@
                     <th style="text-align:center">
                         UM
                     </th>
-                    <th style="text-align:center">
-                        COST POR UNIR
-                    </th>
-                    <th style="text-align:center">
+                    @*<th style="text-align:center">
+                            COST POR UNIR
+                        </th>*@
+                    <th style="text-align:center" WIDTH="80">
                         PRICE PER UNIT
                     </th>
-                    <th style="text-align:center">
+                    <th style="text-align:center" WIDTH="80">
                         QUANTITY
                     </th>
-                    <th style="text-align:center">
+                    <th style="text-align:center" WIDTH="100">
                         TOTAL LINE
                     </th>
                 </tr>
@@ -156,11 +156,11 @@
                     <td style="text-align:center">
                         @item.Um
                     </td>
-                    <td style="text-align:right">
-                        @{
-                            @Convert.ToDecimal(item.CostPerUnit).ToString("$ #,##0.00");
-                        }
-                    </td>
+                    @*<td style="text-align:right">
+                            @{
+                                @Convert.ToDecimal(item.CostPerUnit).ToString("$ #,##0.00");
+                            }
+                        </td>*@
                     <td style="text-align:right">
                         @{
                             @Convert.ToDecimal(item.PricePerUnit).ToString("$ #,##0.00");
@@ -181,7 +181,7 @@
 
             <tfoot>
                 <tr>
-                    <td colspan="4"></td>
+                    <td colspan="3"></td>
                     <td style="text-align:right">Total</td>
                     <td style="text-align:right">
                         @{
@@ -196,22 +196,22 @@
     </div>
 
 
-        <div class="panel panel-axisxl">
-            <!-- Default panel contents -->
-            <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
+    <div class="panel panel-axisxl">
+        <!-- Default panel contents -->
+        <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
 
-            <table class="table table-bordered">
-                <tr>
-                    <th align="center">
-                        @ViewBag.Notes
-                    </th>
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    @ViewBag.Notes
+                </th>
 
-                </tr>
+            </tr>
 
 
-            </table>
+        </table>
 
-        </div>
+    </div>
 
 
     <div style="text-align:center">
@@ -261,7 +261,7 @@
             //NewVersion
             function addtable(id) {
 
-                var Description = $('#SelectQuotes').val();
+                var Description = $('#Description').val();
                 var Um = $('#Um').val();
                 var CostPerUnit = $('#CostPerUnit').val();
                 var PricePerUnit = $('#PricePerUnit').val();
@@ -284,7 +284,7 @@
                 var url = "/Quotes/Create/";
                 var RversionId = id
                 var anti = $('[name=__RequestVerificationToken]').val();
-                var Description = $('#SelectQuotes').val();
+                var Description = $('#Description').val();
                 var Um = $('#Um').val();
                 var PricePerUnit = $('#PricePerUnit').val();
                 var CostPerUnit = $('#CostPerUnit').val();

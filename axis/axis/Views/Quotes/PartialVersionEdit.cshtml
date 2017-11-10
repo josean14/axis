@@ -127,7 +127,7 @@
         <tbody>
             <tr>
                 <th>
-                    @Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">

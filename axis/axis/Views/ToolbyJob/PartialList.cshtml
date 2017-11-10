@@ -2,47 +2,62 @@
 
 
 
-    @Html.AntiForgeryToken()
-    @Html.Hidden("ContractId", (Int32)ViewBag.ContractId)
-
- <button id="checar">Save Tools</button>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Manufacturer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Serial1)
-        </th>
-        <th>
-            Select
-        </th>
-    </tr>
+@Html.AntiForgeryToken()
+@Html.Hidden("ContractId", (Int32)ViewBag.ContractId)
 
 
-    @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Manufacturer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Model)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Serial1)
-        </td>
-       <td>
-           @Html.CheckBoxFor(modelItem => item.CheckJob, new { value = item.Id})
-           
-       </td>
-    </tr>
-    }
-    
-</table>
+<div class="panelright">
+    <div class="panel panel-axislg right">
+        <div class="panel-heading">
+            SELECT TOOLS
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="3"></td>
+                <td style="text-align:right">
+                    <button id="checar" class="btn btn-primary btn-xs">SAVE SELECTED</button>
+                </td>
+
+            </tr>
+            <tr>
+                <th style="text-align:center">
+                    MANUFACTURER
+                </th>
+                <th style="text-align:center">
+                    MODEL
+                </th>
+                <th style="text-align:center">
+                    SERIAL #
+                </th>
+                <th style="text-align:center">
+                    SELECT
+                </th>
+            </tr>
+
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manufacturer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Serial1)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.CheckBoxFor(modelItem => item.CheckJob, new { value = item.Id })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
 
 
 
@@ -62,7 +77,7 @@ $('#checar').click(function () {
     var url = "/ToolbyJob/SaveListA/";
     var anti = $('[name=__RequestVerificationToken]').val();
     var ContractId = $('#ContractId').val();
-    
+
     $.post(url, { ContractId: ContractId, values: array, __RequestVerificationToken: anti }, function (data) {
 
         if (data = 1) {
@@ -80,7 +95,7 @@ $('#checar').click(function () {
                 }
 
             });
-       
+
         }
 
     });

@@ -61,8 +61,9 @@ namespace AXIS.Controllers
             ViewBag.ScopeWork = rversion.ScopeWork.Work;
 
             ViewBag.Notes = rversion.NotesAndInstructions;
+            ViewBag.Description = "";
 
-            ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
+            //ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
 
             return View();
         }
@@ -115,9 +116,9 @@ namespace AXIS.Controllers
             ViewBag.Notes = rversion.NotesAndInstructions;
             ViewBag.ScopeWork = rversion.ScopeWork.Work;
             ViewBag.Typefarm = rfq.Farm.TypeFarm;
+            ViewBag.Description = "";
 
-
-            ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
+            //ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
 
 
             ViewBag.Quotes = db.Quotes.Where(r => r.RversionId == rversionId).ToList();

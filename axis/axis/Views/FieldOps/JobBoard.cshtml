@@ -74,22 +74,19 @@
                 //          { "Id": 1, "PlaceName": "Axis Office", "GeoLong": "32.7673547", "GeoLat": "-117.1994852", "Descriptionfarm": "Information about Office"},
                 //          { "Id": 2, "PlaceName": "Axis New Office ", "GeoLong": "32.7673547", "GeoLat": "-117.1994852", "Descriptionfarm": "Information about New Office for George" },
                 //       ];
-                var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+                var iconBase = '../../Content/images/';
                 var icons = {
                     WIND: {
-                        Size: new google.maps.Size(44, 88),
-                        icon: iconBase + 'info-i_maps.png'
-                        //icon:'http://www.encorepowersolutions.com/wp-content/uploads/2015/10/turbine.gif'
+                        url: iconBase + 'turbin.gif',
                     },
                     OTHER: {
-                        Size: new google.maps.Size(44, 88),
-                        icon: iconBase + 'library_maps.png'
-                        //icon:''
+                        url: "http://www.appsaxisrg.com/Content/images/turbin.gif",
                     },
+
                     SOLAR: {
-                        Size: new google.maps.Size(44, 88),
-                        icon: iconBase + 'parking_lot_maps.png'
-                    }
+                        url: iconBase + 'panel.gif',
+                    },
+
                 };
                 // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
                 $.each(data, function (i, item) {
@@ -104,53 +101,29 @@
                         'typefarm':item.TypeFarm,
                         'rfq': item.Rfq,
                         'Teches': item.Teches,
-                        'icon': icons[item.TypeFarm].icon,
-                        'optimized': false
+                        'icon': icons[item.TypeFarm].url,
+                        'optimized': false,
                     }
 
                         );
 
-                //function addMarker(lat,lng){
-                //    var marker = new google.maps.Marker({
-                //        position: new google.maps.LatLng(lat,lng),
-                //        map: map,
-                //        title: 'title',
-                //        desc: 'Detail'
-                //    });
-                //    oms.addMarker(maker);
-                //}
-                 
-                //oms.addListener('click',function(marker){
-                //    markerInfoWin.setContent(marker.desc);
-                //    markerInfoWin.open(map, marker);
-                //});
-                //oms.addListener('spiderfy',function(markers){
-                //    for (var i = 0; i < markers.length; i ++ ){
-                //    }
-                //    markerInfoWin.close();
-                //});
-                //oms.addListener('unspiderfy',function(markers){
-                //    for (var i = 0; i < markers.length; i ++ ){
-                //    }
-                //    markerInfoWin.close();
-                //});
 
                 var pinIcon = new google.maps.MarkerImage(
-            "http://www.encorepowersolutions.com/wp-content/uploads/2015/10/turbine.gif",
+            icons[item.TypeFarm].url,
             null, /* size is determined at runtime */
-            null, /* origin is 0,0 */
+            new google.maps.Point(0, -15), /* origin is 0,0 */
             null, /* anchor is bottom center of the scaled image */
-            new google.maps.Size(44, 88)
+            new google.maps.Size(50, 80)
                     );
 
 
 
-                    // Make the marker is only Wind
-                    //marker.setIcon(pinIcon)
+                    //Make the marker is only Wind
+                    marker.setIcon(pinIcon)
 
                     // put in some information about each json object - in this case, the opening hours.
                     var infowindow = new google.maps.InfoWindow({
-                        content: "<div class='infoDiv'><h4>" +"Site Name: "+ item.PlaceName + "<br>" + "Type of Farm: "+item.TypeFarm + "<br>" + "Resouce Manager: " + item.ResouceManager + "<br>" + "Project Name:" + item.ProjectName +"<br>"  + "Job#:" + item.Id + "<br>" + "P.O.#" + item.POS + "<br>" + "RFQ # " + item.Rfq + "<br>" + "Technicians:" + item.Teches +"</div></div>"
+                        content: "<div class='infoDiv'><h4>" +"Site Name: "+ item.PlaceName + "</h4><br><h5>" + "Type of Farm: "+item.TypeFarm + "<br>" + "Resouce Manager: " + item.ResouceManager + "<br>" + "Project Name:" + item.ProjectName +"<br>"  + "Job#:" + item.Id + "<br>" + "P.O.#" + item.POS + "<br>" + "RFQ # " + item.Rfq + "<br>" + "Technicians:" + item.Teches +"</h5></div></div>"
                     });
 
                     // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!

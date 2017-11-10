@@ -111,7 +111,7 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 db.AssignmentOfToolsByJobs.Add(assignmentOfToolsByJob);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -177,13 +177,15 @@ namespace AXIS.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult PartialListContract(int? ContractId) {
+        public ActionResult PartialListContract(int? ContractId)
+        {
 
-            if (ContractId == null) {
+            if (ContractId == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Where(f => f.ContractId == ContractId);
-            
+
             if (assignmentOfToolsByJob == null)
             {
                 return HttpNotFound();
@@ -214,19 +216,20 @@ namespace AXIS.Controllers
             ViewBag.ContractId = ContractId;
 
             AssignmentOfToolsByJob assignmentOfToolsByJob;
-            foreach (var item in values) {
+            foreach (var item in values)
+            {
 
                 int id = Int32.Parse(item);
                 assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Find(id);
-                
+
                 assignmentOfToolsByJob.ContractId = ContractId;
 
                 db.SaveChanges();
-                
+
             }
 
             return new JsonResult() { Data = "Assigned successfully" };
-            
+
         }
 
         // Liberar inventario de trucks

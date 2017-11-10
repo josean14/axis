@@ -15,7 +15,7 @@ namespace AXIS.Controllers
         private AXISDB db = new AXISDB();
 
 
-       
+
 
         // GET: Trucks/Edit/5
         public ActionResult Edit(int? id, int ContractId)
@@ -43,7 +43,7 @@ namespace AXIS.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
 
                 db.Entry(truck).State = EntityState.Modified;
 
@@ -63,7 +63,7 @@ namespace AXIS.Controllers
         }
 
 
-        
+
 
         protected override void Dispose(bool disposing)
         {

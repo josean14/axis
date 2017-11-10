@@ -1,51 +1,59 @@
 ﻿@model IEnumerable<AXIS.Models.TruckDetail>
 
 
-<table class="table">
-    <tr>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.LicencePlate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MakeModel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SiteLocation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VIN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateRent)
-        </th>
-        <th></th>
-    </tr>
+<div class="panelright">
+    <div class="panel panel-axisxl right">
+        <div class="panel-heading" style="text-align:center">
+            TRUCK DETAILS
+        </div>
+        <table class="table table-bordered">
+            <tr>
 
-@foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.LicencePlate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MakeModel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SiteLocation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VIN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateRent)
-        </td>
-        <td>
-            <a href=@Url.Action("Edit", "TruckDetails", new { id = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-pencil" , title="EDIT"></a> |
-            <a href=@Url.Action("AToolsbyTruck", "ToolsByTrucks", new { TruckId = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-plus" , title="ASSIGN TOOLS"></a> 
-            
-        </td>
-    </tr>
-}
+                <th style="text-align:center">
+                    LICENSE PLATE
+                </th>
+                <th style="text-align:center">
+                    MAKE/MODEL
+                </th>
+                <th>
+                    SITE LOCATION
+                </th>
+                <th>
+                    LAST 6 OF VIN
+                </th>
+                <th>
+                    DATE
+                </th>
+                <th>OPTIONS</th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+        {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LicencePlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MakeModel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SiteLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VIN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateRent)
+                    </td>
+                    <td style="text-align:center">
+                        <a href=@Url.Action("Edit", "TruckDetails", new { id = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-pencil" , title="EDIT"></a> |
+                        <a href=@Url.Action("AToolsbyTruck", "ToolsByTrucks", new { TruckId = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-plus" , title="ASSIGN TOOLS"></a>
+
+                    </td>
+                </tr>
+        }
+
+        </table>
+    </div>
+    </div>

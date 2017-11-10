@@ -55,7 +55,7 @@ namespace AXIS.Controllers
 
                 if (FileT != null)
                 {
-                    var dir = Server.MapPath("~/Documents/PO/" + assignmentOfTool.PurchaseOrderId+ "/" + "Tools");
+                    var dir = Server.MapPath("~/Documents/PO/" + assignmentOfTool.PurchaseOrderId + "/" + "Tools");
                     if (!Directory.Exists(dir))
                     {
                         Directory.CreateDirectory(dir);
@@ -74,7 +74,7 @@ namespace AXIS.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", "Mobilization");
             }
-            
+
             return View(assignmentOfTool);
         }
 
@@ -82,7 +82,7 @@ namespace AXIS.Controllers
         //
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditJson([Bind(Include = "PurchaseOrderId,SuppliedBy")] AssignmentOfTool assignmentOfTool,  int ContractId, string AditionalInfo)
+        public ActionResult EditJson([Bind(Include = "PurchaseOrderId,SuppliedBy")] AssignmentOfTool assignmentOfTool, int ContractId, string AditionalInfo)
         {
             if (ModelState.IsValid)
             {
