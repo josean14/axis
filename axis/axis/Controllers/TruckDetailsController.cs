@@ -18,7 +18,7 @@ namespace AXIS.Controllers
         {
 
             var trucks = db.TruckDetails.Where(t => t.PurchaseOrderId == PurchaseOrderId);
-            
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
             ViewBag.ContractId = ContractId;
             return PartialView(trucks.ToList());
         }

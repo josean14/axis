@@ -172,9 +172,10 @@ namespace AXIS.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AToolsbyTruck(int? TruckId, int ContractId)
+        public ActionResult AToolsbyTruck(int? TruckId, int ContractId, string LicencePlate, int PurchaseOrderId)
         {
-
+            ViewBag.LicencePlate = LicencePlate;
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
             if (TruckId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -186,11 +187,12 @@ namespace AXIS.Controllers
                 return HttpNotFound();
             }
             ViewBag.ContractId = ContractId;
+
             return View(assignmentOfToolsByTruck);
 
         }
 
-        public ActionResult PartialList(int? Id, int ContractId)
+        public ActionResult PartialList(int? Id, int ContractId, int PurchaseOrderId)
         {
             if (Id == null)
             {
@@ -199,6 +201,7 @@ namespace AXIS.Controllers
             var assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Where(f => f.TruckId == 0);
             ViewBag.TrucktId = Id;
             ViewBag.ContractId = ContractId;
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
             if (assignmentOfToolsByTruck == null)
             {
                 return HttpNotFound();
@@ -220,6 +223,7 @@ namespace AXIS.Controllers
                 assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Find(id);
 
                 assignmentOfToolsByTruck.TruckId = TruckId;
+                assignmentOfToolsByTruck.Location = "JOB";
                 db.SaveChanges();
 
             }
@@ -236,6 +240,7 @@ namespace AXIS.Controllers
             AssignmentOfToolsByTruck assignmentOfToolsByTruck;
             assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Find(Id);
             assignmentOfToolsByTruck.TruckId = 0;
+            assignmentOfToolsByTruck.Location = "WAREHOUSE";
             db.SaveChanges();
             return new JsonResult() { Data = 1 };
 

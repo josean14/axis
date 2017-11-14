@@ -25,7 +25,7 @@
     <table class="table">
         <tr>
             <th>
-                @Html.ActionLink("MANUFACTURER", "PartialInvWarehousebyTruck", new { sortOrder = ViewBag.ManufacturerSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("MANUFACTURER", "Index", new { sortOrder = ViewBag.ManufacturerSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
             <th>
                 MODEL
@@ -46,10 +46,7 @@
                 ADITIONAL INFO.
             </th>
             <th>
-                @Html.ActionLink("CATEGORY", "PartialInvWarehousebyTruck", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th>
-                @Html.ActionLink("CATEGORY", "PartialInvWarehousebyTruck", new { sortOrder = ViewBag.TruckSortParm, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("CATEGORY", "Index", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
 
         </tr>

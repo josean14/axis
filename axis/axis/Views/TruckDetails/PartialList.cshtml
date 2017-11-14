@@ -48,7 +48,7 @@
                     </td>
                     <td style="text-align:center">
                         <a href=@Url.Action("Edit", "TruckDetails", new { id = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-pencil" , title="EDIT"></a> |
-                        <a href=@Url.Action("AToolsbyTruck", "ToolsByTrucks", new { TruckId = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-plus" , title="ASSIGN TOOLS"></a>
+                        <a href=@Url.Action("AToolsbyTruck", "ToolsByTrucks", new { TruckId = item.TruckId, ContractId = @ViewBag.ContractId, LicencePlate= item.LicencePlate, PurchaseOrderId = @ViewBag.PurchaseOrderId }) class="glyphicon glyphicon-plus" , title="ASSIGN TOOLS"></a>
 
                     </td>
                 </tr>

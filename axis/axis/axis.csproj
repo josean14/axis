@@ -384,6 +384,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\axisbg.jpg" />
+    <Content Include="Content\images\axisbrackground.jpg" />
+    <Content Include="Content\images\axis_logo.jpg" />
+    <Content Include="Content\images\axis_logo.png" />
+    <Content Include="Content\images\axis_logo2.png" />
+    <Content Include="Content\images\panel.gif" />
+    <Content Include="Content\images\turbin.gif" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -685,6 +692,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\Users\" />
     <Folder Include="Documents\Contracts\" />
     <Folder Include="Documents\PO\" />
     <Folder Include="Views\TabModel\" />

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<AXIS.Models.AssignmentOfToolsByJob>
 
+
+
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
@@ -33,6 +35,12 @@
                 @Html.ActionLink("CATEGORY", "PartialInvWarehousebyJob", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
 
+            <th>
+                <p>
+                    <a href=@Url.Action("Create", "ToolsByTrucks") class="btn btn-primary btn-xs" , title="new">NEW TOOL</a>
+                </p>
+            </th>
+
         </tr>
 
         @foreach (var item in Model)
@@ -55,6 +63,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td style="text-align:center">
+                    <a href=@Url.Action("Edit", "ToolsByTrucks", new { id = item.Id }) class="glyphicon glyphicon-pencil" , title="EDIT"></a>
                 </td>
 
             </tr>
