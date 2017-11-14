@@ -4,6 +4,7 @@
 
 @Html.AntiForgeryToken()
 @Html.Hidden("ContractId", (Int32)ViewBag.ContractId)
+@Html.Hidden("PurchaseOrderId", (Int32)ViewBag.PurchaseOrderId)
 
 
 <div class="panelright">
@@ -73,10 +74,11 @@ $('#checar').click(function () {
         array.push($(this).val());
     });
 
-    var url2 = '@Url.Action("Index", "Mobilization")';
     var url = "/ToolbyJob/SaveListA/";
     var anti = $('[name=__RequestVerificationToken]').val();
     var ContractId = $('#ContractId').val();
+    var PurchaseOrderId = $('#PurchaseOrderId').val();
+    var url2 = '@Url.Action("Edit", "ATools")' + "/" + PurchaseOrderId + "?ContractId=" + ContractId;
 
     $.post(url, { ContractId: ContractId, values: array, __RequestVerificationToken: anti }, function (data) {
 

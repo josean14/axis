@@ -38,6 +38,12 @@
                 @Html.ActionLink("CATEGORY", "PartialInvWarehousebyTruck", new { sortOrder = ViewBag.CategorySortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
 
+            <th>
+                <p>
+                    <a href=@Url.Action("Create", "ToolsByTrucks") class="btn btn-primary btn-xs" , title="new">NEW TOOL</a>
+                </p>
+            </th>
+
         </tr>
 
         @foreach (var item in Model)
@@ -67,6 +73,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Category)
                 </td>
+                <th>
+                <td style="text-align:center">
+                    <a href=@Url.Action("Edit", "ToolsByTrucks", new { id = item.Id }) class="glyphicon glyphicon-pencil" , title="EDIT"></a>
+                </td>
+                </th>
 
             </tr>
         }

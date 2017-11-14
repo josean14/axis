@@ -37,7 +37,7 @@
 
             <th>
                 <p>
-                    <a href=@Url.Action("Create", "ToolsByTrucks") class="btn btn-primary btn-xs" , title="new">NEW TOOL</a>
+                    <a href=@Url.Action("Create", "ToolByJob") class="btn btn-primary btn-xs" , title="new">NEW TOOL</a>
                 </p>
             </th>
 
@@ -65,7 +65,7 @@
                     @Html.DisplayFor(modelItem => item.Category)
                 </td>
                 <td style="text-align:center">
-                    <a href=@Url.Action("Edit", "ToolsByTrucks", new { id = item.Id }) class="glyphicon glyphicon-pencil" , title="EDIT"></a>
+                    <a href=@Url.Action("Edit", "ToolByJob", new { id = item.Id }) class="glyphicon glyphicon-pencil" , title="EDIT"></a>
                 </td>
 
             </tr>

@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.SuppliedBy, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.LabelFor(model => model.SuppliedBy, htmlAttributes: new { @class = "form-control" })
+                                    @Html.EnumDropDownListFor(model => model.SuppliedBy, new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.SuppliedBy, "", new { @class = "text-danger" })
                                     @Html.HiddenFor(model => model.SuppliedBy)
                                     @Html.HiddenFor(model => model.Cost)
@@ -149,9 +149,9 @@
 
 
             //Muestra el listado de las herramientas ya seleccionadas
-            @Html.Action("PartialListContract", "ToolbyJob", new { Id = @ViewBag.ContractId })
+            @Html.Action("PartialListContract", "ToolbyJob", new { Id = @ViewBag.ContractId, PurchaseOrderId= @ViewBag.PurchaseOrderId })
             //Muestra listado de herramientas que se pueden asignar
-            @Html.Action("PartialList", "ToolbyJob", new { Id = @ViewBag.ContractId })
+            @Html.Action("PartialList", "ToolbyJob", new { Id = @ViewBag.ContractId, PurchaseOrderId = @ViewBag.PurchaseOrderId })
             //PEndiente renderizar la vista cuando se selecciona el inventario de herramientas
         }
     }
@@ -160,7 +160,7 @@
 
 
 <div id="ListTools" style="display:none">
-    @Html.Action("PartialList", "ToolbyJob", new { Id = @ViewBag.ContractId })
+    @Html.Action("PartialList", "ToolbyJob", new { Id = @ViewBag.ContractId, PurchaseOrderId = @ViewBag.PurchaseOrderId })
 
 </div>
 

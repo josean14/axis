@@ -1,38 +1,126 @@
 ﻿@model IEnumerable<AXIS.Models.AssignmentOfToolsByJob>
 
+@Html.AntiForgeryToken()
+@Html.Hidden("ContractId", (Int32)ViewBag.ContractId)
+@Html.Hidden("PurchaseOrderId", (Int32)ViewBag.PurchaseOrderId)
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Manufacturer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Serial1)
-        </th>
+<div class="panelright">
+    <div class="panel panel-axislg right">
+        <div class="panel-heading">
+            TOOLS ASSIGNED
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Manufacturer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Serial1)
+                </th>
 
-        <th></th>
-    </tr>
+                <th>OPTIONS</th>
+            </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Serial1)
-            </td>
-            <td>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manufacturer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Serial1)
+                    </td>
+                    <td style="text-align:center">
+                        <a href="#" onclick="confirmRemove(@item.Id)" class="glyphicon glyphicon-remove"></a>
+                    </td>
+                        
+                </tr>
+            }
 
-                @Html.ActionLink("Remove", "Mobilization")
-            </td>
-        </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="/Scripts/jquery.min.js"></script>
+<script>
+    var array = [];
+
+$('#checar').click(function () {
+    $('input:checkbox:checked').each(function () {
+        array.push($(this).val());
+    });
+
+
+    var url = "/ATools/Edit/";
+    var anti = $('[name=__RequestVerificationToken]').val();
+    var ContractId = $('#ContractId').val();
+    var PurchaseOrderId = $('#PurchaseOrderId').val();
+    var url2 = '@Url.Action("Edit", "ATools")' + "/" + PurchaseOrderId + "?ContractId=" + ContractId;
+
+    ////Aqui me quede
+    $.post(url, { ContractId: ContractId, PurchaseOrderId: PurchaseOrderId, values: array, __RequestVerificationToken: anti }, function (data) {
+
+        if (data = 1) {
+
+            window.location.href = url2;
+        }
+
+    });
+});
+
+
+    function confirmRemove(id) {
+        bootbox.confirm({
+            message: "ARE YOU SURE TO REMOVE THIS TOOL?",
+            buttons: {
+                confirm: {
+                    label: 'YES',
+                    className: 'btn-success'
+                },
+                cancel: {
+                    label: 'NO',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+
+                if (result) {
+                    var url = "/ToolbyJob/Remove/";
+                    var ContractId = $('#ContractId').val();
+                    var PurchaseOrderId = $('#PurchaseOrderId').val();
+                    var url2 = '@Url.Action("Edit", "ATools")' + "/" + PurchaseOrderId + "?ContractId=" + ContractId;
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { Id: id, __RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+
+
+
+                    });
+
+                }
+            }
+        });
+
+
     }
 
-</table>
+</script>

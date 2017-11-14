@@ -35,7 +35,7 @@ namespace AXIS.Controllers
                 return HttpNotFound();
             }
             ViewBag.PurchaseOrderId = id;
-            ViewBag.ContractId = id;
+            ViewBag.ContractId = ContractId;
             return View(assignmentOfTool);
         }
 

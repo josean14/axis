@@ -13,10 +13,10 @@
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
-        @using (Html.BeginForm("Index", "ToolbyTrucks", FormMethod.Get))
+        @using (Html.BeginForm("Index", "ToolsbyTrucks", FormMethod.Get))
         {
             <p>
-                FIND BY JOB #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                FIND BY LICENSE PLATE #: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
                 <input type="submit" value="SEARCH" />
             </p>
         }
@@ -24,6 +24,9 @@
 
     <table class="table">
         <tr>
+            <th>
+                @Html.ActionLink("LICENSE PLATE", "Index", new { sortOrder = ViewBag.TruckIdSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
             <th>
                 @Html.ActionLink("MANUFACTURER", "Index", new { sortOrder = ViewBag.ManufacturerSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
@@ -54,6 +57,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.TruckDetail.LicencePlate)
+                </th>
                 <td>
                     @Html.DisplayFor(modelItem => item.Manufacturer)
                 </td>

@@ -19,7 +19,7 @@ namespace AXIS.Controllers
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.TruckIdSortParm = String.IsNullOrEmpty(sortOrder) ? "truckId_desc" : "";
+            ViewBag.TruckIdSortParm = String.IsNullOrEmpty(sortOrder) ? "truckLicense_desc" : "";
             ViewBag.CategorySortParm = sortOrder == "Category" ? "category_desc" : "Category";
             ViewBag.ManufacturerSortParm = sortOrder == "Manufacturer" ? "manufacturer_desc" : "Manufacturer";
             if (searchString != null)
@@ -33,28 +33,19 @@ namespace AXIS.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var ToolsbyTruck = from s in db.AssignmentOfToolsByTrucks.Where(c => c.Location == "JOB")
+            var ToolsbyTruck = from s in db.AssignmentOfToolsByTrucks.Where(c => c.Location == "JOB").Include(d => d.TruckDetail)
                                select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                int numVal;
-                if (Int32.TryParse(searchString, out numVal))
-                {
-                    ToolsbyTruck = ToolsbyTruck.Where(s => s.TruckId.Equals(numVal));
-                }
-                else
-                {
-                    ToolsbyTruck = ToolsbyTruck.Where(s => s.TruckId.Equals(0));
-                    ViewBag.Message = "Invalid TruckId#";
-                }
+                ToolsbyTruck = ToolsbyTruck.Where(s => s.TruckDetail.LicencePlate.Contains(searchString));
 
             }
 
             switch (sortOrder)
             {
-                case "truckId_desc":
-                    ToolsbyTruck = ToolsbyTruck.OrderByDescending(s => s.TruckId);
+                case "truckLicense_desc":
+                    ToolsbyTruck = ToolsbyTruck.OrderByDescending(s => s.TruckDetail.LicencePlate);
                     break;
                 case "Category":
                     ToolsbyTruck = ToolsbyTruck.OrderBy(s => s.Category);
@@ -69,7 +60,7 @@ namespace AXIS.Controllers
                     ToolsbyTruck = ToolsbyTruck.OrderByDescending(s => s.Manufacturer);
                     break;
                 default: //Contract ascending
-                    ToolsbyTruck = ToolsbyTruck.OrderBy(s => s.TruckId);
+                    ToolsbyTruck = ToolsbyTruck.OrderBy(s => s.TruckDetail.LicencePlate);
                     break;
             }
             int pageSize = 10;

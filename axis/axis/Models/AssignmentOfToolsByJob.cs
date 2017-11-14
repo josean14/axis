@@ -16,19 +16,19 @@ namespace AXIS.Models
         [Key]
         public virtual int Id { get; set; }
 
-        [DisplayName("MANUFACTURER.")]
+        [DisplayName("MANUFACTURER")]
         public virtual string Manufacturer { get; set; }
 
-        [DisplayName("MODEL.")]
+        [DisplayName("MODEL")]
         public virtual string Model { get; set; }
 
-        [DisplayName("SERIAL 1.")]
+        [DisplayName("SERIAL #1")]
         public virtual string Serial1 { get; set; }
 
-        [DisplayName("SERIAL 2.")]
+        [DisplayName("SERIAL #2")]
         public virtual string Serial2 { get; set; }
 
-        [DisplayName("STATUS.")]
+        [DisplayName("STATUS")]
         public virtual string Status { get; set; }
 
         [DisplayName("Calibration Due / Manufact. Date")]
@@ -37,16 +37,16 @@ namespace AXIS.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public virtual DateTime CDMD { get; set; }
 
-        [DisplayName("ADDITIONAL 1.")]
+        [DisplayName("ADDITIONAL INFORMATION 1")]
         public virtual string Additional1 { get; set; }
 
-        [DisplayName("ADDITIONAL 2.")]
+        [DisplayName("ADDITIONAL INFORMATION 2")]
         public virtual string Additional2 { get; set; }
 
-        [DisplayName("LOCATION.")]
+        [DisplayName("LOCATION")]
         public virtual string Location { get; set; }
 
-        [DisplayName("CATEGORY.")]
+        [DisplayName("CATEGORY")]
         public virtual string Category { get; set; }
 
         public virtual int ContractId { get; set; }

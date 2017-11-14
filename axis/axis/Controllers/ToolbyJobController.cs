@@ -177,13 +177,15 @@ namespace AXIS.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult PartialListContract(int? ContractId)
+        public ActionResult PartialListContract(int? ContractId, int PurchaseOrderId)
         {
 
             if (ContractId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
+            ViewBag.ContractId = ContractId;
             var assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Where(f => f.ContractId == ContractId);
 
             if (assignmentOfToolsByJob == null)
@@ -194,7 +196,7 @@ namespace AXIS.Controllers
 
         }
 
-        public ActionResult PartialList(int? Id)
+        public ActionResult PartialList(int? Id, int PurchaseOrderId)
         {
             if (Id == null)
             {
@@ -202,6 +204,7 @@ namespace AXIS.Controllers
             }
             var assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Where(f => f.ContractId == 0);
             ViewBag.ContractId = Id;
+            ViewBag.PurchaseOrderId = PurchaseOrderId;
             if (assignmentOfToolsByJob == null)
             {
                 return HttpNotFound();
@@ -223,6 +226,7 @@ namespace AXIS.Controllers
                 assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Find(id);
 
                 assignmentOfToolsByJob.ContractId = ContractId;
+                assignmentOfToolsByJob.Location = "JOB";
 
                 db.SaveChanges();
 
@@ -240,6 +244,7 @@ namespace AXIS.Controllers
             AssignmentOfToolsByJob assignmentOfToolsByJob;
             assignmentOfToolsByJob = db.AssignmentOfToolsByJobs.Find(Id);
             assignmentOfToolsByJob.ContractId = 0;
+            assignmentOfToolsByJob.Location = "WAREHOUSE";
             db.SaveChanges();
             return new JsonResult() { Data = 1 };
 
