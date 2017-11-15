@@ -689,6 +689,7 @@
     <Content Include="Views\ToolbyJob\PartialListContract.cshtml" />
     <Content Include="Views\ToolsByTrucks\AToolsbyTruck.cshtml" />
     <Content Include="Views\ToolsByTrucks\PartialList.cshtml" />
+    <Content Include="Views\TruckDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,3 @@
+Agregar TechId en la tabla de TruckDetails
+Agregar CostInv en la tabla de TruckDetails
+Enviar de info. Mobiles a George 

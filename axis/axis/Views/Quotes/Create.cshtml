@@ -4,6 +4,17 @@
     ViewBag.Title = "RFQ # " + @ViewBag.RfqId + " Ver. 1";
 }
 
+@{
+
+            var selectList = new SelectList(
+                    new List<SelectListItem>
+            {
+                new SelectListItem {Text = "", Value = ""},
+                new SelectListItem {Text = "Mobilization in", Value = "Mobilization in"},
+                new SelectListItem {Text = "Mobilization Out", Value = "Mobilization Out"},
+            }, "Value", "Text");
+
+}
 <div class="panelright">
     <div class="panel panel-axis right">
         <!-- Default panel contents -->
@@ -98,7 +109,7 @@
 </div>
 
 <div class="panel panel-default">
-    <!-- Default panel contents -->
+    <!-- Para mobilization per Tech -->
     <table class="table table-bordered">
         <thead class="tr-axis">
             <tr>
@@ -106,22 +117,97 @@
                     Description
                 </th>
                 <th style="text-align:center">
-                    UM
+                    Price per Tech
                 </th>
                 <th style="text-align:center">
-                    Cost per Unit
+                    # Technicians
                 </th>
                 <th style="text-align:center">
-                    Price per Unit
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    @*@Html.DropDownListFor(model => model.Description, selectList, Model.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                    @Html.Label("Mobilization In", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                    @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                 </th>
                 <th style="text-align:center">
-                    Quantity
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = " 0" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                </th>
+            </tr>
+
+            <tr>
+                <th>
+                    @*@Html.DropDownListFor(model => model.Description, selectList, Model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                    @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                    @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                 </th>
                 <th style="text-align:center">
-                    Total Line
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = " 0" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                </th>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <!-- Trabajos por tiempos -->
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th style="width:400px">
+                    Description
+                </th>
+                <th style="text-align:center">
+                    Hourly Rate
+                </th>
+                <th style="text-align:center">
+                    # Technicians
+                 </th>
+                <th style="text-align:center">
+                    Weekly Hours (Projected)
+                </th>
+                <th style="text-align:center">
+                    # Weeks (Projected)
+                </th>
+                <th style="text-align:center">
+                    Total
                 </th>
                 <th style="text-align:center">
                     Action
+                </th>
+                <th style="text-align:center">
+                    Show / Hide
                 </th>
             </tr>
         </thead>
@@ -135,25 +221,83 @@
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
                     @Html.EditorFor(model => model.CostPerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
                     @Html.ValidationMessageFor(model => model.CostPerUnit, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
+                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:right">
+                    @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+
+                </th>
+                <th style="text-align:center">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Add Item</a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <!-- Precios por Conceptos -->
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th style="width:400px">
+                    Description
+                </th>
+                <th style="text-align:center">
+                    Price per Unit
+                </th>
+                <th style="text-align:center">
+                    # Of Units
+                </th>
+                <th style="text-align:center">
+                    Total
+                </th>
+                <th style="text-align:center">
+                    Show / Hide
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                    @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                </th>
+                <th style="text-align:center">
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
                     @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
                 </th>
-                <th style="text-align:right">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()" } })
+                <th style="text-align:center">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                 </th>
-                <th style="text-align:right">
-                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
 
+                <th style="text-align:center">
+                    @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
@@ -172,6 +316,8 @@
 @Html.AntiForgeryToken()
 
 <p id="msg"></p>
+
+
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
@@ -206,6 +352,7 @@
         </tbody>
     </table>
 </div>
+
 
 
 <div class="panelright">
@@ -302,10 +449,12 @@
                 function calctotal() {
                     var PricePerUnit = $('#PricePerUnit').val();
                     var Quantity = $('#Quantity').val();
+                    var CostperUnit = $('#CostperUnit').val();
+                    var Currency = $('#Currency').val();
 
 
-                    var result = PricePerUnit * Quantity;
-                    $('#Currency').val(result);
+                    var result = PricePerUnit * Quantity * CostperUnit * Quantity * Currency;
+                    $('#Um').val(result);
                 }
 
 

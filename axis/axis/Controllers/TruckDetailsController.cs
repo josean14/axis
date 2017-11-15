@@ -7,12 +7,66 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using PagedList;
 
 namespace AXIS.Controllers
 {
     public class TruckDetailsController : Controller
     {
         private AXISDB db = new AXISDB();
+
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.SiteSortParm = String.IsNullOrEmpty(sortOrder) ? "site_desc" : "";
+            ViewBag.LicenseSortParm = sortOrder == "License" ? "lisence_desc" : "Lisence";
+            ViewBag.DescriptionSortParm = sortOrder == "Description" ? "description_desc" : "Description";
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var Trucks = from s in db.TruckDetails.Where(t => t.Status == "RENT")
+                               select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Trucks = Trucks.Where(s => s.SiteLocation.Contains(searchString));
+
+            }
+
+            switch (sortOrder)
+            {
+                case "site_desc":
+                    Trucks = Trucks.OrderByDescending(s => s.SiteLocation);
+                    break;
+                case "License":
+                    Trucks = Trucks.OrderBy(s => s.LicencePlate);
+                    break;
+                case "license_desc":
+                    Trucks = Trucks.OrderByDescending(s => s.LicencePlate);
+                    break;
+                case "Description":
+                    Trucks = Trucks.OrderBy(s => s.MakeModel);
+                    break;
+                case "description_desc":
+                    Trucks = Trucks.OrderByDescending(s => s.MakeModel);
+                    break;
+                default: //Site Location ascending
+                    Trucks = Trucks.OrderBy(s => s.SiteLocation);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(Trucks.ToPagedList(pageNumber, pageSize));
+
+        }
 
         public ActionResult PartialList(int PurchaseOrderId, int ContractId)
         {
@@ -36,6 +90,7 @@ namespace AXIS.Controllers
                 return HttpNotFound();
             }
             ViewBag.ContractId = ContractId;
+            ViewBag.TechId = new SelectList(db.Teches.Where(c => c.Status == "IN FIELD"), "TechId", "FullName");
             return View(truckDetail);
         }
 
@@ -44,7 +99,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TruckId,LicencePlate,MakeModel,SiteLocation,VIN,DateRent,Year,GasDiesel,GasCard,InsuranceDocumentacion,ItemInterior1,ItemInterior2,ItemInterior3,ItemInterior4,ItemInterior5,EngineComparment1,EngineComparment2,EngineComparment3,EngineComparment4,ItemExterior1,ItemExterior2,ItemExterior3,ItemExterior4,ItemExterior5,ItemExterior6,ItemExterior7,ItemExterior8,ItemExterior9,ItemExterior10,ItemExterior11,ItemExterior12,ItemExterior13,ItemExterior14,ItemExterior15,ItemExterior16,AditionalComments,PurchaseOrderId")] TruckDetail truckDetail, int ContractId)
+        public ActionResult Edit([Bind(Include = "TruckId,LicencePlate,MakeModel,SiteLocation,VIN,DateRent,Year,GasDiesel,GasCard,InsuranceDocumentacion,ItemInterior1,ItemInterior2,ItemInterior3,ItemInterior4,ItemInterior5,EngineComparment1,EngineComparment2,EngineComparment3,EngineComparment4,ItemExterior1,ItemExterior2,ItemExterior3,ItemExterior4,ItemExterior5,ItemExterior6,ItemExterior7,ItemExterior8,ItemExterior9,ItemExterior10,ItemExterior11,ItemExterior12,ItemExterior13,ItemExterior14,ItemExterior15,ItemExterior16,AditionalComments,PurchaseOrderId,TechId")] TruckDetail truckDetail, int ContractId)
         {
             if (ModelState.IsValid)
             {

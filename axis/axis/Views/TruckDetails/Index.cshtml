@@ -1,0 +1,115 @@
+﻿@model PagedList.IPagedList<AXIS.Models.TruckDetail>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "TRUCK REPORT";
+}
+
+<h2>ASSETS &raquo; TRUCK REPORT</h2>
+
+<p>
+    <a href=@Url.Action("Inventory", "Assets") class="btn btn-primary btn-xs">BACK</a>
+</p>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        @using (Html.BeginForm("Index", "ToolbyJob", FormMethod.Get))
+        {
+            <p>
+                FIND BY SITE LOCATION: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
+                <input type="submit" value="SEARCH" />
+            </p>
+        }
+    </div>
+
+    <table class="table-bordered">
+        <tr>
+            <th>
+                FARM NAME
+            </th>
+            <th>
+                SITE LOCATION
+            </th>
+            <th>
+                DRIVER NAME
+            </th>
+            <th>
+                LISENCE PLATE
+            </th>
+            <th>
+                INVOICE TOTAL
+            </th>
+            <th>
+                VEHICLE DESCRIPTION
+            </th>
+            <th>
+                VIN (LAST 6)
+            </th>
+            <th>
+                COMPANY RENTAL
+            </th>
+            <th>
+                REPORT SUBMITTED
+            </th>
+            <th>
+                OPTIONS
+            </th>
+            <th>
+                VEHICLE NOTES
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Truck.Purchaseorder.Contract.Rversion.Rfq.Farm.FarmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiteLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TechId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicencePlate)
+                </td>
+                <td>
+                   INSERT BY ROBBIE
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MakeModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VIN)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Truck.RentalAgency)
+                </td>
+                <td align="center">
+                    TECH ID SEND INFO.
+                </td>
+                <td align="center">
+                    DETAILS / EDIT
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.AditionalComments)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="panel-footer">
+        <div class="row">
+            PAGE @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) OF @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -45,6 +45,10 @@
                     <tr>
                         <th align="center">
                             <p>DRIVER NAME:</p>
+                            <div class="col-md-10">
+                                @Html.DropDownList("TechId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TechId, "", new { @class = "text-danger" })
+                            </div>
                         </th>
                         <th align="center">
                             <div class="form-group">
@@ -432,7 +436,7 @@
                     <table class="table table-bordered">
                         <tr>
                             <th align="center">
-                                @Html.EditorFor(model => model.AditionalComments, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.AditionalComments, new { rows = 5, cols = 80 })
                                 @Html.ValidationMessageFor(model => model.AditionalComments, "", new { @class = "text-danger" })
                             </th>
                         </tr>
