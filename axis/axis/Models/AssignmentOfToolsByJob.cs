@@ -34,9 +34,9 @@ namespace AXIS.Models
         [DisplayName("Calibration Due / Manufact. Date")]
         [Required(ErrorMessage = "The date is required.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public virtual DateTime CDMD { get; set; }
-
+        
         [DisplayName("ADDITIONAL INFORMATION 1")]
         public virtual string Additional1 { get; set; }
 

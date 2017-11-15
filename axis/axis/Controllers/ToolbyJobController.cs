@@ -140,11 +140,28 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Location,Category,ContractId")] AssignmentOfToolsByJob assignmentOfToolsByJob)
+        public ActionResult Edit([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Location,Category,ContractId,CheckJob")] AssignmentOfToolsByJob assignmentOfToolsByJob)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(assignmentOfToolsByJob).State = EntityState.Modified;
+                AssignmentOfToolsByJob assignmentOfToolsByJobB;
+                assignmentOfToolsByJobB = db.AssignmentOfToolsByJobs.Find(assignmentOfToolsByJob.Id);
+
+                assignmentOfToolsByJobB.Manufacturer = assignmentOfToolsByJob.Manufacturer;
+                assignmentOfToolsByJobB.Model = assignmentOfToolsByJob.Model;
+                assignmentOfToolsByJobB.Serial1 = assignmentOfToolsByJob.Serial1;
+                assignmentOfToolsByJobB.Serial2 = assignmentOfToolsByJob.Serial2;
+                assignmentOfToolsByJobB.Status = assignmentOfToolsByJob.Status;
+                assignmentOfToolsByJobB.CDMD = assignmentOfToolsByJob.CDMD;
+                assignmentOfToolsByJobB.Additional1 = assignmentOfToolsByJob.Additional1;
+                assignmentOfToolsByJobB.Additional2 = assignmentOfToolsByJob.Additional2;
+                assignmentOfToolsByJobB.Location = assignmentOfToolsByJob.Location;
+                assignmentOfToolsByJobB.Category = assignmentOfToolsByJob.Category;
+                assignmentOfToolsByJobB.ContractId = assignmentOfToolsByJob.ContractId;
+
+
+
+                //db.Entry(assignmentOfToolsByJob).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
