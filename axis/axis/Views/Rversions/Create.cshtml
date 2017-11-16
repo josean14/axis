@@ -90,11 +90,6 @@
             <table class="table table-bordered">
                 <tr>
                     <th align="center">
-                        <p>Project Name: @ViewBag.ProjectName</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
                         <div class="form-group">
                             <label class="control-label col-md-4">Type of work</label>
                             <div class="col-md-6">
@@ -119,6 +114,7 @@
 
                 <tr>
                     <th align="center">
+                        <label class="control-label col-md-4">Project Description</label>
                         <div class="col-md-12">
                             @Html.TextAreaFor(model => model.ProjectDescription, new { @class = "form-control", placeholder = "Enter description Here..", @rows = "5" })
                             @Html.ValidationMessageFor(model => model.ProjectDescription, "", new { @class = "text-danger" })

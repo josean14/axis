@@ -16,7 +16,6 @@ namespace AXIS.Models
         public virtual string Status { get; set; }
 
         [DisplayName("Project Name")]
-        [Required(ErrorMessage = "The project name is required.")]
         public virtual string ProjectName { get; set; }
 
         [DisplayName("ID Farm")]

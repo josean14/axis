@@ -11,6 +11,8 @@
 
 <div class="panel panel-default">
         <!-- Default panel contents -->
+        @Html.HiddenFor(model => model.ProjectName)
+
         <div class="panel-heading">STEP 1</div>
 
         <table class="table table-bordered">
@@ -20,16 +22,17 @@
                 <div class="form-group">
                     @Html.Label("CUSTOMER", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                        @if (ViewBag.ClientList != null)
+                        {
+                            @Html.DropDownListFor(model => model.Farm.ClientId, ViewBag.ClientList as SelectList, "--Select Customer", new { @class = "form-control", @id = "ClientId" })
+                        }
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-2">SITE NAME</label>
                     <div class="col-md-10">
-                        @Html.DropDownList("FarmId", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.FarmId, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.FarmId, new SelectList(" "), "--Select Site", new { @class = "form-control" })
                     </div>
                 </div>
             </div>
@@ -61,6 +64,20 @@
            <a href=@Url.Action("Index","Rfqs") class="btn btn-primary btn-xs">VIEW RFQ LIST</a>
     </p>
 </div>
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#ClientId").change(function () {
+            $.get("/Rfqs/GetFarm", { ClientId: $("#ClientId").val() }, function (data){
+                $("FarmId").empty();
+                $.each(data, function (index, row) {
+                    $("#FarmId").append("<option value='" + row.FarmId + "'>" + row.FarmName + "</option>")
+                });
+            });
+        })
+    });
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

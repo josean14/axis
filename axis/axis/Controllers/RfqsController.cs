@@ -127,7 +127,12 @@ namespace AXIS.Controllers
 
                 case "WIND":
                     ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.WIND), "FarmId", "FarmName");
-                    break;
+                    ViewBag.ClientId = new SelectList(db.Clients,"ClientId","FullName");
+                    
+                    //Otra manera de hacer la lista
+                    List<Client> ClientList = db.Clients.ToList();
+                    ViewBag.ClientList = new SelectList(ClientList, "ClientId", "Fullname");
+                    break;  
                 case "SOLAR":
                     ViewBag.FarmId = new SelectList(db.Farms.Where(f => f.TypeFarm == TypeFarm.SOLAR), "FarmId", "FarmName");
                     break;
@@ -162,6 +167,14 @@ namespace AXIS.Controllers
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName", rfq.FarmId);
             return View(rfq);
         }
+
+        public JsonResult GetFarm(int ClientId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Farm> FarmList = db.Farms.Where(x => x.ClientId == ClientId).ToList();
+            return Json(FarmList, JsonRequestBehavior.AllowGet);
+        }
+
 
         // GET: Rfqs/Edit/5
         public ActionResult Edit(int? id)
