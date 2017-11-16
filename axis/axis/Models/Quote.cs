@@ -15,26 +15,29 @@ namespace AXIS.Models
         [Required(ErrorMessage = "The description is required.")]
         public virtual string Description { get; set; }
 
-        [DisplayName("Um")]
-        [Required(ErrorMessage = "The unit is required.")]
-        public virtual string Um { get; set; }
-
-
-        [DisplayName("Price per unit")]
-        [Required(ErrorMessage = "The price is required.")]
+        [DisplayName("Price Per Unit")]
         public virtual double PricePerUnit { get; set; }
 
-        [DisplayName("Quantity")]
-        [Required(ErrorMessage = "The quantity is required.")]
-        public virtual double Quantity { get; set; }
+        [DisplayName("# of Units")]
+        public virtual double NUnits { get; set; }
 
-        [DefaultValue(0)]
-        [DisplayName("Currency")]
-        public virtual double Currency { get; set; }
+        [DisplayName("Hourly Rate")]
+        public virtual double HourlyRate { get; set; }
 
-        [DefaultValue(0)]
-        [DisplayName("Cost per Unit")]
-        public virtual double CostPerUnit { get; set; }
+        [DisplayName("# Technicians")]
+        public virtual double Technicians { get; set; }
+
+        [DisplayName("Weekly Hours")]
+        public virtual double WeeklyHours { get; set; }
+
+        [DisplayName("# Weeks")]
+        public virtual double Weeks { get; set; }
+
+        [DisplayName("Total")]
+        public virtual double Total { get; set; }
+
+        //Guardara 1 para horas y 2 para proyecto
+        public virtual double TypeR { get; set; }
 
         public virtual int RversionId { get; set; }
 

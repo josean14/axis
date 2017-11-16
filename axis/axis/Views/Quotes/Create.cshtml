@@ -130,12 +130,10 @@
         <tbody>
             <tr>
                 <th>
-                    @*@Html.DropDownListFor(model => model.Description, selectList, Model.Description, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                    
                     @Html.Label("Mobilization In", new { htmlAttributes = new { @class = "form-control" } })
                     
-                    @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                    
                 </th>
                 <th style="text-align:center">
                     @Html.Editor("MIPricePerTech", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalMI()", placeholder = "$ 0.00" } })
@@ -153,13 +151,9 @@
 
             <tr>
                 <th>
-                    @*@Html.DropDownListFor(model => model.Description, selectList, Model.Description, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
-                    @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
                     
+                    @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
 
-                    @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                 </th>
                 <th style="text-align:center">
                     @Html.Editor("MOPricePerTech", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalMO()", placeholder = "$ 0.00" } })
@@ -216,34 +210,33 @@
                     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
 
-                    @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
-                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Technicians, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    @Html.ValidationMessageFor(model => model.Technicians, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.CostPerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.CostPerUnit, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.WeeklyHours, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.WeeklyHours, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Weeks, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.Weeks, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
 
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Add Item</a>
+                            <a href="" onclick="addQuote(@ViewBag.RversionId,1); return false;" class="glyphicon glyphicon-save">Add Item</a>
                         </div>
                     </div>
                 </th>
@@ -279,29 +272,28 @@
         <tbody>
             <tr>
                 <th>
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    @Html.Editor("Description2", new { htmlAttributes = new { @class = "form-control" } })
+                    
 
-                    @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                    
                 </th>
                 <th style="text-align:center">
                     @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
                     @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
-                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.NUnits, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    @Html.ValidationMessageFor(model => model.NUnits, "", new { @class = "text-danger" })
                 </th>
 
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <a href="" onclick="addQuote(@ViewData["RversionId"]); return false;" class="glyphicon glyphicon-save">Add Item</a>
+                            <a href="" onclick="addQuote(@ViewBag.RversionId,2); return false;" class="glyphicon glyphicon-save">Add Item</a>
                         </div>
                     </div>
                 </th>
@@ -384,7 +376,7 @@
 
     <script>
 
-                function addtable(id) {
+                function addtable(id,TypeR) {
 
                     var Description = $('#Description').val();
                     var Um = $('#Um').val();
@@ -403,20 +395,43 @@
                     var band = clearform();
                 }
 
-                function addQuote(id) {
+                function addQuote(id,TypeR) {
                     var url = "/Quotes/Create/";
                     var RversionId = id
                     var anti = $('[name=__RequestVerificationToken]').val();
-                    var Description = $('#Description').val();
-                    var Um = $('#Um').val();1
-                    var PricePerUnit = $('#PricePerUnit').val();
-                    var CostPerUnit = $('#CostPerUnit').val();
-                    var Quantity = $('#Quantity').val();
-                    var Currency = PricePerUnit * Quantity;
+                    if(TypeR == 1){
+                        
+                        var Description = $('#Description').val();
+                        var PricePerUnit = 0;
+                        var NUnits = 0;
+                        var HourlyRate = $('#HourlyRate').val();
+                        var Technicians = $('#Technicians').val();
+                        var WeeklyHours = $('#WeeklyHours').val();
+                        var Weeks = $('#Weeks').val();
+                        var Total =  HourlyRate * Technicians * WeeklyHours * Weeks;
 
-                    $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, CostPerUnit: CostPerUnit, __RequestVerificationToken: anti },
+                    
+                    }else{
+                        
+                        var Description = $('#Description2').val();
+                        var PricePerUnit = $('#PricePerUnit').val();
+                        var NUnits = $('#NUnits').val();
+                        var HourlyRate = 0;
+                        var Technicians = 0;
+                        var WeeklyHours = 0;
+                        var Weeks = 0;
+                        var Total =  PricePerUnit * NUnits;
+
+                                            
+                    }
+                    
+                    
+                    $.post(url, { Description: Description, PricePerUnit: PricePerUnit, NUnits: NUnits, HourlyRate: HourlyRate, 
+                        Technicians: Technicians, WeeklyHours: WeeklyHours, Weeks: Weeks, Total: Total,TypeR: TypeR ,RversionId: RversionId,  __RequestVerificationToken: anti },
                         function (data) {
-                            var band = addtable(data);
+                            
+                            //Pendiente cambiar funcion de presentacion de datos que fueron guardados de la funcion addTable y de la limpieza de datos
+                            var band = addtable(data,TypeR);
 
                         });
 

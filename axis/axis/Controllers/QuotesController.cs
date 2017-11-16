@@ -73,8 +73,9 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "QuoteId,Description,Um,PricePerUnit,Quantity,Currency,RversionId,CostPerUnit")] Quote quote)
+        public ActionResult Create([Bind(Include = "QuoteId,Description,PricePerUnit,NUnits,HourlyRate,Technicians,WeeklyHours,Weeks,Total,TypeR,RversionId")] Quote quote)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Quotes.Add(quote);
