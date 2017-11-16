@@ -53,6 +53,25 @@ namespace AXIS.Models
         [Required(ErrorMessage = "The Terms & conditions is required.")]
         public virtual string TermsandConditions { get; set; }
 
+
+        [DisplayName("MIPricePerTech")]
+        public virtual double MIPricePerTech { get; set; }
+
+        [DisplayName("MITechnicians")]
+        public virtual double MITechnicians { get; set; }
+
+        [DisplayName("MITotal")]
+        public virtual double MITotal { get; set; }
+
+        [DisplayName("MOPricePerTech")]
+        public virtual double MOPricePerTech { get; set; }
+
+        [DisplayName("MOTechnicians")]
+        public virtual double MOTechnicians { get; set; }
+
+        [DisplayName("MOTotal")]
+        public virtual double MOTotal { get; set; }
+
         public virtual Rfq Rfq { get; set; }
 
         public virtual ScopeWork ScopeWork { get; set; }

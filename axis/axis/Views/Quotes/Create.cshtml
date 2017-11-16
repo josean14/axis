@@ -133,22 +133,21 @@
                     @*@Html.DropDownListFor(model => model.Description, selectList, Model.Description, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                     @Html.Label("Mobilization In", new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-
+                    
                     @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                    @Html.Editor("MIPricePerTech", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalMI()", placeholder = "$ 0.00" } })
+                    
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = " 0" } })
-                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    @Html.Editor("MITechnicians", new { htmlAttributes = new { @class = "form-control", placeholder = " 0", @onfocus = "calctotalMI()" } })
+
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                    @Html.Editor("MITotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" , @readonly = "readonly" } })
+
                 </th>
             </tr>
 
@@ -157,22 +156,22 @@
                     @*@Html.DropDownListFor(model => model.Description, selectList, Model.Description, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                     @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    
 
                     @*@Html.DropDownList("Description", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectQuotes" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                    @Html.Editor("MOPricePerTech", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalMO()", placeholder = "$ 0.00" } })
+
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", placeholder = " 0" } })
-                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    @Html.Editor("MOTechnicians", new { htmlAttributes = new { @class = "form-control", placeholder = " 0", @onfocus = "calctotalMO()" } })
+
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                    @Html.Editor("MOTotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
+
                 </th>
 
             </tr>
@@ -375,7 +374,8 @@
 </div>
 
 <div>
-    @Html.ActionLink(" SAVE VERSION", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })
+    @*@Html.ActionLink(" SAVE VERSION", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })*@
+    <a href="#" onclick="saveVersion(@ViewBag.RversionId); return false;" class = "btn btn-primary btn-xs">SAVE VERSION</a>
 </div>
 
 @section Scripts {
@@ -457,6 +457,21 @@
                     $('#Um').val(result);
                 }
 
+                function calctotalMI() {
+                    var MIPricePerTech = $('#MIPricePerTech').val();
+                    var MITechnicians = $('#MITechnicians').val();
+
+                    var result =  MIPricePerTech * MITechnicians;
+                    $('#MITotal').val(result);
+                }
+                function calctotalMO() {
+                    var MOPricePerTech = $('#MOPricePerTech').val();
+                    var MOTechnicians = $('#MOTechnicians').val();
+
+                    var result =  MOPricePerTech * MOTechnicians;
+                    $('#MOTotal').val(result);
+                }
+
 
                 $("#SelectQuotes").change(function () {       // Funcion que se ejecuta cuando cambia la lista
 
@@ -491,6 +506,37 @@
 
                     }
                 });
+
+
+                function saveVersion(Id){
+                    @*@Html.ActionLink(" SAVE VERSION", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })*@
+
+                    var url = "/Rversions/SaveM/";
+                    var MIPricePerTech = $('#MIPricePerTech').val();
+                    var MITechnicians = $('#MITechnicians').val();
+                    var MITotal = $('#MITotal').val();
+                    var MOPricePerTech = $('#MOPricePerTech').val();
+                    var MOTechnicians = $('#MOTechnicians').val();
+                    var MOTotal = $('#MOTotal').val();
+
+                    
+                    var url2 = '@Url.Action("Details", "rfqs")' + "/" + @ViewBag.RfqId;
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { Id: Id, MIPricePerTech: MIPricePerTech,MITechnicians: MITechnicians,MITotal: MITotal,MOPricePerTech: MOPricePerTech,MOTechnicians: MOTechnicians,MOTotal: MOTotal,__RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+
+
+
+                    });
+                
+                }
 
 
     </script>

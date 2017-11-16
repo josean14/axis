@@ -212,5 +212,39 @@ namespace AXIS.Controllers
 
             return RedirectToAction("Index", "Rfqs");
         }
+
+        ///Salvar datos de movilizacion
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveM(int? Id, double MIPricePerTech,double MITechnicians, double MITotal, double MOPricePerTech, double MOTechnicians, double MOTotal)
+        {
+
+
+            if (Id != null)
+            {
+
+                var rversion = db.Rversions.Find(Id);
+
+                rversion.MIPricePerTech = MIPricePerTech;
+                rversion.MITechnicians = MITechnicians;
+                rversion.MITotal = MITotal;
+                rversion.MOPricePerTech = MOPricePerTech;
+                rversion.MOTechnicians = MOTechnicians;
+                rversion.MOTotal = MOTotal;
+
+                db.Entry(rversion).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return new JsonResult() { Data = 1 };
+            }
+            else
+            {
+                return new JsonResult() { Data = null };
+
+            }
+
+            return RedirectToAction("Index", "Rfqs");
+        }
+
     }
 }
