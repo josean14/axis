@@ -1,3 +1,13 @@
 Agregar TechId en la tabla de TruckDetails
 Agregar CostInv en la tabla de TruckDetails
 Enviar de info. Mobiles a George 
+
+
+Cambios en la version 16112017
+-Views TruckDetails/PartialList
+-Views TruckDetails/Index
+
+item.Truck.Purchaseorder.Contract.ContractId
+
+Formato a MONEDA
+var result = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");

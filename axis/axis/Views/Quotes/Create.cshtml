@@ -4,17 +4,6 @@
     ViewBag.Title = "RFQ # " + @ViewBag.RfqId + " Ver. 1";
 }
 
-@{
-
-            var selectList = new SelectList(
-                    new List<SelectListItem>
-            {
-                new SelectListItem {Text = "", Value = ""},
-                new SelectListItem {Text = "Mobilization in", Value = "Mobilization in"},
-                new SelectListItem {Text = "Mobilization Out", Value = "Mobilization Out"},
-            }, "Value", "Text");
-
-}
 <div class="panelright">
     <div class="panel panel-axis right">
         <!-- Default panel contents -->
@@ -69,7 +58,7 @@
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>@ViewBag.City , @ViewBag.State, @ViewBag.Country</p>
+                        @ViewBag.City , @ViewBag.State, @ViewBag.Country
                     </th>
                 </tr>
             </table>
@@ -83,11 +72,7 @@
             <div class="panel-heading">QUOTE / PROJECT DESCRIPTION</div>
 
             <table class="table table-bordered">
-                <tr>
-                    <th align="center">
-                        <p>Project Name: @ViewBag.ProjectName</p>
-                    </th>
-                </tr>
+
                 <tr>
                     <th align="center">
                         <p>Type of Work: @ViewBag.TypeWork</p>
@@ -130,22 +115,17 @@
         <tbody>
             <tr>
                 <th>
-                    
                     @Html.Label("Mobilization In", new { htmlAttributes = new { @class = "form-control" } })
-                    
-                    
                 </th>
                 <th style="text-align:center">
                     @Html.Editor("MIPricePerTech", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalMI()", placeholder = "$ 0.00" } })
-                    
                 </th>
                 <th style="text-align:right">
                     @Html.Editor("MITechnicians", new { htmlAttributes = new { @class = "form-control", placeholder = " 0", @onfocus = "calctotalMI()" } })
-
                 </th>
                 <th style="text-align:right">
-                    @Html.Editor("MITotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" , @readonly = "readonly" } })
-
+                    @Html.Hidden("MITotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
+                    @Html.Editor("MITotalMoneda", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
                 </th>
             </tr>
 
@@ -164,8 +144,8 @@
 
                 </th>
                 <th style="text-align:right">
-                    @Html.Editor("MOTotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
-
+                    @Html.Hidden("MOTotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
+                    @Html.Editor("MOTotalMoneda", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
                 </th>
 
             </tr>
@@ -188,7 +168,7 @@
                     # Technicians
                  </th>
                 <th style="text-align:center">
-                    Weekly Hours (Projected)
+                    Weekly Hours per Tech (Projected)
                 </th>
                 <th style="text-align:center">
                     # Weeks (Projected)
@@ -221,21 +201,22 @@
                     @Html.ValidationMessageFor(model => model.Technicians, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.WeeklyHours, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.EditorFor(model => model.WeeklyHours, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.WeeklyHours, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Weeks, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.EditorFor(model => model.Weeks, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.Weeks, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
+                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly", placeholder = "$ 0.00" } })
                     @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
 
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
+                            <!-- Agrega cada linea de tiempos por Tech -->
                             <a href="" onclick="addQuote(@ViewBag.RversionId,1); return false;" class="glyphicon glyphicon-save">Add Item</a>
                         </div>
                     </div>
@@ -475,16 +456,18 @@
                 function calctotalMI() {
                     var MIPricePerTech = $('#MIPricePerTech').val();
                     var MITechnicians = $('#MITechnicians').val();
-
                     var result =  MIPricePerTech * MITechnicians;
+                    var result1 = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                     $('#MITotal').val(result);
+                    $('#MITotalMoneda').val(result1);
                 }
                 function calctotalMO() {
                     var MOPricePerTech = $('#MOPricePerTech').val();
                     var MOTechnicians = $('#MOTechnicians').val();
-
                     var result =  MOPricePerTech * MOTechnicians;
+                    var result1 = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                     $('#MOTotal').val(result);
+                    $('#MOTotalMoneda').val(result1);
                 }
 
 
