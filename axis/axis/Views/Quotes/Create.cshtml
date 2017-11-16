@@ -193,24 +193,24 @@
 
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "$ 0.00" } })
                     @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.Technicians, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    @Html.EditorFor(model => model.Technicians, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.Technicians, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.WeeklyHours, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    @Html.EditorFor(model => model.WeeklyHours, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.WeeklyHours, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Weeks, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    @Html.EditorFor(model => model.Weeks, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.Weeks, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                    @Html.Editor("TotalH", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", @readonly = "readonly", placeholder = "$ 0.00" } })
+                    
 
                 </th>
                 <th style="text-align:center">
@@ -259,17 +259,17 @@
                     
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()",placeholder = "$ 0.00" } })
                     @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.NUnits, new { htmlAttributes = new { @class = "form-control", placeholder = "0" } })
+                    @Html.EditorFor(model => model.NUnits, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()",placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.NUnits, "", new { @class = "text-danger" })
                 </th>
 
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+                    @Html.Editor("TotalP", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()", @readonly = "readonly" } })
+                    
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
@@ -290,29 +290,59 @@
 <p id="msg"></p>
 
 
-
+<!--Esta es la tabla que muestra el registro por Horas-->
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <table class="table table-bordered" id="tabla">
+    <table class="table table-bordered" id="tablaH">
         <thead class="tr-axis">
             <tr>
                 <th style="width:400px">
                     Description
                 </th>
                 <th style="text-align:center">
-                    UM
+                    Hourly Rate
                 </th>
                 <th style="text-align:center">
-                    Cost per Unit
+                    # Technicians
+                </th>
+                <th style="text-align:center">
+                    Weekly Hours per Tech (Projected)
+                </th>
+                <th style="text-align:center">
+                    # Weeks (Projected)
+                </th>
+                <th style="text-align:center">
+                    Total
+                </th>
+                <th style="text-align:center">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr></tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!--Esta es la tabla que muestra el registro por Horas-->
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table table-bordered" id="tablaP">
+        <thead class="tr-axis">
+            <tr>
+                <th style="width:400px">
+                    Description
                 </th>
                 <th style="text-align:center">
                     Price per Unit
                 </th>
                 <th style="text-align:center">
-                    Quantity
+                    # Of Units
                 </th>
                 <th style="text-align:center">
-                    Total Line
+                    Total
                 </th>
                 <th style="text-align:center">
                     Action
@@ -357,21 +387,36 @@
 
     <script>
 
-                function addtable(id,TypeR) {
+        function addtable(id,TypeR) {
 
-                    var Description = $('#Description').val();
-                    var Um = $('#Um').val();
-                    var CostPerUnit = $('#CostPerUnit').val();
-                    var PricePerUnit = $('#PricePerUnit').val();
-                    var Quantity = $('#Quantity').val();
-                    var Currency = PricePerUnit * Quantity;
+            if(TypeR == 1){
+                var Description = $('#Description').val();
+                var HourlyRate = $('#HourlyRate').val();
+                var Technicians = $('#Technicians').val();
+                var WeeklyHours = $('#WeeklyHours').val();
+                var Weeks = $('#Weeks').val();
+                var Total =  HourlyRate * Technicians * WeeklyHours * Weeks;
 
-                    $('#tabla tr:last').after(
-                        '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + Um + '</td>' +
-                             '<td style="text-align:right">' + CostPerUnit + '</td><td style="text-align:right">' + PricePerUnit + '</td><td style="text-align:center">'
-                               + Quantity + '</td><td style="text-align:right">' + Currency + '</td>' +
-                               '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
-                        );
+                $('#tablaH tr:last').after(
+                    '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + HourlyRate + '</td>' +
+                         '<td style="text-align:right">' + Technicians + '</td><td style="text-align:right">' + WeeklyHours + '</td><td style="text-align:center">'
+                           + Weeks + '</td><td style="text-align:right">' + Total + '</td>' +
+                           '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
+                    );
+            }else{
+                var Description = $('#Description2').val();
+                var PricePerUnit = $('#PricePerUnit').val();
+                var NUnits = $('#NUnits').val();
+                var Total =  PricePerUnit * NUnits;
+            
+                $('#tablaP tr:last').after(
+                    '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + PricePerUnit + '</td>' +
+                        '<td style="text-align:right">' + NUnits + '</td><td style="text-align:right">' + Total + '</td>'+
+                        '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
+                );
+
+            }
+
 
                     var band = clearform();
                 }
@@ -432,26 +477,44 @@
 
                 function clearform() {
 
-                    var Description = $('#Description').val('');
-                    var Um = $('#Um').val('');
-                    var PricePerUnit = $('#PricePerUnit').val('');
-                    var CostPerUnit = $('#CostPerUnit').val('');
-                    var Quantity = $('#Quantity').val('');
-                    var Currency = $('#Currency').val('');
 
+                    $('#Description').val('');
+                    $('#Description2').val('');
+                    $('#PricePerUnit').val('');
+                    $('#NUnits').val('');
+                    $('#HourlyRate').val('');
+                    $('#Technicians').val('');
+                    $('#WeeklyHours').val('');
+                    $('#Weeks').val('');
+                    var result1 = 0;
+                    result1 = '$' + result1.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    $('#TotalH').val(result1);
+                    $('#TotalP').val(result1);
+                    
                 }
 
 
-                function calctotal() {
+                function calctotalH() {
+                    var HourlyRate = $('#HourlyRate').val();
+                    var Technicians = $('#Technicians').val();
+                    var WeeklyHours = $('#WeeklyHours').val();
+                    var Weeks = $('#Weeks').val();
+                    var result =  HourlyRate * Technicians * WeeklyHours * Weeks;
+                    var result = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    
+                    $('#TotalH').val(result);
+                }
+
+
+                function calctotalP() {
                     var PricePerUnit = $('#PricePerUnit').val();
-                    var Quantity = $('#Quantity').val();
-                    var CostperUnit = $('#CostperUnit').val();
-                    var Currency = $('#Currency').val();
-
-
-                    var result = PricePerUnit * Quantity * CostperUnit * Quantity * Currency;
-                    $('#Um').val(result);
+                    var NUnits = $('#NUnits').val();
+                    var result =  PricePerUnit * NUnits;
+                    var result = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    
+                    $('#TotalP').val(result);
                 }
+
 
                 function calctotalMI() {
                     var MIPricePerTech = $('#MIPricePerTech').val();
