@@ -70,7 +70,7 @@
     $(document).ready(function () {
         $("#ClientId").change(function () {
             $.get("/Rfqs/GetFarm", { ClientId: $("#ClientId").val() }, function (data){
-                $("FarmId").empty();
+                $("#FarmId").empty();
                 $.each(data, function (index, row) {
                     $("#FarmId").append("<option value='" + row.FarmId + "'>" + row.FarmName + "</option>")
                 });
