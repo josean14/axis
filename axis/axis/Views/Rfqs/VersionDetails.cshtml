@@ -9,7 +9,14 @@
 
     @{
         double TotalPrice = 0;
+        double TotalQuote1 = 0;
+        double TotalQuote2 = 0;
     }
+
+    <div class="jumbotron" align="center">
+        <h2><b>BUSINESS DEVELOPMENT &raquo; RFQ</b></h2>
+
+    </div>
 
     @Html.ActionLink("BACK", "Details", new { id = Model.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
     @{
@@ -95,11 +102,6 @@
                 <table class="table table-bordered">
                     <tr>
                         <th align="center">
-                            <p>Project Name: @ViewBag.ProjectName</p>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th align="center">
                             <p>Type of Work: @ViewBag.ScopeWork</p>
                         </th>
                     </tr>
@@ -121,76 +123,214 @@
         </div>
     </div>
 
-
     <div class="panel panel-default">
-        <!-- Default panel contents -->
+        <!-- Para mobilization per Tech -->
         <table class="table table-bordered">
             <thead class="tr-axis">
                 <tr>
-                    <th>
-                        DESCRIPTION
+                    <th style="width:400px">
+                        Description
                     </th>
                     <th style="text-align:center">
-                        UM
+                        Price per Tech
                     </th>
-                    @*<th style="text-align:center">
-                            COST POR UNIR
-                        </th>*@
-                    <th style="text-align:center" WIDTH="80">
-                        PRICE PER UNIT
+                    <th style="text-align:center">
+                        # Technicians
                     </th>
-                    <th style="text-align:center" WIDTH="80">
-                        QUANTITY
-                    </th>
-                    <th style="text-align:center" WIDTH="100">
-                        TOTAL LINE
+                    <th style="text-align:center">
+                        Total
                     </th>
                 </tr>
             </thead>
-            @foreach (var item in ViewBag.Quotes)
-            {
-                <tr class="trbodyaxis">
-                    <td style="text-align:left">
-                        @item.Description
-                    </td>
-                    <td style="text-align:center">
-                        @item.Um
-                    </td>
-                    @*<td style="text-align:right">
-                            @{
-                                @Convert.ToDecimal(item.CostPerUnit).ToString("$ #,##0.00");
-                            }
-                        </td>*@
-                    <td style="text-align:right">
-                        @{
-                            @Convert.ToDecimal(item.PricePerUnit).ToString("$ #,##0.00");
-                        }
-                    </td>
-                    <td style="text-align:center">
-                        @item.Quantity
-                    </td>
-                    <td style="text-align:right">
-                        @{
-                            @Convert.ToDecimal(item.Currency).ToString("$ #,##0.00");
-                        }
-                    </td>
-
-                </tr>
-                                TotalPrice = TotalPrice + @item.Currency;
-                            }
-
-            <tfoot>
+            <tbody>
                 <tr>
-                    <td colspan="3"></td>
-                    <td style="text-align:right">Total</td>
-                    <td style="text-align:right">
+                    <th>
+                        @Html.Label("Mobilization In", new { htmlAttributes = new { @class = "form-control" } })
+                    </th>
+                    <th style="text-align:center">
                         @{
-                            @Convert.ToDecimal(TotalPrice).ToString("$ #,##0.00");
+                            @Convert.ToDecimal(ViewBag.MIPricePerTech).ToString("$ #,##0.00");
                         }
-
-                    </td>
+                    </th>
+                    <th style="text-align:center">
+                        @{
+                            @Convert.ToDecimal(ViewBag.MITechnicians).ToString(" #,##");
+                        }
+                    </th>
+                    <th style="text-align:right">
+                        @{
+                            @Convert.ToDecimal(ViewBag.MITotal).ToString("$ #,##0.00");
+                        }
+                    </th>
                 </tr>
-            </tfoot>
+
+                <tr>
+                    <th>
+
+                        @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
+
+                    </th>
+                    <th style="text-align:center">
+                        @{
+                            @Convert.ToDecimal(ViewBag.MOPricePerTech).ToString("$ #,##0.00");
+                        }
+                    </th>
+                    <th style="text-align:center">
+                        @{
+                            @Convert.ToDecimal(ViewBag.MOTechnicians).ToString(" #,##");
+                        }
+                    </th>
+                    <th style="text-align:right">
+                        @{
+                            @Convert.ToDecimal(ViewBag.MOTotal).ToString("$ #,##0.00");
+                        }
+                    </th>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+        
+
+    @{
+        if (ViewBag.Quotes1.Count == 0)
+        {
+        }
+        else
+        {
+            <div class="panel panel-default">
+                <!-- Tabla por horas tipo=1 -->
+                <table class="table table-bordered">
+                    <thead class="tr-axis">
+                        <tr>
+                            <th style="width:400px">
+                                Description
+                            </th>
+                            <th style="text-align:center">
+                                Hourly Rate
+                            </th>
+                            <th style="text-align:center">
+                                # Technicians
+                            </th>
+                            <th style="text-align:center">
+                                Weekly Hours per Tech (Projected)
+                            </th>
+                            <th style="text-align:center">
+                                # Weeks (Projected)
+                            </th>
+                            <th style="text-align:center">
+                                Total por line
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.Quotes1)
+                    {
+                        <tr class="trbodyaxis">
+                            <td style="text-align:left">
+                                @item.Description
+                            </td>
+                            <td style="text-align:center">
+                                @{
+                                    @Convert.ToDecimal(item.HourlyRate).ToString("$ #,##0.00");
+                                }
+                            </td>
+                            <td style="text-align:center">
+                                @item.Technicians
+                            </td>
+                            <td style="text-align:center">
+                                @item.WeeklyHours
+                            </td>
+                            <td style="text-align:center">
+                                @item.Weeks
+                            </td>
+                            <td style="text-align:center">
+                                @{
+                                    @Convert.ToDecimal(item.Total).ToString("$ #,##0.00");
+                                    TotalQuote1 = TotalQuote1 + @item.Total;
+                                    }
+                            </td>
+                                
+                        </tr>
+                                    }
+                </table>
+            </div>
+        }
+    }
+
+    @{
+        if (ViewBag.Quotes2.Count == 0)
+        {
+        }
+        else
+        {
+            <div class="panel panel-default">
+                <!-- Tabla por horas tipo=1 -->
+                <table class="table table-bordered">
+                    <thead class="tr-axis">
+                        <tr>
+                            <th style="width:400px">
+                                Description
+                            </th>
+                            <th style="text-align:center">
+                                Price per Unit
+                            </th>
+                            <th style="text-align:center">
+                                # Of Units
+                            </th>
+                            <th style="text-align:center">
+                                Total per line
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.Quotes2)
+                    {
+                        <tr class="trbodyaxis">
+                            <td style="text-align:left">
+                                @item.Description
+                            </td>
+                            <td style="text-align:center">
+                                @{
+                                    @Convert.ToDecimal(item.PricePerUnit).ToString("$ #,##0.00");
+                                }
+                            </td>
+                            <td style="text-align:center">
+                                @item.NUnits
+                            </td>
+
+                            <td style="text-align:right">
+                                @{
+                                    @Convert.ToDecimal(item.Total).ToString("$ #,##0.00");
+                                    TotalQuote2 = TotalQuote2 + @item.Total;
+                                    }
+                            </td>
+                            
+                        </tr>
+                                    }
+                </table>
+            </div>
+        }
+    }
+
+
+    @{ 
+        TotalPrice = ViewBag.MITotal + ViewBag.MOTotal + TotalQuote1 + TotalQuote2;
+    }
+    <div class="panel panel-default">
+        <table class="table table-bordered">
+
+                <thead>
+                    <tr>
+                        <th style="text-align:right">
+                            Total
+                            @{
+                                    @Convert.ToDecimal(TotalPrice).ToString("$ #,##0.00");
+                            }
+                        </th>
+                    </tr>
+
+                </thead>
+
 
         </table>
     </div>
@@ -259,112 +399,7 @@
 
 
             //NewVersion
-            function addtable(id) {
 
-                var Description = $('#Description').val();
-                var Um = $('#Um').val();
-                var CostPerUnit = $('#CostPerUnit').val();
-                var PricePerUnit = $('#PricePerUnit').val();
-                var Quantity = $('#Quantity').val();
-                var Currency = PricePerUnit * Quantity;
-
-
-
-                $('#tabla tr:last').after(
-                    '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + Um + '</td>' +
-                         '<td style="text-align:right">' + CostPerUnit + '</td><td style="text-align:right">' + PricePerUnit + '</td><td style="text-align:center">'
-                           + Quantity + '</td><td style="text-align:right">' + Currency + '</td>' +
-                           '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
-                    );
-
-                var band = clearform();
-            }
-
-            function addQuote(id) {
-                var url = "/Quotes/Create/";
-                var RversionId = id
-                var anti = $('[name=__RequestVerificationToken]').val();
-                var Description = $('#Description').val();
-                var Um = $('#Um').val();
-                var PricePerUnit = $('#PricePerUnit').val();
-                var CostPerUnit = $('#CostPerUnit').val();
-                var Quantity = $('#Quantity').val();
-                var Currency = PricePerUnit * Quantity;
-
-                $.post(url, { Description: Description, Um: Um, PricePerUnit: PricePerUnit, Quantity: Quantity, Currency: Currency, RversionId: RversionId, CostPerUnit: CostPerUnit, __RequestVerificationToken: anti },
-                    function (data) {
-                        var band = addtable(data);
-
-                    });
-
-
-            }
-
-            function confirmDelete(id) {
-                var url = "/quotes/Delete/";
-                var QuoteId = id
-                var anti = $('[name=__RequestVerificationToken]').val();
-
-                $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
-                    $("#Quote" + QuoteId).remove();
-                });
-
-            }
-
-            function clearform() {
-
-                var Description = $('#Description').val('');
-                var Um = $('#Um').val('');
-                var PricePerUnit = $('#PricePerUnit').val('');
-                var CostPerUnit = $('#CostPerUnit').val('');
-                var Quantity = $('#Quantity').val('');
-                var Currency = $('#Currency').val('');
-
-            }
-
-
-            function calctotal() {
-                var PricePerUnit = $('#PricePerUnit').val();
-                var Quantity = $('#Quantity').val();
-
-
-                var result = PricePerUnit * Quantity;
-                $('#Currency').val(result);
-            }
-
-            $("#SelectQuotes").change(function () {       // Funcion que se ejecuta cuando cambia la lista
-
-                var name = $(this).val();
-
-                if (name != "")
-                {     var url = "/QuotesLists/GetQuotes/";
-
-
-
-                    $.ajax({
-                        url: url,
-                        data: { Description: name },
-                        cache: false,
-                        type: "POST",
-                        success: function (data) {
-
-                            $('#Um').val(data.Um);
-                            $('#PricePerUnit').val(data.Price);
-                            $('#CostPerUnit').val(data.Cost);
-
-                        },
-                        error: function (reponse) {
-                            alert(reponse);
-                        }
-                    });
-                }else{
-
-                    $('#Um').val('');
-                    $('#PricePerUnit').val('');
-                    $('#CostPerUnit').val('');
-
-                }
-            });
     </script>
 
 }

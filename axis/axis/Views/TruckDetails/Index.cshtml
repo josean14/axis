@@ -69,13 +69,13 @@
                     @Html.DisplayFor(modelItem => item.SiteLocation)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TechId)
+                    @Html.DisplayFor(modelItem => item.TruckId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LicencePlate)
                 </td>
                 <td>
-                   INSERT BY ROBBIE
+                    INSERT BY ROBBIE
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.MakeModel)
@@ -90,7 +90,7 @@
                     TECH ID SEND INFO.
                 </td>
                 <td align="center">
-                    DETAILS / EDIT
+                    <a href=@Url.Action("Edit", "TruckDetails", new { id = item.TruckId, ContractId = item.Truck.Purchaseorder.Contract.ContractId }) class="glyphicon glyphicon-pencil btn btn-primary btn-xs" , title="DETAILS"></a>
                 </td>
                 <td align="center">
                     @Html.DisplayFor(modelItem => item.AditionalComments)

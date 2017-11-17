@@ -255,7 +255,13 @@ namespace AXIS.Controllers
             ViewBag.TypeWork = rversion.TypeWork;
             ViewBag.Status = rversion.Status;
             ViewBag.ScopeWork = rversion.ScopeWork.Work;
-     
+            ViewBag.MIPricePerTech = rversion.MIPricePerTech;
+            ViewBag.MITechnicians = rversion.MITechnicians;
+            ViewBag.MITotal = rversion.MITotal;
+            ViewBag.MOPricePerTech = rversion.MOPricePerTech;
+            ViewBag.MOTechnicians = rversion.MOTechnicians;
+            ViewBag.MOTotal = rversion.MOTotal;
+            
             ViewBag.Notes = rversion.NotesAndInstructions;
             ViewBag.ProjectDescription = rversion.ProjectDescription;
             ViewBag.ProjectName = rfq.ProjectName;
@@ -267,10 +273,11 @@ namespace AXIS.Controllers
             ViewBag.Country = rfq.Farm.Country;
             ViewBag.TermsandConditions = rversion.TermsandConditions;
 
-            var quotes = db.Quotes.Where(q => q.RversionId == rversion.RversionId).ToList();
+            var quotes1 = db.Quotes.Where(q => q.RversionId == rversion.RversionId).Where(r => r.TypeR == 1).ToList();
+            var quotes2 = db.Quotes.Where(q => q.RversionId == rversion.RversionId).Where(r => r.TypeR == 2).ToList();
 
-            ViewBag.Quotes = quotes;
-
+            ViewBag.Quotes1 = quotes1;
+            ViewBag.Quotes2 = quotes2;
             return View(rfq);
         }
 

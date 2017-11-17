@@ -6,6 +6,8 @@ Enviar de info. Mobiles a George
 Cambios en la version 16112017
 -Views TruckDetails/PartialList
 -Views TruckDetails/Index
+-Controlador Rrq/VersionDetails
+-Views Rfq/VersionDetails
 
 item.Truck.Purchaseorder.Contract.ContractId
 

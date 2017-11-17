@@ -28,7 +28,7 @@
             </tr>
 
             @foreach (var item in Model)
-        {
+            {
                 <tr>
 
                     <td>
@@ -47,13 +47,13 @@
                         @Html.DisplayFor(modelItem => item.DateRent)
                     </td>
                     <td style="text-align:center">
-                        <a href=@Url.Action("Edit", "TruckDetails", new { id = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-pencil" , title="DETAILS"></a> |
-                        <a href=@Url.Action("AToolsbyTruck", "ToolsByTrucks", new { TruckId = item.TruckId, ContractId = @ViewBag.ContractId, LicencePlate= item.LicencePlate, PurchaseOrderId = @ViewBag.PurchaseOrderId }) class="glyphicon glyphicon-plus" , title="ASSIGN TOOLS"></a>
+                        <a href=@Url.Action("Edit", "TruckDetails", new { id = item.TruckId, ContractId = @ViewBag.ContractId }) class="glyphicon glyphicon-pencil btn btn-primary btn-xs" , title="DETAILS"></a> |
+                        <a href=@Url.Action("AToolsbyTruck", "ToolsByTrucks", new { TruckId = item.TruckId, ContractId = @ViewBag.ContractId, LicencePlate= item.LicencePlate, PurchaseOrderId = @ViewBag.PurchaseOrderId }) class="glyphicon glyphicon-wrench btn btn-primary btn-xs" , title="ASSIGN TOOLS"></a>
 
                     </td>
                 </tr>
-        }
+            }
 
         </table>
     </div>
-    </div>
+</div>
