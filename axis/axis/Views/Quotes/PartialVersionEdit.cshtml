@@ -97,7 +97,7 @@
 
 
 <div class="panel panel-default">
-    <!-- Default panel contents -->
+    <!-- Para mobilization per Tech -->
     <table class="table table-bordered">
         <thead class="tr-axis">
             <tr>
@@ -105,22 +105,93 @@
                     Description
                 </th>
                 <th style="text-align:center">
-                    UM
+                    Price per Tech
                 </th>
                 <th style="text-align:center">
-                    Cost per Unit
+                    # Technicians
                 </th>
                 <th style="text-align:center">
-                    Price per Unit
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    @Html.Label("Mobilization In", new { htmlAttributes = new { @class = "form-control" } })
                 </th>
                 <th style="text-align:center">
-                    Quantity
+                    @{
+                        @Convert.ToDecimal(ViewBag.MIPricePerTech).ToString("$ #,##0.00");
+                    }
                 </th>
                 <th style="text-align:center">
-                    Total Line
+                    @{
+                        @Convert.ToDecimal(ViewBag.MITechnicians).ToString(" #,##");
+                    }
+                </th>
+                <th style="text-align:right">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MITotal).ToString("$ #,##0.00");
+                    }
+                </th>
+            </tr>
+
+            <tr>
+                <th>
+
+                    @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
+
+                </th>
+                <th style="text-align:center">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MOPricePerTech).ToString("$ #,##0.00");
+                    }
+                </th>
+                <th style="text-align:center">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MOTechnicians).ToString(" #,##");
+                    }
+                </th>
+                <th style="text-align:right">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MOTotal).ToString("$ #,##0.00");
+                    }
+                </th>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <!-- Trabajos por tiempos -->
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th style="width:400px">
+                    Description
+                </th>
+                <th style="text-align:center">
+                    Hourly Rate
+                </th>
+                <th style="text-align:center">
+                    # Technicians
+                </th>
+                <th style="text-align:center">
+                    Weekly Hours per Tech (Projected)
+                </th>
+                <th style="text-align:center">
+                    # Weeks (Projected)
+                </th>
+                <th style="text-align:center">
+                    Total
                 </th>
                 <th style="text-align:center">
                     Action
+                </th>
+                <th style="text-align:center">
+                    Show / Hide
                 </th>
             </tr>
         </thead>
@@ -129,32 +200,92 @@
                 <th>
                     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.Um, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Um, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.CostPerUnit, new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.CostPerUnit, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Technicians, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "0" } })
+                    @Html.ValidationMessageFor(model => model.Technicians, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()", placeholder = "$ 0.00" } })
-                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.WeeklyHours, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "0" } })
+                    @Html.ValidationMessageFor(model => model.WeeklyHours, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotal()" } })
-                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Weeks, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", placeholder = "0" } })
+                    @Html.ValidationMessageFor(model => model.Weeks, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:right">
-                    @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                    @Html.Editor("TotalH", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", @readonly = "readonly", placeholder = "$ 0.00" } })
+
 
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <a href="/" onclick="addQuote(@ViewBag.RversionId); return false;" class="glyphicon glyphicon-save">Add Item</a>
+                            <!-- Agrega cada linea de tiempos por Tech -->
+                            <a href="" onclick="addQuote(@ViewBag.RversionId,1); return false;" class="glyphicon glyphicon-save">Add Item</a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <!-- Precios por Conceptos -->
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th style="width:400px">
+                    Description
+                </th>
+                <th style="text-align:center">
+                    Price per Unit
+                </th>
+                <th style="text-align:center">
+                    # Of Units
+                </th>
+                <th style="text-align:center">
+                    Total
+                </th>
+                <th style="text-align:center">
+                    Show / Hide
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    @Html.Editor("Description2", new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+                </th>
+                <th style="text-align:center">
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()", placeholder = "$ 0.00" } })
+                    @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
+                </th>
+                <th style="text-align:center">
+                    @Html.EditorFor(model => model.NUnits, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()", placeholder = "0" } })
+                    @Html.ValidationMessageFor(model => model.NUnits, "", new { @class = "text-danger" })
+                </th>
+
+                <th style="text-align:center">
+                    @Html.Editor("TotalP", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()", @readonly = "readonly" } })
+
+                </th>
+                <th style="text-align:center">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <a href="" onclick="addQuote(@ViewBag.RversionId,2); return false;" class="glyphicon glyphicon-save">Add Item</a>
                         </div>
                     </div>
                 </th>
@@ -165,75 +296,148 @@
 </div>
 
 
+
+
 @Html.AntiForgeryToken()
 
 <p id="msg"></p>
 
 
 
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <table class="table table-bordered" id="tabla">
-        <thead class="tr-axis">
-            <tr>
-                <th style="width:400px">
-                    Description
-                </th>
-                <th style="text-align:center">
-                    UM
-                </th>
-                <th style="text-align:center">
-                    Cost per Unit
-                </th>
-                <th style="text-align:center">
-                    Price per Unit
-                </th>
-                <th style="text-align:center">
-                    Quantity
-                </th>
-                <th style="text-align:center">
-                    Total Line
-                </th>
-                <th style="text-align:center">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in ViewBag.Quotes)
-            {
-                var idquote = "Quote" + item.QuoteId;
+@{
+    if (ViewBag.Quotes1.Count == 0)
+    {
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <!-- Tabla por horas tipo=1 -->
+            <table class="table table-bordered" id="tablaH">
+                <thead class="tr-axis">
+                    <tr>
+                        <th style="width:400px">
+                            Description
+                        </th>
+                        <th style="text-align:center">
+                            Hourly Rate
+                        </th>
+                        <th style="text-align:center">
+                            # Technicians
+                        </th>
+                        <th style="text-align:center">
+                            Weekly Hours per Tech (Projected)
+                        </th>
+                        <th style="text-align:center">
+                            # Weeks (Projected)
+                        </th>
+                        <th style="text-align:center">
+                            Total por line
+                        </th>
 
-                <tr class="trbodyaxis" id=@idquote>
-                    <td style="text-align:left">
-                        @item.Description
-                    </td>
-                    <td style="text-align:center">
-                        @item.Um
-                    </td>
-                    <td style="text-align:right">
-                        @item.CostPerUnit
-                    </td>
-                    <td style="text-align:right">
-                        @item.PricePerUnit
-                    </td>
-                    <td style="text-align:center">
-                        @item.Quantity
-                    </td>
-                    <td style="text-align:right">
-                        @item.Currency
-                    </td>
+                        <th style="text-align:center">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in ViewBag.Quotes1)
+                {
+                    var id = "Quote" + item.QuoteId;
+                    <tr class="trbodyaxis" id= @id>
+                        <td style="text-align:left">
+                            @item.Description
+                        </td>
+                        <td style="text-align:center">
+                            @{
+                                @Convert.ToDecimal(item.HourlyRate).ToString("$ #,##0.00");
+                            }
+                        </td>
+                        <td style="text-align:center">
+                            @item.Technicians
+                        </td>
+                        <td style="text-align:center">
+                            @item.WeeklyHours
+                        </td>
+                        <td style="text-align:center">
+                            @item.Weeks
+                        </td>
+                        <td style="text-align:center">
+                            @{
+                                @Convert.ToDecimal(item.Total).ToString("$ #,##0.00");
+                                
+                            }
+                        </td>
+                        <td style="text-align:center">
+                            <a href="/" onclick="confirmDelete(@item.QuoteId,1); return false;" class="glyphicon glyphicon-remove"></a>
+                        </td>
 
-                    <td style="text-align:center">
-                        <a href="/" onclick="confirmDelete(@item.QuoteId); return false;" class="glyphicon glyphicon-remove"></a>
-                    </td>
-                </tr>
-            }
+                    </tr>
+                                }
+            </table>
+        </div>
+                                }
+}
 
-        </tbody>
-    </table>
-</div>
+@{
+    if (ViewBag.Quotes2.Count == 0)
+    {
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <!-- Tabla por horas tipo=1 -->
+            <table class="table table-bordered" id="tablaP">
+                <thead class="tr-axis">
+                    <tr>
+                        <th style="width:400px">
+                            Description
+                        </th>
+                        <th style="text-align:center">
+                            Price per Unit
+                        </th>
+                        <th style="text-align:center">
+                            # Of Units
+                        </th>
+                        <th style="text-align:center">
+                            Total per line
+                        </th>
+                        <th style="text-align:center">
 
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in ViewBag.Quotes2)
+                {
+                    var id = "Quote" + item.QuoteId;
+                    <tr class="trbodyaxis" id= @id>
+                        <td style="text-align:left">
+                            @item.Description
+                        </td>
+                        <td style="text-align:center">
+                            @{
+                                @Convert.ToDecimal(item.PricePerUnit).ToString("$ #,##0.00");
+                            }
+                        </td>
+                        <td style="text-align:center">
+                            @item.NUnits
+                        </td>
+
+                        <td style="text-align:right">
+                            @{
+                                @Convert.ToDecimal(item.Total).ToString("$ #,##0.00");
+                                
+                            }
+                        </td>
+                        <td style="text-align:center">
+                            <a href="/" onclick="confirmDelete(@item.QuoteId,2); return false;" class="glyphicon glyphicon-remove"></a>
+                        </td>
+
+                    </tr>
+                                }
+            </table>
+        </div>
+                                }
+}
 
 <div class="panelright">
     <div class="panel panel-axis">
@@ -258,7 +462,7 @@
     @Html.ActionLink(" Save Version", "Details", "rfqs", new { id = ViewBag.RfqId, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
 </div>
 
-<script>
+@*<script>
     $("#SelectQuotes").change(function () {       // Funcion que se ejecuta cuando cambia la lista
 
         var name = $(this).val();
@@ -292,4 +496,220 @@
 
         }
     });
+</script>*@
+<script>
+
+        function addtable(id,TypeR) {
+
+            if(TypeR == 1){
+                var Description = $('#Description').val();
+                var HourlyRate = $('#HourlyRate').val();
+                var Technicians = $('#Technicians').val();
+                var WeeklyHours = $('#WeeklyHours').val();
+                var Weeks = $('#Weeks').val();
+                var Total =  HourlyRate * Technicians * WeeklyHours * Weeks;
+
+                $('#tablaH tr:last').after(
+                    '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + HourlyRate + '</td>' +
+                         '<td style="text-align:right">' + Technicians + '</td><td style="text-align:right">' + WeeklyHours + '</td><td style="text-align:center">'
+                           + Weeks + '</td><td style="text-align:right">' + Total + '</td>' +
+                           '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
+                    );
+            }else{
+                var Description = $('#Description2').val();
+                var PricePerUnit = $('#PricePerUnit').val();
+                var NUnits = $('#NUnits').val();
+                var Total =  PricePerUnit * NUnits;
+
+                $('#tablaP tr:last').after(
+                    '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + PricePerUnit + '</td>' +
+                        '<td style="text-align:right">' + NUnits + '</td><td style="text-align:right">' + Total + '</td>'+
+                        '<td style="text-align:center"><a href="" onclick="confirmDelete(' + id + '); return false;" class = "glyphicon glyphicon-remove"></a></td>'
+                );
+
+            }
+
+
+                    var band = clearform();
+                }
+
+                function addQuote(id,TypeR) {
+                    var url = "/Quotes/Create/";
+                    var RversionId = id
+                    var anti = $('[name=__RequestVerificationToken]').val();
+                    if(TypeR == 1){
+
+                        var Description = $('#Description').val();
+                        var PricePerUnit = 0;
+                        var NUnits = 0;
+                        var HourlyRate = $('#HourlyRate').val();
+                        var Technicians = $('#Technicians').val();
+                        var WeeklyHours = $('#WeeklyHours').val();
+                        var Weeks = $('#Weeks').val();
+                        var Total =  HourlyRate * Technicians * WeeklyHours * Weeks;
+
+
+                    }else{
+
+                        var Description = $('#Description2').val();
+                        var PricePerUnit = $('#PricePerUnit').val();
+                        var NUnits = $('#NUnits').val();
+                        var HourlyRate = 0;
+                        var Technicians = 0;
+                        var WeeklyHours = 0;
+                        var Weeks = 0;
+                        var Total =  PricePerUnit * NUnits;
+
+
+                    }
+
+
+                    $.post(url, { Description: Description, PricePerUnit: PricePerUnit, NUnits: NUnits, HourlyRate: HourlyRate,
+                        Technicians: Technicians, WeeklyHours: WeeklyHours, Weeks: Weeks, Total: Total,TypeR: TypeR ,RversionId: RversionId,  __RequestVerificationToken: anti },
+                        function (data) {
+
+                            //Pendiente cambiar funcion de presentacion de datos que fueron guardados de la funcion addTable y de la limpieza de datos
+                            var band = addtable(data,TypeR);
+
+                        });
+
+
+                }
+
+                function confirmDelete(id) {
+                    var url = "/quotes/Delete/";
+                    var QuoteId = id
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { id: QuoteId, __RequestVerificationToken: anti }, function (data) {
+                        $("#Quote" + QuoteId).remove();
+                    });
+
+                }
+
+                function clearform() {
+
+
+                    $('#Description').val('');
+                    $('#Description2').val('');
+                    $('#PricePerUnit').val('');
+                    $('#NUnits').val('');
+                    $('#HourlyRate').val('');
+                    $('#Technicians').val('');
+                    $('#WeeklyHours').val('');
+                    $('#Weeks').val('');
+                    var result1 = 0;
+                    result1 = '$' + result1.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    $('#TotalH').val(result1);
+                    $('#TotalP').val(result1);
+
+                }
+
+
+                function calctotalH() {
+                    var HourlyRate = $('#HourlyRate').val();
+                    var Technicians = $('#Technicians').val();
+                    var WeeklyHours = $('#WeeklyHours').val();
+                    var Weeks = $('#Weeks').val();
+                    var result =  HourlyRate * Technicians * WeeklyHours * Weeks;
+                    var result = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+
+                    $('#TotalH').val(result);
+                }
+
+
+                function calctotalP() {
+                    var PricePerUnit = $('#PricePerUnit').val();
+                    var NUnits = $('#NUnits').val();
+                    var result =  PricePerUnit * NUnits;
+                    var result = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+
+                    $('#TotalP').val(result);
+                }
+
+
+                function calctotalMI() {
+                    var MIPricePerTech = $('#MIPricePerTech').val();
+                    var MITechnicians = $('#MITechnicians').val();
+                    var result =  MIPricePerTech * MITechnicians;
+                    var result1 = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    $('#MITotal').val(result);
+                    $('#MITotalMoneda').val(result1);
+                }
+                function calctotalMO() {
+                    var MOPricePerTech = $('#MOPricePerTech').val();
+                    var MOTechnicians = $('#MOTechnicians').val();
+                    var result =  MOPricePerTech * MOTechnicians;
+                    var result1 = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                    $('#MOTotal').val(result);
+                    $('#MOTotalMoneda').val(result1);
+                }
+
+
+                $("#SelectQuotes").change(function () {       // Funcion que se ejecuta cuando cambia la lista
+
+                    var name = $(this).val();
+
+                    if (name != "")
+                    {     var url = "/QuotesLists/GetQuotes/";
+
+
+
+                        $.ajax({
+                            url: url,
+                            data: { Description: name },
+                            cache: false,
+                            type: "POST",
+                            success: function (data) {
+
+                                $('#Um').val(data.Um);
+                                $('#PricePerUnit').val(data.Price);
+                                $('#CostPerUnit').val(data.Cost);
+
+                            },
+                            error: function (reponse) {
+                                alert(reponse);
+                            }
+                        });
+                    }else{
+
+                        $('#Um').val('');
+                        $('#PricePerUnit').val('');
+                        $('#CostPerUnit').val('');
+
+                    }
+                });
+
+
+                function saveVersion(Id){
+                    @*@Html.ActionLink(" SAVE VERSION", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })*@
+
+                    var url = "/Rversions/SaveM/";
+                    var MIPricePerTech = $('#MIPricePerTech').val();
+                    var MITechnicians = $('#MITechnicians').val();
+                    var MITotal = $('#MITotal').val();
+                    var MOPricePerTech = $('#MOPricePerTech').val();
+                    var MOTechnicians = $('#MOTechnicians').val();
+                    var MOTotal = $('#MOTotal').val();
+
+
+                    var url2 = '@Url.Action("Details", "rfqs")' + "/" + @ViewBag.RfqId;
+
+                    var anti = $('[name=__RequestVerificationToken]').val();
+
+                    $.post(url, { Id: Id, MIPricePerTech: MIPricePerTech,MITechnicians: MITechnicians,MITotal: MITotal,MOPricePerTech: MOPricePerTech,MOTechnicians: MOTechnicians,MOTotal: MOTotal,__RequestVerificationToken: anti }, function (data) {
+
+                        if (data = 1) {
+
+                            window.location.href = url2;
+                        }
+
+
+
+
+                    });
+
+                }
+
+
 </script>

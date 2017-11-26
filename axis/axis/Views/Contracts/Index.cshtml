@@ -36,9 +36,9 @@
             <th>
                 @Html.ActionLink("SITE NAME", "Index", new { sortOrder = ViewBag.FarmnameortParm })
             </th>
-            <th>
+            @*<th>
                 @Html.ActionLink("PROJECT NAME", "Index", new { sortOrder = ViewBag.ProjectnameSortParm })
-            </th>
+            </th>*@
             <th>
                 PROJECT DESCRIPTION
             </th>
@@ -65,9 +65,9 @@
                     @Html.DisplayFor(modelItem => item.Rfq.Farm.FarmName)
                 </td>
 
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Rfq.ProjectName)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Rversion.ProjectDescription)
                 </td>

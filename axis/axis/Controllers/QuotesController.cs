@@ -119,6 +119,22 @@ namespace AXIS.Controllers
             ViewBag.Typefarm = rfq.Farm.TypeFarm;
             ViewBag.Description = "";
 
+            ViewBag.MIPricePerTech = rversion.MIPricePerTech;
+            ViewBag.MITechnicians = rversion.MITechnicians;
+            ViewBag.MITotal = rversion.MITotal;
+
+            ViewBag.MOPricePerTech = rversion.MOPricePerTech;
+            ViewBag.MOTechnicians = rversion.MOTechnicians;
+            ViewBag.MOTotal = rversion.MOTotal;
+
+
+            var quotes1 = db.Quotes.Where(q => q.RversionId == rversion.RversionId).Where(r => r.TypeR == 1).ToList();
+            var quotes2 = db.Quotes.Where(q => q.RversionId == rversion.RversionId).Where(r => r.TypeR == 2).ToList();
+
+            ViewBag.Quotes1 = quotes1;
+            ViewBag.Quotes2 = quotes2;
+
+
             //ViewBag.Description = new SelectList(db.QuotesLists, "Description", "Description");
 
 
