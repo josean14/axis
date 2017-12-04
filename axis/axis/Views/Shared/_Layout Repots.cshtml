@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Axis APP</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+  
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+    <footer>
+        <hr />
+        <p>&copy; @DateTime.Now.Year - © AXIS RENEWABLE GROUP. All rights reserved.</p>
+    </footer>
+        
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jquerymin")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/bootbox")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

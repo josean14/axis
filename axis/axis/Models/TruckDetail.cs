@@ -131,8 +131,8 @@ namespace AXIS.Models
         [DisplayName("STATUS.")]
         public virtual string Status { get; set; }
 
-        [DisplayName("TECHID")]
-        public virtual string TechId { get; set; }
+        [DisplayName("FULL NAME")]
+        public virtual string FullName { get; set; }
 
         public virtual Truck Truck { get; set; }
 

@@ -1,0 +1,401 @@
+﻿
+@{
+    ViewBag.Title = "RFQ";
+    Layout = "~/Views/Shared/_Layout Repots.cshtml";
+}
+
+@model AXIS.Models.Rfq
+
+
+
+@{
+    double TotalPrice = 0;
+    double TotalQuote1 = 0;
+    double TotalQuote2 = 0;
+}
+
+<img src="~/Content/images/axis_logo.jpg" />
+<br />
+
+<div class="row">
+<p>
+    5005 Texas Street Suite 105
+    San Diego, CA 92108
+    Phone: (619) 937-3961
+    Fax:(619) 937-3965
+    Info@axisrg.com
+</p>
+
+</div>
+
+<div class="panelright">
+    <div class="panel panel-axis right">
+        <!-- Default panel contents -->
+        <div class="panel-heading">RFQ # @Html.DisplayFor(model => model.RfqId)</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th align="center">
+                    <p>Date:</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.VersionDate</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Version #</p>
+                </th>
+                <th align="center">
+                    <p>@ViewBag.NumberVersion</p>
+                </th>
+            </tr>
+            <tr>
+                <th align="center">
+                    <p>Site Farm</p>
+                </th>
+                <th align="center">
+                    @ViewBag.SiteFarm
+                </th>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axis right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">CUSTOMER</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>@ViewBag.FullName</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>@ViewBag.Street</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>@ViewBag.City,  @ViewBag.State,  @ViewBag.Country</p>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="col-sm-6 form-group">
+        <div class="panel panel-axislg right">
+            <!-- Default panel contents -->
+            <div class="panel-heading">QUOTE /PROJECT DESCRIPTION</div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th align="center">
+                        <p>Type of Work: @ViewBag.ScopeWork</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        <p>Scope ok Work:@ViewBag.TypeWork</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="center">
+                        @ViewBag.ProjectDescription
+                    </th>
+                </tr>
+
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <!-- Para mobilization per Tech -->
+    <table class="table table-bordered">
+        <thead class="tr-axis">
+            <tr>
+                <th style="width:400px">
+                    Description
+                </th>
+                <th style="text-align:center">
+                    Price per Tech
+                </th>
+                <th style="text-align:center">
+                    # Technicians
+                </th>
+                <th style="text-align:center">
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    @Html.Label("Mobilization In", new { htmlAttributes = new { @class = "form-control" } })
+                </th>
+                <th style="text-align:center">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MIPricePerTech).ToString("$ #,##0.00");
+                    }
+                </th>
+                <th style="text-align:center">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MITechnicians).ToString(" #,##");
+                    }
+                </th>
+                <th style="text-align:right">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MITotal).ToString("$ #,##0.00");
+                    }
+                </th>
+            </tr>
+
+            <tr>
+                <th>
+
+                    @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
+
+                </th>
+                <th style="text-align:center">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MOPricePerTech).ToString("$ #,##0.00");
+                    }
+                </th>
+                <th style="text-align:center">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MOTechnicians).ToString(" #,##");
+                    }
+                </th>
+                <th style="text-align:right">
+                    @{
+                        @Convert.ToDecimal(ViewBag.MOTotal).ToString("$ #,##0.00");
+                    }
+                </th>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+@{
+    if (ViewBag.Quotes1.Count == 0)
+    {
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <!-- Tabla por horas tipo=1 -->
+            <table class="table table-bordered">
+                <thead class="tr-axis">
+                    <tr>
+                        <th style="width:400px">
+                            Description
+                        </th>
+                        <th style="text-align:center">
+                            Hourly Rate
+                        </th>
+                        <th style="text-align:center">
+                            # Technicians
+                        </th>
+                        <th style="text-align:center">
+                            Weekly Hours per Tech (Projected)
+                        </th>
+                        <th style="text-align:center">
+                            # Weeks (Projected)
+                        </th>
+                        <th style="text-align:center">
+                            Total por line
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in ViewBag.Quotes1)
+                {
+                    <tr class="trbodyaxis">
+                        <td style="text-align:left">
+                            @item.Description
+                        </td>
+                        <td style="text-align:center">
+                            @{
+                                @Convert.ToDecimal(item.HourlyRate).ToString("$ #,##0.00");
+                            }
+                        </td>
+                        <td style="text-align:center">
+                            @item.Technicians
+                        </td>
+                        <td style="text-align:center">
+                            @item.WeeklyHours
+                        </td>
+                        <td style="text-align:center">
+                            @item.Weeks
+                        </td>
+                        <td style="text-align:center">
+                            @{
+                                @Convert.ToDecimal(item.Total).ToString("$ #,##0.00");
+                                TotalQuote1 = TotalQuote1 + @item.Total;
+                            }
+                        </td>
+
+                    </tr>
+                                }
+            </table>
+        </div>
+                                }
+}
+
+@{
+    if (ViewBag.Quotes2.Count == 0)
+    {
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <!-- Tabla por horas tipo=1 -->
+            <table class="table table-bordered">
+                <thead class="tr-axis">
+                    <tr>
+                        <th style="width:400px">
+                            Description
+                        </th>
+                        <th style="text-align:center">
+                            Price per Unit
+                        </th>
+                        <th style="text-align:center">
+                            # Of Units
+                        </th>
+                        <th style="text-align:center">
+                            Total per line
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in ViewBag.Quotes2)
+                {
+                    <tr class="trbodyaxis">
+                        <td style="text-align:left">
+                            @item.Description
+                        </td>
+                        <td style="text-align:center">
+                            @{
+                                @Convert.ToDecimal(item.PricePerUnit).ToString("$ #,##0.00");
+                            }
+                        </td>
+                        <td style="text-align:center">
+                            @item.NUnits
+                        </td>
+
+                        <td style="text-align:right">
+                            @{
+                                @Convert.ToDecimal(item.Total).ToString("$ #,##0.00");
+                                TotalQuote2 = TotalQuote2 + @item.Total;
+                            }
+                        </td>
+
+                    </tr>
+                                }
+            </table>
+        </div>
+                                }
+}
+
+
+@{
+    TotalPrice = ViewBag.MITotal + ViewBag.MOTotal + TotalQuote1 + TotalQuote2;
+}
+<div class="panel panel-default">
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th style="text-align:right">
+                    Total
+                    @{
+                        @Convert.ToDecimal(TotalPrice).ToString("$ #,##0.00");
+                    }
+                </th>
+            </tr>
+
+        </thead>
+
+
+    </table>
+</div>
+
+
+<div class="panel panel-axisxl">
+    <!-- Default panel contents -->
+    <div class="panel-heading">SPECIAL NOTES AND INSTRUCTIONS</div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th align="center">
+                @ViewBag.Notes
+            </th>
+
+        </tr>
+
+
+    </table>
+
+</div>
+
+
+<div style="text-align:center">
+    <p>
+        Above information is not an invoice and only an estimate of services/goods described above.<br />
+        Payment Terms: Net 30 days
+    </p>
+</div>
+
+<div style="color:red">
+    <p style="font-weight:bold">
+        Terms & Conditions
+    </p>
+</div>
+<div>
+    @Html.Raw(ViewBag.TermsandConditions)
+</div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+            function newVersion(id, rfqid) {
+
+                var url = "/Rversions/NewVersion";
+
+                var dialog = bootbox.dialog({
+                    title: 'Create New Version',
+                    message: '<p><i class="fa fa-spin fa-spinner"></i> Loading...</p>'
+
+                });
+
+
+                $.post(url, { Id: id, rfqId: rfqid })
+                     .done(function (data) {
+
+                         dialog.modal('hide');
+                         $('#allData').html(data);
+                     })
+                    .fail(function () {
+                        alert("Fail create new registre")
+                    });
+            }
+
+
+            //NewVersion
+
+    </script>
+
+}

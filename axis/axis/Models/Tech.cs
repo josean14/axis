@@ -38,7 +38,7 @@ namespace AXIS.Models
         public virtual string LastName { get; set; }
 
         [DisplayName("Language")]
-        [Required(ErrorMessage = "The last name is required.")]
+
         public virtual string Language { get; set; }
 
         [DisplayName("Street Address")]
@@ -58,7 +58,7 @@ namespace AXIS.Models
         public virtual string Zip { get; set; }
 
         [DisplayName("Country")]
-        [Required(ErrorMessage = "The Country is required.")]
+
         public virtual string Country { get; set; }
 
         [DisplayName("Cell")]
@@ -74,14 +74,14 @@ namespace AXIS.Models
         public virtual string Email { get; set; }
 
         [DisplayName("E-mail Company")]
-        [Required(ErrorMessage = "The email is required.")]
+
         [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
             ErrorMessage = "Invalid email address.")]
         public virtual string EmailCompany { get; set; }
 
 
         [DisplayName("Local Airport")]
-        [Required(ErrorMessage = "The Local Airport is required.")]
+
         public virtual string LocalAirport { get; set; }
 
         [DisplayName("SSN")]
@@ -89,27 +89,27 @@ namespace AXIS.Models
         public virtual int SSN { get; set; }
 
         [DisplayName("Drive Licence")]
-        [Required(ErrorMessage = "The Drive Licence is required.")]
+
         public virtual string DriveLicence { get; set; }
 
         [DisplayName("PayRate")]
-        [Required(ErrorMessage = "The Pay Rate is required.")]
+
         public virtual double PayRate { get; set; }
 
         [DisplayName("Daily Per Diem Rate")]
-        [Required(ErrorMessage = "The Daily Per Diem Rate is required.")]
+
         public virtual double DayliPerDiem { get; set; }
 
         [DisplayName("Medical")]
-        [Required(ErrorMessage = "The medical is required.")]
+
         public virtual string Medical { get; set; }
 
         [DisplayName("Passport")]
-        [Required(ErrorMessage = "The passport is required.")]
+
         public virtual int Passport { get; set; }
 
         [DisplayName("Marital Status")]
-        [Required(ErrorMessage = "The marital status is required.")]
+
         public virtual MaritalStatus? MaritalStatus { get; set; }
 
         [DisplayName("Children")]
@@ -117,7 +117,7 @@ namespace AXIS.Models
         public virtual int Children { get; set; }
 
         [DisplayName("Education")]
-        [Required(ErrorMessage = "The education is required.")]
+
         public virtual string Education { get; set; }
 
         public string FullName
