@@ -1,0 +1,15 @@
+﻿bodyR {
+    padding-top: -50px;
+    padding-bottom: 20px;
+}
+
+footerR {
+    margin-left: 0px;
+    text-align: center;
+}
+
+/* Set padding to keep content from hitting the edges */
+.bodyR-content {
+    padding-left: -130px;
+    padding-right: 15px;
+}

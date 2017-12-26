@@ -13,9 +13,14 @@ summary {
   display: block;
 }
 
+bodyR {
+  background-color: #FFCC66;
+  margin-left: 0px;
+}
+
 body {
   background-color: #FFCC66;
-  margin-left: 150px;
+  margin-left: 20px;
 }
 *,
 *:before,

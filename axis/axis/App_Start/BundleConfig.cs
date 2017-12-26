@@ -40,6 +40,7 @@ namespace AXIS
                       "~/Content/bootstrap.css",
                        "~/Content/bootstrap-datepicker.css",
                       "~/Content/site.css",
+                      "~/Content/reportes.css",
                       "~/Content/axis.css"));
         }
     }

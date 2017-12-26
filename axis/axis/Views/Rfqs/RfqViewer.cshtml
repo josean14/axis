@@ -11,96 +11,122 @@
     double TotalQuote1 = 0;
     double TotalQuote2 = 0;
 }
-<div class="panelright">
-    <div class="panel panel-axis right">
-        <!-- Default panel contents -->
-        <div class="panel-heading">RFQ # @Html.DisplayFor(model => model.RfqId)</div>
+<table>
+    <tr>
+        <td>
+            <div style="width:500px;height:200px;overflow:hidden;">
+                <img src="~/Content/images/axis_logo.jpg" width="400px" height="auto">
+            </div>
+        </td>
+        <th style="width:280px">
 
-        <table class="table table-bordered">
-            <tr>
-                <th align="center">
-                    <p>Date:</p>
-                </th>
-                <th align="center">
-                    <p>@ViewBag.VersionDate</p>
-                </th>
-            </tr>
-            <tr>
-                <th align="center">
-                    <p>Version #</p>
-                </th>
-                <th align="center">
-                    <p>@ViewBag.NumberVersion</p>
-                </th>
-            </tr>
-            <tr>
-                <th align="center">
-                    <p>Site Farm</p>
-                </th>
-                <th align="center">
-                    @ViewBag.SiteFarm
-                </th>
-            </tr>
-        </table>
+        </th>
+        <td>
+            <div class="panelright">
+                <div class="panel panel-axis right">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">RFQ # @Html.DisplayFor(model => model.RfqId)</div>
 
-    </div>
-</div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                <p>Date:</p>
+                            </th>
+                            <th align="center">
+                                <p>@ViewBag.VersionDate</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p>Version #</p>
+                            </th>
+                            <th align="center">
+                                <p>@ViewBag.NumberVersion</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p>Site Farm</p>
+                            </th>
+                            <th align="center">
+                                @ViewBag.SiteFarm
+                            </th>
+                        </tr>
+                    </table>
 
-<div class="row">
-    <div class="col-sm-6 form-group">
-        <div class="panel panel-axis right">
-            <!-- Default panel contents -->
-            <div class="panel-heading">CUSTOMER</div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
 
-            <table class="table table-bordered">
-                <tr>
-                    <th align="center">
-                        <p>@ViewBag.FullName</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        <p>@ViewBag.Street</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        <p>@ViewBag.City,  @ViewBag.State,  @ViewBag.Country</p>
-                    </th>
-                </tr>
-            </table>
-
-        </div>
-    </div>
-
-    <div class="col-sm-6 form-group">
-        <div class="panel panel-axislg right">
-            <!-- Default panel contents -->
-            <div class="panel-heading">QUOTE /PROJECT DESCRIPTION</div>
-
-            <table class="table table-bordered">
-                <tr>
-                    <th align="center">
-                        <p>Type of Work: @ViewBag.ScopeWork</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        <p>Scope ok Work:@ViewBag.TypeWork</p>
-                    </th>
-                </tr>
-                <tr>
-                    <th align="center">
-                        @ViewBag.ProjectDescription
-                    </th>
-                </tr>
+&nbsp;
+&nbsp;
 
 
-            </table>
+<table>
+    <tr>
+        <th align="center">
 
-        </div>
-    </div>
-</div>
+                <div class="panel panel-axis right">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">CUSTOMER</div>
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                <p>@ViewBag.FullName</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p>@ViewBag.Street</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p>@ViewBag.City,  @ViewBag.State,  @ViewBag.Country</p>
+                            </th>
+                        </tr>
+                    </table>
+
+                </div>
+        </th>
+        <th style="width:500px">
+
+        </th>
+        <th align="center">
+
+                <div class="panel panel-axis right">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">QUOTE /PROJECT DESCRIPTION</div>
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <th align="center">
+                                <p>Type of Work: @ViewBag.ScopeWork</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p>Scope ok Work:@ViewBag.TypeWork</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th align="center">
+                                <p></p>@ViewBag.ProjectDescription
+                            </th>
+                        </tr>
+                    </table>
+
+                </div>
+        </th>
+
+        
+    </tr>
+</table>
+
+
 
 <div class="panel panel-default">
     <!-- Para mobilization per Tech -->
@@ -295,7 +321,7 @@
 
 
 @{
-    TotalPrice = 1500 + 1500 + TotalQuote1 + TotalQuote2;
+    TotalPrice = ViewBag.MITotal + ViewBag.MOTotal + TotalQuote1 + TotalQuote2;
 }
 <div class="panel panel-default">
     <table class="table table-bordered">
@@ -347,10 +373,12 @@
         Terms & Conditions
     </p>
 </div>
-<div>
-    @Html.Raw(ViewBag.TermsandConditions)
-</div>
-</div>
+
+<font size="0.5">
+    <div>
+        @Html.Raw(ViewBag.TermsandConditions)
+    </div>
+</font> 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

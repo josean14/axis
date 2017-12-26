@@ -8,23 +8,26 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<bodyR>
 
   
-    <div class="container body-content">
+    <div class="container bodyR-content">
         @RenderBody()
     </div>
 
 
-    <footer>
+    <footerR>
         <hr />
         <p>&copy; @DateTime.Now.Year - © AXIS RENEWABLE GROUP. All rights reserved.</p>
-    </footer>
+    </footerR>
         
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jquerymin")
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/bundles/bootbox")
         @RenderSection("scripts", required: false)
+</bodyR>
+<body>
+
 </body>
 </html>

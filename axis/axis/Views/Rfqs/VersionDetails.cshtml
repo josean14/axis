@@ -13,6 +13,7 @@
         double TotalQuote2 = 0;
     }
 
+
     <div class="jumbotron" align="center">
         <h2><b>BUSINESS DEVELOPMENT &raquo; RFQ</b></h2>
 
@@ -22,8 +23,6 @@
     @{
         if (ViewBag.Status == "Open")
         {
-
-
             <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">NEW VERSION</a>
             @Html.ActionLink("SEND TO CUSTOMER", "PrintRfqViewer", "Rfqs", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId, version = ViewBag.NumberVersion, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
             <label> </label>

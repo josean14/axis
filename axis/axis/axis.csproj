@@ -415,6 +415,7 @@
     <Content Include="Content\images\turbin.gif" />
     <Content Include="Content\images\Turbine.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\reportes.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
