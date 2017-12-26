@@ -25,7 +25,7 @@
 
 
             <a href="" onclick="newVersion(@ViewBag.RversionId, @Model.RfqId); return false;" class="btn btn-primary btn-xs">NEW VERSION</a>
-            @Html.ActionLink("SEND TO CUSTOMER", "RfqViewer", "Rfqs", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId, version = ViewBag.NumberVersion }, new { @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("SEND TO CUSTOMER", "PrintRfqViewer", "Rfqs", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId, version = ViewBag.NumberVersion, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
             <label> </label>
             @Html.ActionLink("GENERATE JOB", "Create", "Contracts", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId, version = ViewBag.NumberVersion }, new { @class = "btn btn-primary btn-xs" })
             <label> </label>

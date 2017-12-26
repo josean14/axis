@@ -6,28 +6,11 @@
 
 @model AXIS.Models.Rfq
 
-
-
 @{
     double TotalPrice = 0;
     double TotalQuote1 = 0;
     double TotalQuote2 = 0;
 }
-
-<img src="~/Content/images/axis_logo.jpg" />
-<br />
-
-<div class="row">
-<p>
-    5005 Texas Street Suite 105
-    San Diego, CA 92108
-    Phone: (619) 937-3961
-    Fax:(619) 937-3965
-    Info@axisrg.com
-</p>
-
-</div>
-
 <div class="panelright">
     <div class="panel panel-axis right">
         <!-- Default panel contents -->
@@ -190,8 +173,9 @@
 
 
 @{
-    if (ViewBag.Quotes1.Count == 0)
+    if (ViewBag.Quotes1 == null)
     {
+        ViewBag.Quotes1 = 0;
     }
     else
     {
@@ -255,8 +239,9 @@
 }
 
 @{
-    if (ViewBag.Quotes2.Count == 0)
+    if (ViewBag.Quotes2 == null)
     {
+        ViewBag.Quotes2 = 0;
     }
     else
     {
@@ -310,7 +295,7 @@
 
 
 @{
-    TotalPrice = ViewBag.MITotal + ViewBag.MOTotal + TotalQuote1 + TotalQuote2;
+    TotalPrice = 1500 + 1500 + TotalQuote1 + TotalQuote2;
 }
 <div class="panel panel-default">
     <table class="table table-bordered">
