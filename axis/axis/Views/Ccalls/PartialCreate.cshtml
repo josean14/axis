@@ -1,5 +1,5 @@
 ﻿@model AXIS.Models.Ccall
-
+@using Microsoft.AspNet.Identity
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -32,8 +32,8 @@
                                 </div>
                                 <div class="form-group">
                                     @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                    @Html.TextBoxFor(model => model.UserName, new { disabled = "disabled", @readonly = "readonly", @class = "form-control", @Value = @User.Identity.GetUserName() })
+
                                 </div>
                                 @Html.HiddenFor(model => model.ClientId)
                                 <hr />

@@ -220,7 +220,7 @@ namespace AXIS.Controllers
             Rfq rfq = db.Rfqs.Find(id);
             db.Rfqs.Remove(rfq);
             db.SaveChanges();
-            return new JsonResult() { Data = "Deleted successfully" };
+            return new JsonResult() { Data = "RFQ Deleted successfully" };
         }
 
         protected override void Dispose(bool disposing)
@@ -231,6 +231,30 @@ namespace AXIS.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // POST: Rfqs/Delete/5
+        [HttpPost, ActionName("Closed")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Closed(int id)
+        {
+            Rfq rfq = db.Rfqs.Find(id);
+            rfq.Status = "Closed";
+            db.Entry(rfq).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var listverions = db.Rversions.Where(r => r.RfqId == id).ToList();
+            foreach (var item in listverions)
+            {
+                item.Status = "Close";
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+                return new JsonResult() { Data = "RFQ Closed" };
+        }
+
+
+
 
         // GET: Rfqs/Edit/5
         public ActionResult VersionDetails(int? RversionId, int? RfqId, string typefarm)
@@ -378,7 +402,7 @@ namespace AXIS.Controllers
 
             ViewBag.Quotes1 = quotes1;
             ViewBag.Quotes2 = quotes2;
-            return new Rotativa.ViewAsPdf("RfqViewer", rfq) { FileName = "RFQ.pdf" };
+            return new Rotativa.ViewAsPdf("RfqViewer", rfq) { FileName = "RFQ " + RfqId + " Ver "+ ViewBag.NumberVersion +  ".pdf" };
         }
     }
 

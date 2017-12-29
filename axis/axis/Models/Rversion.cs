@@ -11,7 +11,7 @@ namespace AXIS.Models
 
     public enum TypeWork
     {
-        Services, Construct
+        SERVICES, CONSTRUCT
     }
 
     public class Rversion
@@ -26,30 +26,30 @@ namespace AXIS.Models
 
         public virtual DateTime Date { get; set; }
 
-        [DisplayName("Type work")]
+        [DisplayName("TYPE OF WORK")]
         public virtual TypeWork? TypeWork { get; set; }
 
-        [DisplayName("Project description")]
+        [DisplayName("PROJECT DESCRIPTION")]
         [Required(ErrorMessage = "The project description is required.")]
         public virtual string ProjectDescription { get; set; }
 
-        [DisplayName("Total cost")]
+        [DisplayName("TOTAL COST")]
         public virtual double TotalCost { get; set; }
 
-        [DisplayName("Status")]
+        [DisplayName("STATUS")]
         public virtual string Status { get; set; }
 
+        [DisplayName("NOTES & INSTRUCTIONS")]
         [Required(ErrorMessage = "The notes and instructions is required.")]
         public virtual String NotesAndInstructions { get; set; }
 
-        [DisplayName("Number Project")]
         public virtual int RfqId { get; set; }
 
-        [DisplayName("Scope Work")]
+        [DisplayName("SCOPE OF WORK")]
         public virtual int ScopeWorkId { get; set; }
 
         [AllowHtml]
-        [DisplayName("Terms & Conditions")]
+        [DisplayName("TERMS & CONDITIONS")]
         [Required(ErrorMessage = "The Terms & conditions is required.")]
         public virtual string TermsandConditions { get; set; }
 

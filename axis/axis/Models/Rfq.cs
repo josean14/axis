@@ -9,22 +9,23 @@ namespace AXIS.Models
 {
     public class Rfq
     {
-        [DisplayName("# RFQ")]
+        [DisplayName("RFQ")]
         public virtual int RfqId { get; set; }
-        
-        [Required(ErrorMessage = "The street address is required.")]
+
+        [DisplayName("STATUS")]
+        [Required(ErrorMessage = "The Status is required.")]
         public virtual string Status { get; set; }
 
-        [DisplayName("Project Name")]
+        [DisplayName("PROJECT NAME")]
         public virtual string ProjectName { get; set; }
 
         [DisplayName("ID Farm")]
         public virtual int FarmId { get; set; }
 
-        [DisplayName("Farm")]
+        [DisplayName("SITE NAME")]
         public virtual Farm Farm { get; set; }
 
-        [DisplayName("# Ver")]
+        [DisplayName("VER #")]
         public virtual List<Rversion> Rversions { get; set; }
 
     }

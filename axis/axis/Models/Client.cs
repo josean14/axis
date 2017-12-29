@@ -11,57 +11,57 @@ namespace AXIS.Models
     {
         public virtual int ClientId { get; set; }
 
-        [DisplayName("First Name")]
+        [DisplayName("FIRST NAME")]
         [Required(ErrorMessage = "The first name is required.")]
         public virtual string FirstName { get; set; }
 
-        [DisplayName("Last Name")]
+        [DisplayName("LAST NAME")]
         [Required(ErrorMessage = "The last name is required.")]
         public virtual string LastName { get; set; }
 
-        [DisplayName("Title")]
+        [DisplayName("TITLE")]
         [Required(ErrorMessage = "The title is required.")]
         public virtual string Title { get; set; }
 
-        [DisplayName("Department")]
+        [DisplayName("DEPARMENT")]
         [Required(ErrorMessage = "The department is required.")]
         public virtual string Department { get; set; }
 
-        [DisplayName("Company")]
+        [DisplayName("COMPANY")]
         [Required(ErrorMessage = "The Company is required.")]
         public virtual string Company { get; set; }
 
-        [DisplayName("Region")]
+        [DisplayName("REGION")]
         [Required(ErrorMessage = "The Region is required.")]
         public virtual string Region { get; set; }
 
-        [DisplayName("Work Phone")]
+        [DisplayName("WORK PHONE")]
         [Required(ErrorMessage = "The phone number is required.")]
         [RegularExpression(@"^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$",
             ErrorMessage = "Invalid phone number.")]
         public virtual string WorkPhone { get; set; }
 
-        [DisplayName("E-mail")]
+        [DisplayName("E-MAIL")]
         [Required(ErrorMessage = "The email is required.")]
         [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
             ErrorMessage = "Invalid email address.")]
         public virtual string Email { get; set; }
 
-        [DisplayName("Street Address")]
+        [DisplayName("STREET ADDRESS")]
         public virtual string Street { get; set; }
 
-        [DisplayName("City")]
+        [DisplayName("CITY")]
         [Required(ErrorMessage = "The city is required.")]
         public virtual string City { get; set; }
 
-        [DisplayName("State")]
+        [DisplayName("STATE")]
         [Required(ErrorMessage = "The state is required.")]
         public virtual string State { get; set; }
 
-        [DisplayName("Zip Code")]
+        [DisplayName("ZIP CODE")]
         public virtual string ZipCode { get; set; }
 
-        [DisplayName("Country")]
+        [DisplayName("COUNTRY")]
         [Required(ErrorMessage = "The country is required.")]
         public virtual string Country { get; set; }
         public virtual ICollection<Farm> Farms { get; set; }

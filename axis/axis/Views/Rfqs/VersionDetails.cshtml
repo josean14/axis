@@ -30,6 +30,15 @@
             <label> </label>
             @Html.ActionLink("CLOSE VERSION", "Close", "Rversions", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId }, new { @class = "btn btn-primary btn-xs" })
         }
+        else
+        {
+            if (ViewBag.Status == "Contracted")
+            {
+                @Html.ActionLink("EXPORT TO PDF", "PrintRfqViewer", "Rfqs", new { rfqid = Model.RfqId, rversionid = ViewBag.RversionId, version = ViewBag.NumberVersion, typefarm = ViewBag.Typefarm }, new { @class = "btn btn-primary btn-xs" })
+
+            }
+        }
+
     }
     <h2>STATUS: @ViewBag.Status</h2>
 
@@ -41,7 +50,7 @@
             <table class="table table-bordered">
                 <tr>
                     <th align="center">
-                        <p>Date:</p>
+                        <p>DATE</p>
                     </th>
                     <th align="center">
                         <p>@ViewBag.VersionDate</p>
@@ -49,7 +58,7 @@
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Version #</p>
+                        <p>VER #</p>
                     </th>
                     <th align="center">
                         <p>@ViewBag.NumberVersion</p>
@@ -57,7 +66,7 @@
                 </tr>
                 <tr>
                     <th align="center">
-                        <p>Site Farm</p>
+                        <p>SITE NAME</p>
                     </th>
                     <th align="center">
                         @ViewBag.SiteFarm
@@ -103,12 +112,12 @@
                 <table class="table table-bordered">
                     <tr>
                         <th align="center">
-                            <p>Type of Work: @ViewBag.ScopeWork</p>
+                            <p>TYPE OF WORK: @ViewBag.ScopeWork</p>
                         </th>
                     </tr>
                     <tr>
                         <th align="center">
-                            <p>Scope ok Work:@ViewBag.TypeWork</p>
+                            <p>SCOPE OF WORK:@ViewBag.TypeWork</p>
                         </th>
                     </tr>
                     <tr>

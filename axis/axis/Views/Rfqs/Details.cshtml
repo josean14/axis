@@ -18,20 +18,21 @@
         <table class="table table-bordered">
             <tr>
                 <th align="center">
-                    <p>Project Name</p>
-                </th>
-                <th align="center">
-                    <p>@Html.DisplayFor(model => model.ProjectName)</p>
-                </th>
-            </tr>
-            <tr>
-                <th align="center">
-                    <p>Site Name</p>
+                    <p>SITE NAME</p>
                 </th>
                 <th align="center">
                     @Html.DisplayFor(model => model.Farm.FarmName)
                 </th>
             </tr>
+            <tr>
+                <th align="center">
+                    <p>CUSTOMER</p>
+                </th>
+                <th align="center">
+                    @Html.DisplayFor(model => model.Farm.Client.FullName)
+                </th>
+            </tr>
+
         </table>
 
     </div>

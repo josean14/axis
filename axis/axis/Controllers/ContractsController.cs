@@ -144,18 +144,18 @@ namespace AXIS.Controllers
                 {
                     if (item.RversionId != contract.RversionId)
                     {
-                        item.Status = "Close";
+                        item.Status = "Closed";
                         db.Entry(item).State = EntityState.Modified;
                         db.SaveChanges();
                     }
                     else
                     {
-                        item.Status = "Contract";
+                        item.Status = "Contracted";
                         db.Entry(item).State = EntityState.Modified;
                         db.SaveChanges();
 
                         var rfq = db.Rfqs.Find(contract.RfqId);
-                        rfq.Status = "Contract";
+                        rfq.Status = "Contracted";
                         db.Entry(rfq).State = EntityState.Modified;
                         db.SaveChanges();
                     }
