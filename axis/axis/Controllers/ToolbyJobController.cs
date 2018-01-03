@@ -108,12 +108,16 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Location,Category,ContractId")] AssignmentOfToolsByJob assignmentOfToolsByJob)
+        public ActionResult Create([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Category")] AssignmentOfToolsByJob assignmentOfToolsByJob)
         {
             if (ModelState.IsValid)
             {
 
+                assignmentOfToolsByJob.ContractId = 0;
+                assignmentOfToolsByJob.Location = "WAREHOUSE";
+                assignmentOfToolsByJob.CheckJob = false;
                 db.AssignmentOfToolsByJobs.Add(assignmentOfToolsByJob);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

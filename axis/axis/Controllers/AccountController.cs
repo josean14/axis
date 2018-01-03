@@ -138,7 +138,7 @@ namespace AXIS.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [MyAuthorize(Roles = "Administrator")]
         public ActionResult Register()
         {
             return View();
@@ -147,7 +147,7 @@ namespace AXIS.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [MyAuthorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -176,7 +176,7 @@ namespace AXIS.Controllers
         }
 
         //Register Role
-        [AllowAnonymous]
+        [MyAuthorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult RegisterRole()
         {
@@ -187,7 +187,7 @@ namespace AXIS.Controllers
 
         //POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [MyAuthorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterRole(RegisterViewModel model, ApplicationUser user)
         {

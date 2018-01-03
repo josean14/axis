@@ -95,11 +95,15 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Location,Category,TruckId")] AssignmentOfToolsByTruck assignmentOfToolsByTruck)
+        public ActionResult Create([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Category")] AssignmentOfToolsByTruck assignmentOfToolsByTruck)
         {
             if (ModelState.IsValid)
             {
+                assignmentOfToolsByTruck.Location = "WAREHOUSE";
+                assignmentOfToolsByTruck.TruckId = 0;
+                assignmentOfToolsByTruck.CheckTruck = false;
                 db.AssignmentOfToolsByTrucks.Add(assignmentOfToolsByTruck);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -127,7 +131,7 @@ namespace AXIS.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Location,Category,TruckId")] AssignmentOfToolsByTruck assignmentOfToolsByTruck)
+        public ActionResult Edit([Bind(Include = "Id,Manufacturer,Model,Serial1,Serial2,Status,CDMD,Additional1,Additional2,Location,Category,TruckId,CheckTruck")] AssignmentOfToolsByTruck assignmentOfToolsByTruck)
         {
             if (ModelState.IsValid)
             {
