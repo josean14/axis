@@ -5,9 +5,11 @@
 }
 
 <p>
-    @Html.ActionLink(" CERTIFICATES", "Edit", "TechInfoAxis", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
+    <a href=@Url.Action("Index", "Teches") class="btn btn-primary btn-xs">BACK</a>
     @Html.ActionLink(" WORK EXPERIENCE", "Index", "TechInfoWorks", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
-    @Html.ActionLink(" ADD PHOTO", "Uploadimg", "Teches", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
+
+    
+
     <br />
     <div style="text-align:Center">
         <div>
@@ -17,6 +19,12 @@
                  style="border:solid" src=@Url.Content(@ViewBag.Src) />
         </div>
     </div>
+    <br />
+    <div style="text-align:Center">
+        @Html.ActionLink(" ADD PHOTO", "Uploadimg", "Teches", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
+    </div>
+
+
 </p>
 
 <div class="container">
@@ -126,15 +134,3 @@
 </div>
 
 
-<p>
-    <a href=@Url.Action("Index", "Teches") class="btn btn-primary btn-xs">Back</a>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TechId }, new { @class = "btn btn-primary btn-xs" })
-    @using (Html.BeginForm("Delete", "Teches", new { id = Model.TechId }, FormMethod.Post, null))
-    {
-        @Html.AntiForgeryToken()
-        <div class="form-actions">
-            <input type="submit" value="Delete" class="btn btn-primary btn-xs" />
-        </div>
-    }
-
-</p>

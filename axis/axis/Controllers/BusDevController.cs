@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AXIS.Controllers
 {
-    [Authorize]
+    [MyAuthorize(Roles = "Administrator, FieldManager, AFManager, SalesManager, Salesman")]
     public class BusDevController : Controller
     {
         // GET: BusDev

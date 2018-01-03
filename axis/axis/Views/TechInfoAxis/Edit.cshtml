@@ -1,251 +1,379 @@
 ﻿@model AXIS.Models.TechInfoAxi
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "CERTIFICATES";
 }
 
-<h2>Edit</h2>
 
 @using (Html.BeginForm("Edit", "TechInfoAxis", FormMethod.Post,
                             new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>TechInfoAxi</h4>
-        <hr />
+    <br />
+    <div class="panel panel-default">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.TechInfoAxiId)
-
-        <div class="form-group">
-            @Html.Label("NFPA Expedition Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ExperienceDate, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExperienceDate, "", new { @class = "text-danger" })
-            </div>
+        <div class="panel-heading">
+            <h4>CERTIFICATES</h4>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nfra70E, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Nfra70E)
-                @Html.EditorFor(model => model.Nfra70E, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.Nfra70E, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Osha10, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Osha10)
-                @Html.EditorFor(model => model.Osha10, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.Osha10, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstAidCPR, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.FirstAidCPR)
-                @Html.EditorFor(model => model.FirstAidCPR, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.FirstAidCPR, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TowerRescue, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.TowerRescue)
-                @Html.EditorFor(model => model.TowerRescue, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.TowerRescue, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ConfinedSpace, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.ConfinedSpace)
-                @Html.EditorFor(model => model.ConfinedSpace, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.ConfinedSpace, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Loto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Loto)
-                @Html.EditorFor(model => model.Loto, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.Loto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ergonomics, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Ergonomics)
-                @Html.EditorFor(model => model.Ergonomics, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.Ergonomics, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Hazcom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Hazcom)
-                @Html.EditorFor(model => model.Hazcom, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.Hazcom, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CraneSafety, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.CraneSafety)
-                @Html.EditorFor(model => model.CraneSafety, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.CraneSafety, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RiggingSignalMan, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.RiggingSignalMan)
-                @Html.EditorFor(model => model.RiggingSignalMan, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.RiggingSignalMan, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FireExtinguisher, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.FireExtinguisher)
-                @Html.EditorFor(model => model.FireExtinguisher, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                @Html.ValidationMessageFor(model => model.FireExtinguisher, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HasI9, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.HasI9, false)
-                    @Html.DisplayFor(model => model.I9File)
-                    @Html.ValidationMessageFor(model => model.HasI9, "", new { @class = "text-danger" })
+        <table class="table table-bordered">
+            <div class="form-horizontal">
+                <br />
+                <div class="form-group">
+                    @Html.Label("NFPA Expedition Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ExperienceDate, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ExperienceDate, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div id="FI9" style="display: none;">
-            <div class="form-group">
-                @Html.LabelFor(model => model.I9File, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.I9File, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                    @Html.ValidationMessageFor(model => model.I9File, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nfra70E, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.Nfra70E == null)
+                            {
+                                @Html.DisplayFor(model => model.Nfra70E)
+                                
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.Nfra70E, "Download", new { ImageName = Model.Nfra70E, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.Nfra70E, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.Nfra70E, "", new { @class = "text-danger" })
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Osha10, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.Osha10 == null)
+                            {
+                                @Html.DisplayFor(model => model.Osha10)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.Osha10, "Download", new { ImageName = Model.Osha10, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.Osha10, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.Osha10, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstAidCPR, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.FirstAidCPR == null)
+                            {
+                                @Html.DisplayFor(model => model.FirstAidCPR)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.FirstAidCPR, "Download", new { ImageName = Model.FirstAidCPR, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.FirstAidCPR, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.FirstAidCPR, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TowerRescue, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.TowerRescue == null)
+                            {
+                                @Html.DisplayFor(model => model.TowerRescue)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.TowerRescue, "Download", new { ImageName = Model.TowerRescue, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.TowerRescue, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.TowerRescue, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfinedSpace, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.ConfinedSpace == null)
+                            {
+                                @Html.DisplayFor(model => model.ConfinedSpace)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.ConfinedSpace, "Download", new { ImageName = Model.ConfinedSpace, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.ConfinedSpace, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.ConfinedSpace, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Loto, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.Loto == null)
+                            {
+                                @Html.DisplayFor(model => model.Loto)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.Loto, "Download", new { ImageName = Model.Loto, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.Loto, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.Loto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ergonomics, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.Ergonomics == null)
+                            {
+                                @Html.DisplayFor(model => model.Ergonomics)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.Ergonomics, "Download", new { ImageName = Model.Ergonomics, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.Ergonomics, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.Ergonomics, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Hazcom, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.Hazcom == null)
+                            {
+                                @Html.DisplayFor(model => model.Hazcom)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.Hazcom, "Download", new { ImageName = Model.Hazcom, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.Hazcom, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.Hazcom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CraneSafety, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.CraneSafety == null)
+                            {
+                                @Html.DisplayFor(model => model.CraneSafety)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.CraneSafety, "Download", new { ImageName = Model.CraneSafety, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.CraneSafety, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.CraneSafety, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RiggingSignalMan, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.RiggingSignalMan == null)
+                            {
+                                @Html.DisplayFor(model => model.RiggingSignalMan)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.RiggingSignalMan, "Download", new { ImageName = Model.RiggingSignalMan, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.RiggingSignalMan, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.RiggingSignalMan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FireExtinguisher, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @{
+                            if (Model.FireExtinguisher == null)
+                            {
+                                @Html.DisplayFor(model => model.FireExtinguisher)
+
+                            }
+                            else
+                            {
+                                @Html.ActionLink(Model.FireExtinguisher, "Download", new { ImageName = Model.FireExtinguisher, TechId = Model.TechId })
+                            }
+                        }
+                        @Html.EditorFor(model => model.FireExtinguisher, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                        @Html.ValidationMessageFor(model => model.FireExtinguisher, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasI9, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.HasI9, false)
+                            @Html.DisplayFor(model => model.I9File)
+                            @Html.ValidationMessageFor(model => model.HasI9, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div id="FI9" style="display: none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.I9File, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.I9File, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.I9File, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasW2, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.HasW2)
+                            @Html.DisplayFor(model => model.W2File)
+                            @Html.ValidationMessageFor(model => model.HasW2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div id="FW2" style="display: none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.W2File, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.W2File, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.W2File, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasW4, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.HasW4)
+                            @Html.DisplayFor(model => model.W4File)
+                            @Html.ValidationMessageFor(model => model.HasW4, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div id="FW4" style="display: none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.W4File, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.W4File, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.W4File, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasApplicanceOffer, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.HasApplicanceOffer)
+                            @Html.DisplayFor(model => model.ApplicanceOfferFile)
+                            @Html.ValidationMessageFor(model => model.HasApplicanceOffer, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div id="FApplicanceOffer" style="display: none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ApplicanceOfferFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ApplicanceOfferFile, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.ApplicanceOfferFile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HasAxisLaborCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.HasAxisLaborCode)
+                            @Html.DisplayFor(model => model.AxisLaborCodeFile)
+                            @Html.ValidationMessageFor(model => model.HasAxisLaborCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div id="FAxisLaborCode" style="display: none;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AxisLaborCodeFile, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.AxisLaborCodeFile, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                            @Html.ValidationMessageFor(model => model.AxisLaborCodeFile, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TechnicalLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.TechnicalLevel, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TechnicalLevel, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.TechInfoAxiId)
+                @Html.HiddenFor(model => model.TechId)
+
+
+
             </div>
+
+        </table>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="SAVE" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HasW2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.HasW2)
-                    @Html.DisplayFor(model => model.W2File)
-                    @Html.ValidationMessageFor(model => model.HasW2, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div id="FW2" style="display: none;">
-            <div class="form-group">
-                @Html.LabelFor(model => model.W2File, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.W2File, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                    @Html.ValidationMessageFor(model => model.W2File, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.HasW4, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.HasW4)
-                    @Html.DisplayFor(model => model.W4File)
-                    @Html.ValidationMessageFor(model => model.HasW4, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div id="FW4" style="display: none;">
-            <div class="form-group">
-                @Html.LabelFor(model => model.W4File, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.W4File, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                    @Html.ValidationMessageFor(model => model.W4File, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HasApplicanceOffer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.HasApplicanceOffer)
-                    @Html.DisplayFor(model => model.ApplicanceOfferFile)
-                    @Html.ValidationMessageFor(model => model.HasApplicanceOffer, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div id="FApplicanceOffer" style="display: none;">
-            <div class="form-group">
-                @Html.LabelFor(model => model.ApplicanceOfferFile, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ApplicanceOfferFile, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                    @Html.ValidationMessageFor(model => model.ApplicanceOfferFile, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HasAxisLaborCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.HasAxisLaborCode)
-                    @Html.DisplayFor(model => model.AxisLaborCodeFile)
-                    @Html.ValidationMessageFor(model => model.HasAxisLaborCode, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div id="FAxisLaborCode" style="display: none;">
-            <div class="form-group">
-                @Html.LabelFor(model => model.AxisLaborCodeFile, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.AxisLaborCodeFile, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                    @Html.ValidationMessageFor(model => model.AxisLaborCodeFile, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TechnicalLevel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.TechnicalLevel, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TechnicalLevel, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => model.TechInfoAxiId)
-        @Html.HiddenFor(model => model.TechId)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Edit" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Details", "Teches", new { id = Model.TechId }, null)
+    <a href=@Url.Action("Index", "TechInfoAxis") class="btn btn-primary btn-xs">BACK</a>
 </div>
 
 @section Scripts {

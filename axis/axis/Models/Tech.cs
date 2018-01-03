@@ -129,7 +129,7 @@ namespace AXIS.Models
         public virtual string Status { get; set; }
 
         [DisplayName("PO Asigned")]
-        public virtual string POAsigned { get; set; }
+        public virtual int POAsigned { get; set; }
 
         public virtual List<TechInfoAxi> TechInfoAxi { get; set; }
         public virtual List<TechInfoWork> TechInfoWork { get; set; }

@@ -12,7 +12,7 @@ using Rotativa;
 
 namespace AXIS.Controllers
 {
-    [Authorize]
+    [MyAuthorize(Roles = "Administrator, FieldManager, AFManager, SalesManager, Salesman")]
     public class RfqsController : Controller
     {
         private AXISDB db = new AXISDB();

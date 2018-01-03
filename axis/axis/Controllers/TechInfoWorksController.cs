@@ -21,6 +21,8 @@ namespace AXIS.Controllers
         {
             int techid = id;
 
+            var tech = db.Teches.Find(id);
+
             var techInfoWorks = from s in db.TechInfoWorks
                                 select s;
 
@@ -28,6 +30,7 @@ namespace AXIS.Controllers
 
             techInfoWorks = techInfoWorks.Where(s => s.TechId.Equals(techid));
             ViewBag.TechId = techid;
+            ViewBag.FullName = tech.FullName;
 
             return View(techInfoWorks.ToList());
 
@@ -51,11 +54,11 @@ namespace AXIS.Controllers
         }
 
         // GET: TechInfoWorks/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName");
             ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work");
-            ViewBag.TechId = new SelectList(db.Teches, "TechId", "FullName");
+            ViewBag.TechId = id;
             ViewBag.ManufacturerName = new SelectList(db.Manufacteres, "ManufacturerName", "ManufacturerName");
             return View();
         }
@@ -71,12 +74,12 @@ namespace AXIS.Controllers
             {
                 db.TechInfoWorks.Add(techInfoWork);
                 db.SaveChanges();
-                return RedirectToAction("WorkExp","Teches");
+                return RedirectToAction("Index", "TechInfoWorks", new { id = techInfoWork.TechId });
             }
 
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName", techInfoWork.FarmId);
             ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work", techInfoWork.ScopeWorkId);
-            ViewBag.TechId = new SelectList(db.Teches, "TechId", "FullName", techInfoWork.TechId);
+            ViewBag.TechId = techInfoWork.TechId;
             ViewBag.ManufacturerName = new SelectList(db.Manufacteres, "ManufacturerName", "ManufacturerName");
             return View(techInfoWork);
         }
@@ -95,7 +98,7 @@ namespace AXIS.Controllers
             }
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName", techInfoWork.FarmId);
             ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work", techInfoWork.ScopeWorkId);
-            ViewBag.TechId = new SelectList(db.Teches, "TechId", "FullName", techInfoWork.TechId);
+            ViewBag.TechId = idtech;
             ViewBag.ManufacturerName = new SelectList(db.Manufacteres, "ManufacturerName", "ManufacturerName", techInfoWork.ManufacturerName);
 
             var objPlatform = db.Platforms.Where(c => c.ManufacturerName == techInfoWork.ManufacturerName);
@@ -120,7 +123,7 @@ namespace AXIS.Controllers
             }
             ViewBag.FarmId = new SelectList(db.Farms, "FarmId", "FarmName", techInfoWork.FarmId);
             ViewBag.ScopeWorkId = new SelectList(db.ScopeWorks, "ScopeWorkId", "Work", techInfoWork.ScopeWorkId);
-            ViewBag.TechId = new SelectList(db.Teches, "TechId", "FullName", techInfoWork.TechId);
+            ViewBag.TechId = techInfoWork.TechId;
 
             ViewBag.ManufacturerName = new SelectList(db.Manufacteres, "ManufacturerName", "ManufacturerName", techInfoWork.ManufacturerName);
 
@@ -131,30 +134,16 @@ namespace AXIS.Controllers
             return View(techInfoWork);
         }
 
-        // GET: TechInfoWorks/Delete/5
-        public ActionResult Delete(int? id, int idtech)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TechInfoWork techInfoWork = db.TechInfoWorks.Find(id);
-            if (techInfoWork == null)
-            {
-                return HttpNotFound();
-            }
-            return View(techInfoWork);
-        }
 
         // POST: TechInfoWorks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int TechId, int TechInfoWorkId)
         {
-            TechInfoWork techInfoWork = db.TechInfoWorks.Find(id);
+            TechInfoWork techInfoWork = db.TechInfoWorks.Find(TechInfoWorkId);
             db.TechInfoWorks.Remove(techInfoWork);
             db.SaveChanges();
-            return RedirectToAction("Index", "TechInfoWorks", new { id = techInfoWork.TechId });
+            return RedirectToAction("Index", "TechInfoWorks", new { id = TechId });
         }
 
         protected override void Dispose(bool disposing)

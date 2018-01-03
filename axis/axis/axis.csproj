@@ -290,6 +290,7 @@
     <Compile Include="Controllers\FieldOperationsController.cs" />
     <Compile Include="Controllers\FieldOpsController.cs" />
     <Compile Include="Controllers\FlightsController.cs" />
+    <Compile Include="Controllers\HandleUnauthorizedRequestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MobilizationController.cs" />
@@ -721,12 +722,15 @@
     <Content Include="Views\TruckDetails\Index.cshtml" />
     <Content Include="Views\Shared\_Layout Repots.cshtml" />
     <Content Include="Views\Rfqs\RfqViewer.cshtml" />
+    <Content Include="Views\TechInfoAxis\Index.cshtml" />
+    <Content Include="Views\Shared\Unauthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\Users\" />
     <Folder Include="Documents\Contracts\" />
     <Folder Include="Documents\PO\" />
+    <Folder Include="Views\HandleUnauthorizedRequest\" />
     <Folder Include="Views\TabModel\" />
     <Folder Include="Views\Users\" />
   </ItemGroup>

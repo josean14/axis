@@ -11,6 +11,7 @@ using PagedList;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class TruckDetailsController : Controller
     {
         private AXISDB db = new AXISDB();

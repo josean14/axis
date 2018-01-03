@@ -1,89 +1,93 @@
 ﻿@model AXIS.Models.TechInfoWork
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "EDIT WORK EXPERIENCE";
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>TechInfoWork</h4>
-        <hr />
+    <br />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>EDIT WORK EXPERIENCE</h4>
+        </div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.TechInfoWorkId)
+        @Html.HiddenFor(model => model.TechId);
+        <table class="table table-bordered">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ManufacturerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ManufacturerName", null, "Please select an option", htmlAttributes: new { @class = "form-control", @id = "SelectManufactere" })
+                        @Html.ValidationMessageFor(model => model.ManufacturerName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PlatformName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" id="listsplatform">
+                        @Html.DropDownList("PlatformName", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PlatformName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ManufacturerName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ManufacturerName", null, htmlAttributes: new { @class = "form-control", @id = "SelectManufactere" })
-                @Html.ValidationMessageFor(model => model.ManufacturerName, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Farm.FarmName, "Site Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("FarmId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FarmId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TypeOfService, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.TypeOfService, htmlAttributes: new { @class = "form-control", @id = "SelectTypeWork" })
+                        @Html.ValidationMessageFor(model => model.TypeOfService, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Scopework, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" id="listscopework">
+                        @Html.DropDownList("ScopeWorkId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ScopeWorkId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
+
+        </table>
+
+        <div class="panel-footer">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="SAVE" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PlatformName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" id="listsplatform">
-                @Html.DropDownList("PlatformName", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PlatformName, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FarmId, "FarmId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("FarmId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.FarmId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TypeOfService, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.TypeOfService, htmlAttributes: new { @class = "form-control", @id = "SelectTypeWork" })
-                @Html.ValidationMessageFor(model => model.TypeOfService, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ScopeWorkId, "ScopeWorkId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10" id="listscopework">
-                @Html.DropDownList("ScopeWorkId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ScopeWorkId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TechId, "TechId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TechId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TechId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+
 }
 
 <div>
-    <a href=@Url.Action("Index", "TechInfoWorks", new { id = Model.TechId}) class="btn btn-primary btn-xs">Back</a>
+    <a href=@Url.Action("Index", "TechInfoWorks", new { id = Model.TechId}) class="btn btn-primary btn-xs">BACK</a>
 </div>
 
 @section Scripts {

@@ -10,7 +10,7 @@ using AXIS.Models;
 
 namespace AXIS.Controllers
 {
-    [Authorize]
+    [MyAuthorize(Roles = "Administrator, FieldManager, AFManager, SalesManager, Salesman")]
     public class QuotesController : Controller
     {
         private AXISDB db = new AXISDB();

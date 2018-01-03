@@ -14,11 +14,14 @@ using AXIS.Mailers;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class MobilizationController : Controller
     {
         private AXISDB db = new AXISDB();
 
         // GET: Mobilization
+
+        [MyAuthorize(Roles = "Administrator, FieldManager, RSourceManager, AAManager")]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -83,6 +86,7 @@ namespace AXIS.Controllers
             return View(Purchaseorders.ToPagedList(pageNumber, pageSize));
         }
 
+        [MyAuthorize(Roles = "Administrator, FieldManager")]
         public ActionResult Authorization(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -150,6 +154,7 @@ namespace AXIS.Controllers
             return View(approvaltech.ToPagedList(pageNumber, pageSize));
         }
 
+        [MyAuthorize(Roles = "Administrator, FieldManager")]
         public ActionResult AuthorizationTrucks(string sortOrder, string currentFilter, string searchString, int? page) 
         {
             ViewBag.CurrentSort = sortOrder;
@@ -309,7 +314,7 @@ namespace AXIS.Controllers
 
             Tech tech = db.Teches.Find(fo.TechId);
             tech.Status = "IN FIELD";
-            tech.POAsigned = fo.PurchaseOrder.PO;
+            tech.POAsigned = fo.PurchaseOrder.PurchaseOrderId;
             db.Entry(tech).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -392,7 +397,7 @@ namespace AXIS.Controllers
 
             Tech tech = db.Teches.Find(techid);
             tech.Status = "BANCH";
-            tech.POAsigned = " ";
+            tech.POAsigned = 0;
             db.Entry(tech).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -804,7 +809,7 @@ namespace AXIS.Controllers
 
             Tech tech = db.Teches.Find(techid);
             tech.Status = "BANCH";
-            tech.POAsigned = " ";
+            tech.POAsigned = 0;
             db.Entry(tech).State = EntityState.Modified;
             db.SaveChanges();
 

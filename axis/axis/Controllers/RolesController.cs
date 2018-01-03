@@ -9,6 +9,7 @@ using AspNet.Identity.MySQL;
 
 namespace AXIS.Controllers
 {
+    [MyAuthorize(Roles = "Administrator")]
     public class RolesController : Controller
     {
         private AXISDB db = new AXISDB();

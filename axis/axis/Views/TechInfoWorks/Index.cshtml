@@ -7,14 +7,15 @@
 <h2>WORK EXPERIENCE</h2>
 
 <p>
-    <a href=@Url.Action("WorkExp", "Teches") class="btn btn-primary btn-xs">BACK</a>
-    <a href=@Url.Action("Create", "TechInfoWorks") class="btn btn-primary btn-xs">ADD</a>
+    @Html.ActionLink("BACK","Details", "Teches", new { id = @ViewBag.TechId }, new {@class= "btn btn-primary btn-xs" })
+    @Html.ActionLink("ADD", "Create", "TechInfoWorks", new { id = @ViewBag.TechId }, new { @class = "btn btn-primary btn-xs" })
+
 </p>
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
-        Tech ID:@ViewBag.Techid
+        FULL NAME: @ViewBag.FullName
     </div>
     <table class="table table-bordered">
         <tr>
@@ -43,7 +44,7 @@
 
         @foreach (var item in Model)
         {
-            var ident = "Tech" + @item.TechId;
+            var ident = "Tech" + @item.TechInfoWorkId;
 
             var fullname = @item.Tech.FirstName + " " + @item.Tech.LastName;
 
@@ -67,8 +68,8 @@
                     @Html.DisplayFor(modelItem => item.Notes)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.TechInfoWorkId, idtech = item.TechId }) |
-                     @Html.ActionLink("Delete", "Delete", new { id = item.TechInfoWorkId, idtech = item.TechId })
+                    @Html.ActionLink(" ", "Edit", new { id = item.TechInfoWorkId, idtech = item.TechId }, new {@class= "glyphicon glyphicon-pencil" }) |
+                    <a href="" onclick="confirmDelete(@item.TechId, @item.TechInfoWorkId); return false;" class="glyphicon glyphicon-remove" , title="DELETE W.E."></a>
                 </td>
             </tr>
         }
@@ -80,52 +81,47 @@
     </div>
 </div>
 
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Farm.FarmName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tech.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeOfService)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ManufacturerName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlatformName)
-        </th>
 
-        <th></th>
-    </tr>
+@section scripts
+{
+    <script>
+        function confirmDelete(TechId,TechInfoWorkId) {
+            bootbox.confirm({
+                message: "ARE YOU SURE TO DELETE THIS INFO.",
+                buttons: {
+                    confirm: {
+                        label: 'YES',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'NO',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Farm.FarmName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tech.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfService)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManufacturerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlatformName)
-            </td>
+                    if (result) {
+                        var url = "/TechInfoWorks/Delete/";
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TechInfoWorkId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TechInfoWorkId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TechInfoWorkId })
-            </td>
-        </tr>
-    }
+                        var anti = $('[name=__RequestVerificationToken]').val();
 
-</table>*@
+                        $.post(url, { TechId: TechId, TechInfoWorkId: TechInfoWorkId , __RequestVerificationToken: anti }, function (data) {
+
+
+
+                            $("#Tech" + TechInfoWorkId).remove();
+                            $("#msg").last().addClass("alert alert-success");
+                            $("#msg").html(data);
+                        });
+
+                    }
+                }
+            });
+
+
+        }
+
+
+    </script>
+
+}

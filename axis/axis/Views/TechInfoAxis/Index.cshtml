@@ -3,10 +3,10 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "PROFILE";
+    ViewBag.Title = "CERTIFICATES";
 }
 
-<h2>TECHNICIANS &raquo; PROFILE</h2>
+<h2>TECHNICIANS &raquo; CERTIFICATES</h2>
 
 <p>
     <a href=@Url.Action("Index", "Technicians") class="btn btn-primary btn-xs">BACK</a>
@@ -15,7 +15,7 @@
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading">
-        @using (Html.BeginForm("Index", "Teches", FormMethod.Get))
+        @using (Html.BeginForm("Index", "TechInfoAxis", FormMethod.Get))
         {
             <p>
                 Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-controlsearch" })
@@ -29,18 +29,14 @@
             <th>
                 @Html.ActionLink("FULL NAME", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
             </th>
-            <th>
-                LANGUAGE
-            </th>
+
             <th>
                 STATE
             </th>
             <th>
                 @Html.ActionLink("COUNTRY", "Index", new { sortOrder = ViewBag.CountrySortParm })
             </th>
-            <th>
-                CELL PHONE
-            </th>
+
             <th>
                 E-MAIL
             </th>
@@ -48,7 +44,7 @@
                 @Html.ActionLink("LOCAL AIRPORT", "Index", new { sortOrder = ViewBag.AirportSortParm })
             </th>
             <th>
-                ACTIONS
+                ADD CERTIFICATE
             </th>
         </tr>
 
@@ -62,18 +58,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => fullname)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Language)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.State)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cell)
-                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
@@ -81,10 +73,7 @@
                     @Html.DisplayFor(modelItem => item.LocalAirport)
                 </td>
                 <td>
-                    @Html.ActionLink(" ", "Details", new { id = item.TechId }, new { @class = "glyphicon glyphicon-user", @Title="DETAILS"}) |
-                    @Html.ActionLink(" ", "Edit", new { id = item.TechId }, new { @class = "glyphicon glyphicon-pencil", @Title = "EDIT" }) |
-                    <a href="" onclick="confirmDelete(@item.TechId); return false;" class="glyphicon glyphicon-remove" , title="DELETE TECHNICIAN"></a>
-
+                    @Html.ActionLink(" CERTIFICATES", "Edit", "TechInfoAxis", new { id = item.TechId }, new { @class = "glyphicon glyphicon-plus", @title = "ADD CERTIFICATE" })
                 </td>
             </tr>
         }
@@ -100,46 +89,3 @@
     </div>
 </div>
 
-@section scripts
-{
-    <script>
-        function confirmDelete(id) {
-            bootbox.confirm({
-                message: "ARE YOU SURE TO DELETE THIS TECHNICIAN",
-                buttons: {
-                    confirm: {
-                        label: 'YES',
-                        className: 'btn-success'
-                    },
-                    cancel: {
-                        label: 'NO',
-                        className: 'btn-danger'
-                    }
-                },
-                callback: function (result) {
-
-                    if (result) {
-                        var url = "/Teches/Delete/";
-                        var TechId = id
-                        var anti = $('[name=__RequestVerificationToken]').val();
-
-                        $.post(url, { id: TechId, __RequestVerificationToken: anti }, function (data) {
-
-
-
-                            $("#Tech" + TechId).remove();
-                            $("#msg").last().addClass("alert alert-success");
-                            $("#msg").html(data);
-                        });
-
-                    }
-                }
-            });
-
-
-        }
-
-
-    </script>
-
-    }

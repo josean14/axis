@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class AssetsController : Controller
     {
         private AXISDB db = new AXISDB();

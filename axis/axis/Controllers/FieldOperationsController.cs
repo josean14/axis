@@ -11,6 +11,7 @@ using AXIS.Mailers;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class FieldOperationsController : Controller
     {
         private AXISDB db = new AXISDB();

@@ -12,6 +12,7 @@ using AXIS.Mailers;
 
 namespace AXIS.Controllers
 {
+    [Authorize]
     public class FlightsController : Controller
     {
         private AXISDB db = new AXISDB();
