@@ -101,7 +101,7 @@ namespace AXIS.Controllers
             {
                 assignmentOfToolsByTruck.Location = "WAREHOUSE";
                 assignmentOfToolsByTruck.TruckId = 0;
-                assignmentOfToolsByTruck.CheckTruck = false;
+                
                 db.AssignmentOfToolsByTrucks.Add(assignmentOfToolsByTruck);
 
                 db.SaveChanges();

@@ -115,7 +115,7 @@ namespace AXIS.Controllers
 
                 assignmentOfToolsByJob.ContractId = 0;
                 assignmentOfToolsByJob.Location = "WAREHOUSE";
-                assignmentOfToolsByJob.CheckJob = false;
+                
                 db.AssignmentOfToolsByJobs.Add(assignmentOfToolsByJob);
 
                 db.SaveChanges();

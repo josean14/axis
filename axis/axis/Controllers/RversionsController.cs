@@ -243,7 +243,7 @@ namespace AXIS.Controllers
 
             }
 
-            return RedirectToAction("Index", "Rfqs");
+           // return RedirectToAction("Index", "Rfqs");
         }
 
     }

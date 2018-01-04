@@ -52,7 +52,7 @@ namespace AXIS.Models
 
         public virtual int TruckId { get; set; }
 
-        public virtual bool CheckTruck { get; set; }
+    
 
         [DisplayName("TruckDetails")]
         public virtual TruckDetail TruckDetail { get; set; }
