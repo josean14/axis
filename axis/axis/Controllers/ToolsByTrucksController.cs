@@ -105,7 +105,7 @@ namespace AXIS.Controllers
                 db.AssignmentOfToolsByTrucks.Add(assignmentOfToolsByTruck);
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("InvWarehouse", "Assets");
             }
 
             return View(assignmentOfToolsByTruck);
@@ -137,7 +137,7 @@ namespace AXIS.Controllers
             {
                 db.Entry(assignmentOfToolsByTruck).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("InvWarehouse", "Assets");
             }
             return View(assignmentOfToolsByTruck);
         }
@@ -165,7 +165,7 @@ namespace AXIS.Controllers
             AssignmentOfToolsByTruck assignmentOfToolsByTruck = db.AssignmentOfToolsByTrucks.Find(id);
             db.AssignmentOfToolsByTrucks.Remove(assignmentOfToolsByTruck);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("InvWarehouse", "Assets");
         }
 
         public ActionResult AToolsbyTruck(int? TruckId, int ContractId, string LicencePlate, int PurchaseOrderId)
