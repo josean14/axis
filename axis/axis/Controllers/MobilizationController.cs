@@ -273,12 +273,12 @@ namespace AXIS.Controllers
             {
                 return HttpNotFound();
             }
-            var allCustomer = db.Clients.ToList();
-
+            var allCustomer = db.Purchaseorders.ToList();
+            var datos = db.Purchaseorders.Include(a => a.Contract).Include(b => b.Contract.Rversion).Include(c => c.Contract.Rversion.Rfq).Include(e => e.Contract.Rversion.Rfq.Farm).Include(f => f.Contract.Rversion.Rfq.Farm.Client).ToList();
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "EmployeeMob2.rpt"));
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "EmployeeMob3.rpt"));
 
-            rd.SetDataSource(allCustomer);
+            rd.SetDataSource(datos);
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();

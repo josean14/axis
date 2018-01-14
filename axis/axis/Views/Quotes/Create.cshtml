@@ -4,6 +4,8 @@
     ViewBag.Title = "RFQ # " + @ViewBag.RfqId + " Ver. 1";
 }
 
+<h2>CREATE RFQ</h2>
+
 <div class="panelright">
     <div class="panel panel-axis right">
         <!-- Default panel contents -->
@@ -124,14 +126,14 @@
                     @Html.Editor("MITechnicians", new { htmlAttributes = new { @class = "form-control", placeholder = " 0", @onfocus = "calctotalMI()" } })
                 </th>
                 <th style="text-align:right">
-                    @Html.Hidden("MITotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
+                    @Html.Hidden("MITotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly", @onfocus = "calctotalMI()" } })
                     @Html.Editor("MITotalMoneda", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
                 </th>
             </tr>
 
             <tr>
                 <th>
-                    
+
                     @Html.Label("Mobilization Out", new { htmlAttributes = new { @class = "form-control" } })
 
                 </th>
@@ -145,7 +147,7 @@
                 </th>
                 <th style="text-align:right">
                     @Html.Hidden("MOTotal", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
-                    @Html.Editor("MOTotalMoneda", new { htmlAttributes = new { @class = "form-control", placeholder = "$ 0.00", @readonly = "readonly" } })
+                    @Html.Editor("MOTotalMoneda", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalMO()", placeholder = "$ 0.00", @readonly = "readonly" } })
                 </th>
 
             </tr>
@@ -166,7 +168,7 @@
                 </th>
                 <th style="text-align:center">
                     # Technicians
-                 </th>
+                </th>
                 <th style="text-align:center">
                     Weekly Hours per Tech (Projected)
                 </th>
@@ -210,7 +212,7 @@
                 </th>
                 <th style="text-align:right">
                     @Html.Editor("TotalH", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalH()", @readonly = "readonly", placeholder = "$ 0.00" } })
-                    
+
 
                 </th>
                 <th style="text-align:center">
@@ -254,22 +256,22 @@
             <tr>
                 <th>
                     @Html.Editor("Description2", new { htmlAttributes = new { @class = "form-control" } })
-                    
 
-                    
+
+
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()",placeholder = "$ 0.00" } })
+                    @Html.EditorFor(model => model.PricePerUnit, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()", placeholder = "$ 0.00" } })
                     @Html.ValidationMessageFor(model => model.PricePerUnit, "", new { @class = "text-danger" })
                 </th>
                 <th style="text-align:center">
-                    @Html.EditorFor(model => model.NUnits, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()",placeholder = "0" } })
+                    @Html.EditorFor(model => model.NUnits, new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()", placeholder = "0" } })
                     @Html.ValidationMessageFor(model => model.NUnits, "", new { @class = "text-danger" })
                 </th>
 
                 <th style="text-align:center">
                     @Html.Editor("TotalP", new { htmlAttributes = new { @class = "form-control", @onfocus = "calctotalP()", @readonly = "readonly" } })
-                    
+
                 </th>
                 <th style="text-align:center">
                     <div class="form-group">
@@ -378,7 +380,7 @@
 
 <div>
     @*@Html.ActionLink(" SAVE VERSION", "Details", "rfqs", new { id = ViewBag.RfqId }, new { @class = "btn btn-primary btn-xs" })*@
-    <a href="#" onclick="saveVersion(@ViewBag.RversionId); return false;" class = "btn btn-primary btn-xs">SAVE VERSION</a>
+    <a href="#" onclick="saveVersion(@ViewBag.RversionId); return false;" class="btn btn-primary btn-xs">SAVE VERSION</a>
 </div>
 
 @section Scripts {
@@ -408,7 +410,7 @@
                 var PricePerUnit = $('#PricePerUnit').val();
                 var NUnits = $('#NUnits').val();
                 var Total =  PricePerUnit * NUnits;
-            
+
                 $('#tablaP tr:last').after(
                     '<tr class="trbodyaxis" id=Quote' + id + '><td style="text-align:left">' + Description + '</td><td style="text-align:center">' + PricePerUnit + '</td>' +
                         '<td style="text-align:right">' + NUnits + '</td><td style="text-align:right">' + Total + '</td>'+
@@ -426,7 +428,7 @@
                     var RversionId = id
                     var anti = $('[name=__RequestVerificationToken]').val();
                     if(TypeR == 1){
-                        
+
                         var Description = $('#Description').val();
                         var PricePerUnit = 0;
                         var NUnits = 0;
@@ -436,9 +438,9 @@
                         var Weeks = $('#Weeks').val();
                         var Total =  HourlyRate * Technicians * WeeklyHours * Weeks;
 
-                    
+
                     }else{
-                        
+
                         var Description = $('#Description2').val();
                         var PricePerUnit = $('#PricePerUnit').val();
                         var NUnits = $('#NUnits').val();
@@ -448,14 +450,14 @@
                         var Weeks = 0;
                         var Total =  PricePerUnit * NUnits;
 
-                                            
+
                     }
-                    
-                    
-                    $.post(url, { Description: Description, PricePerUnit: PricePerUnit, NUnits: NUnits, HourlyRate: HourlyRate, 
+
+
+                    $.post(url, { Description: Description, PricePerUnit: PricePerUnit, NUnits: NUnits, HourlyRate: HourlyRate,
                         Technicians: Technicians, WeeklyHours: WeeklyHours, Weeks: Weeks, Total: Total,TypeR: TypeR ,RversionId: RversionId,  __RequestVerificationToken: anti },
                         function (data) {
-                            
+
                             //Pendiente cambiar funcion de presentacion de datos que fueron guardados de la funcion addTable y de la limpieza de datos
                             var band = addtable(data,TypeR);
 
@@ -490,7 +492,7 @@
                     result1 = '$' + result1.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
                     $('#TotalH').val(result1);
                     $('#TotalP').val(result1);
-                    
+
                 }
 
 
@@ -501,7 +503,7 @@
                     var Weeks = $('#Weeks').val();
                     var result =  HourlyRate * Technicians * WeeklyHours * Weeks;
                     var result = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                    
+
                     $('#TotalH').val(result);
                 }
 
@@ -511,7 +513,7 @@
                     var NUnits = $('#NUnits').val();
                     var result =  PricePerUnit * NUnits;
                     var result = '$' + result.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-                    
+
                     $('#TotalP').val(result);
                 }
 
@@ -580,7 +582,7 @@
                     var MOTechnicians = $('#MOTechnicians').val();
                     var MOTotal = $('#MOTotal').val();
 
-                    
+
                     var url2 = '@Url.Action("Details", "rfqs")' + "/" + @ViewBag.RfqId;
 
                     var anti = $('[name=__RequestVerificationToken]').val();
@@ -596,7 +598,7 @@
 
 
                     });
-                
+
                 }
 
 

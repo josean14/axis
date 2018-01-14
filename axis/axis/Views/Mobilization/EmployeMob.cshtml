@@ -10,7 +10,9 @@
 
     <a href=@Url.Action("Index", "Mobilization") class="btn btn-primary btn-xs">TECHNICIANS</a>
 
-    <a href=@Url.Action("EmployeMobPDF", "Mobilization", new {id = ViewBag.Poid}) class="btn btn-primary btn-xs">GENERATE EMPLOYEE MOBILIZTION FILE</a>
+    
+
+    <a href="~/Reports/EmployeeMob.aspx" target="_blank">View Report</a>
 </p>
 
 @using (Html.BeginForm())

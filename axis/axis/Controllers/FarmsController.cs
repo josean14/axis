@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AXIS.Models;
+using CrystalDecisions.CrystalReports.Engine;
 using PagedList;
 
 namespace AXIS.Controllers
@@ -133,9 +135,32 @@ namespace AXIS.Controllers
             return View(farm);
         }
 
-       
+        public ActionResult IndexPDF()
+        {
+            var allsites1 = db.Farms.Include(a => a.Client).ToList();
+            var allsites = db.Farms.ToList();
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Site Index.rpt"));
 
-     
+            if (allsites1.Count == 0)
+            {
+                //No hay datos
+                return HttpNotFound();
+            }
+
+            rd.SetDataSource(allsites1);
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "Farm Index.pdf");
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
